@@ -1,0 +1,14 @@
+<%= page_title(@user.login) %>
+
+<% sidebar ||= nil %>
+<% locals ||= {} %>
+
+<%= render "users/users_sub_header" %>
+
+<% content_for :left_sidebar do %>
+  <h1><%= link_to @user.login, @user %></h1>
+
+  <%= render partial: sidebar, locals: locals if sidebar %>
+<% end %>
+
+<%= yield %>

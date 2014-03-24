@@ -1,0 +1,30 @@
+<% content_for :h1 do %>
+  <%= link_to "Community", users_path %>
+<% end %>
+
+<% content_for :main_menu do %>
+  <%= render "users/main_menu" %>
+<% end %>
+
+<% content_for :left_sidebar do %>
+  <h1><%= link_to @player.account, player_path(@player.account) %></h1>
+
+  <p class="faded text"><%= @player.account %> has <%= @results.total_count %> items for sale.</p>
+
+  <%= render "players/sidebars/show", results: @results %>
+<% end %>
+
+<% if @results.any? %>
+
+  <% pagination = paginate(@results) %>
+  <%= render "application/pagination", pagination: pagination %>
+
+  <%= render "searches/results", results: @results %>
+
+  <%= render "application/pagination", pagination: pagination %>
+
+<% else %>
+  <div class="no-results">
+    <h2>No items indexed for this account!</h2>
+  </div>
+<% end %>

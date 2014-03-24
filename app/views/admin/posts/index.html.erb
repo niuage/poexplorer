@@ -1,0 +1,5 @@
+<%= link_to "New blog post", new_admin_post_path %>
+
+<% @posts.each do |post| %>
+  <%= render "admin/posts/post", post: post %>
+<% end %>

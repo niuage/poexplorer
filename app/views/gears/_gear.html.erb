@@ -1,0 +1,27 @@
+<% gear_name = gear.name %>
+<% desc = gear.description %>
+
+<div class="span6 gear">
+  <div class="span4 w-2 h-4">
+    <div class="sockets">Rendering sockets...</div>
+  </div>
+
+  <div class="span8">
+    <h5><%= gear_name.present? ? gear_name : "Any piece of gear" %></h5>
+
+      <p class="faded">
+        <%= desc.present? ? desc : "n/a" %>
+      </p>
+
+    <ul class="skill-gems">
+      <% gear.skill_gems.each do |skill| %>
+        <li data-attr="<%= skill.attr %>" class="<%= skill.attr %> support_<%= skill.support %>">
+          <%= link_to skill.name,
+                      "http://pathofexile.gamepedia.com/#{skill.name}",
+                      class: skill.attr,
+                      target: "_blank" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

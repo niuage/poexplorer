@@ -1,0 +1,13 @@
+<%= javascript_include_tag "application" %>
+<%= yield :javascripts %>
+
+<script type="text/javascript" charset="utf-8">
+  // <![CDATA[
+  ;
+  $(function() {
+    $("time").timeago();
+    $(".ttip").tooltip()
+    <%= yield :dom_ready %>
+  });
+  // ]]>
+</script>

@@ -1,0 +1,15 @@
+<div id="sockets-fields" class="tabcontent">
+  <div class="controls-row clearfix">
+    <div class="span6">
+      <%= @form.item_socket_count(width: 6) %>
+      <%= @form.item_socket_count(max: true, width: 6) %>
+    </div>
+    <%= @form.item_socket_combination(width: 3) %>
+  </div>
+  <div class="controls-row">
+    <div class="span6">
+      <%= @form.item_linked_socket_count(width: 6) %>
+      <%= @form.item_linked_socket_count(max: true, width: 6) %>
+    </div>
+  </div>
+</div>

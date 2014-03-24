@@ -1,0 +1,6 @@
+<% if can? :update, @user %>
+  <%= link_to edit_user_registration_path, class: "btn" do %>
+    <i class="icon-pencil"></i>
+    Edit my profile
+  <% end %>
+<% end %>

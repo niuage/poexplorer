@@ -1,0 +1,22 @@
+<%= render "searches/search_sub_header" %>
+
+<%= render layout: "shopping_carts/layout" do %>
+
+  <% if @results.any? %>
+
+    <% pagination = paginate(@results) if @results.total_pages > 1 %>
+
+    <%= render "application/pagination", pagination: pagination%>
+    <%= render "searches/results", results: @results %>
+    <%= render "application/pagination", pagination: pagination %>
+
+  <% else %>
+
+    <div class="no-results">
+      <h2>Shopping cart empty</h2>
+      <p>You can add items to your shopping cart when browsing through search results.</p>
+    </div>
+
+  <% end %>
+
+<% end %>

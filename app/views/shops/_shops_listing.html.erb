@@ -1,0 +1,30 @@
+<% if shops.any? %>
+
+  <% content_for :dom_ready do %>
+    App.OnlineStatus.setup("#results");
+  <% end %>
+
+  <div id="results">
+    <% shops.each do |shop| %>
+      <%= render "shops/shop_listing", shop: shop %>
+    <% end %>
+  </div>
+
+<% else %>
+
+  <% if (league = League.find_by(id: @league_id)) && league.permanent %>
+
+    <div class="no-results">
+      <h2>No shops yet in this league (<%= league.name %>).</h2>
+      <% if can? :create, Shop %>
+        <%= link_to "Create a shop!", new_shop_path %>
+      <% end %>
+    </div>
+
+  <% else %>
+    <div class="no-results">
+      <h2>Shops for temporary leagues are not supported.</h2>
+    </div>
+  <% end %>
+
+<% end %>

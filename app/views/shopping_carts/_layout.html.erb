@@ -1,0 +1,10 @@
+<% content_for :left_sidebar do %>
+  <p class="text faded">
+    Your personal item<br/>
+    selection.
+  </p>
+
+  <%= render "searches/facets", results: @results %>
+<% end %>
+
+<%= yield %>

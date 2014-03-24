@@ -1,0 +1,79 @@
+<ul class="menu">
+
+  <li class="">
+    <%= link_to "#",
+          class: "ttip",
+          title: user_signed_in? ? "Set your league" : "Playing Hardcore?",
+          data: {
+            content: "loading",
+            load: user_league_static_path,
+            placement: "left"
+          } do %>
+      <i class="icon-flag"></i><br/>
+      <span>
+        <% if user_signed_in? %>
+          <%= current_user.league? ? current_user.league_name : "Standard" %>
+        <% else %>
+          Default
+        <% end %>
+      </span>
+    <% end %>
+  </li>
+
+  <li>
+    <%= link_to players_path, class: "ttip", title: "Ladder", data: { placement: "left" } do %>
+      <i class="icon-group"></i><br>
+      <span>Players</span>
+    <% end %>
+  </li>
+
+  <li class="bordered-section">
+    <%= link_to item_prices_path, class: "ttip", title: "How to set prices", data: { placement: "left" } do %>
+      <i class="icon-money"></i><br>
+      <span>Prices</span>
+    <% end %>
+  </li>
+
+  <% if false %>
+  <li class="bordered-section">
+    <%= link_to posts_path do %>
+      <i class="icon-beaker"></i><br>
+      <span>Blog</span>
+    <% end %>
+  </li>
+  <% end %>
+
+  <li>
+    <%= link_to "#footer", class: "ttip", title: "Like!", data: { placement: "left" } do %>
+      <i class="icon-thumbs-up"></i><br>
+      <span>Connect</span>
+    <% end %>
+  </li>
+</ul>
+
+<% content_for :dom_ready do %>
+  $entries = $('[data-load]')
+  $entries.on("click.close_popovers", function(e) {
+    $entries.not($(e.currentTarget)).popover("hide")
+  })
+  $entries.on('click.open_popovers',function() {
+    var e = $(this);
+    if (e.data("loaded")) {
+      return;
+    }
+    e.data("loaded", true)
+    $.ajax({
+      url: e.data('load'),
+      success: function(data) {
+        e.popover("destroy").popover({
+          trigger: "click",
+          html: true,
+          content: data
+        }).popover('show');
+      },
+      error: function() {
+        e.data("loaded", false)
+      }
+    })
+  });
+<% end %>

@@ -1,0 +1,55 @@
+h1 {
+  color: $a-color;
+  font-size: 27px;
+  line-height: $sub-header-height;
+}
+
+h2 {
+  font-size: 1.4em;
+}
+h2, .h2-title { margin-bottom: 0.7em; }
+.h2-title h2 { margin-bottom: 3px; }
+
+h3 {
+  font-size: 1.0em;
+  i, i[class^="icon-"] {
+    margin-top: 3px;
+  }
+}
+h3, .h3-title { margin-bottom: 0.6em; }
+
+.faded {
+  color: #999;
+}
+
+.small {
+  line-height: 1.0em;
+  font-size: 0.75em;
+}
+.medium {
+  font-size: 0.875em;
+}
+
+h2.first {
+  padding-top: 11px;
+}
+
+.user-content {
+  p, ul li {
+    color: #555;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #333 !important;
+  }
+
+  h1 {
+    font-size: 1.4em !important;
+  }
+
+  h2 {
+    font-size: 1.4em !important;
+  }
+}

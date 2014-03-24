@@ -1,0 +1,12 @@
+<div class="nested-fields">
+  <div class="controls-row">
+    <% @form.with_form(f) do |form| %>
+      <%= form.mods %>
+      <%= form.stat_value %>
+      <%= form.stat_max_value %>
+      <%= form.excluded %>
+
+      <%= form.link_to_remove_stat %>
+    <% end %>
+  </div>
+</div>

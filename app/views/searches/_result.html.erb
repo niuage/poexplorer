@@ -1,0 +1,54 @@
+<%
+item_size = result.item_span_size
+%>
+
+<div class="result item bb bb-dark row-fluid" data-item-type="<%= result.item_type.titleize %>" data-id="<%= result.id %>">
+  <div class="span<%= item_size %>">
+    <%= render "items/item/icon_with_sockets", item: result %>
+    <span class="faded small"><%= result.indexed_at %></span>
+  </div>
+
+  <div class="span<%= 12 - item_size %>">
+
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="h2-title">
+          <span class="small faded right">
+            <%= render "items/item/buttons", item: result %>
+          </span>
+          <h2><%= result.link_to_item %></h2>
+        </div>
+      </div>
+    </div>
+
+    <p class="requirements"><%= result.requirement_list %></p>
+
+    <div class="row-fluid section small-section">
+
+      <div class="span8">
+      <% unless result.skill? %>
+        <% if result.stats.any? %>
+        <%= render "items/item/mods", item: result %>
+        <% end %>
+      <% end %>
+      </div>
+
+      <div class="span4">
+        <%= render "items/item/properties", item: result %>
+      </div>
+
+    </div>
+
+    <hr>
+    <div class="row-fluid">
+      <div class="span8">
+        <p class="shop-link faded small">
+        <%= result.seller_links %>
+      </p>
+      </div>
+      <div class="span4">
+        <p><%= result.link_to_item_view %></p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<%= render "about_sub_header" %>
+
+<% content_for :left_sidebar do %>
+
+  <%= render "about/help_sidebar" %>
+<% end %>
+
+<div class="text">
+
+  <div class="bordered-section">
+    <h2 class="first">How to set prices in your PoE forum threads</h2>
+
+    <p>
+      This page details the format you should use to set
+      the prices of your items in your forum threads.
+    </p>
+  </div>
+
+  <div class="bordered-section clearfix">
+    <h2>Price tag types</h2>
+
+    <p><span class="tag">~gb/o</span> means "global buyout". <span class="tag">~b/o</span> means "buyout".</p>
+
+    <div class="row_fluid">
+      <div class="span4">
+        <h3 class="unique">Global</h3>
+        <p><span class="tag">~gb/o 2 chaos</span></p>
+        <p>Set the price of all the items in the thread. The other 2 price tags have precedence over this one.</p>
+      </div>
+
+      <div class="span4">
+        <h3 class="rare">Spoiler title</h3>
+        <p><span class="tag">[spoiler="~b/o 2 chaos"][/spoiler]</span></p>
+        <p>
+          Set the price of the items listed within the spoiler.
+          Nested spoilers are supported.
+        </p>
+      </div>
+
+      <div class="span4">
+        <h3 class="magic">Local</h3>
+        <p><span class="tag">[item] ~b/o 2 chaos</span></p>
+        <p>
+          Set the price of the item listed just before the tag.
+          Has precedence over the other 2 tags.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bordered-section clearfix">
+    <h2>Price tag format</h2>
+
+    <p>The price defined as a unique value/currency pair: <span class="tag">[value (integer or float)] [currency name]</span></p>
+
+    <h3>Examples</h3>
+    <p><span class="tag">2 exalted</span>, <span class="tag">1.5 exa</span>, <span class="tag">15 chaos</span></p>
+    <p><span class="tag">2 exalted 2 gcp</span> will be understood as <span class="tag">2 exalted</span></p>
+  </div>
+
+  <div class="bordered-section clearfix">
+    <h2>Supported currencies</h2>
+
+    <div class="row-fluid">
+      <div class="span4">
+        <p><span class="orb alch"></span> Alchemy orb: <span class="tag">alch</span></p>
+        <p><span class="orb chaos"></span> Chaos orb: <span class="tag">chaos</span></p>
+        <p><span class="orb gcp"></span> Gemcutter's Prism <span class="tag">gcp</span></p>
+        <p><span class="orb exa"></span> Exalted orb: <span class="tag">exa</span></p>
+      </div>
+      <div class="span8">
+        <p>I decided to support only 4 popular currencies because it will make the search by price easier and more perfomant.</p>
+
+        <p>If you set a price in a different currency, it will simply be ignored.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bordered-section clearfix">
+    <h2>Thread example</h2>
+
+    <pre>
+[item]
+<span class="tag">~b/o 1 gcprism</span>
+This item costs 1 gcp.
+As long as the currency name starts by the currency abbreviation,
+it will be recognized.
+
+[spoiler="Everything for less than 1 chaos! <span class="tag">~b/o 1 chaos</span>"]
+
+  [item] This item costs 1 chaos
+  [item] <span class="tag">~b/o 1 alchemy</span> This item costs 1 alch
+
+  [spoiler="Nested spoiler, everything for 1 alch! <span class="tag">~b/o 1 alch</span>"]
+
+    [item] This item costs 1 alch
+
+  [/spoiler]
+
+[/spoiler]
+
+[item] This item costs 3 alch because of the global buyout
+
+<span class="tag">~gb/o 3 alch</span>
+All items without a buyout specified cost 3 alchs in this thread.
+This can be placed anywhere.
+    </pre>
+  </div>
+</div>

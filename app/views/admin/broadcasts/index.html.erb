@@ -1,0 +1,11 @@
+<%= link_to "New broadcast", new_admin_broadcast_path %>
+
+<% @broadcasts.each do |broadcast| %>
+  <div class="bordered-section">
+    <h3><%= broadcast.title %></h3>
+    <p><%= broadcast.body %></p>
+    <p><%= broadcast.priority %></p>
+    <p class="right"><%= link_to "destroy", [:admin, broadcast], method: :delete %></p>
+    <p class="right"><%= link_to "Edit", [:edit, :admin, broadcast] %></p>
+  </div>
+<% end %>

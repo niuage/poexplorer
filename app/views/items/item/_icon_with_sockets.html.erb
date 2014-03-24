@@ -1,0 +1,6 @@
+<% if item.raw_icon.present? %>
+  <div class="item-icon w-<%= item.w %> h-<%= item.model.h %>">
+    <%= image_tag item.raw_icon %>
+    <div class="sockets" data-sockets="<%= item.sockets.to_json %>"></div>
+  </div>
+<% end %>

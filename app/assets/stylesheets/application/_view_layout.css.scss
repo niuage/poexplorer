@@ -1,0 +1,60 @@
+a.ico { position: relative; }
+
+a.view_layout {
+  &.current, &:hover {
+    background: $pagination-border-color;
+
+    .ico {
+      &.s_layout { background-position: 0 -45px; }
+      &.l_layout { background-position: 0 -30px; }
+      &.day_layout { background-position: -16px -30px; }
+      &.night_layout { background-position: -16px -45px; }
+    }
+  }
+  .ico {
+    background: image-url("layout-icons.png") 0 0;
+    &.s_layout { background-position: 0 -15px; }
+    &.l_layout { background-position: 0 0; }
+    &.day_layout { background-position: -16px 0px; }
+    &.night_layout { background-position: -16px -15px; }
+  }
+
+  &.s_layout {
+    border-right: 1px solid #a5a5a5;
+  }
+
+  .ico {
+    top: 10px;
+    left: 12px;
+  }
+
+  span.ico {
+    height: 15px;
+    width: 15px;
+    background-repeat: no-repeat;
+    position: absolute;
+  }
+}
+
+.pagination-bar {
+
+  .layouts {
+    float: right;
+
+    li {
+      float: left;
+      height:35px;
+
+      a {
+        height: 35px;
+        width: 39px;
+        display: block;
+
+        &:hover {
+          background: $pagination-border-color;
+        }
+      }
+    }
+  }
+
+}

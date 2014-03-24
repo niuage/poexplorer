@@ -1,0 +1,11 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  authentication:
+    destroy:
+      add_password: "Set a password below or link your account to another service before removing this one."
+      error: "An error occured. Try again later."
+      success: "Your account is not linked to %{provider} anymore!"
+    create:
+      success: "Your account is now linked to %{provider}!"

@@ -1,0 +1,114 @@
+<%= render "about_sub_header" %>
+
+<% content_for :left_sidebar do %>
+  <%= render "about/help_sidebar" %>
+<% end %>
+
+<div class="text">
+
+  <div class="bordered-section">
+    <h2>Searching by price</h2>
+
+    <p>On PoExplorer, you can filter items by price.</p>
+
+    <p>When you search for items which costs "At least 20 chaos", you want items that cost 1 exalted orb to show up, for example. For this to work, we need the current exchange rates.</p>
+
+    <p>Right now, they are hard-coded, but later, I will use <%= link_to "http://exileex.com", "http://exileex.com" %> API to keep up to date.</p>
+
+    <p>EDIT: OUTDATED RATES</p>
+  </div>
+
+  <style type="text/css">
+      table td {
+        text-align: center;
+        vertical-align: middle;
+        padding: 0 5px;
+      }
+    </style>
+
+  <div class="bordered-section">
+    <h2>Softcore League exchange rates</h2>
+
+    <table class="big">
+      <tr>
+        <td></td>
+        <td><span class="orb alch"></span></td>
+        <td><span class="orb chaos"></span></td>
+        <td><span class="orb gcp"></span></td>
+        <td><span class="orb exa"></span></td>
+      </tr>
+
+      <tr>
+        <td><span class="orb alch"></span></td>
+        <td>1</td>
+        <td>2:1</td>
+        <td>7:1</td>
+        <td>39:1</td>
+      </tr>
+      <tr>
+        <td><span class="orb chaos"></span></td>
+        <td>2:1</td>
+        <td>1</td>
+        <td>4:1</td>
+        <td>34:1</td>
+      </tr>
+      <tr>
+        <td><span class="orb gcp"></span></td>
+        <td>1:7</td>
+        <td>1:4</td>
+        <td>1</td>
+        <td>10:1</td>
+      </tr>
+      <tr>
+        <td><span class="orb exa"></span></td>
+        <td>1:39</td>
+        <td>1:34</td>
+        <td>1:10</td>
+        <td>1</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="bordered-section">
+    <h2>Hardcore League exchange rates</h2>
+
+    <table class="big">
+      <tr>
+        <td></td>
+        <td><span class="orb alch"></span></td>
+        <td><span class="orb chaos"></span></td>
+        <td><span class="orb gcp"></span></td>
+        <td><span class="orb exa"></span></td>
+      </tr>
+
+      <tr>
+        <td><span class="orb alch"></span></td>
+        <td>1</td>
+        <td>2:1</td>
+        <td>5:1</td>
+        <td>32:1</td>
+      </tr>
+      <tr>
+        <td><span class="orb chaos"></span></td>
+        <td>1:2</td>
+        <td>1</td>
+        <td>2:1</td>
+        <td>20:1</td>
+      </tr>
+      <tr>
+        <td><span class="orb gcp"></span></td>
+        <td>1:5</td>
+        <td>1:2</td>
+        <td>1</td>
+        <td>7:1</td>
+      </tr>
+      <tr>
+        <td><span class="orb exa"></span></td>
+        <td>1:32</td>
+        <td>1:20</td>
+        <td>1:7</td>
+        <td>1</td>
+      </tr>
+    </table>
+  </div>
+</div>

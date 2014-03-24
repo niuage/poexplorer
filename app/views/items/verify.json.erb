@@ -1,0 +1,7 @@
+<% item = {
+  verified: @item.verified,
+  price_value: @item.get_price_value,
+  currency: @item.get_currency,
+  indexed_at: @item.indexed_at.iso8601
+}
+%><%=raw item.to_json %>

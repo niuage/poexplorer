@@ -1,0 +1,10 @@
+<div id="price-fields" class="tabcontent">
+  <div class="controls-rows clearfix">
+    <%= @form.item_min_price(width: 2) %>
+    <%= @form.item_max_price(width: 2) %>
+    <%= @form.item_currency(width: 2) %>
+  </div>
+  <div class="row-fluid">
+    <p class="small text"><i class="icon-info-sign"></i> Set Min Price to 0 to only show items with a buyout. &mdash; <%= link_to "Learn more about searching by price", search_by_price_path, target: "_blank" %></p>
+  </div>
+</div>

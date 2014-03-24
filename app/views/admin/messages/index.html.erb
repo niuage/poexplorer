@@ -1,0 +1,12 @@
+<% @messages.each do |message| %>
+  <div class="bordered-section">
+    <h2>
+      <%= link_to [:admin, message] do %>
+        <%= message.title.present? ? message.title : "no title" %>
+      <% end %>
+    </h2>
+    <p>Sender: <%= message.sender_id %></p>
+    <p>Contact: <%= message.contact_info %></p>
+    <p><%= message.body %></p>
+  </div>
+<% end %>

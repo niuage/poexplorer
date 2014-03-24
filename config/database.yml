@@ -1,0 +1,19 @@
+development:
+  adapter: mysql2
+  database: poexplorer_development
+  pool: 20
+  timeout: 5000
+
+test:
+  adapter: sqlite3
+  database: db/test_poe.sqlite3
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: mysql2
+  database: poexplorer_production
+  user: poexplorer
+  password: p03xpl0r3r
+  pool: 20
+  timeout: 5000

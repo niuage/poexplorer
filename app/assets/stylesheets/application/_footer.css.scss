@@ -1,0 +1,31 @@
+#footer {
+  background: white;
+  border-top: 1px solid #ccc;
+  padding: $gap 0;
+
+  h5  {
+    font-size: 14px;
+  }
+
+  h4, h5 { margin-bottom: 10px; }
+
+  li {
+    a {
+      font-size: 12px;
+    }
+  }
+
+  .report-bugs {
+    position: fixed;
+    bottom: 0;
+    right: 3%;
+    background: #194B81;
+    display: block;
+    font-size: 12px;
+    color: white;
+    padding: 6px 10px;
+    border: 1px solid #0C2744;
+    border-width: 1px 1px 0;
+    box-shadow: inset 0px 1px rgba(255, 255, 255, 0.3);
+  }
+}

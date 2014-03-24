@@ -1,0 +1,15 @@
+<ul class="stats">
+  <% item.stats.each do |stat| %>
+    <% next if stat.hidden %>
+    <% klass = "#{"implicit" if stat.implicit }" %>
+    <%= content_tag :li,
+          data: { mod: stat.mod_id, value: stat.value },
+          class: klass do %>
+      <%= stat.name %>
+    <% end %>
+  <% end %>
+
+  <% if item.corrupted %>
+    <li class="corrupted">Corrupted</li>
+  <% end %>
+</ul>

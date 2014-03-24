@@ -1,0 +1,42 @@
+<div class="row-fluid bordered-section build result" data-id="<%= build.id %>">
+  <%= render "builds/vote", build: build %>
+
+  <div class="span11">
+    <h2><%= link_to build.title, build_path(build) %></h2>
+
+    <p class="faded text">
+      <% if klasses = build.klass_sentence %>
+        Plays as <strong><%= klasses %></strong>
+      <% end %>
+      in <strong><%= build.leagues %></strong>
+    </p>
+
+    <p class="text summary"><%= build.summary %></p>
+
+    <% gems = build.gem_sentence %>
+    <% uniques = build.unique_sentence %>
+
+    <% if gems || uniques %>
+    <div class="details">
+    <% if gems %>
+    <div class="row-fluid">
+      <h4 class=" span2">Main gems</h4>
+      <p class="span10"><%= gems %></p>
+    </div>
+    <% end %>
+
+    <% if uniques %>
+    <div class="row-fluid">
+      <h4 class=" span2">Uniques</h4>
+      <p class="span10 unique"><%= uniques %></p>
+    </div>
+    <% end %>
+    </div>
+    <% end %>
+
+    <p class="author faded">
+      Created by <%= link_to build.username, user_builds_path(build.user_id) %> <time datetime="<%= build.published_at %>">on <%= build.published_at %></time>
+    </p>
+
+  </div>
+</div>

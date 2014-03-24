@@ -1,0 +1,19 @@
+<% all_uniques = @build.uniques.first(20) %>
+
+<% if all_uniques.any? %>
+<div class="thumbnails">
+    <h3 id="uniques">Uniques</h3>
+
+  <% all_uniques.each_slice(4) do |uniques| %>
+    <div class="row-fluid">
+      <% uniques.each do |unique| %>
+        <a href="http://pathofexile.gamepedia.com/<%= unique.name %>" target="_blank" class="span3 unique-thumb thumbnail">
+          <h5><%= unique.name %></h5>
+          <p class="text faded"><%= unique.base_name %></p>
+          <%= image_tag unique.image_url %>
+        </a>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<% end %>

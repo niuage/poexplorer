@@ -1,0 +1,27 @@
+<div class="facet">
+  <h3>
+    <% if facet.resetable? %>
+      <%= link_to "reset", facet.reset_path,
+            class: "reset-facet #{ "reset-on" if facet.show_reset? }" %>
+    <% end %>
+
+    <%= facet.title %>
+  </h3>
+  <ul>
+  <% facet.terms.each do |term| %>
+    <% facet.with_term(term) do %>
+      <li>
+        <%= _link_to_if facet.facet_link?, facet.term_path do %>
+          <span class="facet-title">
+            <span class="right small tag">
+              <%= facet.count_for_term %>
+            </span>
+
+            <%= facet.term_title %>
+          </span>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+  </ul>
+</div>

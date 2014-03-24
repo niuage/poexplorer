@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? content_for(:title) : "PoExplorer.com" %></title>
+  <%= render "layouts/layout/meta" %>
+  <%= render "layouts/stylesheets" %>
+  <%#= render "layouts/layout/open_search" %>
+  <%= render "layouts/common/ga" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= body_classes %>">
+
+  <%= render "layouts/layout/header/header" %>
+  <%= render "sub_header" %>
+  <%= render "layouts/flash", flash: flash %>
+
+  <div id="content" class="wrapper-l">
+
+    <div class="row-fluid">
+
+      <div id="left-sidebar" class="span2">
+        <%= yield :left_sidebar %>
+      </div>
+
+      <div class="span10">
+        <div id="main-content">
+          <div class="row-fluid">
+            <div class="span12">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <%= render "layouts/layout/footer" %>
+  <%= render "layouts/common/bottom" %>
+</body>
+</html>

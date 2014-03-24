@@ -1,0 +1,7 @@
+<%= simple_form_for @message do |f| %>
+  <%= f.input :title, input_html: { class: "span12" } %>
+  <%= f.input :contact_info, placeholder: "Provide a way for me to answer you (email, reddit name, etc)", input_html: { class: "span12" } %>
+  <%= f.input :body, input_html: { class: "span12", style: "min-height: 200px" } %>
+  <%= f.submit "Send message", class: "btn btn-success" %>
+  <%= link_to "Cancel", feedback_path, class: "btn" %>
+<% end %>

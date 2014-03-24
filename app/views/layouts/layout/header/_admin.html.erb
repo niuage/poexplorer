@@ -1,0 +1,62 @@
+<div id="header">
+  <div id="inner-header">
+    <div class="wrapper-l">
+      <div class="row-fluid">
+        <span class="span2">
+          <%= link_to root_url do %>
+          PoExplorer <span class="beta">/ beta</span>
+          <% end %>
+        </span>
+
+        <span class="span6">
+
+          <ul class="clearfix main-menu">
+            <li class="tn-search">
+              <%= link_to [:admin, :broadcasts] do %>
+              broadcasts
+              <% end %>
+            </li>
+
+            <li class="tn-shops">
+              <%= link_to [:admin, :messages] do %>
+              Messages
+              <% end %>
+            </li>
+
+            <li class="tn-shops">
+              <%= link_to [:admin, :posts] do %>
+              Blog
+              <% end %>
+            </li>
+
+            <li class="tn-search">
+              <%= link_to [:admin, :searches] do %>
+              Searches
+              <% end %>
+            </li>
+
+            <li class="dropdown">
+              <%= link_to "", "#", class: "dropdown-toggle icon-caret-down ico", data: { toggle: "dropdown" } %>
+              <ul class="dropdown-menu">
+
+                <li class="tn-shops">
+                  <%= link_to [:admin, :scrawls] do %>
+                  Crawls
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+
+          </ul>
+        </span>
+
+        <span class="span4">
+          <%= render "layouts/layout/header/user" %>
+        </span>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>

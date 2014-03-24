@@ -1,0 +1,9 @@
+<%= stylesheet "authentication" %>
+
+<div class="social-login bordered-section row-fluid">
+  <% Authentication::PROVIDERS.each do |provider| %>
+  <div class="span4 user-provider <%= provider[:klass] %>">
+    <%= link_to_provider provider[:name], Authentication.authentication_for_service(@authentications, provider[:name]) %>
+  </div>
+  <% end %>
+</div>

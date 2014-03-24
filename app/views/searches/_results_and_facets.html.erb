@@ -1,0 +1,38 @@
+<% no_facet_link ||= false %>
+
+<% content_for :left_sidebar do %>
+  <% if @results %>
+    <%= render "searches/facets", results: @results, no_facet_link: no_facet_link %>
+  <% end %>
+<% end %>
+
+<% if @results && @results.any? %>
+  <% pagination = paginate(@results) %>
+
+  <%= render "application/pagination", pagination: pagination %>
+  <%= render "searches/results", results: @results %>
+  <%= render "application/pagination", pagination: pagination %>
+
+<% else %>
+  <div class="no-results">
+    <h2>No results :(</h2>
+
+    <% if @form.similar? %>
+      Try broadening your search<br>and make sure the number of mods that should
+      be matching is not too high (<%= @form.search.minimum_mod_match %> out of
+      <%= @form.search.optional_stats_count %> should match)
+    <% else %>
+      <p>Try broadening your search, and make sure you're searching in the right category.</p>
+      <p>
+        <%= link_to "Weapons", [:new, :weapon_search] %> &mdash;
+        <%= link_to "Armours", [:new, :armour_search] %> &mdash;
+        <%= link_to "Misc", [:new, :misc_search] %>
+      </p>
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :dom_ready do %>
+  App.NumberFormatter.setup();
+  App.Tabs.setup(".search-tabs");
+<% end %>

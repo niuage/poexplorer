@@ -1,0 +1,29 @@
+<% stylesheet "builds" %>
+
+<% content_for :h1 do %>
+  <%= link_to "Builds", builds_path %>
+<% end %>
+
+<% content_for :main_menu do %>
+  <li class="tab-search">
+    <%= link_to builds_path do %>
+      <i class="icon-search"></i> Browse
+    <% end %>
+  </li>
+  <li class="tab-add-build">
+    <%= link_to "<i class='icon-plus'></i> Submit new build".html_safe, new_build_path %>
+  </li>
+
+  <% if user_signed_in? %>
+    <li class='right tab-my-builds'>
+      <%= link_to user_builds_path(current_user) do %>
+        <i class="icon-folder-open"></i> My builds
+      <% end %>
+    </li>
+  <% end %>
+<% end %>
+
+<% javascript "builds" %>
+<% content_for :dom_ready do %>
+  App.BuildForm.setup()
+<% end %>

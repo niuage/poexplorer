@@ -1,0 +1,46 @@
+<div class="controls-row control-group">
+
+  <%= render "items/fields/common" %>
+
+  <div class="search-tabs" id="armour-tabs">
+    <div class="btn-group">
+      <a class="btn" href="#defense">Defense</a>
+      <a class="btn" href="#sockets">Sockets</a>
+      <a class="btn" href="#requirements">Requirements</a>
+      <a class="btn" href="#price">Price</a>
+    </div>
+
+    <div id="defense-fields" class="tabcontent">
+      <div class="controls-row clearfix">
+        <div class="row-fluid">
+          <% [:armour, :evasion, :energy_shield].each do |stat| %>
+            <div class="span4">
+              <%= @form.stat_requirement(stat, width: 6) %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="row-fluid">
+          <div class="span4">
+            <%= @form.stat_requirement(:block_chance, width: 6) %>
+          </div>
+          <div class="span6">
+            <p class="small text"><i class="icon-info-sign"></i> Set max to 0 to exclude a stat</p>
+          </div>
+        </div>
+
+        <%#= @form.item_armour(width: 3) %>
+        <%#= @form.item_evasion(width: 3) %>
+        <%#= @form.item_shield(width: 3) %>
+        <%#= @form.item_block_chance(width: 3) %>
+      </div>
+    </div>
+
+    <%= render "items/fields/sockets" %>
+
+    <%= render "items/fields/requirements" %>
+
+    <%= render "items/fields/price" %>
+
+  </div>
+</div>

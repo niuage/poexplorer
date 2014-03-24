@@ -1,0 +1,11 @@
+<%= render "searches/search_sub_header" %>
+
+<p class="text alert-info">This feature is in beta, please <%= link_to "report any bug, or suggest improvements", feedback_path %>.</p>
+
+<%= render "searches/form" %>
+
+<%= render "searches/results_and_facets", no_facet_link: true %>
+
+<% content_for :dom_ready do %>
+  App.SimilarMods.setup()
+<% end %>

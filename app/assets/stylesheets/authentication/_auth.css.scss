@@ -1,0 +1,29 @@
+body.authentication {
+  background: #f6f6f6;
+}
+
+.signin-box {
+  background: white;
+  padding: $gap;
+  margin: 2 * $gap 0;
+  border-radius: 4px;
+  box-shadow: 0 0 6px #999;
+}
+
+.social-login {
+  a {
+    font-size: 13px;
+    border-radius: 3px;
+    display: block;
+    padding: 12px;
+    color: white;
+    &:hover {
+      color: white;
+    }
+
+    span {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+}

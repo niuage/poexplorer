@@ -1,0 +1,41 @@
+<%= render layout: "shops/layout" do %>
+  <% if false %>
+  <% if can? :create, Shop %>
+    <%= render "shops/form" %>
+  <% else %>
+    <div class="text no-results bordered-section">
+      <% if user_signed_in? %>
+      <p>You can only open <%= pluralize(User::MAX_SHOP_COUNT, "shop") %> right now.</p>
+
+      <p>
+        <%= link_to "View your shops", user_shops_path(current_user) %>
+      </p>
+      <% else %>
+        <p>You have to <%= link_to "log in", new_user_session_path %> to create a shop.</p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <h2>Why open a shop?</h2>
+
+  <div class="text">
+    <p>
+      Opening a shop on PoExplorer makes sure your items
+      will be indexed much more often, and will rank higher up
+      in the search.
+    </p>
+
+    <p>
+      PoExplorer users will also be able to browse through your shop on the site easily, and buy more items!
+    </p>
+
+    <p>Any feedback or ideas to share? <%= link_to "Send me a message!", feedback_path %></p>
+  </div>
+  <% else %>
+    <div class="text no-results bordered-section">
+      <h2>Shops are disabled for now.</h2>
+      <p>Your stuff should be indexed anyway by the regular indexer.</p>
+      <p>To see all of your items, go to http://poexplorer.com/players/[account_name].</p>
+    </div>
+  <% end %>
+<% end %>

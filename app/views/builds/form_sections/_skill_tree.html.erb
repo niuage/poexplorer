@@ -1,0 +1,31 @@
+<div class="bordered-section">
+  <div id="skill-trees">
+    <%= f.fields_for :skill_trees do |t| %>
+    <%= render "skill_trees/fields", f: t %>
+    <% end %>
+  </div>
+  <div class="links">
+    <%= link_to_add_association "<i class='icon-plus icon-white'></i> Add a skill tree".html_safe, f, :skill_trees,
+    data: {
+      association_insertion_node: "#skill-trees",
+      association_insertion_method: "append"
+      },
+      partial: "skill_trees/fields",
+      class: "btn btn-info"
+        %>
+  </div>
+</div>
+
+<div class="row-fluid bordered-section">
+<%=
+  f.input :keystone_ids, as: :select, label: "Select keystones", wrapper_html: { class: "span12" }, input_html: { class: "span12" } do
+      f.select :keystone_ids,
+        options_for_select(Keystone.select("name, id, uid").map { |k| [k.name, k.id, { "data-uid" => k.uid }] }, f.object.keystone_ids),
+        {}, { multiple: true, class: "keystone-select", placeholder: "Select keystones" }
+    end
+%>
+</div>
+
+<% content_for :dom_ready do %>
+  App.SkillTree.setup()
+<% end %>

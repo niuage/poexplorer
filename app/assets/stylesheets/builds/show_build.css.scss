@@ -1,0 +1,143 @@
+@import "variables";
+
+.build-page {
+  h1, h2, h3, h4 {
+    font-weight: normal;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+    font-size: 36px;
+  }
+
+  .summary {
+    color: #777;
+  }
+
+  h2 {
+    font-size: 1.6em;
+    color: $a-color;
+  }
+
+  h3 {
+    font-size: 1.4em;
+  }
+
+  h5 {
+    font-size: 1.1em;
+    margin-bottom: 3px;
+  }
+
+  .unique-thumb, .gear {
+    margin-bottom: 10px;
+    border: 1px solid white;
+    padding: 5px;
+
+    &:hover {
+      border: 1px solid #ccc;
+      border-radius: 2px;
+      box-shadow: $box-shadow;
+      background: #f8f8f8;
+    }
+  }
+
+  .unique-thumb img {
+      max-height: 120px;
+    }
+
+  .skill-gems {
+    margin-top: 10px;
+
+    li {
+      line-height: 18px;
+      padding-left: 15px;
+      background-repeat: no-repeat;
+      background-position: 0 3px;
+
+      &.dex { background-image: image-url("skills/small_dex.png") }
+      &.int { background-image: image-url("skills/small_int.png") }
+      &.str { background-image: image-url("skills/small_str.png") }
+    }
+  }
+
+  .bordered-section {
+    border-bottom: 3px solid $sub-header-color;
+  }
+
+  .skill-tree {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+
+    &:last-child {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+  }
+
+  .keystones {
+    img {
+      height: 50px;
+      width: 50px;
+      border-radius: 3px;
+      float: left;
+    }
+
+    .row-fluid {
+      margin-bottom: 20px;
+    }
+
+    .keystone {
+      padding-left: 60px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+}
+
+.playstyle {
+  .user {
+    height: 52px;
+    border-bottom: 3px solid #ccc;
+    margin-bottom: 8px;
+  }
+
+  h5 {
+    margin-bottom: 3px;
+  }
+
+  li {
+    padding: 8px 0;
+
+    p {
+      line-height: 18px;
+      font-size: 14px;
+    }
+  }
+}
+
+.bandit {
+  padding: 20px 20px;
+  border-radius: 2px;
+  background: #fff no-repeat 0 0;
+  background-size: cover;
+  border: 1px solid #444;
+  box-shadow: inset 0 0 1px #FFF;
+
+  &.choice_1 { background-image: image-url("bandits/alira.png"); }
+  &.choice_2 { background-image: image-url("bandits/kraytin.png"); }
+  &.choice_3 { background-image: image-url("bandits/oak.png"); }
+  &.choice_4 { background-image: image-url("bandits/all.png"); }
+
+  h3, p {
+    color: white;
+    text-shadow: 0 0 4px black;
+  }
+
+  h3 {
+    margin-bottom: 5px;
+  }
+}

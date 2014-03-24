@@ -1,0 +1,33 @@
+<%= render "searches/search_sub_header" %>
+
+<%= simple_form_for :similar_search, { url: similar_searches_path } do |f| %>
+  <%= f.input :league_id, collection: simple_options_for_select(
+        League,
+        text: ->(name) { return nil unless League.visible?(name); name.capitalize + " league" }
+        ),
+      selected: current_league_id,
+      input_html: { class: "span12 search_league" }
+  %>
+  <%= f.input :text_representation, as: :text,
+        label: "Text representation you get when copying an item in-game",
+        input_html: { class: "span12", style: "height: 400px" } %>
+  <%= f.button :submit, "Find similar items" %>
+<% end %>
+
+<% content_for :left_sidebar do %>
+  <p class="text">
+    In Path of Exile, when hovering over an item, pressing <code>Ctrl+C</code>
+    will copy a text representation of the item in your clipboard. Paste it
+    in the textarea, and PoExplorer will find similar items for you.
+  </p>
+
+  <p class="text">
+    The most obvious use of this features is finding upgrades for your character,
+    since you can look for similar items with better stats.
+  </p>
+
+  <p class="text">
+    This feature is in beta, don't hesitate to report bugs,
+    propose improvements, or ask questions.
+  </p>
+<% end %>

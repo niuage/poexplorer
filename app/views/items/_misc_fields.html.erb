@@ -1,0 +1,23 @@
+<div class="controls-row control-group clearfix">
+
+  <%= render "items/fields/common" %>
+
+  <div class="search-tabs" id="misc-tabs">
+    <div class="btn-group">
+      <a class="btn" href="#offense">Offense</a>
+      <a class="btn" href="#requirements">Requirements</a>
+      <a class="btn" href="#price">Price</a>
+    </div>
+
+    <div id="offense-fields" class="tabcontent">
+      <div class="controls-row clearfix">
+        <%= @form.item_elemental_damage(width: 3) %>
+      </div>
+    </div>
+
+    <%= render "items/fields/requirements" %>
+
+    <%= render "items/fields/price" %>
+  </div>
+
+</div>

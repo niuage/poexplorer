@@ -1,0 +1,47 @@
+.section {
+  margin-bottom: $gap;
+}
+
+.large-section {
+  margin-bottom: $gap * 2;
+}
+
+.bordered {
+  border-bottom: 1px solid #ccc;
+}
+
+.bordered-section {
+  padding-bottom: $gap;
+  margin-bottom: $gap;
+  @extend .bordered;
+}
+#right-sidebar .bordered-section,
+ {
+  padding-bottom: 1/3 * $gap;
+  margin-bottom: 1/3 * $gap;
+  border-width: 3px;
+}
+
+form .bordered-section {
+  padding-bottom: 1/3 * $gap;
+  margin-bottom: 1/3 * $gap;
+  border-color: #aaa;
+}
+
+#right-sidebar li {
+  padding-bottom: 1/3 * $gap;
+  margin-bottom: 1/3 * $gap;
+  border-bottom: 1px solid #ccc;
+}
+
+.padding-top {
+  padding-top: $gap;
+}
+
+.slim-row {
+  padding-top: 12px;
+
+  &:hover {
+    background: #f2f2f2;
+  }
+}

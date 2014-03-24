@@ -1,0 +1,9 @@
+<ul class="props">
+  <% item.properties.each do |prop| %>
+    <% options = { data: { sort: prop[2] } } if prop[2] %>
+    <%= content_tag :li, options do %>
+      <span><%= prop[1] %></span>
+      <%= prop[0] %>
+    <% end %>
+  <% end %>
+</ul>

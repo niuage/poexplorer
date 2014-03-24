@@ -1,0 +1,20 @@
+<%= render "searches/search_sub_header" %>
+
+<div class="item-container section <%= @layout.to_class %>" id="item">
+  <%= render "searches/result", result: @item %>
+</div>
+
+<% if can? :destroy, @item %>
+  <%= link_to "Destroy", item_path(@item), method: :delete %>
+<% end %>
+
+<%= render "items/similar_items" %>
+
+<% content_for :dom_ready do %>
+  App.ItemRenderer.setup(".item-container .item");
+  App.ModHighlighter.highlightAll(".item-container .item", "#results .item");
+  App.SocketRenderer.render($("#left-sidebar"));
+  App.ItemVerification.setup({ root: ".item-container" });
+  App.OnlineStatus.setup(".item-container");
+  App.SimilarMods.setup();
+<% end %>

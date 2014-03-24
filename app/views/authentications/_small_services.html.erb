@@ -1,0 +1,8 @@
+<div class="social-login bordered-section row-fluid">
+  <% Authentication::PROVIDERS.each_with_index do |s, i| %>
+    <% provider = s[:name].to_s %>
+    <div class="span6 <%= s[:klass] %>">
+      <%= link_to_provider provider %>
+    </div>
+  <% end %>
+</div>

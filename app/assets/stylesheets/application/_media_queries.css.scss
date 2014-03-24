@@ -1,0 +1,11 @@
+@media (max-width: 480px) {
+  .l-fluid-fixed .l-main {
+    margin-right: 0;
+    padding-right: 0;
+    border: 0;
+  }
+
+  .l-sidebar-right {
+    display: none;
+  }
+}

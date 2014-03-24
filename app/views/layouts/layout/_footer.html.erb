@@ -1,0 +1,69 @@
+<div id="footer">
+  <div class="wrapper-l">
+
+    <div class="row-fluid">
+      <div class="span2 text">
+        <h4>PoExplorer&#8482; 2013</h4>
+        <p class="small">PoExplorer is a Path of Exile shop indexer.</p>
+        <p class="small faded"><%= link_to "Made in NYC &hearts;".html_safe, "http://nytm.org/made" %></p>
+      </div>
+
+      <div class="span2">
+        <h5>PoExplorer</h5>
+        <ul>
+          <li><%= link_to "Search", new_search_path %></li>
+          <li><%= link_to "Players", players_path %></li>
+          <li><%= link_to "Reddit thread", "http://www.reddit.com/r/pathofexile/comments/1a1puk/poexplorer_find_items_easily/" %></li>
+          <li><%= link_to "Path of Exile forum thread", "http://www.pathofexile.com/forum/view-thread/273056" %></li>
+        </ul>
+      </div>
+
+      <div class="span2">
+        <h5>Community</h5>
+        <ul>
+          <li><%= link_to "Reddit", "http://www.reddit.com/r/pathofexile/" %></li>
+          <li><%= link_to "Official website", "http://pathofexile.com" %></li>
+          <li><%= link_to "ExileStats", "http://exilestats.com/" %></li>
+        </ul>
+      </div>
+
+      <div class="span2">
+        <h5>Connect</h5>
+        <ul class="social">
+          <li>
+            <div class="fb-like" data-href="https://www.facebook.com/pages/Poexplorer/551844928170028" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+          </li>
+
+          <li>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://poexplorer.com" data-text="Check out PoExplorer to find the best Path of Exile items. #pathofexile" data-via="PoExplorer" data-hashtags="poexplorer">Tweet</a>
+          </li>
+
+          <li>
+            <div class="g-plusone" data-href="http://poexplorer.com" data-size="medium" data-annotation="inline" data-width="120"></div>
+            <script type="text/javascript">
+            (function() {
+              var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+              po.src = 'https://apis.google.com/js/plusone.js';
+              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+            })();
+            </script>
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="span4">
+        <h5>Help me out!</h5>
+        <%= render "layouts/common/donate" %>
+        <p class="small">Every donation will be used to maintain the site. <s>And beers</s>.<br/>Any amount helps! <i class="icon-gift" style="color: #da4f49;"></i></p>
+      </div>
+    </div>
+
+
+  </div>
+
+  <%= link_to feedback_path, class: "report-bugs" do %>
+  <i class="icon-comments"></i>
+  Feedback
+  <% end %>
+</div>

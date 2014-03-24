@@ -1,0 +1,31 @@
+<% pagination = paginate(@players) if @players.total_pages > 1 %>
+
+<% content_for :h1 do %>
+  <%= link_to "Community", users_path %>
+<% end %>
+
+<% content_for :main_menu do %>
+  <%= render "users/main_menu" %>
+<% end %>
+
+<% content_for :left_sidebar do %>
+  <p class="text faded">
+    Only players in the top 15000 of each league are listed.
+  </p>
+
+  <%= render "players/sidebars/index" %>
+<% end %>
+
+
+<%= render "application/pagination", pagination: pagination if pagination %>
+
+<%= render "players/head" %>
+<%= render "players/players_listing", players: @players %>
+
+<%= render "application/pagination", pagination: pagination if pagination %>
+
+<% content_for :head do %>
+  <style type="text/css">
+    .ign { display: none; }
+  </style>
+<% end %>

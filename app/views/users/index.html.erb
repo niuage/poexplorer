@@ -1,0 +1,20 @@
+<% pagination = paginate(@users) if @users.total_pages > 1 %>
+
+<%= render "users/users_sub_header" %>
+
+<%= render "application/pagination", pagination: pagination if pagination %>
+
+<div class="slim-row row-fluid result bordered">
+  <span class="span3">Login</span>
+  <span class="span4">League</span>
+</div>
+<% @users.each do |user| %>
+  <div class="slim-row row-fluid result bordered">
+    <span class="span3">
+      <%= link_to user.login, user_path(user) %>
+    </span>
+    <span class="span4">
+      <%= user.league && user.league.name || "n/a" %>
+    </span>
+  </div>
+<% end %>

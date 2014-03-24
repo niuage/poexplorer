@@ -1,0 +1,43 @@
+<% can_update_shop = can?(:update, @shop) %>
+
+<%= render layout: "users/layout", locals: { sidebar: "users/sidebars/shop_facets", locals: { results: @results } } do %>
+
+  <div class="shop-header">
+    <%= @shop.small_delete_button if can_update_shop %>
+    <%= @shop.open_thread_button %>
+    <h2><%= @shop.link_to_shop %></h2>
+  </div>
+
+<% if @shop.processing %>
+  <div class="grey-box">
+    <h2>Your shop is waiting to be processed. Come back later.</h2>
+    <p>It should take around 15 minutes if everything goes according to plan.</p>
+  </div>
+<% elsif @shop.is_invalid %>
+  <div class="grey-box">
+    <h2>This shop is invalid.</h2>
+    <p class="text">Shop URL: <%= link_to @shop.thread_url, @shop.thread_url %></p>
+    <p>
+      <%= @shop.delete_button %>
+    </p>
+  </div>
+<% else %>
+
+  <% if @results.any? %>
+
+    <% pagination = paginate(@results) %>
+    <%= render "application/pagination", pagination: pagination %>
+
+    <%= render "searches/results", results: @results %>
+
+    <%= render "application/pagination", pagination: pagination %>
+
+  <% else %>
+    <div class="no-results">
+      <h2>No items in this shop!</h2>
+      <p>They might all be sold :(</p>
+    </div>
+  <% end %>
+
+<% end %>
+<% end %>

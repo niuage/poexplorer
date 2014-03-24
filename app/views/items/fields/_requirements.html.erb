@@ -1,0 +1,23 @@
+<div id="requirements-fields" class="tabcontent">
+  <div class="controls-rows clearfix">
+    <div class="span3">
+      <%= @form.form.label "Level" %>
+      <div class="row-fluid">
+        <%= @form.item_min_level(width: 6) %>
+        <%= @form.item_max_level(width: 6) %>
+      </div>
+    </div>
+
+    <div class="span9">
+      <%= @form.form.label "Stats (set max to 0 to exclude a stat)" %>
+      <div class="row-fluid">
+
+        <% [:str, :dex, :int].each do |stat| %>
+          <div class="span4">
+            <%= @form.stat_requirement(stat, width: 6) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+.popover p.text { margin: 0; }
+.popover { z-index: 10001; }
+
+.hide {display: none;}
+
+// Select 2
+
+.select2-search .select2-input {
+  border-color: #FF9900 !important;
+  border-width: 1px;
+}
+
+input.boolean {
+  margin-right: 5px
+}
+
+label {
+  &.radio, &.checkbox {
+    padding-top: 4px;
+  }
+}

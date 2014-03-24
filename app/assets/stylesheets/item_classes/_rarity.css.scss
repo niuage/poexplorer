@@ -1,0 +1,20 @@
+.normal       { color: $normal-color; }
+
+.magic        { color: $magic-color; }
+
+.rare         { color: $rare-color; }
+
+.unique       { color: $unique-color; }
+
+.cold         { color: $int-color; }
+.fire         { @extend .unique; }
+.lightning    { @extend .rare; }
+.life         { color: #da4f49; }
+
+.int          { color: $int-color; }
+.str          { color: $str-color; }
+.dex          { color: $dex-color; }
+
+.socket-D     { color: green }
+.socket-S     { color: red }
+.socket-I     { color: blue }

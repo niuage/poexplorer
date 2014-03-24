@@ -1,0 +1,24 @@
+<% choice = @build.bandit_choice %>
+
+<div class="bordered-section">
+  <h2>Deal with the Bandits</h2>
+
+  <div class="row-fluid">
+    <div class="span4 bandit choice_<%= choice.normal_choice %>">
+      <h3>Normal</h3>
+      <p><%= choice.to_s(:normal) %></p>
+    </div>
+
+    <div class="span4 bandit choice_<%= choice.cruel_choice %>">
+      <h3>Cruel</h3>
+      <p><%= choice.to_s(:cruel) %></p>
+    </div>
+
+    <div class="span4 bandit choice_<%= choice.merciless_choice %>">
+      <h3>Merciless</h3>
+      <p><%= choice.to_s(:merciless) %></p>
+    </div>
+  </div>
+
+  <%= to_html choice.alternatives %>
+</div>

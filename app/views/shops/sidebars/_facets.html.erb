@@ -1,0 +1,32 @@
+<% facet_params = params.dup %>
+<% facet_params.delete(:page) %>
+
+<div class="facet">
+  <h3>
+    League
+    <%= link_to "reset", url_for(facet_params.except("league")), class: "reset-facet" %>
+  </h3>
+  <ul>
+    <% League.permanent.all.each do |league| %>
+      <li>
+        <%= link_to league.name, url_for(facet_params.merge(league: league.to_param)), class: "#{"current" if @league_id == league.id}" %>
+      </li>
+    <% end %>
+  </ul>
+
+</div>
+
+<div class="facet">
+  <h3>
+    Sort by
+    <%= link_to "reset", url_for(facet_params.except("sort")), class: "reset-facet" %>
+  </h3>
+
+  <ul>
+    <% Shop::SORT_BY.each do |param, facet| %>
+      <li>
+        <%= link_to facet, facet_params.merge(sort: param), class: "#{"current" if facet_params["sort"] == param.to_s}" %>
+      </li>
+    <% end %>
+  </ul>
+</div>

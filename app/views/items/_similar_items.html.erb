@@ -1,0 +1,12 @@
+<% content_for :left_sidebar do %>
+  <p class="text faded"><%= @similar_item_search.explanation %></p>
+<% end %>
+
+<div class="h2-title">
+  <h2>Similar items</h2>
+</div>
+
+<%= render "searches/results", results: @similar_items %>
+
+<% pagination = paginate(@similar_items) %>
+<%= render "application/pagination", pagination: pagination %>

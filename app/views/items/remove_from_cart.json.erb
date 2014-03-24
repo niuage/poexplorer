@@ -1,0 +1,5 @@
+{
+  "item_id": <%= @item.id %>,
+  "item_ids": <%= @user.reload.cached_favorite_item_ids %>,
+  "success": <%= @cart.valid? %>
+}

@@ -1,0 +1,15 @@
+.bb {
+  border-bottom: 1px solid white;
+
+  &.bb-dark {
+    border-color: #bbb;
+  }
+
+  &.bb-medium {
+    border-width: 2px;
+  }
+}
+
+.br-light {
+  border-right: 1px solid #ddd;
+}

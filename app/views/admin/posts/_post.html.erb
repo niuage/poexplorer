@@ -1,0 +1,6 @@
+<div class="bordered-section">
+  <h2><%= post.title %></h2>
+  <%= post.body.html_safe %>
+
+  <%= link_to "destroy", admin_post_path(post), method: :delete %>
+</div>

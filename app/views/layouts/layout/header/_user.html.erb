@@ -1,0 +1,45 @@
+<ul class="right-menu">
+
+  <% if user_signed_in? %>
+
+    <li>
+      <%= link_to current_user do %>
+        <%= current_user.login %>
+        <span class="tag cart-item-count"><%= ShoppingCart.item_count(current_user) %></span>
+      <% end %>
+    </li>
+
+    <li class="dropdown menu-right">
+      <%= link_to "", "#", class: "dropdown-toggle icon-user ico", data: { toggle: "dropdown" } %>
+      <ul class="dropdown-menu">
+        <% if current_user.admin? %>
+          <li><%= link_to "Admin", admin_root_path %></li>
+        <% end %>
+        <li><%= link_to "Profile", current_user %></li>
+
+        <% if false %>
+        <li><%= link_to "Shopping cart", shopping_cart_path %></li>
+        <% end %>
+
+        <li class="separator"></li>
+        <li><%= link_to "Edit my profile", edit_user_registration_path %></li>
+        <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+      </ul>
+    </li>
+
+  <% else %>
+    <li class="tn-signin"><%= link_to "Sign in", new_user_registration_path %></li>
+
+    <li class="social facebook">
+      <%= link_to my_provider_path(:facebook) do %>
+        <i class="icon-facebook"></i>
+      <% end %>
+    </li>
+    <li class="social twitter">
+      <%= link_to my_provider_path(:twitter) do %>
+        <i class="icon-twitter"></i>
+      <% end %>
+    </li>
+  <% end %>
+
+</ul>

@@ -1,0 +1,23 @@
+<% keystones = @build.keystones.all %>
+
+<% if keystones.any? %>
+<div class="bordered-section">
+  <h2 id="keystones">Keystones</h2>
+
+  <div class="keystones">
+    <% keystones.each_slice(3) do |keystones| %>
+      <div class="row-fluid">
+        <% keystones.each do |keystone| %>
+          <div class="span4">
+            <%= image_tag "http://webcdn.pathofexile.com/image/#{keystone.icon}" %>
+            <div class="keystone">
+              <h5><%= keystone.name %></h5>
+              <p><%= keystone.description.gsub("//", "<br>").html_safe %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,113 @@
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Please review the problems below:"
+    labels:
+      shop:
+        thread_url: "Enter the URL or ID of your shop on the forums (shops/selling)"
+    placeholders:
+      shop:
+        thread_url: "http://www.pathofexile.com/forum/view-thread/[ID]"
+      weapon_search:
+        physical_dps: "pDPS"
+        name: "Item name"
+        socket_count: "At least # sockets"
+        linked_socket_count: "At least # linked sockets"
+        max_socket_count: "At most # sockets"
+        max_linked_socket_count: "At most # linked sockets"
+        socket_combination: "Socket colors (RGBW)"
+        quality: "Quality"
+        physical_damage: "Physical dmg"
+        elemental_damage: "Elemental dmg"
+        aps: "APS"
+        dps: "DPS"
+        str: "Min Str"
+        max_str: "Max Str"
+        dex: "Min Dex"
+        max_dex: "Max Dex"
+        int: "Min Int"
+        max_int: "Max Int"
+        critical_strike_chance: "CS chance"
+        level: "Min lvl"
+        max_level: "Max lvl"
+        price_value: "Min price"
+        max_price_value: "Max price"
+        account: "Posted by"
+        thread_id: "Thread id"
+        stats:
+          value: "min"
+          max_value: "max"
+      armour_search:
+        name: "Item name"
+        socket_count: "At least # sockets"
+        linked_socket_count: "At least # linked sockets"
+        max_socket_count: "At most # sockets"
+        max_linked_socket_count: "At most # linked sockets"
+        socket_combination: "Socket colors (RGBW)"
+        quality: "Quality"
+        aps: "A.P.S."
+        critical_strike_chance: "CS chance (min)"
+        block_chance: "Min Block Chance"
+        max_block_chance: "Max Block Chance"
+        armour: "Min Armour"
+        max_armour: "Max Armour"
+        evasion: "Min Evasion"
+        max_evasion: "Max Evasion"
+        energy_shield: "Min Energy Shield"
+        max_energy_shield: "Max Energy Shield"
+        level: "Min lvl"
+        max_level: "Max lvl"
+        price_value: "Min price"
+        max_price_value: "Max price"
+        account: "Posted by"
+        thread_id: "Thread id"
+        str: "Min Str"
+        max_str: "Max Str"
+        dex: "Min Dex"
+        max_dex: "Max Dex"
+        int: "Min Int"
+        max_int: "Max Int"
+        stats:
+          value: "min"
+          max_value: "max"
+      misc_search:
+        name: "Item name"
+        quality: "Quality"
+        block_chance: "Block chance"
+        level: "Min lvl"
+        max_level: "Max lvl"
+        elemental_damage: "Adds # Elemental dmg"
+        price_value: "Min price"
+        max_price_value: "Max price"
+        account: "Posted by"
+        thread_id: "Thread id"
+        str: "Min Str"
+        max_str: "Max Str"
+        dex: "Min Dex"
+        max_dex: "Max Dex"
+        int: "Min Int"
+        max_int: "Max Int"
+        stats:
+          value: "min"
+          max_value: "max"
+    # Labels and hints examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    hints:
+      defaults:
+        login: "You shouldn't use your Path of Exile login"
+

@@ -1,0 +1,17 @@
+<% results ||= nil %>
+<% total_count = results.total_count if results %>
+
+<%= render "searches/tab_nav", type: "weapon", form: @form, total_count: total_count %>
+<%= render "searches/tab_nav", type: "armour", form: @form, total_count: total_count %>
+<%= render "searches/tab_nav", type: "misc", form: @form, total_count: total_count %>
+<%= render "searches/tab_nav", type: "similar", form: @form, total_count: total_count, tab_name: "Similar items" %>
+
+<% if false %>
+<li class="tab-shopping right">
+  <%= link_to shopping_cart_path do %>
+    <i class="icon-shopping-cart"></i>
+    Shopping cart
+    <span class="tag cart-item-count"><%= ShoppingCart.item_count(current_user) %></span>
+  <% end %>
+</li>
+<% end %>

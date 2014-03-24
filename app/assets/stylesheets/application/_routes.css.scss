@@ -1,0 +1,91 @@
+.tn-selected { background-color: $top-nav-hover-bg-color; }
+.tab-selected {
+  color: white !important;
+}
+
+.c-searches, .c-misc_searches, .c-armour_searches, .c-weapon_searches, .c-similar_searches {
+
+  .tn-search a { @extend .tn-selected; }
+
+}
+
+.c-weapon_searches, .c-searches {
+  .tab-search-weapons a { @extend .tab-selected; }
+}
+.c-similar_searches .tab-search-similars a { @extend .tab-selected; }
+.c-armour_searches .tab-search-armours a { @extend .tab-selected; }
+.c-misc_searches .tab-search-miscs a { @extend .tab-selected; }
+.c-shopping_carts .tab-shopping a { @extend .tab-selected; }
+
+.c-items {
+  .tn-search a { @extend .tn-selected; }
+}
+
+.c-sessions {
+  .tab-log-in a { @extend .tab-selected; }
+}
+
+.c-registrations {
+  .tab-sign-up a { @extend .tab-selected; }
+
+  &.a-edit, &.a-update {
+    .tab-profile a { @extend .tab-selected; }
+  }
+}
+
+.c-shops {
+  .tn-shops a { @extend .tn-selected; }
+
+  &.a-index {
+    .tab-browse a { @extend .tab-selected; }
+  }
+
+  &.a-new, &.a-edit, &.a-create, &.a-update {
+    .tab-usershop a { @extend .tab-selected; }
+  }
+
+  &.a-show, &.a-index {
+    .tab-shop a { @extend .tab-selected; }
+  }
+
+}
+
+.c-users {
+  &.a-show {
+    .tab-profile a { @extend .tab-selected; }
+  }
+
+  .tab-users a { @extend .tab-selected; }
+}
+
+.c-players {
+  .tab-ladders a { @extend .tab-selected; }
+}
+
+.a-item_prices, .a-search_by_price {
+  .tab-help a { @extend .tab-selected; }
+}
+
+.a-faq .tab-faq a { @extend .tab-selected; }
+
+.c-feedback { .tab-feedback a { @extend .tab-selected; } }
+
+.c-builds, .c-build_searches {
+  .tn-builds a { @extend .tn-selected; }
+}
+
+.c-builds.a-new, .c-builds.a-create {
+  .tab-add-build a { @extend .tab-selected; }
+}
+
+.c-builds.a-index {
+  .tab-search a { @extend .tab-selected; }
+}
+
+.c-builds.a-edit {
+  .tab-my-builds a { @extend .tab-selected; }
+}
+
+.c-build_searches {
+  .tab-search a { @extend .tab-selected; }
+}

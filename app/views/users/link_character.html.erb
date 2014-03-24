@@ -1,0 +1,29 @@
+<%= render layout: "users/layout", locals: { sidebar: "users/sidebars/show" } do %>
+
+  <h2>Steps to link the character "<%= @ign %>" to this account</h2>
+
+  <div class="text">
+
+  <p class="bordered-section">1 - Open one of your threads on pathofexile.com.</p>
+
+  <p class="bordered-section">2 - Edit the first post of the thread and add this code anywhere: <span class="tag tag-green"><%= @token %></span>.</p>
+
+  <div class="bordered-section">
+  <p>3 - Once it's done, enter your thread URL, choose the league of your character and click <span class="tag">Validate and link</span>.</p>
+
+  <%= simple_form_for :user, url: validate_player_user_path(@user) do |f| %>
+    <%= f.input :thread_url, input_html: { value: nil, class: "span12" } %>
+    <%= f.input :league_id, label: "League of your PoE character",
+          collection: League.running,
+          selected: current_league_id %>
+    <%= f.submit "Validate and link", class: "btn btn-success" %>
+  <% end %>
+
+  </div>
+
+  <p class="faded">PoExplorer will check for the presence of the code, and link your character to this PoExplorer account. Your character should appear on your <%= link_to "profile page", @user %>. From there, you can mark it as being <span class="tag tag-green">online</span> manually, whenever you log into the game!</p>
+
+  <p class="faded">This is particularly useful for characters that are not on the PoE ladder (top 15k in each league).</p>
+
+  </div>
+<% end %>

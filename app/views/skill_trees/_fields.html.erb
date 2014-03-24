@@ -1,0 +1,22 @@
+<div class="nested-fields">
+  <% tree = SkillTreeDecorator.new(f) %>
+  <div class="box dark">
+    <div class="box-content">
+      <div class="skill-tree">
+        <div class="row-fluid">
+          <%= tree.url %>
+          <%= tree.level %>
+        </div>
+        <div class="row-fluid">
+          <%= tree.description %>
+        </div>
+        <div>
+          <a href="" class="btn btn-info ttip import-keystones" title="Will automatically import the keystones of this skill tree">
+            Import keystones
+          </a>
+          <%= link_to_remove_association "Delete", f, class: "btn" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

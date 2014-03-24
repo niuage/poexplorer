@@ -1,0 +1,45 @@
+$pagination-color: #f7f7f7;
+$bottom-pagination-color: darken($pagination-color, 2%);
+
+.pagination-bar {
+  @extend .clearfix;
+  border: 1px solid $pagination-border-color;
+  @include linear-gradient($pagination-color, $bottom-pagination-color);
+  border-radius: 2px;
+  margin: 10px 0 16px;
+
+  .pagination {
+    margin: 0;
+
+    a {
+      display: block;
+      padding: 0 12px;
+    }
+
+    span {
+      font-size: 14px;
+      line-height: 35px;
+      float: left;
+      display: block;
+
+      &:hover, &.current {
+        background-color: $pagination-border-color;
+        color: white;
+      }
+
+      &.gap { padding: 0 3px; }
+      &.gap:hover { background-color: transparent; color: #333; }
+
+      &.current {
+        padding: 0 10px;
+      }
+    }
+
+//    .next, .prev, .first, .last {
+//      @extend .ir;
+//      width: 40px;
+//      background: image-url("layout-icons.png") -15px 0;
+//    }
+  }
+
+}

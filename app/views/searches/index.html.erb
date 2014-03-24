@@ -1,0 +1,16 @@
+<h2>Searches</h2>
+
+<p>You'll soon be able to see your previous and favorite searches.</p>
+
+<% if false %>
+<ul>
+  <% @searches.each do |search| %>
+    <li>
+      <h3><%= search.item.name %></h3>
+      <p><%= search.updated_at %></p>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate @searches %>
+<% end %>

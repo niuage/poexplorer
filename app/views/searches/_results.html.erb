@@ -1,0 +1,16 @@
+<% content_for :dom_ready do %>
+  App.ItemRenderer.setup("#results .result");
+  App.ItemVerification.setup({ root: "#results" });
+  App.OnlineStatus.setup("#results");
+  App.PM.setup();
+
+  <% if user_signed_in? %>
+    App.CartButton.setup(".btn-cart", {
+      itemIds: <%= current_user.cached_favorite_item_ids %>
+    });
+  <% end %>
+<% end %>
+
+<div id="results" class="<%= @layout.to_class %>">
+  <%= render partial: "searches/result", collection: results %>
+</div>

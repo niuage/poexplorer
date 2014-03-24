@@ -1,0 +1,17 @@
+<% if players.any? %>
+
+  <% content_for :dom_ready do %>
+    App.OnlineStatus.setup("#results");
+  <% end %>
+
+  <div id="results">
+    <%= render players %>
+  </div>
+
+<% else %>
+
+  <div class="no-results">
+    <h2>No players</h2>
+  </div>
+
+<% end %>

@@ -1,0 +1,24 @@
+<div class="slim-row row-fluid result bordered">
+
+  <span class="span4 online-status">
+    <%= link_to player_path(player.account),
+                class: "account",
+                data: { account: player.account } do %>
+      <i class="icon-circle-blank online-icon"></i>
+      <span><%= player.account %></span>
+      <% end %>
+  </span>
+
+  <span class="span3">
+    <%= player.character %>
+  </span>
+
+  <span class="span3">
+    <%= player.klass %>
+  </span>
+
+  <span class="span2 small pagination-right">
+    <%= link_to "Forum Profile", "http://pathofexile.com/account/view-profile/#{player.account}", target: "_blank" %>
+  </span>
+
+</div>

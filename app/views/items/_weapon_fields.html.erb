@@ -1,0 +1,33 @@
+<div class="controls-row control-group clearfix">
+
+  <%= render "items/fields/common" %>
+
+  <div class="search-tabs" id="weapon-tabs">
+    <div class="btn-group">
+      <a class="btn" href="#offense">Offense</a>
+      <a class="btn" href="#sockets">Sockets</a>
+      <a class="btn" href="#requirements">Requirements</a>
+      <a class="btn" href="#price">Price</a>
+    </div>
+
+    <div id="offense-fields" class="tabcontent">
+      <div class="controls-row clearfix">
+        <div>
+          <%= @form.item_physical_damage(width: 2) %>
+          <%= @form.item_elemental_damage(width: 2) %>
+          <%= @form.item_dps(width: 2) %>
+          <%= @form.item_physical_dps(width: 2) %>
+          <%= @form.item_aps(width: 2) %>
+          <%= @form.item_csc(width: 2) %>
+        </div>
+      </div>
+    </div>
+
+    <%= render "items/fields/sockets" %>
+
+    <%= render "items/fields/requirements" %>
+
+    <%= render "items/fields/price" %>
+  </div>
+
+</div>

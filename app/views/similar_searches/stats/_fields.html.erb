@@ -1,0 +1,19 @@
+<div class="nested-fields" data-mod-id="<%= f.object.mod_id %>">
+  <div class="controls-row">
+    <% @form.with_form(f) do |form| %>
+      <%= form.mods %>
+      <div class="span3 toggle-group">
+        <%= form.lower_mod_value %>
+        <%= form.stat_value(width: 4) %>
+        <%= form.higher_mod_value %>
+      </div>
+
+      <div class="span2 toggle-group">
+        <%= form.required_mod %>
+        <%= form.excluded_mod %>
+      </div>
+
+      <%= form.link_to_remove_stat %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<%= render layout: "application/nav" do %>
+  <li class="tab-browse">
+    <%= link_to shops_path do %>
+    <i class="icon-search"></i>
+    Browse
+    <% end %>
+  </li>
+
+  <% if user_signed_in? %>
+    <li class="tab-myshops">
+      <%= link_to [current_user, :shops] do %>
+        <i class="icon-shopping-cart"></i>
+        My shops
+      <% end %>
+    </li>
+  <% end %>
+
+  <li class="tab-usershop">
+    <%= link_to new_shop_path do %>
+    <i class="icon-plus"></i>
+    Create a shop
+    <% end %>
+  </li>
+<% end %>

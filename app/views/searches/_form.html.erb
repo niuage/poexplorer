@@ -1,0 +1,47 @@
+<%= simple_form_for @search, html: { id: "search-form" } do |f| %>
+  <% @form.form = f %>
+
+  <%= render @form %>
+
+  <div id="stats" class="row-fluid">
+    <%= f.fields_for :stats do |s| %>
+      <%= render @form.stats_partial_path, f: s %>
+    <% end %>
+  </div>
+
+  <div class="row-fluid control-group">
+    <div class="span12">
+      <div class="mod-sep span10">
+        <%= @form.online(width: 2) %>
+        <%= @form.only_corrupted(width: 3) %>
+      </div>
+
+      <span class="span2">
+        <%= link_to_add_association "<i class='icon-plus icon-white'></i> Add mod".html_safe, f, :stats,
+          data: {
+            association_insertion_node: "#stats",
+            association_insertion_method: "append"
+          },
+          partial: @form.stats_partial_path,
+          class: "btn right btn-info span12"
+        %>
+      </span>
+    </div>
+  </div>
+
+  <div class="row-fluid control-group last">
+    <div class="span12">
+      <%= @form.submit(width: 2) %>
+      <%= @form.order(width: 3) %>
+    </div>
+  </div>
+
+  <%= f.input :order_by_mod_id, as: :hidden, input_html: { id: "order-by-mod-id" } %>
+<% end %>
+
+<% content_for :dom_ready do %>
+  App.SearchForm.setup();
+  App.InputHighlighter.setup();
+  App.ModToggle.setup();
+  App.ModSorter.setup();
+<% end %>

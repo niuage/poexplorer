@@ -1,0 +1,8 @@
+<ul class="nav nav-tabs">
+  <li class="<%= "active" if controller_name == 'sessions' %>">
+    <%= link_to "Log in", new_user_session_path %>
+  </li>
+  <li class="<%= "active" if controller_name == 'registrations' %>">
+    <%= link_to "Sign up", new_user_registration_path %>
+  </li>
+</ul>

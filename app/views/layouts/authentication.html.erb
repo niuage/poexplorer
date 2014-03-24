@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? content_for(:title) : "PoExplorer.com" %></title>
+  <% stylesheet "authentication" %>
+  <%= render "layouts/layout/meta" %>
+  <%= render "layouts/stylesheets" %>
+  <%= render "layouts/common/ga" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="authentication <%= body_classes %>">
+
+  <%= render "layouts/layout/header/authentication_header" %>
+  <%= render "layouts/flash", flash: flash %>
+
+  <div id="content" class="wrapper-l">
+    <div class="row-fluid">
+
+      <div class="span6 offset3">
+        <div class="signin-box">
+        <%= yield %>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <%= render "layouts/layout/footer" %>
+  <%= render "layouts/common/bottom" %>
+</body>
+</html>

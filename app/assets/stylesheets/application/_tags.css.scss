@@ -1,0 +1,50 @@
+.tag {
+  display: inline-block;
+  padding: 0px 3px;
+  background: #e4e4e4;
+  color: #777;
+  border-radius: $border-radius;
+  text-shadow: 0 1px 0 white;
+
+  &.small {
+    font-size: 0.825em;
+    line-height: 16px;
+  }
+
+  &.faded {
+    background: #aaa;
+  }
+}
+
+.tag, .item .tag {
+  &.tag-red, &.tag-green, &.tag-blue {
+    color: white; text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+  }
+  &.tag-red { background: red; }
+  &.tag-green { background: green; }
+  &.tag-blue { background: blue; }
+}
+
+#header .tag {
+  line-height: 18px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 6px;
+  background: $top-nav-hover-bg-color;
+  color: #FFF;
+  text-shadow: 0 -1px #000;
+  padding: 0 4px;
+}
+
+.tag.support_false {
+  text-shadow: none;
+  color: white;
+  font-weight: normal;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: -2px;
+
+  &.dex { background: $dex-color; }
+  &.str { background: $str-color; }
+  &.int { background: $int-color; }
+}

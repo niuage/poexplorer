@@ -1,0 +1,16 @@
+<% flash.each do |name, msg| %>
+<div class="alert alert-<%= name %>">
+  <%= content_tag :p, msg.html_safe %>
+</div>
+<% end %>
+
+<% if @broadcast %>
+<div class="alert alert-info">
+  <p>
+    <% if @broadcast.title.present? %>
+      <strong><%= @broadcast.title %></strong> &mdash;
+    <% end %>
+    <%= @broadcast.body %>
+  </p>
+</div>
+<% end %>

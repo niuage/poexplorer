@@ -1,0 +1,4 @@
+<div class="skill-tree">
+  <h5><%= link_to "#{ "Level #{skill_tree.level}" if skill_tree.level.present? } Passive Skill Tree", skill_tree.url %></h5>
+  <%= to_html skill_tree.description.presence || "No description" %>
+</div>

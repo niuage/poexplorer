@@ -1,0 +1,9 @@
+<% title ||= @search.try(:to_title).presence || "Items" %>
+
+<% content_for :h1 do %>
+  <%= link_to title, new_search_path, title: "New search" %>
+<% end %>
+
+<% content_for :main_menu do %>
+  <%= render "searches/search_menu", results: @results %>
+<% end %>
