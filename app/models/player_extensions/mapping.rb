@@ -13,7 +13,6 @@ module PlayerExtensions
 
       tire do
         mapping(_routing: { required: true, path: "account" }) do
-          indexes :_id, path: "account", type: "string", index: :not_analyzed
           indexes :account, type: "string", index: :not_analyzed
           indexes :online, type: "boolean"
           indexes :league_id, type: "integer"
@@ -26,7 +25,6 @@ module PlayerExtensions
 
     def to_indexed_json
       to_json(
-        methods: [:_id],
         except: [
           :id,
           :marked_online_at,
