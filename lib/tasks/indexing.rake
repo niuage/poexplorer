@@ -97,7 +97,7 @@ namespace :index do
 
   task :reset_all_the_things => :environment do
     `rake db:drop db:create db:migrate db:seed;`
-    `curl -XDELETE 'http://localhost:9200'`
+    `curl -XDELETE 'http://localhost:9200/_all'`
     `bundle exec rake 'index:index[lala]'`
   end
 
