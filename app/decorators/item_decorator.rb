@@ -53,7 +53,7 @@ class ItemDecorator < ApplicationDecorator
 
     def online_status
       h.content_tag :span, class: "online-status" do
-        h.link_to("#",
+        h.link_to(h.player_path(source.account),
                   class: "account",
                   data: { account: source.account }) do
           h.content_tag(:i, "", class: "icon-circle-blank online-icon") + \

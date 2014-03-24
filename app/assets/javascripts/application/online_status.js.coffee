@@ -4,7 +4,6 @@ class OnlineStatus
     @$account = @$root.find(".account")
 
   setup: ->
-    @$account.click (e) -> e.preventDefault()
     @updateStatuses()
 
   createPlayers: (data) ->

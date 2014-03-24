@@ -25,7 +25,8 @@ module UserShops
       @results = ItemDecorator.decorate_collection(
         Elastic::ItemSearch.new(@search, params)
           .tire_search
-          .results
+          .results,
+        context: { size: layout_size }
       )
 
       @price_setter = can? :update, @shop

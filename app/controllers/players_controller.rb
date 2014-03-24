@@ -55,10 +55,9 @@ class PlayersController < ApplicationController
     update_from_url_params(@search)
 
     @results = ItemDecorator.decorate_collection(
-      Elastic::PlayerStashSearch.new(@search, params)
-      .tire_search
-      .results
-      )
+      Elastic::PlayerStashSearch.new(@search, params).tire_search.results,
+      context: { size: layout_size }
+    )
   end
 
 end

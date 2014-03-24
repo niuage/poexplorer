@@ -11,7 +11,10 @@ class ShoppingCartsController < ApplicationController
     update_from_url_params(@search)
     @searchable = Elastic::CartSearch.new(@search, params)
     @tire_search = @searchable.tire_search(current_user.cached_favorite_item_ids)
-    @results = ItemDecorator.decorate_collection(@tire_search.results)
+    @results = ItemDecorator.decorate_collection(
+      @tire_search.results,
+      context: { size: layout_size }
+    )
   end
 
   private

@@ -48,7 +48,10 @@ class SimilarSearchesController < ApplicationController
 
     @searchable = Elastic::SimilarItemSearch.new(@search, params)
     @tire_search = @searchable.tire_search
-    @results = ItemDecorator.decorate_collection(@tire_search.results)
+    @results = ItemDecorator.decorate_collection(
+      @tire_search.results,
+      context: { size: layout_size }
+    )
     @form = SimilarSearchFormDecorator.new(@search)
   end
 
