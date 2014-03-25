@@ -11,8 +11,6 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
     @explanation = []
   end
 
-  end
-
   def tire_search
     Tire.search(Indices.item_indices(search), tire_search_hash)
   end
@@ -108,7 +106,7 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
 
     @similar_stats_count = self.class.similar_stats_count(
       search, stats_count
-    )
+      )
   end
 
   def self.similar_stats_count(search, stats_count)
@@ -129,6 +127,11 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
     must_match :rarity_id
     @explanation << "Same rarity"
 
+    if similar_stats_count == 0 || search.unique?
+      @explanation << "Same base name"
+      must_match :base_name
+    end
+
     similar_armour            if armour?
     similar_linked_sockets    if has_sockets?
 
@@ -137,11 +140,6 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
     similar_elemental_damage  if weapon?
 
     similar_level
-
-    if similar_stats_count == 0 || search.unique?
-      @explanation << "Same rarity & base name"
-      must_match :base_name
-    end
   end
 
   def mods_should_match
@@ -179,7 +177,7 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
   def similar_armour
     [:evasion, :energy_shield, :armour].each do |type|
       if self.send(type).to_i > 0
-        @explanation << "Has #{type.to_s.humanize}"
+        @explanation << "Must have #{type.to_s.titleize}"
         context.must { range type, gt: 0 }
       end
     end
@@ -193,7 +191,7 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
 
   def similar_linked_sockets
     return unless (linked_socket_count = self.linked_socket_count).present?
-    @explanation << "Should have #{linked_socket_count} sockets or more"
+    @explanation << "Should have #{linked_socket_count} linked sockets or more"
     context.should { range :linked_socket_count, gte: linked_socket_count, boost: linked_socket_count }
   end
 
@@ -230,7 +228,7 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
   ### OTHER
 
   def explanation
-    @explanation.join("</br>")
+    @explanation.map { |e| "<p class='faded text'>#{e}</p>" }.join("").html_safe
   end
 
   def stats
@@ -240,14 +238,15 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
   end
 
   def should_match_item_type
+    return unless (item_type = search.item_type).present?
+
     should_or_must = search.same_item_type? ? :must : :should
 
-    @explanation << "#{should_or_must.to.capitalize} be of the same type"
-
-    item_type = search.item_type
     context.send(should_or_must) do
       term :item_type, item_type
-    end if item_type.present?
+    end
 
+    @explanation << "#{should_or_must.to_s.capitalize} be of the same type (#{item_type.titleize})"
   end
+
 end
