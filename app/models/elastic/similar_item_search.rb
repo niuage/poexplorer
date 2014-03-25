@@ -6,6 +6,13 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
 
   attr_accessor :explanation, :search, :options
 
+  def initialize(search, options = {})
+    super
+    @explanation = []
+  end
+
+  end
+
   def tire_search
     Tire.search(Indices.item_indices(search), tire_search_hash)
   end
@@ -54,6 +61,8 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
           item.with_context(self) do
             item.item_specific_requirements if item.item?
 
+            item.should_match_item_type
+
             item.is_priced
 
             case
@@ -61,8 +70,6 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
             when  item.map?  ; item.similar_maps
             else             ; item.similar_items
             end
-
-            item.should_match_item_type
           end
         end
       end
@@ -120,6 +127,7 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
     mods_should_match
 
     must_match :rarity_id
+    @explanation << "Same rarity"
 
     similar_armour            if armour?
     similar_linked_sockets    if has_sockets?
@@ -131,11 +139,9 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
     similar_level
 
     if similar_stats_count == 0 || search.unique?
-      @explanation = "Same rarity & base name"
+      @explanation << "Same rarity & base name"
       must_match :base_name
     end
-
-    @explanation ||= "At least #{similar_stats_count} out of the #{stats_count} mod#{ "s" if stats_count != 1 } match, and same rarity"
   end
 
   def mods_should_match
@@ -172,7 +178,10 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
 
   def similar_armour
     [:evasion, :energy_shield, :armour].each do |type|
-      context.must { range type, gt: 0 } if self.send(type).to_i > 0
+      if self.send(type).to_i > 0
+        @explanation << "Has #{type.to_s.humanize}"
+        context.must { range type, gt: 0 }
+      end
     end
   end
 
@@ -184,7 +193,8 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
 
   def similar_linked_sockets
     return unless (linked_socket_count = self.linked_socket_count).present?
-    context.should { term :linked_socket_count, value: linked_socket_count, boost: linked_socket_count }
+    @explanation << "Should have #{linked_socket_count} sockets or more"
+    context.should { range :linked_socket_count, gte: linked_socket_count, boost: linked_socket_count }
   end
 
   def similar_level
@@ -200,25 +210,27 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
 
   def similar_skills
     quality = self.quality.to_i
-    must_match :base_name
-    context.should { range :quality, gte: (quality * 0.8).to_i, lte: (quality * 1.2).to_i }
+    same_base_name
+    @explanation << "Quality should be higher"
+    context.should { range :quality, gte: quality.to_i }
   end
 
   ### MAPS
 
   def similar_maps
-    must_match :base_name
+    same_base_name
     similar_level
+  end
+
+  def same_base_name
+    must_match :base_name
+    @explanation << "Same base name"
   end
 
   ### OTHER
 
   def explanation
-    case
-    when skill?; "Quality +/- 3%"
-    when map?  ; "Same type and rarity"
-    else       ; "#{@explanation}"
-    end
+    @explanation.join("</br>")
   end
 
   def stats
@@ -229,9 +241,13 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
 
   def should_match_item_type
     should_or_must = search.same_item_type? ? :must : :should
+
+    @explanation << "#{should_or_must.to.capitalize} be of the same type"
+
     item_type = search.item_type
     context.send(should_or_must) do
       term :item_type, item_type
     end if item_type.present?
+
   end
 end

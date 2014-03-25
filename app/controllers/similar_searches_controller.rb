@@ -2,7 +2,7 @@ class SimilarSearchesController < ApplicationController
   respond_to :html
 
   before_filter :find_search, only: [:show, :update]
-  before_filter :view_layout, only: [:show]
+  before_filter :view_layout, only: [:new, :show, :create]
 
   def new
     @form = SimilarSearchFormDecorator.new(nil)

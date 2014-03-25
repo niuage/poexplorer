@@ -320,7 +320,7 @@ G_MODIFIER_TYPES = {
   "Adds a total of #% to Resistances" => [:bow, :claw, :dagger, :one_hand_axe, :one_hand_mace, :one_hand_sword, :sceptre, :staff, :thrusting_one_hand_sword, :two_hand_axe, :two_hand_mace, :two_hand_sword, :wand, :body_armour, :boot, :glove, :helmet, :shield, :amulet, :belt, :quiver, :ring],
   "Can't use other Rings" => [:ring],
   "#% reduced Effect of Curses on You" => [:ring],
-  "#% reduced Attribute Requirements" => [:bow, :claw, :dagger, :one_hand_axe, :one_hand_mace, :one_hand_sword, :sceptre, :staff, :thrusting_one_hand_sword, :two_hand_axe, :two_hand_mace, :two_hand_sword, :wand, :body_armour, :boot, :glove, :helmet, :shield, :amulet, :belt, :flask, :map, :quiver, :ring, :skill],
+  "#% reduced Attribute Requirements" => [:bow, :claw, :dagger, :one_hand_axe, :one_hand_mace, :one_hand_sword, :sceptre, :staff, :thrusting_one_hand_sword, :two_hand_axe, :two_hand_mace, :two_hand_sword, :wand, :body_armour, :boot, :glove, :helmet, :shield, :amulet, :belt, :flask, :map, :quiver, :ring, :skill, :thrusting_one_hand_sword],
 
   ##
   ## Mods found after running a missing mod search

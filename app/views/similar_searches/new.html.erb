@@ -13,7 +13,7 @@
   <%= f.input :text_representation, as: :text,
         label: "Text representation you get when copying an item in-game",
         input_html: { class: "span12", style: "height: 400px" } %>
-  <%= f.button :submit, "Find similar items" %>
+  <%= f.button :submit, "Find similar items", class: "btn-success" %>
 <% end %>
 
 <% content_for :left_sidebar do %>
