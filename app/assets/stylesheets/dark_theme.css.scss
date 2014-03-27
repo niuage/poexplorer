@@ -163,6 +163,10 @@ select {
   .stats li, .props li[data-sort] {
     &:hover, &.sorting { background: #3A3A41; }
   }
+
+  .sorting {
+    border-color: #24242B;
+  }
 }
 
 a.view_layout.s_layout {
