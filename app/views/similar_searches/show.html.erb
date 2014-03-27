@@ -2,9 +2,14 @@
 
 <%= render "searches/search_sub_header" %>
 
-<p class="text alert-info">This feature is in beta, please <%= link_to "report any bug, or suggest improvements", feedback_path %>.</p>
-
 <%= render "searches/form" %>
+
+<div class="alert alert-info">
+  <p>
+  Need your help to improve this feature!
+  <%= link_to "Report any bug, and suggest improvements here", feedback_path %>.
+  </p>
+</div>
 
 <%= render "searches/results_and_facets", no_facet_link: true %>
 

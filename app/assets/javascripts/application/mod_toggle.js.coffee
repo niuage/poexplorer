@@ -1,6 +1,39 @@
 class ModToggle
   constructor: ->
     @$form = $("#search-form")
+    @onOptionalStatCountChange()
+
+  # should be in another class
+  onOptionalStatCountChange: ->
+    if (@$statCount = @$form.find("#optional-stat-count")).length
+      @updateOptionalStatCountOnToggle()
+      @$form.trigger("optionalStatCountChanged")
+
+  # should be in another class
+  updateOptionalStatCountOnToggle: ->
+    @$similarModMatchCount = @$form.find("#similar_search_minimum_mod_match")
+
+    @$similarModMatchCount.on "change", (e) =>
+      @$form.trigger("optionalStatCountChanged")
+
+    @$form.on "optionalStatCountChanged", (e) =>
+      optionalStatCount = @optionalStatCount()
+
+      @$statCount.html("out of #{optionalStatCount}")
+      similarModMatchCount = parseInt(@$similarModMatchCount.val())
+      @$statCount.removeClass()
+      switch
+        when similarModMatchCount > optionalStatCount
+          @$statCount.addClass("life")
+        when optionalStatCount - similarModMatchCount <= 1
+          @$statCount.addClass("unique")
+        else
+          @$statCount.addClass("dex")
+
+  # should be in another class
+  optionalStatCount: ->
+    $optionalMods = @$form.find(".optional-mods")
+    $optionalMods.length - $optionalMods.find(":checked").length
 
   # set the toggle buttons states
   # and setup their click event
@@ -27,8 +60,11 @@ class ModToggle
     $btn.tooltip("show")
 
     if $btn.parent(".toggle-group").length && checked
+      # all siblings and exclude self?
       $btn.prevAll(".btn-toggle").each (i, e) => @setButton($(e), false)
       $btn.nextAll(".btn-toggle").each (i, e) => @setButton($(e), false)
+
+    @$form.trigger("optionalStatCountChanged")
 
   messageChecked: ($btn) ->
     $btn.data("messageChecked")

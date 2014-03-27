@@ -17,7 +17,7 @@ class SimilarSearchesController < ApplicationController
     league_id = params[:similar_search][:league_id].presence || current_league_id
 
     if text.blank?
-      flash[:alert] = "The text representation of the item can't be blank"
+      flash.now[:alert] = "The text representation of the item can't be blank"
       return render(:new)
     end
 
@@ -26,10 +26,10 @@ class SimilarSearchesController < ApplicationController
       search = parser.search
       search.update_attribute(:league_id, league_id)
     rescue TypeError => e
-      flash[:alert] = e.message
+      flash.now[:alert] = e.message
       return render(:new)
     rescue ItemParsers::Base::InvalidSearchError => e
-      flash[:alert] = e.message
+      flash.now[:alert] = e.message
       return render(:new)
     end
 

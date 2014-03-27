@@ -12,7 +12,7 @@ class SimilarSearchFormDecorator < SearchFormDecorator
   def minimum_mod_match(options = {})
     input(:minimum_mod_match,
           input_options({
-            label: "<b>At least X <u>optional</u> mods<span id='optional-stat-count'></span> are matching</b>".html_safe,
+            label: "<b>At least X <span id='optional-stat-count'></span> <u>optional</u> mods are matching</b>".html_safe,
           }, options)
     ).html_safe
   end
