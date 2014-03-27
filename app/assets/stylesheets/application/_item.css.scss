@@ -47,22 +47,24 @@
     margin-bottom: 2px;
   }
 
-  .stats li {
-  }
-
   .props li[data-sort], .stats li {
     position: relative;
     cursor: pointer;
 
     i {
-      position: absolute;
-      left: -20px;
-      top: 2px;
+      float: right;
+      padding-top: 2px;
     }
 
-    &:hover {
-      background: #eee;
+    &:hover, &.sorting {
+      background: #e7e7e7;
     }
+  }
+
+  .sorting {
+    margin-left: -4px;
+    padding: 0 4px;
+    border-radius: 2px;
   }
 
   .tag {
@@ -89,6 +91,11 @@
   .requirements {
     @extend .faded;
     height: 30px;
+
+    [data-sort] {
+      cursor: pointer;
+      border-bottom: 1px dotted #ccc;
+    }
   }
 
   .props {
@@ -122,8 +129,6 @@
       margin-bottom: 1px;
       font-size: 13px;
     }
-
-    .stats li i { left: -20px; }
 
     .requirements {
       padding: 5px 0 4px;

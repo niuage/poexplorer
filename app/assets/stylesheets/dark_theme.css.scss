@@ -161,8 +161,7 @@ select {
   }
 
   .stats li, .props li[data-sort] {
-    &:hover { background: #3A3A41; }
-
+    &:hover, &.sorting { background: #3A3A41; }
   }
 }
 

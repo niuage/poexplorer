@@ -12,11 +12,12 @@ class ModSorter
   hightlightCurrentModAndProp: ->
     if (mod_id = @currentMod())
       $mods = App.ModHighlighter.selectMods(@$results, [mod_id])
-      $mods.prepend("<i class='icon-chevron-down'></i>")
+      $mods.addClass("sorting").prepend("<i class='icon-chevron-down'></i>")
 
     if (order = @$orderSelect.val())
-      @$results.find(".props li[data-sort=#{order}]")
-        .prepend("<i class='dex icon-chevron-down'></i>")
+      @$results.find("[data-sort=#{order}]")
+        .addClass("sorting")
+        .prepend("<i class='dex icon-chevron-down'></i> ")
 
   currentMod: ->
     @$orderByModInput.val()
@@ -26,9 +27,9 @@ class ModSorter
       $li = $(e.currentTarget)
       @sortByMod($li.data("mod"))
 
-    @$results.find(".props li[data-sort]").on "click", (e) =>
-      $li = $(e.currentTarget)
-      @$orderSelect.val($li.data("sort"))
+    @$results.find("[data-sort]").on "click", (e) =>
+      $elt = $(e.currentTarget)
+      @$orderSelect.val($elt.data("sort"))
       @$form.submit()
 
   removeSortingFilter: ->

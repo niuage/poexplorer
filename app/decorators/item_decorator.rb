@@ -27,7 +27,9 @@ class ItemDecorator < ApplicationDecorator
   end
 
   def level
-    "#{ source.item_type ==  "Map" ? "Level" : "Requires level" } #{source.level.to_i}"
+    h.content_tag :span, data: { sort: :level } do
+      "#{ source.item_type ==  "Map" ? "Level" : "Requires level" } #{source.level.to_i}"
+    end
   end
 
   def requirement_list
@@ -63,7 +65,9 @@ class ItemDecorator < ApplicationDecorator
     end
 
     def quality
-      "Quality <b>+#{source.quality.to_i}%</b>".html_safe
+      h.content_tag :span, data: { sort: :quality } do
+        "<b>+#{source.quality.to_i}%</b> Quality".html_safe
+      end
     end
 
     def indexed_at
