@@ -3,14 +3,20 @@
 <%= render "searches/search_sub_header" %>
 
 <%= simple_form_for :similar_search, { url: similar_searches_path } do |f| %>
-  <%= f.input :league_id, collection: simple_options_for_select(
+  <div class="controls-row">
+  <%= f.label :league_id, "League" %>
+  <%= f.input :league_id,
+      label: false,
+      collection: simple_options_for_select(
         League,
         text: ->(name) { return nil unless League.visible?(name); name.capitalize + " league" }
-        ),
+      ),
       selected: current_league_id,
       input_html: { class: "span12 search_league" }
   %>
+  </div>
   <%= f.input :text_representation, as: :text,
+        label_html: { style: "margin-top: 20px" },
         label: "Text representation you get when copying an item in-game",
         input_html: { class: "span12", style: "height: 400px" } %>
   <%= f.button :submit, "Find similar items", class: "btn-success" %>
@@ -23,13 +29,19 @@
     in the textarea, and PoExplorer will find similar items for you.
   </p>
 
-  <p class="text">
-    The most obvious use of this features is finding upgrades for your character,
+  <p class="small text bordered-section">
+    The most obvious use of this features is finding upgrades,
     since you can look for similar items with better stats.
+    <br><br>
+    It can also help you estimate the price of an item.
   </p>
 
-  <p class="text">
-    This feature is in beta, don't hesitate to report bugs,
-    propose improvements, or ask questions.
+  <p class="small text">
+    This feature is in beta, don't hesitate to
+    <%= link_to "report bugs, propose improvements, or ask questions", feedback_path %>.
   </p>
+<% end %>
+
+<% content_for :dom_ready do %>
+  $("form select").select2();
 <% end %>
