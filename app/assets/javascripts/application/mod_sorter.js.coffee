@@ -12,12 +12,16 @@ class ModSorter
   hightlightCurrentModAndProp: ->
     if (mod_id = @currentMod())
       $mods = App.ModHighlighter.selectMods(@$results, [mod_id])
-      $mods.addClass("sorting").prepend("<i class='icon-chevron-down'></i>")
+      @highlight($mods)
 
     if (order = @$orderSelect.val())
-      @$results.find("[data-sort=#{order}]")
-        .addClass("sorting")
-        .prepend("<i class='dex icon-chevron-down'></i> ")
+      @highlight(@$results.find("[data-sort=#{order}]"))
+
+
+  highlight: ($elts) ->
+    $elts
+      .addClass("sorting")
+      .prepend("<i class='dex icon-chevron-down'></i> ")
 
   currentMod: ->
     @$orderByModInput.val()

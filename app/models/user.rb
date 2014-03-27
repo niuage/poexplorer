@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
 
   belongs_to :league
 
-  serialize :cached_favorite_item_ids
+  # serialize :cached_favorite_item_ids
 
   before_save :cache_association_names
 
@@ -35,10 +35,6 @@ class User < ActiveRecord::Base
 
   def cache_association_names
     self.league_name = (self.league_id.nil? ? nil : self.league.name) if self.league_id_changed?
-  end
-
-  def cached_favorite_items
-    Item.where(id: cached_favorite_item_ids)
   end
 
   def cached_favorite_item_ids

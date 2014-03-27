@@ -4,7 +4,7 @@
   App.OnlineStatus.setup("#results");
   App.PM.setup();
 
-  <% if user_signed_in? %>
+  <% if false && user_signed_in? %>
     App.CartButton.setup(".btn-cart", {
       itemIds: <%= current_user.cached_favorite_item_ids %>
     });

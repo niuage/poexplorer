@@ -52,8 +52,9 @@
     cursor: pointer;
 
     i {
-      float: right;
-      padding-top: 2px;
+      position: absolute;
+      right: 2px;
+      top: 2px;
     }
 
     &:hover, &.sorting {
@@ -62,7 +63,6 @@
   }
 
   .sorting {
-    margin-left: -4px;
     padding: 0 4px;
     border-radius: 2px;
   }
