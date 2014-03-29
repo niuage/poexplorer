@@ -10,8 +10,8 @@ module Elastic::Concerns::Facets
       terms :linked_socket_count
     end
 
-    context.facet "type" do
-      terms :type, size: 5
+    context.facet "item_type" do
+      terms :item_type, size: 5
     end
 
     context.facet "name" do

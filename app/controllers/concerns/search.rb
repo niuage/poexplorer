@@ -29,7 +29,7 @@ module Concerns::Search
 
   def update_from_url_params(search)
     name = params[:name]
-    type = params[:type]
+    type = params[:item_type]
     rarity = params[:rarity]
     league = params[:league]
     linked_sockets = params[:linked_sockets]

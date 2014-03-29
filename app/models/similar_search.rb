@@ -24,8 +24,9 @@ class SimilarSearch < Search
   end
 
   def same_item_type
-    true if self[:same_item_type] || self[:same_item_type].nil?
+    true if self[:same_item_type] != false
   end
+  alias_method :same_item_type?, :same_item_type
 
   def optional_stats_count
     stats.select { |s| s.mod_id && !s.required? && !s.excluded? }.count

@@ -16,7 +16,11 @@ class ModToggle
     @$similarModMatchCount.on "change", (e) =>
       @$form.trigger("optionalStatCountChanged")
 
-    @$form.on "optionalStatCountChanged", (e) =>
+    @$form.on "cocoon:after-insert", (event, elt) =>
+      @$form.trigger("optionalStatCountChanged")
+    .on "cocoon:after-remove", "#stats", (event, elt) =>
+      @$form.trigger("optionalStatCountChanged")
+    .on "optionalStatCountChanged", (e) =>
       optionalStatCount = @optionalStatCount()
 
       @$statCount.html("out of #{optionalStatCount}")
@@ -32,7 +36,7 @@ class ModToggle
 
   # should be in another class
   optionalStatCount: ->
-    $optionalMods = @$form.find(".optional-mods")
+    $optionalMods = @$form.find(".optional-mods:visible")
     $optionalMods.length - $optionalMods.find(":checked").length
 
   # set the toggle buttons states

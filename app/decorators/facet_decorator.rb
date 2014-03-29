@@ -2,7 +2,7 @@ class FacetDecorator
   NAMES = {
     rarity: "Rarity",
     linked_sockets: "Linked sockets",
-    type: "Top 5 Types",
+    item_type: "Top 5 Types",
     name: "Top 5 Names"
   }
 
