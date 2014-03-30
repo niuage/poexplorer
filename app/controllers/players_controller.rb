@@ -10,9 +10,6 @@ class PlayersController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        # I should also take into account the league
-        # but it would require a query per player I think
-        # since they are potentially from different leagues
         @players = Player.where(account: params[:account])
 
         league = params[:league].to_i
