@@ -16,3 +16,7 @@
 <% content_for :dom_ready do %>
   App.SimilarMods.setup()
 <% end %>
+
+<% content_for :left_sidebar do %>
+  <p class="text faded"><%= @searchable.explanation %></p>
+<% end %>
