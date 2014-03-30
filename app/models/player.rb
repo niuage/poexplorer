@@ -68,6 +68,19 @@ class Player < ActiveRecord::Base
       formatted_data
   end
 
+  def as_json(options)
+    options[:except] ||= []
+    options[:except] << :last_online
+
+    options[:methods] ||= []
+    options[:methods] << :last_online_iso8601
+    super(options)
+  end
+
+  def last_online_iso8601
+    last_online.try :iso8601
+  end
+
   def self.sort_column(sort)
     return sort if SORT_BY_COLUMNS.map(&:to_s).include?(sort)
     SORT_BY_COLUMNS[0]

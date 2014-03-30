@@ -1,7 +1,7 @@
 class OnlineStatus
   constructor: (root) ->
     @$root = $(root)
-    @$account = @$root.find(".account")
+    @$onlineStatus = @$root.find(".online-status")
 
   setup: ->
     @updateStatuses()
@@ -30,10 +30,12 @@ class OnlineStatus
         players = self.createPlayers(data)
 
         for account, player of players
-          $account = self.$root.find(".account[data-account='#{account}']")
+          $account = self.$onlineStatus.find(".account[data-account='#{account}']")
           icon = $account.find("i")
           self.complete(icon)
           self.setOnlineStatus($account, icon, player)
+
+        self.$onlineStatus.find("time").timeago()
 
   complete: (icon) ->
     icon.removeClass("icon-circle-blank").addClass("icon-circle")
@@ -41,16 +43,21 @@ class OnlineStatus
   setOnlineStatus: ($account, icon, player) ->
     klass = if player.online then "online" else "offline"
     icon.addClass(klass)
+    $onlineStatus = $account.parent()
 
     if player.online
-      $account.find("span").html (i, old_html) ->
-        old_html + " <span class='ign'>(IGN: #{player.character})</span>"
+      $onlineStatus
+        .append(" &bull; <span class='ign'>IGN: #{player.character}</span>")
 
-      $account.closest(".item").find(".send-pm").addClass("online-icon online")
+      $onlineStatus.closest(".item").find(".send-pm").addClass("online-icon online")
+
+    if player.last_online_iso8601
+      $onlineStatus
+        .append(" &bull; <time datetime='#{player.last_online_iso8601}'></time>")
 
   usernames: ->
     accounts = []
-    $.each @$account.find("span"), (i, elt) ->
+    $.each @$onlineStatus.find("span"), (i, elt) ->
       account = $(elt).html()
       if $.inArray(account, accounts) < 0
         accounts.push(account)
