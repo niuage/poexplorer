@@ -47,39 +47,33 @@ class ItemDecorator < ApplicationDecorator
     reqs.delete_if{|r|r.blank?}.join(" &mdash; ").html_safe
   end
 
-  def seller_links
-    %Q{
-      #{online_status}
-      }.html_safe
-    end
-
-    def online_status
-      h.content_tag :span, class: "online-status" do
-        h.link_to(h.player_path(source.account),
-                  class: "account",
-                  data: { account: source.account }) do
-          h.content_tag(:i, "", class: "icon-circle-blank online-icon") + \
-          h.content_tag(:span, source.account)
-        end
+  def online_status
+    h.content_tag :span, class: "online-status" do
+      h.link_to(h.player_path(source.account),
+        class: "account",
+          data: { account: source.account }) do
+        h.content_tag(:i, "", class: "icon-circle-blank online-icon") + \
+        h.content_tag(:span, source.account)
       end
-    end
+    end.html_safe
+  end
 
-    def quality
-      h.content_tag :span, data: { sort: :quality } do
-        "<b>+#{source.quality.to_i}%</b> Quality".html_safe
-      end
+  def quality
+    h.content_tag :span, data: { sort: :quality } do
+      "<b>+#{source.quality.to_i}%</b> Quality".html_safe
     end
+  end
 
-    def indexed_at
-      "<i class='icon-time'></i> #{h.content_tag(:time, source.indexed_at, datetime: source.indexed_at)}".html_safe
-    end
+  def indexed_at
+    "<i class='icon-time'></i> #{h.content_tag(:time, source.indexed_at, datetime: source.indexed_at)}".html_safe
+  end
 
-    def buy_button
-      h.link_to thread_url, class: "btn btn-success", target: "_blank" do
-        h.content_tag(:i, "", class: "icon-thumbs-up icon-white") + \
-        " Buy now"
-      end
+  def buy_button
+    h.link_to thread_url, class: "btn btn-success", target: "_blank" do
+      h.content_tag(:i, "", class: "icon-thumbs-up icon-white") + \
+      " Buy now"
     end
+  end
 
     # def signed_out_cart_button(size = nil)
     #   h.link_to h.shopping_cart_path,

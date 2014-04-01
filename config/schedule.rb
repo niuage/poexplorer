@@ -16,14 +16,6 @@
 #   end
 # end
 
-# every 1.hour do
-#   rake "shop:process"
-# end
-
-# every 3.hours do
-#   rake "shop:index"
-# end
-
 # every 30.minutes do
 #   rake "players:import"
 # end

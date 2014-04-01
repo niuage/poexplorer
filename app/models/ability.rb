@@ -22,16 +22,6 @@ private
       user.id == object.id
     end
 
-    can :create, Shop unless user.reached_shop_limit?
-
-    can :update, Shop do |shop|
-      shop.user_id == user.id
-    end
-
-    can :read, Shop do |shop|
-      user.id == shop.user_id || shop.visible?
-    end
-
     can :read, ShoppingCart
 
     can :create, UserFavorite
@@ -44,10 +34,6 @@ private
   end
 
   def visitor_abilities user
-    can :read, Shop do |shop|
-      shop.visible?
-    end
-
     can :read, Build do |build|
       build.published? || can?(:update, build)
     end

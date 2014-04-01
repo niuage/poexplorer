@@ -1,13 +1,13 @@
 <%= render layout: "users/layout", locals: { sidebar: "users/sidebars/show" } do %>
 
   <div class="bordered-section">
-    <h2>Path Of Exile characters linked to this account</h2>
+    <h2>Path Of Exile accounts</h2>
     <%= render "players/head" %>
     <p>This feature is still in development.</p>
     <%#= render "players/players_listing", players: @user.players %>
   </div>
 
-  <% if false && @user.is?(current_user) %>
+  <% if @user.is?(current_user) %>
   <div class="bordered-section text">
     <h2>Add a Path of Exile character</h2>
 

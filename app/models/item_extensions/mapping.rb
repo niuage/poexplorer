@@ -111,8 +111,7 @@ module ItemExtensions::Mapping
         :icon,
         :size,
         :created_at,
-        :updated_at,
-        :shop_id
+        :updated_at
       ],
       methods: [
         :indexed_at,

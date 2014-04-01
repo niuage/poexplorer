@@ -33,23 +33,6 @@
   }
 }
 
-.c-shops {
-  .tn-shops a { @extend .tn-selected; }
-
-  &.a-index {
-    .tab-browse a { @extend .tab-selected; }
-  }
-
-  &.a-new, &.a-edit, &.a-create, &.a-update {
-    .tab-usershop a { @extend .tab-selected; }
-  }
-
-  &.a-show, &.a-index {
-    .tab-shop a { @extend .tab-selected; }
-  }
-
-}
-
 .c-users {
   &.a-show {
     .tab-profile a { @extend .tab-selected; }

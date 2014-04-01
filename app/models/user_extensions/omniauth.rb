@@ -1,4 +1,4 @@
-module Concerns
+module UserExtensions
   module Omniauth
     extend ActiveSupport::Concern
 

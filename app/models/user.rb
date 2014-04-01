@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
-  include Concerns::Omniauth
-
-  MAX_SHOP_COUNT = 3
+  include UserExtensions::Omniauth
+  # include UserExtensions::ShoppingCart
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
@@ -9,14 +8,7 @@ class User < ActiveRecord::Base
 
   validates :login, presence: true, uniqueness: true
 
-  # mount_uploader :avatar, AvatarUploader
-
   scope :admin, -> { where(role: "admin") }
-
-  has_many :shops, dependent: :destroy
-
-  has_many :user_favorites, dependent: :destroy
-  has_many :favorite_items, -> { order("items.identified DESC") }, through: :user_favorites, source: :item
 
   has_many :user_players
   has_many :players, through: :user_players
@@ -27,19 +19,12 @@ class User < ActiveRecord::Base
 
   belongs_to :league
 
-  # serialize :cached_favorite_item_ids
-
   before_save :cache_association_names
 
   make_voter
 
   def cache_association_names
     self.league_name = (self.league_id.nil? ? nil : self.league.name) if self.league_id_changed?
-  end
-
-  def cached_favorite_item_ids
-    self[:cached_favorite_item_ids] ||= []
-    self[:cached_favorite_item_ids]
   end
 
   def to_param
@@ -58,20 +43,8 @@ class User < ActiveRecord::Base
     "user_#{id}"
   end
 
-  def reached_shop_limit?
-    shops.count >= MAX_SHOP_COUNT
-  end
-
   def is?(user)
     user && id == user.id
-  end
-
-  def user_favorites_count
-    cached_favorite_item_ids.length
-  end
-
-  def update_cached_favorite_item_ids
-    update_attribute(:cached_favorite_item_ids, user_favorites.pluck(:item_id))
   end
 
   def password_required?

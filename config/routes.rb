@@ -3,7 +3,7 @@ Poesearch::Application.routes.draw do
 
   root to: "searches#new"
 
-  resources :users do
+  resources :users, except: [:index] do
     member do
       post :generate_token
       get :link_character
