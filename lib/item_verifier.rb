@@ -1,4 +1,3 @@
-require 'open-uri'
 require 'digest/md5'
 
 class ItemVerifier
@@ -21,37 +20,20 @@ class ItemVerifier
   private
 
   def item_verified?
-    thread = Nokogiri::HTML(open(thread_url))
+    forum_thread = ForumThreadHtml.new(item.thread_id)
 
-    items = find_poe_items(thread)
-    return false unless items
+    return false unless forum_thread.items
 
-    items.each do |poe_item|
+    forum_thread.items.each do |poe_item|
       item_attrs = poe_item[1]
 
       md5 = ItemBuilder.md5(item_attrs)
-      verified = ItemBuilder.item_verified?(item_attrs)
 
       if item.uid == md5
-        # [PERF] THIS COULD BE IMPROVED BY STOPPING AS SOON
-        # AS THE PRICE IS FOUND
-        item.price = PriceParser.new(thread)[poe_item[0]] if verified
-        return verified
+        return ItemBuilder.item_verified?(item_attrs)
       end
     end
 
     false
-  end
-
-  def find_poe_items(thread)
-    content = thread.css("script").last.content
-    return unless content && content.include?("DeferredItemRenderer")
-    matches = content.match(/new R\((.*)\)\)\.run\(\)/)
-    return unless matches.length > 1
-    return JSON.parse(matches[1])
-  end
-
-  def thread_url
-    Indexer.thread_url(item.thread_id)
   end
 end

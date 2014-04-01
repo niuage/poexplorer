@@ -11,18 +11,20 @@ class Indexer
   #########
 
   def index_thread(thread_id, scrawl_or_shop = nil)
+    forum_thread_html = ForumThreadHtml.new(thread_id)
+
     # open thread
-    thread = open_thread(thread_id)
+    thread = forum_thread_html.thread
     return unless thread
 
     # get the PoExplorer thread
     forum_thread = ForumThread.where(uid: thread_id).first_or_initialize
 
     # last update date
-    first_post_updated_at = thread_date(thread)
+    first_post_updated_at = forum_thread_html.thread_date
 
     # get items
-    forum_thread.forum_items = items(thread)
+    forum_thread.forum_items = forum_thread_html.items
 
     # exit if no items
     return forum_thread.clean_up! unless forum_thread.any_forum_items?
@@ -38,7 +40,7 @@ class Indexer
     thread_edited = forum_thread.edited?
 
     # no need to get the prices if the thread hasnt been updated at all
-    prices = thread_edited ? PriceParser.new(thread) : []
+    prices = thread_edited ? forum_thread_html.prices : []
 
     md5_to_update = []
     items_to_index = []
@@ -79,7 +81,7 @@ class Indexer
     TireIndex.store(forum_thread.league_id, items_to_update)
 
     # update stuff like the username
-    forum_thread.update_from_html(thread, save: false)
+    forum_thread.account = forum_thread_html.account
     create_player(forum_thread)
 
     # useless?
@@ -102,50 +104,6 @@ class Indexer
     forum_thread.save
 
     closing_thread(scrawl_or_shop) if scrawl_or_shop
-  end
-
-  def create_player(forum_thread)
-    return if forum_thread.account.blank? || forum_thread.league_id.blank?
-    player = Player.where(
-      account: forum_thread.account,
-      league_id: forum_thread.league_id
-    ).first_or_initialize
-    player.save
-    puts %Q{
-      Player #{forum_thread.account} created in league #{forum_thread.league_id}
-    }
-  end
-
-  def items(thread)
-    thread.css("script").reverse_each do |script|
-      content = script.content
-      next unless content.include?("DeferredItemRenderer")
-      matches = content.match(/new R\((.*)\)\)\.run\(\)/)
-      next unless matches.length > 1
-      return JSON.parse(matches[1])
-    end
-    false
-  end
-
-  def open_thread(id)
-    puts "opening thread #{id}"
-    Nokogiri::HTML(open(thread_url(id))) if id
-  end
-
-  def thread_url(id)
-    self.class.thread_url(id)
-  end
-
-  def self.thread_url(id)
-    "#{THREAD_ROOT}/#{id}"
-  end
-
-  def thread_date(thread)
-    last_edited_by = thread.css(".forumTable .content-container.first .last_edited_by").first.try(:content)
-    date = last_edited_by ?
-      last_edited_by.match(/Last edited by.*on (.*)/i).try(:[], 1) :
-      thread.css(".post_date").first.try(:content)
-    DateTime.strptime(date, "%B %d, %Y %I:%M %p") if date
   end
 
   def last_updated_at(scrawl_or_shop, updated_at); end

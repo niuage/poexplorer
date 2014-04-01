@@ -201,7 +201,7 @@ class ItemDecorator < ApplicationDecorator
   end
 
   def thread_url
-    @_url ||= ForumThread.new(uid: source.thread_id).url
+    @_url ||= ForumThreadHtml.url(source.thread_id)
   end
 
   def rarity_name

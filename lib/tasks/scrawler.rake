@@ -1,14 +1,10 @@
 namespace :crawler do
 
   def crawl_league_by_id(league_id)
-    league_id = league_id - 1
-    return if league_id < 0
     puts "scrawl league #{league_id}"
-    forums = Scrawler::FORUM_IDS[league_id]
-    return unless forums
 
-    0.upto(forums.length - 1) do |forum_id|
-      scrawler = Scrawler.new(league_id, forum_id)
+    0.upto(1) do |shop|
+      scrawler = Scrawler.new(league_id, shop)
       scrawler.scrawl!(2, 0)
     end
   end

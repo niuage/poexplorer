@@ -1,9 +1,11 @@
+require 'open-uri'
 require 'digest/md5'
 
 class ForumThread < ActiveRecord::Base
   THREAD_ROOT = "http://www.pathofexile.com/forum/view-thread"
 
   before_save :refresh_items, if: :temp_items_changed
+  after_save :update_player
 
   attr_accessible :last_updated_at, :items, :account, :uid
   attr_accessor :temp_items, :temp_items_changed,
@@ -44,11 +46,6 @@ class ForumThread < ActiveRecord::Base
     self.temp_items_changed = true
   end
 
-  def update_from_html(html, options = {})
-    self.account = thread_account(html)
-    save if options[:save]
-  end
-
   def update_league
     return if league_id || !any_forum_items?
     self.league_id = League.find_by(name: forum_items[0][1]["league"]).try(:id)
@@ -63,14 +60,17 @@ class ForumThread < ActiveRecord::Base
     @forum_items = items
   end
 
-  def url
-    [THREAD_ROOT, uid].join("/")
-  end
-
   private
 
-  def thread_account(html)
-    html.css(".profile-link").first.try :content if html
+  def update_player
+    return if account.blank? || league_id.blank?
+    Player
+      .by_league(league_id)
+      .by_account(account)
+      .first_or_create
+    puts %Q{
+      Player #{account} created in league #{league_id}
+    }
   end
 
   def refresh_items

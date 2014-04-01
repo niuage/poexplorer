@@ -1,19 +1,10 @@
 class Scrawler < Indexer
-  FORUM_IDS = [
-    [415, 306],     # [SC selling, SC Shop],
-    [418, 305],     # [HC selling, HC shop],
-    [429, 427],     # [Anarchy selling, Anarchy Shop],
-    [432, 430],     # [onsl selling, onsl shop]
-    [429, 427],     # [domination selling, domination shop]
-    [432, 430],      # [nemesis selling, nemesis shop]
-    [508, 506],     # [ambush selling, ambush shop]
-    [511, 509]      # [invasion selling, invasion shop]
-  ]
 
-  attr_accessor :scrawl, :forum_url
+  attr_accessor :scrawl, :shop, :page, :league_id
 
-  def initialize(league = 0, shop = 0)
-    @forum_url = "#{FORUM_ROOT}/#{FORUM_IDS[league][shop]}"
+  def initialize(league_id, shop = 0)
+    self.league_id = league_id
+    self.shop = shop
   end
 
   def scrawl!(page_count = 20, offset = 0)
@@ -23,7 +14,7 @@ class Scrawler < Indexer
     old_i = 0
 
     ((offset + 1)..(offset + page_count)).each do |page_nb|
-      pages << open_page(page_nb)
+      pages << ForumThreadPage.new(league_id, shop, page_nb)
     end
 
     pages.each_with_index do |page, i|
@@ -60,30 +51,10 @@ class Scrawler < Indexer
 
   protected
 
-  def scrawl_page page
-    page.css(css[:root_table]).css("tr").each do |tr|
-      index_thread(thread_id(tr), scrawl)
+  def scrawl_page(page)
+    page.thread_ids.each do |thread_id|
+      index_thread(thread_id, scrawl)
     end
-  end
-
-  def page_url(page)
-    "#{forum_url}/page/#{page}"
-  end
-
-  def thread_id(thread_row)
-    link = thread_row.css(css[:thread_title]).first
-    link.attr("href").match(/(\d+)/).try(:[], 1) if link
-  end
-
-  def open_page(page)
-    Nokogiri::HTML(open(page_url(page)))
-  end
-
-  def css
-    @css ||= {
-      root_table: "#view_forum_table",
-      thread_title: ".title a"
-    }
   end
 
   def time_out_message(i)

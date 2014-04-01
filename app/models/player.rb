@@ -3,34 +3,21 @@ class Player < ActiveRecord::Base
 
   belongs_to :league
 
-  validates :account, presence: true
-  validates :online,  inclusion: { in: [true, false] }
+  validates :account,   presence: true, uniqueness: { scope: :character }
+  validates :online,    inclusion: { in: [true, false] }
   validates :league_id, presence: true
   validates :character, uniqueness: true
-  validates :account, uniqueness: { scope: :character }
 
-  scope :online, -> { where(online: true) }
+  scope :online,  -> { where(online: true) }
   scope :offline, -> { where(online: false) }
 
   scope :not_marked_online, -> { where("marked_online_at IS NULL OR marked_online_at < ?", 2.hours.ago) }
-  scope :updated_before, ->(time) { where('updated_at < ?', time) }
-  scope :updated_after, ->(time) { where('updated_at > ?', time) }
+  scope :updated_before,    ->(time) { where('updated_at < ?', time) }
+  scope :updated_after,     ->(time) { where('updated_at > ?', time) }
 
-  scope :by_league, ->(league_id) { where(league_id: league_id) }
+  scope :by_league,    ->(league_id) { where(league_id: league_id) }
   scope :by_character, ->(character) { where(character: character) }
-
-  SORT_BY = {
-    online: "Online",
-    rank: "Rank"
-  }
-
-  SORT_BY_COLUMNS = SORT_BY.keys.freeze
-
-  scope :sort_by, ->(sort) do
-    sort = Player.sort_column(sort)
-    direction = { rank: "ASC", online: "DESC" }
-    order("#{sort} #{direction[sort]}") if sort
-  end
+  scope :by_account,   ->(account) { where(account: account) }
 
   scope :in_league, ->(league_id) { where(league_id: league_id) }
 
@@ -63,9 +50,10 @@ class Player < ActiveRecord::Base
       ]
     end
 
-    self.import \
+    self.import(
       [:account, :character, :league_id, :online, :last_online],
       formatted_data
+    )
   end
 
   def as_json(options)
@@ -81,10 +69,25 @@ class Player < ActiveRecord::Base
     last_online.try :iso8601
   end
 
+  ### remove? ###
+  SORT_BY = {
+    online: "Online",
+    rank: "Rank"
+  }
+
+  SORT_BY_COLUMNS = SORT_BY.keys.freeze
+
+  scope :sort_by, ->(sort) do
+    sort = Player.sort_column(sort)
+    direction = { rank: "ASC", online: "DESC" }
+    order("#{sort} #{direction[sort]}") if sort
+  end
+
   def self.sort_column(sort)
     return sort if SORT_BY_COLUMNS.map(&:to_s).include?(sort)
     SORT_BY_COLUMNS[0]
   end
+  ### end remove? ###
 
   def online!
     update_columns(online: true, last_online: Time.zone.now)
