@@ -29,7 +29,7 @@ class ForumThreadHtml
   def items
     return unless (content = thread.css("script").last.content)
     matches = content.match(/new R\((.*)\)\)\.run\(\)/)
-    return unless matches.length > 1
+    return unless matches && matches.length > 1
     return JSON.parse(matches[1])
   end
 
