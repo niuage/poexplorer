@@ -12,16 +12,13 @@ class User < ActiveRecord::Base
 
   has_many :user_players
   has_many :players, through: :user_players
-
   has_many :authentications
-
-  has_many :builds
-
+  # has_many :builds
   belongs_to :league
 
   before_save :cache_association_names
 
-  make_voter
+  # make_voter
 
   def cache_association_names
     self.league_name = (self.league_id.nil? ? nil : self.league.name) if self.league_id_changed?
