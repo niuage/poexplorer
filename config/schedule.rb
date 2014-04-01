@@ -8,15 +8,7 @@
 # set :output, "/path/to/my/cron_log.log"
 #
 
-# every 5.hours do
-#   0.upto(1) do |i|
-#     0.upto(1) do |j|
-#       rake "'scrawler:wts[5,0,#{i},#{j}]'"
-#     end
-#   end
-# end
-
-# every 30.minutes do
+# every 15.minutes do
 #   rake "players:import"
 # end
 

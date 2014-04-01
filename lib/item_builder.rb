@@ -229,6 +229,7 @@ class ItemBuilder
 
   def scrawled?
     if item = find_item_by_uid(md5)
+      log "item id: #{item.id}"
       log "updating price: #{update_prices} | #{price}" if update_prices
       item.price = price if update_prices
       item.save

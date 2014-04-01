@@ -1,6 +1,9 @@
 require 'open-uri'
 require 'digest/md5'
 
+## TODO:
+## Don't select the item_store column when not needed
+
 class ForumThread < ActiveRecord::Base
   THREAD_ROOT = "http://www.pathofexile.com/forum/view-thread"
 
@@ -31,7 +34,9 @@ class ForumThread < ActiveRecord::Base
   def clean_up!
     verified_items_uid = verified_items.try(:map) { |i| i[0] }
     Item.where(uid: verified_items_uid).destroy_all if verified_items_uid
+    @forum_items = []
     self.items = []
+    self.items_md5 = nil
     save
   end
 
@@ -60,8 +65,12 @@ class ForumThread < ActiveRecord::Base
   end
 
   def forum_items=(items)
-    self.items_md5 = md5(items)
-    @forum_items = items
+    if items
+      self.items_md5 = md5(items)
+      @forum_items = items
+    else
+      clean_up!
+    end
   end
 
   private

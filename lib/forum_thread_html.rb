@@ -30,7 +30,8 @@ class ForumThreadHtml
     return unless (content = thread.css("script").last.content)
     matches = content.match(/new R\((.*)\)\)\.run\(\)/)
     return unless matches && matches.length > 1
-    return JSON.parse(matches[1])
+    items = JSON.parse(matches[1])
+    (items.respond_to?(:each) && !items.empty?) ? items : nil
   end
 
   def thread_date

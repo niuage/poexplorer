@@ -4,8 +4,11 @@ namespace :crawler do
     puts "scrawl league #{league_id}"
 
     0.upto(1) do |shop|
-      scrawler = Scrawler.new(league_id, shop)
-      scrawler.scrawl!(2, 0)
+      puts "/////////////////////////"
+      puts "CRAWLING: #{league_id}, #{shop} /////////////////////////"
+      puts "/////////////////////////"
+      scrawler = Crawler.new(league_id, shop)
+      scrawler.scrawl!(1, 0)
     end
   end
 

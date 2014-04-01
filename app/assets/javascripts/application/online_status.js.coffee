@@ -45,7 +45,7 @@ class OnlineStatus
     icon.addClass(klass)
     $onlineStatus = $account.parent()
 
-    if player.online
+    if player.online && player.character
       $onlineStatus
         .append(" &bull; <span class='ign'>IGN: <b>#{player.character}</b></span>")
 

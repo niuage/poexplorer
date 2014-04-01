@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 20140317033932) do
   create_table "forum_threads", force: true do |t|
     t.string   "account"
     t.string   "items_md5"
-    t.text     "item_store"
+    t.text     "item_store",      limit: 16777215
     t.integer  "uid"
     t.integer  "league_id"
     t.datetime "last_updated_at"

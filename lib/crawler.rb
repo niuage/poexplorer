@@ -1,6 +1,10 @@
-class Scrawler < Indexer
+class Crawler
 
-  attr_accessor :scrawl, :shop, :page, :league_id
+  POE_URL = "http://www.pathofexile.com"
+  FORUM_ROOT = "#{POE_URL}/forum/view-forum"
+  THREAD_ROOT = "#{POE_URL}/forum/view-thread"
+
+  attr_accessor :league_id, :shop
 
   def initialize(league_id, shop = 0)
     self.league_id = league_id
@@ -8,7 +12,6 @@ class Scrawler < Indexer
   end
 
   def scrawl!(page_count = 20, offset = 0)
-    self.scrawl = Scrawl.create
     timeout_count = 0
     pages = []
     old_i = 0
@@ -31,30 +34,14 @@ class Scrawler < Indexer
 
       old_i = i
     end
-
-    scrawl.successful!
   rescue => e
     puts "Failure: #{e.message}\n#{e.backtrace}"
-    scrawl.successful = false
-    scrawl.save
-  end
-
-  def update_stats(scrawl, item)
-    return unless scrawl && item
-    scrawl.increment(:item_count)
-    scrawl.save if scrawl.item_count % 500 == 0
-  end
-
-  def closing_thread(scrawl)
-    scrawl.increment(:thread_count)
   end
 
   protected
 
   def scrawl_page(page)
-    page.thread_ids.each do |thread_id|
-      index_thread(thread_id, scrawl)
-    end
+    page.thread_ids.each { |id| ThreadIndexer.new(id).index }
   end
 
   def time_out_message(i)

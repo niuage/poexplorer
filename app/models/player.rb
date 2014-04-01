@@ -91,7 +91,9 @@ class Player < ActiveRecord::Base
   ### end remove? ###
 
   def online!
-    update_columns(online: true, last_online: Time.zone.now)
+    self.online = true
+    self.last_online = Time.zone.now
+    save
   end
   def offline!
     update_attribute :online, false
