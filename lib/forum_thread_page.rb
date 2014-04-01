@@ -22,14 +22,16 @@ class ForumThreadPage
 
   attr_accessor :league_id, :shop, :page_number
 
-  def initialize(league_id, shop = 0, page_number)
+  def initialize(league_id, shop, page_number)
     self.league_id = league_id
     self.shop = shop
     self.page_number = page_number
   end
 
   def thread_ids
-    page.css(css[:root_table]).css("tr").map { |row| thread_id(row) }
+    page.css(CSS[:root_table]).css("tr")
+      .map { |row| thread_id(row) }
+      .compact
   end
 
   private
@@ -44,7 +46,7 @@ class ForumThreadPage
   end
 
   def forum_url
-    "#{FORUM_ROOT}/#{FORUM_IDS[league_id][shop]}"
+    "#{FORUM_ROOT}/#{FORUM_IDS[league_id - 1][shop]}"
   end
 
   def url

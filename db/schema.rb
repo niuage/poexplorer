@@ -182,12 +182,10 @@ ActiveRecord::Schema.define(version: 20140317033932) do
     t.integer  "elemental_damage"
     t.integer  "sold",                   default: 0
     t.string   "display_stats"
-    t.integer  "shop_id"
     t.string   "socket_combination"
     t.boolean  "corrupted",              default: false
   end
 
-  add_index "items", ["shop_id"], name: "index_items_on_shop_id", using: :btree
   add_index "items", ["uid", "thread_id"], name: "index_items_on_uid_and_thread_id", using: :btree
 
   create_table "keystones", force: true do |t|
@@ -356,24 +354,6 @@ ActiveRecord::Schema.define(version: 20140317033932) do
   end
 
   add_index "searches", ["uid"], name: "index_searches_on_uid", using: :btree
-
-  create_table "shops", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "league_id"
-    t.boolean  "notifications"
-    t.boolean  "processing"
-    t.boolean  "is_invalid",      default: false
-    t.integer  "thread_id"
-    t.string   "title"
-    t.string   "username"
-    t.datetime "last_updated_at"
-    t.integer  "weapon_count"
-    t.integer  "armour_count"
-    t.integer  "misc_count"
-    t.datetime "indexed_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "skill_gems", force: true do |t|
     t.string   "name"

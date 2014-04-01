@@ -3,10 +3,11 @@ class Player < ActiveRecord::Base
 
   belongs_to :league
 
-  validates :account,   presence: true, uniqueness: { scope: :character }
+  validates :account,   presence: true
+  validates :account,   uniqueness: { scope: :character }
   validates :online,    inclusion: { in: [true, false] }
   validates :league_id, presence: true
-  validates :character, uniqueness: true
+  validates :character, uniqueness: true, allow_blank: true
 
   scope :online,  -> { where(online: true) }
   scope :offline, -> { where(online: false) }
@@ -94,5 +95,11 @@ class Player < ActiveRecord::Base
   end
   def offline!
     update_attribute :online, false
+  end
+
+  private
+
+  def blank_character?
+    character.blank?
   end
 end

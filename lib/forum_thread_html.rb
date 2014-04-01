@@ -46,6 +46,6 @@ class ForumThreadHtml
   end
 
   def account
-    thread.css(SELECTORS[:profile_link]).first.try :content if html
+    thread.css(SELECTORS[:profile_link]).first.try :content
   end
 end

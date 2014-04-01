@@ -5,13 +5,17 @@ class ForumThread < ActiveRecord::Base
   THREAD_ROOT = "http://www.pathofexile.com/forum/view-thread"
 
   before_save :refresh_items, if: :temp_items_changed
-  after_save :update_player
 
   attr_accessible :last_updated_at, :items, :account, :uid
   attr_accessor :temp_items, :temp_items_changed,
     :new_items_md5, :forum_items
 
   store :item_store, accessors: :items, coder: JSON
+
+  def account=(account)
+    create_player(account)
+    write_attribute(:account, account)
+  end
 
   def thread_changed?
     # edited?: need to reindex because of possible price changes
@@ -62,7 +66,7 @@ class ForumThread < ActiveRecord::Base
 
   private
 
-  def update_player
+  def create_player(account)
     return if account.blank? || league_id.blank?
     Player
       .by_league(league_id)

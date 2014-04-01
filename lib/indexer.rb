@@ -82,7 +82,6 @@ class Indexer
 
     # update stuff like the username
     forum_thread.account = forum_thread_html.account
-    create_player(forum_thread)
 
     # useless?
     last_updated_at(scrawl_or_shop, first_post_updated_at) if scrawl_or_shop

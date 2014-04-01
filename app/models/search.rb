@@ -8,7 +8,7 @@ class Search < ActiveRecord::Base
     :max_socket_count, :remote_icon_url, :base_name,
     :physical_damage, :critical_strike_chance, :aps,
     :max_level, :level, :str, :dex, :int, :max_int, :max_dex, :max_str,
-    :dps, :thread_id,
+    :dps, :thread_id, :stats_attributes,
     :raw_icon, :w, :h,
     :armour, :evasion, :energy_shield, :block_chance,
     :max_armour, :max_evasion, :max_energy_shield, :max_block_chance,

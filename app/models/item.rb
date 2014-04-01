@@ -16,7 +16,7 @@ class Item < ActiveRecord::Base
   attr_accessible :name, :account, :type, :quality, :level,
     :verified, :identified, :league, :rarity, :rarity_id, :league_id,
     :sockets, :linked_socket_count, :socket_count, :socket_combination,
-    :remote_icon_url, :base_name, :corrupted,
+    :remote_icon_url, :base_name, :corrupted, :stats_attributes,
     :physical_damage, :critical_strike_chance, :aps, :str,
     :dex, :int, :dps, :thread_id,
     :raw_icon, :w, :h, :armour, :evasion, :energy_shield, :block_chance,
