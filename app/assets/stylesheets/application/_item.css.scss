@@ -35,7 +35,6 @@
     padding-top: 2px;
     margin-top: 3px;
     color: red;
-    font-weight: bold;
     -webkit-animation: glow 1s infinite alternate;
     -moz-animation: glow 1s infinite alternate;
     -ms-animation: glow 1s infinite alternate;
@@ -138,7 +137,7 @@
 
     .section { margin: 0; }
 
-    .shop-link { padding: 4px 0; }
+    .footer { padding: 4px 0; }
 
     hr {
       margin: 3px 0 0px;
@@ -150,7 +149,7 @@
   background: image-url("loader.gif") 0 0;
 }
 
-.shop-link {
+.footer {
   .icon-check, .icon-refresh { color: green; }
   .icon-remove { color: red; }
 }

@@ -68,13 +68,6 @@ class SimilarSearchFormDecorator < SearchFormDecorator
     }, options)
   end
 
-  def has_price(options = {})
-    input :has_price, input_options({
-      label: "Must have a buyout price",
-      input_html: { class: "" }
-    }, options)
-  end
-
   def item_types_select
     h.item_types_select(item_type_class)
   end

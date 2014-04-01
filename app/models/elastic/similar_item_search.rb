@@ -84,7 +84,7 @@ class Elastic::SimilarItemSearch < Elastic::BaseSearch
 
   def is_priced
     bool_query = item? ? :should : (search.has_price? ? :must : :should)
-    context.send(bool_query) { string "_exists_:price.gcp OR _exists_:price.exa OR _exists_:price.alch OR _exists_:price.chaos", boost: 5 }
+    context.send(bool_query) { string Currency.query_string, boost: 5 }
   end
 
   def minimum_number_should_match

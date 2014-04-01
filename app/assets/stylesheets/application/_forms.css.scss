@@ -29,7 +29,9 @@
   }
 
   .mod-sep {
-    border-top: 1px solid #ccc;
+    border: 1px solid #ccc;
+    border-width: 1px 0;
+    padding-top: 2px;
   }
 
   a.inputy {

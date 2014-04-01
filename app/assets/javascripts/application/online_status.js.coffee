@@ -47,7 +47,7 @@ class OnlineStatus
 
     if player.online
       $onlineStatus
-        .append(" &bull; <span class='ign'>IGN: #{player.character}</span>")
+        .append(" &bull; <span class='ign'>IGN: <b>#{player.character}</b></span>")
 
       $onlineStatus.closest(".item").find(".send-pm").addClass("online-icon online")
 

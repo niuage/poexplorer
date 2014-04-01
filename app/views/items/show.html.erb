@@ -10,6 +10,17 @@
 
 <%= render "items/similar_items" %>
 
+<% content_for :head do %>
+  <style type="text/css">
+    .item-container .result { border-bottom: 0; }
+    .item-container {
+      background: #f2f2f2;
+      padding: 0 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
+<% end %>
+
 <% content_for :dom_ready do %>
   App.ItemRenderer.setup(".item-container .item");
   App.ModHighlighter.highlightAll(".item-container .item", "#results .item");

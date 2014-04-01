@@ -1,13 +1,9 @@
 <div class="controls-row control-group">
-  <div class="controls-row">
+  <div class="controls-row bordered-section">
     <%= @form.item_league(width: 3) %>
+    <%= @form.item_rarity(width: 3) %>
     <%= @form.item_type(width: 3) %>
     <%= @form.same_item_type(width: 3) %>
-    <%= @form.has_price(width: 3) %>
-  </div>
-
-  <div class="controls-row bordered-section">
-    <%= @form.item_rarity(width: 3) %>
   </div>
 
   <div class="controls-row">

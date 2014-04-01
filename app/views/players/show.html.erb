@@ -7,12 +7,10 @@
 <% end %>
 
 <% content_for :left_sidebar do %>
-  <h1><%= link_to @player.account, player_path(@player.account) %></h1>
-
-  <p class="faded text"><%= @player.account %> has <%= @results.total_count %> items for sale.</p>
-
   <%= render "players/sidebars/show", results: @results %>
 <% end %>
+
+<h1><%= link_to @player.account, player_path(@player.account) %></h1>
 
 <% if @results.any? %>
 

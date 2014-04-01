@@ -22,8 +22,8 @@ a {
   border-bottom-color: #626568;
 }
 
-.bb.bb-dark {
-  border-color: #626568;
+hr {
+  border-top: 1px solid #626568;
 }
 
 .item:hover h2 a {
@@ -175,4 +175,9 @@ a.view_layout.s_layout {
 
 .popover {
   color: #333;
+}
+
+.item-container {
+  background: #3b3b45;
+  border: 1px solid #31313A;
 }

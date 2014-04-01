@@ -7,17 +7,18 @@ class Currency
     @min = min
     @max = max
     @item_currency = item_currency
-    @prices = [{
-      alch: {   alch: 1,  chaos: 1.0/2, gcp: 1.0/7, exa: 1.0/39 },
-      chaos: {  alch: 2,  chaos: 1,     gcp: 1.0/4, exa: 1.0/34 },
-      gcp: {    alch: 7,  chaos: 4,     gcp: 1,     exa: 1.0/10 },
-      exa: {    alch: 39, chaos: 34,    gcp: 10,    exa: 1 }
-    },
+    @prices = [
     {
       alch: {   alch: 1,  chaos: 1.0/2, gcp: 1.0/5, exa: 1.0/32 },
       chaos: {  alch: 2,  chaos: 1,     gcp: 1.0/2, exa: 1.0/20 },
       gcp: {    alch: 5,  chaos: 2,     gcp: 1,     exa: 1.0/7 },
       exa: {    alch: 32, chaos: 20,    gcp: 7,     exa: 1 }
+    },
+    {
+      alch: {   alch: 1,  chaos: 1.0/2, gcp: 1.0/7, exa: 1.0/39 },
+      chaos: {  alch: 2,  chaos: 1,     gcp: 1.0/4, exa: 1.0/34 },
+      gcp: {    alch: 7,  chaos: 4,     gcp: 1,     exa: 1.0/10 },
+      exa: {    alch: 39, chaos: 34,    gcp: 10,    exa: 1 }
     }
     ]
   end
@@ -31,7 +32,7 @@ class Currency
 
   def value(amount, in_currency)
     # 1 exa => ? gcp
-    @prices[@league_id - 1][@item_currency.to_sym][in_currency] * amount
+    @prices[@league_id][@item_currency.to_sym][in_currency] * amount
   end
 
   def self.valid_currency?(currency)
@@ -39,8 +40,10 @@ class Currency
   end
 
   def get_league_id(id)
-    id = 2 if id > 2
-    id = 1 if id == 0
-    id
+    id.to_i % 2
+  end
+
+  def self.query_string
+    "_exists_:price.gcp OR _exists_:price.exa OR _exists_:price.alch OR _exists_:price.chaos"
   end
 end

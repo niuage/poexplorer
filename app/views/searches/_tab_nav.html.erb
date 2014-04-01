@@ -4,10 +4,10 @@
 
 <li class="tab-search-<%= type %>s">
   <%= link_to [:new, :"#{type}_search"] do %>
-    <% if current %>
+    <% if current && type != "similar" %>
       <i class="icon-search"></i>
     <% end %>
-    <%= tab_name || type.capitalize.pluralize %>
+    <%= tab_name.try(:html_safe) || type.capitalize.pluralize %>
     <% if current %>
       <span class="tag"><%= total_count %></span>
     <% end %>

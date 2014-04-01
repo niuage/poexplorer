@@ -206,6 +206,13 @@ class SearchFormDecorator < ApplicationDecorator
     }, options)
   end
 
+  def has_price(options = {})
+    input :has_price, input_options({
+      label: "Has a buyout price",
+      input_html: { class: "" }
+    }, options)
+  end
+
   def order_by_mod_id
     return "" unless search.order_by_mod_id.to_i > 0
 
