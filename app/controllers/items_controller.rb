@@ -55,11 +55,16 @@ class ItemsController < ApplicationController
   private
 
   def find_item
-    @item = Item.find_by(id: params[:id])
-    return redirect_to(
-      root_url,
-      notice: "This item doesn't exist. It was probably removed when it became unverified."
-    ) if !request.xhr? && !@item
+    @item = Item.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    if request.xhr?
+      render(status: 500)
+    else
+      redirect_to(
+        root_url,
+        notice: "This item doesn't exist. It was probably removed when it became unverified."
+      )
+    end
   end
 
   def create_cart
