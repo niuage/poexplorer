@@ -30,6 +30,7 @@ gem "omniauth-twitter"
 
 gem 'sass-rails'
 gem 'coffee-rails'
+gem 'sprockets-rails'
 
 gem 'uglifier'
 

@@ -293,6 +293,7 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails
   simple_form
+  sprockets-rails
   sqlite3
   steak
   tire!
