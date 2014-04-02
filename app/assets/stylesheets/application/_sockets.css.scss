@@ -24,10 +24,10 @@
     float: left;
   }
 
-  &.socket-D { background: url("/assets/sockets/dex.png") 0 0 no-repeat; }
-  &.socket-I { background: url("/assets/sockets/int.png") 0 0 no-repeat; }
-  &.socket-S { background: url("/assets/sockets/str.png") 0 0 no-repeat; }
-  &.socket-G { background: url("/assets/sockets/gen.png") 0 0 no-repeat; }
+  &.socket-D { background: image-url("sockets/dex.png") 0 0 no-repeat; }
+  &.socket-I { background: image-url("sockets/int.png") 0 0 no-repeat; }
+  &.socket-S { background: image-url("sockets/str.png") 0 0 no-repeat; }
+  &.socket-G { background: image-url("sockets/gen.png") 0 0 no-repeat; }
 }
 
 .w-2 .sockets, .w-2.sockets { width: 94px; }
@@ -40,12 +40,12 @@
 }
 
 .horizontal-link {
-  background: url("/assets/sockets/h-link.png") 0 0 no-repeat;
+  background: image-url("sockets/h-link.png") 0 0 no-repeat;
   width: 38px;
   height: 16px;
 }
 .vertical-link {
-  background: url("/assets/sockets/v-link.png") 0 0 no-repeat;
+  background: image-url("sockets/v-link.png") 0 0 no-repeat;
   height: 38px;
   width: 16px;
 }
@@ -73,22 +73,22 @@
     height: 23px;
     width: 23px;
 
-    &.socket-D { background: url("/assets/sockets/small/dex.png") 0 0 no-repeat; }
-    &.socket-I { background: url("/assets/sockets/small/int.png") 0 0 no-repeat; }
-    &.socket-S { background: url("/assets/sockets/small/str.png") 0 0 no-repeat; }
-    &.socket-G { background: url("/assets/sockets/small/gen.png") 0 0 no-repeat; }
+    &.socket-D { background: image-url("sockets/small/dex.png") 0 0 no-repeat; }
+    &.socket-I { background: image-url("sockets/small/int.png") 0 0 no-repeat; }
+    &.socket-S { background: image-url("sockets/small/str.png") 0 0 no-repeat; }
+    &.socket-G { background: image-url("sockets/small/gen.png") 0 0 no-repeat; }
   }
 
   .w-2 .sockets { width: 47px; }
   .w-1 .sockets { width: 23px; }
 
   .horizontal-link {
-    background: url("/assets/sockets/small/h-link.png") 0 0 no-repeat;
+    background: image-url("sockets/small/h-link.png") 0 0 no-repeat;
     width: 19px;
     height: 8px;
   }
   .vertical-link {
-    background: url("/assets/sockets/small/v-link.png") 0 0 no-repeat;
+    background: image-url("sockets/small/v-link.png") 0 0 no-repeat;
     height: 19px;
     width: 8px;
   }

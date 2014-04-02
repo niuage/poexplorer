@@ -92,7 +92,7 @@ Version: @@ver@@ Timestamp: @@timestamp@@
     text-decoration: none;
 
     border: 0;
-    background: url('/assets/select2.png') right top no-repeat;
+    background: url('select2.png') right top no-repeat;
     cursor: pointer;
     outline: 0;
 }
@@ -170,7 +170,7 @@ Version: @@ver@@ Timestamp: @@timestamp@@
     width: 100%;
 
     height: 100%;
-    background: url('/assets/select2.png') no-repeat 0 1px;
+    background: url('select2.png') no-repeat 0 1px;
 }
 
 .select2-search {
