@@ -1,4 +1,6 @@
 <div class="row-fluid bordered-section build result" data-id="<%= build.id %>">
+  <div class="box">
+    <div class="box-content">
   <%= render "builds/vote", build: build %>
 
   <div class="span11">
@@ -38,5 +40,7 @@
       Created by <%= link_to build.username, user_builds_path(build.user_id) %> <time datetime="<%= build.published_at %>">on <%= build.published_at %></time>
     </p>
 
+  </div>
+  </div>
   </div>
 </div>

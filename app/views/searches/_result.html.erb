@@ -2,6 +2,8 @@
 item_size = result.item_span_size
 %>
 
+<div class="box">
+    <div class="box-content">
 <div class="result item bb bb-dark row-fluid" data-item-type="<%= result.item_type.titleize %>" data-id="<%= result.id %>">
   <div class="span<%= item_size %>">
     <%= render "items/item/icon_with_sockets", item: result %>
@@ -51,4 +53,6 @@ item_size = result.item_span_size
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>
