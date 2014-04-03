@@ -40,6 +40,9 @@ class ForumThread < ActiveRecord::Base
     save
   end
 
+  # TODO
+  # USE A HASH INSTEAD OF AN ARRAY FOR ITEMS WOULD MAKE THIS
+  # A LOT FASTER
   def find_item(item)
     md5 = ItemBuilder.md5(item)
     items.find { |e| e[0] == md5 } if items
