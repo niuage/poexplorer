@@ -9,7 +9,7 @@
             load: user_league_static_path,
             placement: "left"
           } do %>
-      <i class="icon-flag"></i><br/>
+      <i class="fa fa-flag"></i><br/>
       <span>
         <% if user_signed_in? %>
           <%= current_user.league? ? current_user.league_name : "Standard" %>
@@ -22,14 +22,14 @@
 
   <li>
     <%= link_to players_path, class: "ttip", title: "Ladder", data: { placement: "left" } do %>
-      <i class="icon-group"></i><br>
+      <i class="fa fa-group"></i><br>
       <span>Players</span>
     <% end %>
   </li>
 
   <li class="bordered-section">
     <%= link_to item_prices_path, class: "ttip", title: "How to set prices", data: { placement: "left" } do %>
-      <i class="icon-money"></i><br>
+      <i class="fa fa-money"></i><br>
       <span>Prices</span>
     <% end %>
   </li>
@@ -37,7 +37,7 @@
   <% if false %>
   <li class="bordered-section">
     <%= link_to posts_path do %>
-      <i class="icon-beaker"></i><br>
+      <i class="fa fa-beaker"></i><br>
       <span>Blog</span>
     <% end %>
   </li>
@@ -45,7 +45,7 @@
 
   <li>
     <%= link_to "#footer", class: "ttip", title: "Like!", data: { placement: "left" } do %>
-      <i class="icon-thumbs-up"></i><br>
+      <i class="fa fa-thumbs-up"></i><br>
       <span>Connect</span>
     <% end %>
   </li>

@@ -38,7 +38,7 @@ class OnlineStatus
         self.$onlineStatus.find("time").timeago()
 
   complete: (icon) ->
-    icon.removeClass("icon-circle-blank").addClass("icon-circle")
+    icon.removeClass("fa-circle-o").addClass("fa-circle")
 
   setOnlineStatus: ($account, icon, player) ->
     klass = if player.online then "online" else "offline"

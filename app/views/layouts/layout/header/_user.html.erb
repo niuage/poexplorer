@@ -2,12 +2,11 @@
 
   <% if user_signed_in? %>
 
-    <li>
-      <%= link_to current_user.login, user_path(current_user) %>
-    </li>
-
     <li class="dropdown menu-right">
-      <%= link_to "", "#", class: "dropdown-toggle icon-user ico", data: { toggle: "dropdown" } %>
+      <%= link_to "#", class: "dropdown-toggle", data: { toggle: "dropdown" } do %>
+        <i class="fa fa-align-justify"></i>
+        <%= current_user.login %>
+      <% end %>
       <ul class="dropdown-menu">
         <% if current_user.admin? %>
           <li><%= link_to "Admin", admin_root_path %></li>
@@ -29,12 +28,12 @@
 
     <li class="social facebook">
       <%= link_to my_provider_path(:facebook) do %>
-        <i class="icon-facebook"></i>
+        <i class="fa fa-facebook"></i>
       <% end %>
     </li>
     <li class="social twitter">
       <%= link_to my_provider_path(:twitter) do %>
-        <i class="icon-twitter"></i>
+        <i class="fa fa-twitter"></i>
       <% end %>
     </li>
   <% end %>

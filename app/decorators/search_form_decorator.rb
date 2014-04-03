@@ -180,13 +180,13 @@ class SearchFormDecorator < ApplicationDecorator
       message_unchecked: "Mod required. Click to exclude.",
       data: { checked_class: "btn-danger" }
     ) do
-      '<i class="icon-ok" data-icon-on="icon-minus-sign" data-icon-off="icon-ok"></i>'
+      '<i class="fa fa-check" data-fa-on="fa-minus-circle" data-fa-off="fa-check"></i>'
     end
   end
 
   def link_to_remove_stat
     h.link_to_remove_association form, class: "btn span1", title: "Remove mod" do
-      h.content_tag(:i, "", class: "icon-trash")
+      h.content_tag(:i, "", class: "fa fa-trash-o")
     end
   end
 
@@ -201,7 +201,7 @@ class SearchFormDecorator < ApplicationDecorator
 
   def online(options = {})
     input :online, input_options({
-      label: "Online only <i class='icon-circle' style='color: green'></i>".html_safe,
+      label: "Online only <i class='fa fa-circle' style='color: green'></i>".html_safe,
       input_html: { class: "" }
     }, options)
   end
@@ -219,7 +219,7 @@ class SearchFormDecorator < ApplicationDecorator
     h.link_to("#", class: "span3 inputy ttip",
       title: "Remove filter",
       data: { mod_sort: "remove" }) do
-      "<i class='icon-remove right'></i>Sorting by mod value".html_safe
+      "<i class='fa fa-times right'></i>Sorting by mod value".html_safe
     end + \
     h.content_tag(:p, class: "span1 inputy") do
       "then by"

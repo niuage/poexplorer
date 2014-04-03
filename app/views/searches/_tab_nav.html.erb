@@ -5,7 +5,7 @@
 <li class="tab-search-<%= type %>s">
   <%= link_to [:new, :"#{type}_search"] do %>
     <% if current && type != "similar" %>
-      <i class="icon-search"></i>
+      <i class="fa fa-search"></i>
     <% end %>
     <%= tab_name.try(:html_safe) || type.capitalize.pluralize %>
     <% if current %>

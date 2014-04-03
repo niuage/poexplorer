@@ -2,11 +2,11 @@
 
     <% if user_signed_in? %>
       <span data-vote="button" class="vote-up" data-vote-url="<%= vote_up_build_path(build) %>">
-        <i class="icon-caret-up"></i>
+        <i class="fa fa-caret-up"></i>
       </span>
     <% else %>
       <%= link_to new_user_registration_path do %>
-        <i class="icon-caret-up"></i>
+        <i class="fa fa-caret-up"></i>
       <% end %>
     <% end %>
 
@@ -14,11 +14,11 @@
 
     <% if user_signed_in? %>
       <span data-vote="button" class="vote-down" data-vote-url="<%= vote_down_build_path(build) %>">
-        <i class="icon-caret-down"></i>
+        <i class="fa fa-caret-down"></i>
       </span>
     <% else %>
       <%= link_to new_user_registration_path do %>
-        <i class="icon-caret-down"></i>
+        <i class="fa fa-caret-down"></i>
       <% end %>
     <% end %>
 </div>

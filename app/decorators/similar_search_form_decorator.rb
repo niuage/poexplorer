@@ -23,7 +23,7 @@ class SimilarSearchFormDecorator < SearchFormDecorator
       message_checked: "Value is less or equal",
       message_unchecked: "Click for a lower or equal value"
     } do
-      '<i class="icon-chevron-left"></i>'
+      '<i class="fa fa-chevron-left"></i>'
     end
   end
 
@@ -33,7 +33,7 @@ class SimilarSearchFormDecorator < SearchFormDecorator
       message_checked: "Value is greater or equal",
       message_unchecked: "Click for a greater or equal value"
     } do
-      '<i class="icon-chevron-right"></i>'
+      '<i class="fa fa-chevron-right"></i>'
     end
   end
 
@@ -43,7 +43,7 @@ class SimilarSearchFormDecorator < SearchFormDecorator
       message_checked: "Click to make optional",
       message_unchecked: "Click to require this mod"
     } do
-      '<i class="icon-ok"></i>'
+      '<i class="fa fa-check"></i>'
     end
   end
 
@@ -57,7 +57,7 @@ class SimilarSearchFormDecorator < SearchFormDecorator
         disable_inputs: true
       }
     } do
-      '<i class="icon-minus-sign"></i>'
+      '<i class="fa fa-minus-circle"></i>'
     end
   end
 

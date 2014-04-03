@@ -96,8 +96,8 @@ class ModToggle
 
   switchIcons: ($btn, on_off) ->
     $icon = $btn.find("i")
-    return unless (newIcon = $icon.data("icon-#{on_off}"))
-    $icon.removeClass().addClass(newIcon)
+    return unless (newIcon = $icon.data("fa-#{on_off}"))
+    $icon.removeClass().addClass("fa #{newIcon}")
 
   checked_class: ($btn) ->
     $btn.data("checkedClass") || "btn-success"

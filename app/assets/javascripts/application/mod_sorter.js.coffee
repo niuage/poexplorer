@@ -21,7 +21,7 @@ class ModSorter
   highlight: ($elts) ->
     $elts
       .addClass("sorting")
-      .prepend("<i class='dex icon-chevron-down'></i> ")
+      .prepend("<i class='dex fa fa-chevron-down'></i> ")
 
   currentMod: ->
     @$orderByModInput.val()

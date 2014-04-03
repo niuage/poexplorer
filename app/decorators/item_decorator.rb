@@ -52,7 +52,7 @@ class ItemDecorator < ApplicationDecorator
       h.link_to(h.player_path(source.account),
         class: "account",
           data: { account: source.account }) do
-        h.content_tag(:i, "", class: "icon-circle-blank online-icon") + \
+        h.content_tag(:i, "", class: "fa fa-circle-o online-icon") + \
         h.content_tag(:span, source.account)
       end
     end.html_safe
@@ -65,12 +65,12 @@ class ItemDecorator < ApplicationDecorator
   end
 
   def indexed_at
-    "<i class='icon-time'></i> #{h.content_tag(:time, source.indexed_at, datetime: source.indexed_at)}".html_safe
+    "<i class='fa fa-clock-o'></i> #{h.content_tag(:time, source.indexed_at, datetime: source.indexed_at)}".html_safe
   end
 
   def buy_button
     h.link_to thread_url, class: "btn btn-success", target: "_blank" do
-      h.content_tag(:i, "", class: "icon-thumbs-up icon-white") + \
+      h.content_tag(:i, "", class: "fa-thumbs-up fa-white") + \
       " Buy now"
     end
   end
@@ -80,13 +80,13 @@ class ItemDecorator < ApplicationDecorator
     #     class: "btn #{button_size_class} ttip",
     #     data: { container: "body" },
     #     title: "Sign up to use the shopping cart" do
-    #       h.content_tag(:i, "", class: "icon-shopping-cart")
+    #       h.content_tag(:i, "", class: "fa-shopping-cart")
     #   end
     # end
 
     def pm_button
       h.link_to "#", class: "send-pm btn #{button_size_class}" do
-        'PM <i class="icon-comments-alt"></i>'.html_safe
+        'PM <i class="fa fa-comments-o"></i>'.html_safe
       end
     end
 
@@ -107,7 +107,7 @@ class ItemDecorator < ApplicationDecorator
         class: "btn btn-warning #{button_size_class} ttip verify",
           title: "Verify this item",
           data: { placement: "top", container: "body" } do
-        h.concat h.content_tag(:i, "", class: "icon-check")
+        h.concat h.content_tag(:i, "", class: "fa fa-check")
       end
     end
 
@@ -124,7 +124,7 @@ class ItemDecorator < ApplicationDecorator
     #       placement: "top",
     #       container: "body"
     #     } do
-    #     h.content_tag(:i, "", class: "icon-shopping-cart")
+    #     h.content_tag(:i, "", class: "fa-shopping-cart")
     #   end
     # end
 
@@ -146,7 +146,7 @@ class ItemDecorator < ApplicationDecorator
 
     def link_to_item_view
     h.link_to h.item_path(source.id), class: "", target: "_blank" do
-      "<i class='icon-adjust'></i> Find similar items".html_safe
+      "<i class='fa fa-adjust'></i> Find similar items".html_safe
     end
   end
 

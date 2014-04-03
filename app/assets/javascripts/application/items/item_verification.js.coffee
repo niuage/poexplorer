@@ -1,9 +1,9 @@
 class ItemVerification
   constructor: (options) ->
     @$root = $(options.root)
-    @unverifiedIcon = "icon-remove"
-    @verifiedIcon = "icon-check"
-    @loadingIcon = "icon-refresh icon-spin"
+    @unverifiedIcon = "fa fa-times"
+    @verifiedIcon = "fa fa-check"
+    @loadingIcon = "fa fa-refresh fa-spin"
 
   setup: ->
     @$root.on "click", ".reindex, .price", (e) ->
@@ -81,7 +81,7 @@ class ItemVerification
       .removeClass("btn-warning")
       .tooltip('hide')
       .unbind()
-      .html("<i class='icon-remove'></i> Sold")
+      .html("<i class='fa fa-times'></i> Sold")
       .siblings(".price")
         .remove()
 

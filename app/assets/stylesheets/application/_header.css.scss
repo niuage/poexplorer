@@ -31,8 +31,6 @@
       &:hover {
         background: $top-nav-hover-bg-color;
       }
-
-      i { position: relative; top: 1px; }
     }
 
     &.open {
@@ -64,6 +62,7 @@
       &.ico {
         padding: 0;
         width: 40px;
+        text-align: center;
 
         &:after {
           background: $top-nav-hover-bg-color;
