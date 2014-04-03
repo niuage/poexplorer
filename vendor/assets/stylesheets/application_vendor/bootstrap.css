@@ -1917,11 +1917,11 @@ input[type="button"].btn-block {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #5bb75b;
-  background-image: -moz-linear-gradient(top, #4EAD72, #33966A);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4EAD72), to(#33966A));
-  background-image: -webkit-linear-gradient(top, #4EAD72, #33966A);
-  background-image: -o-linear-gradient(top, #4EAD72, #33966A);
-  background-image: linear-gradient(to bottom, #4EAD72, #33966A);
+  background-image: -moz-linear-gradient(top, #2DA880, #33966A);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2DA880), to(#33966A));
+  background-image: -webkit-linear-gradient(top, #2DA880, #33966A);
+  background-image: -o-linear-gradient(top, #2DA880, #33966A);
+  background-image: linear-gradient(to bottom, #2DA880, #33966A);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4EAD72', endColorstr='#ff33966A', GradientType=0);
   border-color: #33966A #33966A #387038;

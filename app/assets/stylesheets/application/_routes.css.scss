@@ -21,6 +21,10 @@
   .tn-search a { @extend .tn-selected; }
 }
 
+.c-about {
+  .tn-help a { @extend .tn-selected; }
+}
+
 .c-sessions {
   .tab-log-in a { @extend .tab-selected; }
 }
@@ -49,7 +53,7 @@
   .tab-help a { @extend .tab-selected; }
 }
 
-.a-faq .tab-faq a { @extend .tab-selected; }
+.a-faq .tab-help a { @extend .tab-selected; }
 
 .c-feedback { .tab-feedback a { @extend .tab-selected; } }
 

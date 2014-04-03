@@ -1,5 +1,13 @@
 <div class="facet">
   <ul>
+    <li>
+      <%= link_to "F.A.Q.", faq_path, class: "facet-title #{"current" if params[:action] == "faq"}" %>
+    </li>
+  </ul>
+</div>
+
+<div class="facet">
+  <ul>
     <li><%= link_to "Search by item price", search_by_price_path, class: "facet-title #{"current" if params[:action] == "search_by_price"}" %></li>
     <li><%= link_to "Set item prices", item_prices_path, class: "facet-title #{"current" if params[:action] == "item_prices"}" %></li>
   </ul>

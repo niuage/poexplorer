@@ -5,7 +5,7 @@
 
   .main-menu {
     > li:first-child {
-      border-left: 1px solid #1B8D47;
+      border-left: 1px solid #2F896C;
     }
   }
 
@@ -41,6 +41,16 @@
         color: $top-nav-hover-bg-color;
       }
     }
+
+    &.sep:after {
+      background: $top-nav-hover-bg-color;
+      content: " ";
+      display: inline-block;
+      position: absolute;
+      top: 9px;
+      width: 1px;
+      height: 24px;
+    }
   }
 
   a {
@@ -63,16 +73,6 @@
         padding: 0;
         width: 40px;
         text-align: center;
-
-        &:after {
-          background: $top-nav-hover-bg-color;
-          content: " ";
-          display: inline-block;
-          float: left;
-          margin-top: 9px;
-          width: 1px;
-          height: 24px;
-        }
       }
 
       &.ir {
