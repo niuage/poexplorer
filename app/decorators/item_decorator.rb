@@ -13,18 +13,14 @@ class ItemDecorator < ApplicationDecorator
   end
 
   def properties
-    props = stats.select(&:hidden).map do |s|
-      [s.name, s.value, s.mod_id]
-    end
-
-    props.concat case source.archetype
+    props = case source.archetype
     when 0; weapon_stats
     when 1; armour_stats
     when 2;   misc_stats
     end.to_a
 
+    props.concat(stats.select(&:hidden).map { |s| [s.name, s.value, s.mod_id] })
     props.delete_if { |stat| !stat || stat[1] == 0 }
-
     props
   end
 
