@@ -50,7 +50,11 @@
     li.sorting { padding-right: 20px; }
   }
 
-  .props li[data-mod] span { display: none; }
+  .props li {
+    font-size: 0.825em;
+
+    &[data-mod] span { display: none; }
+  }
 
   .props li[data-sort],
   .props li[data-mod],
