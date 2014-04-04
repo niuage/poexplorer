@@ -46,7 +46,15 @@
     margin-bottom: 2px;
   }
 
-  .props li[data-sort], .stats li {
+  .stats, .props {
+    li.sorting { padding-right: 20px; }
+  }
+
+  .props li[data-mod] span { display: none; }
+
+  .props li[data-sort],
+  .props li[data-mod],
+  .stats li {
     position: relative;
     cursor: pointer;
 
@@ -88,8 +96,9 @@
       background: #aaa;
     }
 
-    &.tag-red { border-color: #BE0000 }
-    &.tag-green { border-color: #006200 }
+    &.tag-red, &.tag-green { background: white; }
+    &.tag-red { border-color: #BE0000; color: #BE0000; }
+    &.tag-green { border-color: #006200; color: #006200; }
   }
 
   .button-right {
@@ -138,6 +147,10 @@
     li, p {
       margin-bottom: 1px;
       font-size: 13px;
+    }
+
+    li {
+      i.before { left: -12px; top: 4px }
     }
 
     .requirements {

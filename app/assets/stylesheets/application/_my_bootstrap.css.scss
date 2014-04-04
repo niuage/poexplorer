@@ -19,3 +19,11 @@ label {
     padding-top: 4px;
   }
 }
+
+.btn {
+  background-image: none;
+
+  &.active, &:active {
+    @include box-shadow(none);
+  }
+}

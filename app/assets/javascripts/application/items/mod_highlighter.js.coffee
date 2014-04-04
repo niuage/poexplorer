@@ -8,7 +8,8 @@ class ModHighlighter
 
   @selectMods: ($container, mod_ids) ->
     selector = $.map(mod_ids, (mod_id, i) ->
-      ".stats li[data-mod=#{mod_id}]"
+      li = "li[data-mod=#{mod_id}]"
+      ".stats #{li}, .props #{li}"
     ).join(",")
 
     $container.find(selector)

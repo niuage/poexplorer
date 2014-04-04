@@ -4,7 +4,7 @@ $bottom-pagination-color: darken($pagination-color, 2%);
 .pagination-bar {
   @extend .clearfix;
   border: 1px solid $pagination-border-color;
-  @include linear-gradient($pagination-color, $bottom-pagination-color);
+  background: $bottom-pagination-color;
   border-radius: 2px;
   margin: 10px 0 16px;
 
@@ -34,12 +34,6 @@ $bottom-pagination-color: darken($pagination-color, 2%);
         padding: 0 10px;
       }
     }
-
-//    .next, .prev, .first, .last {
-//      @extend .ir;
-//      width: 40px;
-//      background: image-url("layout-icons.png") -15px 0;
-//    }
   }
 
 }

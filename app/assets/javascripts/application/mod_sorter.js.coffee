@@ -17,7 +17,6 @@ class ModSorter
     if (order = @$orderSelect.val())
       @highlight(@$results.find("[data-sort=#{order}]"))
 
-
   highlight: ($elts) ->
     $elts
       .addClass("sorting")
@@ -27,7 +26,7 @@ class ModSorter
     @$orderByModInput.val()
 
   sortOnClick: ->
-    @$results.find(".stats li").on "click", (e) =>
+    @$results.find(".stats li[data-mod], .props li[data-mod]").on "click", (e) =>
       $li = $(e.currentTarget)
       @sortByMod($li.data("mod"))
 

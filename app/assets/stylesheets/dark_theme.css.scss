@@ -160,7 +160,9 @@ select {
     border-color: #24242B;
   }
 
-  .stats li, .props li[data-sort] {
+  .stats li,
+  .props li[data-sort],
+  .props li[data-mod] {
     &:hover, &.sorting { background: #3A3A41; }
   }
 
