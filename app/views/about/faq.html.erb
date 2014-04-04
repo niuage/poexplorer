@@ -1,15 +1,18 @@
 <%= render "about_sub_header" %>
 
 <% content_for :left_sidebar do %>
-  <%= render "about/help_sidebar" %>
+<%= render "about/help_sidebar" %>
 <% end %>
 
+<div class="text bordered-section">
+  <h2 class="first">F.A.Q.</h2>
+
+  <p>I will add to this section at a future date, and might add some tutorials.</p>
+</div>
+
 <div class="text">
-
   <div class="bordered-section">
-    <p>I will add to this section at a future date, and might add some tutorials.</p>
-
-    <h2 class="first">Can you only show items with online sellers?</h2>
+    <h3 class="first">Can you only show items with online sellers?</h3>
 
     <p>
       This feature wasn't available in the previous version of PoExplorer,
@@ -19,7 +22,7 @@
   </div>
 
   <div class="bordered-section">
-    <h2 class="first">My items are not indexed, what's happening?</h2>
+    <h3 class="first">My items are not indexed, what's happening?</h3>
 
     <p>
       Your threads are indexed when they reach the first pages in the forum.

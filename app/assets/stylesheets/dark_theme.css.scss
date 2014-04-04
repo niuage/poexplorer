@@ -67,12 +67,13 @@ a.view_layout {
   }
 }
 
-.unique, .fire, .str  { color: #E07726; }
-.life                 { color: #F75B54; }
-.cold                 { color: #77A8FF; }
+.unique, .fire, .str  { color: #E07726 }
+.life                 { color: #F75B54 }
+.cold                 { color: #77A8FF }
+.chaos                { color: #EF6CBF }
 .magic                { color: #6BB2FF }
-.rare, .lightning     { color: #DDBF22; }
-.normal               { color: #fff; }
+.rare, .lightning     { color: #DDBF22 }
+.normal               { color: #fff }
 
 textarea,
 input[type="text"],
@@ -154,7 +155,6 @@ select {
     background: #34343B;
     border-color: #292931;
     color: white;
-    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
   }
   .implicit {
     border-color: #24242B;

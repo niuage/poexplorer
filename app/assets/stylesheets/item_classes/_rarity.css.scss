@@ -8,7 +8,8 @@
 
 .cold         { color: $int-color; }
 .fire         { @extend .unique; }
-.lightning    { @extend .rare; }
+.lightning    { color: #B09300 }
+.chaos        { color: #D02090; }
 .life         { color: #da4f49; }
 
 .int          { color: $int-color; }
