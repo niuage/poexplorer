@@ -1,5 +1,3 @@
-require 'open-uri'
-
 class ForumThreadHtml
   THREAD_ROOT = "http://www.pathofexile.com/forum/view-thread"
   SELECTORS = {
@@ -15,7 +13,7 @@ class ForumThreadHtml
   end
 
   def thread
-    @_thread ||= Nokogiri::HTML(open(url))
+    @_thread ||= HtmlPage.new(url).html
   end
 
   def url

@@ -100,7 +100,7 @@
       background: #aaa;
     }
 
-    &.tag-red, &.tag-green { background: white; }
+    &.tag-red, &.tag-green { background: none; }
     &.tag-red { border-color: #BE0000; color: #BE0000; }
     &.tag-green { border-color: #006200; color: #006200; }
   }

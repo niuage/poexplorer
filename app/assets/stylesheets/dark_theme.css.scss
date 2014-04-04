@@ -1,4 +1,14 @@
 $dark-bg-color: #31313a;
+$dark-life: #F75B54;
+$dex-color: #51A531;
+
+.unique, .fire, .str  { color: #E07726 }
+.life                 { color: $dark-life }
+.cold                 { color: #77A8FF }
+.chaos                { color: #EF6CBF }
+.magic                { color: #6BB2FF }
+.rare, .lightning     { color: #DDBF22 }
+.normal               { color: #fff }
 
 body {
   background: #484852 image-url("dark-bg.png") center 0 repeat-y;
@@ -20,6 +30,8 @@ a {
 
 .facet {
   border-bottom-color: #626568;
+
+  h3 { color: #ADADAD }
 }
 
 hr {
@@ -66,14 +78,6 @@ a.view_layout {
     &:hover { background: lighten($dark-bg-color, 2%) }
   }
 }
-
-.unique, .fire, .str  { color: #E07726 }
-.life                 { color: #F75B54 }
-.cold                 { color: #77A8FF }
-.chaos                { color: #EF6CBF }
-.magic                { color: #6BB2FF }
-.rare, .lightning     { color: #DDBF22 }
-.normal               { color: #fff }
 
 textarea,
 input[type="text"],
@@ -155,6 +159,9 @@ select {
     background: #34343B;
     border-color: #292931;
     color: white;
+
+    &.tag-red { border-color: $dark-life; color: $dark-life; }
+    &.tag-green { border-color: $dex-color; color: $dex-color; }
   }
   .implicit {
     border-color: #24242B;

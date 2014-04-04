@@ -1,5 +1,3 @@
-require 'open-uri'
-
 class ForumThreadPage
   POE_URL = "http://www.pathofexile.com"
   FORUM_ROOT = "#{POE_URL}/forum/view-forum"
@@ -37,7 +35,7 @@ class ForumThreadPage
   private
 
   def page
-    @_page ||= Nokogiri::HTML(open(url))
+    @_page ||= HtmlPage.new(url).html
   end
 
   def thread_id(thread_row)

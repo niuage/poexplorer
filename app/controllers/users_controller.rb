@@ -30,6 +30,8 @@ class UsersController < ApplicationController
     end
   end
 
+  # lol
+  # TODO: redo this thing
   def validate_player
     thread_id = thread_id()
     return redirect_to(@user, notice: "The thread url was invalid") unless thread_id
