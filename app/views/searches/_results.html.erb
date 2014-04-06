@@ -1,8 +1,8 @@
 <% content_for :dom_ready do %>
   App.ItemRenderer.setup("#results .result");
   App.ItemVerification.setup({ root: "#results" });
-  App.OnlineStatus.setup("#results");
-  App.PM.setup();
+  App.OnlineStatus.accountStatuses("#results");
+  App.PM.setup("#results");
 
   <% if false && user_signed_in? %>
     App.CartButton.setup(".btn-cart", {

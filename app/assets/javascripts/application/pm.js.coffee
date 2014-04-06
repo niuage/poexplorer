@@ -1,9 +1,11 @@
 class PM
-  constructor: ->
+  constructor: (itemSelector) ->
+    @$item = $(itemSelector)
     @setupPM()
 
   setupPM: ->
-    $("#results").on "click", ".send-pm", (e) =>
+    @$item.on "click", ".send-pm", (e) =>
+      e.preventDefault()
       @sendPMForItem($(e.currentTarget).closest(".item"))
 
   sendPMForItem: ($item) ->
@@ -36,7 +38,9 @@ class PM
     account = $item.find("a[data-account]").data("account")
     itemType = $item.data("itemType")
     $stats = $.map($item.find(".stats li"), (stat, i) ->
-      $.trim($(stat).text())
+      $stat = $(stat).clone()
+      $stat.find(".diff").remove()
+      $.trim($stat.text())
     ).join("\n")
 
     """
@@ -55,7 +59,7 @@ Thanks!
 Found on PoExplorer.com
     """
 
-  @setup: ->
-    new PM()
+  @setup: (itemSelector) ->
+    new PM(itemSelector)
 
 @App.PM = PM

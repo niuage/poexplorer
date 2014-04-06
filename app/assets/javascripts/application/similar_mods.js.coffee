@@ -26,7 +26,7 @@ class SimilarMods
       []
 
     if sign
-      $stat.append(" <span class='tag tag-#{klass}'>#{modValue} #{sign} #{searchModValue}</span>")
+      $stat.append(" <span class='diff tag tag-#{klass}'>#{modValue} #{sign} #{searchModValue}</span>")
 
   getModsFromForm: ->
     $.map $("#search-form #stats .nested-fields"), (e, i) ->

@@ -3,8 +3,7 @@ class OnlineStatus
     @$root = $(root)
     @$onlineStatus = @$root.find(".online-status")
 
-  setup: ->
-    @updateStatuses()
+  accountStatuses: -> @updateAccountStatuses()
 
   createPlayers: (data) ->
     players = {}
@@ -18,12 +17,12 @@ class OnlineStatus
 
     players
 
-  updateStatuses: ->
+  updateAccountStatuses: ->
     self = @
     $.ajax
-      url: "/players"
+      url: "/accounts"
       data:
-        account: @usernames()
+        account: @accountNames()
         league: @league()
       dataType: "json"
       success: (data) ->
@@ -55,7 +54,7 @@ class OnlineStatus
       $onlineStatus
         .append(" &bull; <time datetime='#{player.last_online_iso8601}'></time>")
 
-  usernames: ->
+  accountNames: ->
     accounts = []
     $.each @$onlineStatus.find("span"), (i, elt) ->
       account = $(elt).html()
@@ -66,7 +65,7 @@ class OnlineStatus
   league: ->
     $("#search-form select.search_league").val()
 
-  @setup: (root) ->
-    new OnlineStatus(root).setup()
+  @accountStatuses: (root) ->
+    new OnlineStatus(root).accountStatuses()
 
 @App.OnlineStatus = OnlineStatus

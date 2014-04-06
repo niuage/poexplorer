@@ -1,13 +1,15 @@
 class Player < ActiveRecord::Base
   include PlayerExtensions::Mapping
 
+  attr_accessible :league_id, :character
+
   belongs_to :league
 
   validates :account,   presence: true
   validates :account,   uniqueness: { scope: :character }
+  validates :character, presence: true, uniqueness: true
   validates :online,    inclusion: { in: [true, false] }
   validates :league_id, presence: true
-  validates :character, uniqueness: true, allow_blank: true
 
   scope :online,  -> { where(online: true) }
   scope :offline, -> { where(online: false) }
@@ -21,6 +23,9 @@ class Player < ActiveRecord::Base
   scope :by_account,   ->(account) { where(account: account) }
 
   scope :in_league, ->(league_id) { where(league_id: league_id) }
+
+  # not working, can't figure out why
+  belongs_to :poe_account, primary_key: "account", foreign_key: "name", class_name: "Account"
 
   def self.create_from_api(player_data, league_id, version = 0)
     character_name = player_data["character"]["name"]
@@ -70,26 +75,6 @@ class Player < ActiveRecord::Base
     last_online.try :iso8601
   end
 
-  ### remove? ###
-  SORT_BY = {
-    online: "Online",
-    rank: "Rank"
-  }
-
-  SORT_BY_COLUMNS = SORT_BY.keys.freeze
-
-  scope :sort_by, ->(sort) do
-    sort = Player.sort_column(sort)
-    direction = { rank: "ASC", online: "DESC" }
-    order("#{sort} #{direction[sort]}") if sort
-  end
-
-  def self.sort_column(sort)
-    return sort if SORT_BY_COLUMNS.map(&:to_s).include?(sort)
-    SORT_BY_COLUMNS[0]
-  end
-  ### end remove? ###
-
   def online!
     self.online = true
     self.last_online = Time.zone.now
@@ -97,6 +82,10 @@ class Player < ActiveRecord::Base
   end
   def offline!
     update_attribute :online, false
+  end
+
+  def to_param
+    character
   end
 
   private

@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @token = @user.forum_token if @user.is?(current_user)
     respond_with @user
   end
 
@@ -25,54 +26,42 @@ class UsersController < ApplicationController
     if (@ign = params[:ign]).blank?
       redirect_to @user, notice: "IGN missing"
     else
-      @token = "#{@user.forum_token}:#{@ign}:"
+      @token = @user.forum_token
       respond_with @user
     end
   end
 
-  # lol
-  # TODO: redo this thing
-  def validate_player
-    thread_id = thread_id()
-    return redirect_to(@user, notice: "The thread url was invalid") unless thread_id
+  def validate_account
+    return redirect_to(@user, notice: "The thread url was invalid") unless thread_id.to_i > 0
 
-    league = League.find((params[:user][:league_id].presence || League.permanent.first.id).to_i)
+    thread = ForumThreadHtml.new(thread_id)
 
-    thread = Nokogiri::HTML(open("http://pathofexile.com/forum/view-thread/#{thread_id}"))
-    content = thread.css(".forumPostListTable tr:first-child .content").first.try(:inner_html)
-    return redirect_to(@user, notice: "The thread was invalid.") if content.blank?
+    return redirect_to(@user, notice: "The thread was invalid.") if thread.first_post.blank?
 
-    matches = content.match Regexp.new("#{@user.forum_token}:([^:\s<]+):")
-    character = matches && matches[1]
-    return redirect_to(@user, notice: "The character name could not be found. You have to include '#{@user.forum_token}:character_name:' in your thread") if character.blank?
+    return redirect_to(@user,
+      notice: "You have to include '#{@user.forum_token}' in the first post of your thread"
+    ) unless thread.first_post.match @user.forum_token
 
-    account = thread.css(".forumPostListTable tr:first-child td:nth-child(2) .post_by_account a").first.try :text
+    account = thread.posted_by
     return redirect_to(@user, notice: "The thread was invalid. Could not find the account name.") if account.blank?
 
-    player = Player.where(character: character, account: account).first_or_initialize
+    @user.account = Account.where(name: account).first_or_initialize
+    @user.save
 
-    if player.new_record?
-      player.league = league
-      player.online = false
-    elsif @user.players.where(id: player.id).any?
-      return redirect_to(@user, notice: "This character was already linked to your account.")
-    end
-
-    player.save
-    @user.players << player
-
-    redirect_to @user, notice: "#{character} (#{account}) was linked to this account successfully."
+    redirect_to @user, notice: "The account '#{account}'' was linked to this account successfully!"
   end
 
   private
 
   def thread_id
+    return @thread_id if @thread_id.present?
+
     url = params[:user][:thread_url]
     return nil if url.blank?
 
     url = url.split("/").delete_if &:empty?
 
-    return url.last
+    @thread_id = url.last
   end
 
   def find_user

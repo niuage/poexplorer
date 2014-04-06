@@ -1,13 +1,10 @@
+<% players ||= [] %>
+
 <% if players.any? %>
-
-  <% content_for :dom_ready do %>
-    App.OnlineStatus.setup("#results");
-  <% end %>
-
+  <%= render "players/head" %>
   <div id="results">
     <%= render players %>
   </div>
-
 <% else %>
 
   <div class="no-results">

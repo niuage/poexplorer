@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317033932) do
+ActiveRecord::Schema.define(version: 20140405034535) do
+
+  create_table "accounts", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -293,6 +300,8 @@ ActiveRecord::Schema.define(version: 20140317033932) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "search_stats", ["search_id"], name: "index_search_stats_on_search_id", using: :btree
 
   create_table "searches", force: true do |t|
     t.integer  "user_id"

@@ -1,24 +1,33 @@
 <div class="slim-row row-fluid result bordered">
 
-  <span class="span4 online-status">
+  <span class="span3 online-status">
     <%= link_to player_path(player.account),
                 class: "account",
                 data: { account: player.account } do %>
-      <i class="fa fa-circle-o online-icon"></i>
+      <i class="fa fa-circle online-icon <%= player.online? ? "online" : "offline" %>"></i>
       <span><%= player.account %></span>
       <% end %>
   </span>
 
-  <span class="span3">
+  <span class="span3" data-character="<%= player.character %>">
     <%= player.character %>
   </span>
 
-  <span class="span3">
-    <%= player.klass %>
+  <span class="span2">
+    <%= player.league.name %>
   </span>
 
-  <span class="span2 small pagination-right">
+  <span class="span4">
+    <% if can? :edit, player %>
+      <%= link_to "Edit", edit_player_path(player) %>
+      <% if !player.online? %>
+        &bull;
+        <%= link_to "Mark online", mark_online_player_path(player), data: {
+          method: :put
+        } %>
+      <% end %>
+    <% end %>
+    &bull;
     <%= link_to "Forum Profile", "http://pathofexile.com/account/view-profile/#{player.account}", target: "_blank" %>
   </span>
-
 </div>

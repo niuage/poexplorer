@@ -31,6 +31,18 @@ private
     can :update, Build do |build|
       build.user_id == user.id
     end
+
+    can :edit, Player do |player|
+      user.account_name == player.account
+    end
+
+    can :create, Player do
+      user.account_name.any?
+    end
+
+    can :update, Player do |player|
+      player.account == user.account_name
+    end
   end
 
   def visitor_abilities user

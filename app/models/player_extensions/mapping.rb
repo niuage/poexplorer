@@ -31,8 +31,7 @@ module PlayerExtensions
           :last_online,
           :created_at,
           :updated_at
-        ]
-        )
+        ])
     end
 
     def save(*)
@@ -44,11 +43,16 @@ module PlayerExtensions
     end
 
     def index
-      current_index.presence || (Thread.current[:"poe_master_#{league_id}"] = Tire.index(index_name))
+      current_index.presence ||
+        (self.current_index = Tire.index(index_name))
     end
 
     def current_index
       Thread.current[:"poe_master_#{league_id}"]
+    end
+
+    def current_index=(index)
+      Thread.current[:"poe_master_#{league_id}"] = index
     end
 
     def index_name

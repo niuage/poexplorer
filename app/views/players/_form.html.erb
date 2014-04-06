@@ -1,0 +1,7 @@
+<%= simple_form_for @player do |f| %>
+  <%= f.input :character %>
+  <%= f.input :league_id, label: "League of your PoE character",
+          collection: League.running,
+          selected: current_league_id %>
+  <%= f.button :submit, @player.new_record? ? "Create character" : "Update character", class: "btn btn-success" %>
+<% end %>

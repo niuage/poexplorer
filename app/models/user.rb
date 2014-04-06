@@ -10,15 +10,21 @@ class User < ActiveRecord::Base
 
   scope :admin, -> { where(role: "admin") }
 
-  has_many :user_players
-  has_many :players, through: :user_players
-  has_many :authentications
-  # has_many :builds
+  has_many :authentications, dependent: :destroy
   belongs_to :league
 
   before_save :cache_association_names
 
+  has_one :account, dependent: :destroy
+  delegate :name, to: :account, prefix: true, allow_nil: true
+  delegate :players, to: :account, allow_nil: true
+
   # make_voter
+
+  def forum_token
+    read_attribute(:forum_token).presence ||
+      (create_new_token && read_attribute(:generate_forum_token))
+  end
 
   def cache_association_names
     self.league_name = (self.league_id.nil? ? nil : self.league.name) if self.league_id_changed?
@@ -30,6 +36,10 @@ class User < ActiveRecord::Base
 
   def generate_forum_token
     self.forum_token = [*('a'..'z'),*('0'..'9')].shuffle[0, 20].join
+  end
+
+  def create_new_token
+    generate_forum_token && save
   end
 
   def admin?

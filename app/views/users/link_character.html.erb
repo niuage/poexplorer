@@ -11,7 +11,7 @@
   <div class="bordered-section">
   <p>3 - Once it's done, enter your thread URL, choose the league of your character and click <span class="tag">Validate and link</span>.</p>
 
-  <%= simple_form_for :user, url: validate_player_user_path(@user) do |f| %>
+  <%= simple_form_for :user, url: validate_account_user_path(@user) do |f| %>
     <%= f.input :thread_url, input_html: { value: nil, class: "span12" } %>
     <%= f.input :league_id, label: "League of your PoE character",
           collection: League.running,

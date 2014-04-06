@@ -3,7 +3,9 @@ class ForumThreadHtml
   SELECTORS = {
     last_edited_by: ".forumTable .content-container.first .last_edited_by",
     post_date: ".post_date",
-    profile_link: ".profile-link"
+    profile_link: ".profile-link",
+    first_post: ".forumPostListTable tr:first-child .content",
+    posted_by: ".forumPostListTable tr:first-child td:nth-child(2) .post_by_account a"
   }
 
   attr_accessor :thread_id
@@ -46,5 +48,13 @@ class ForumThreadHtml
 
   def account
     thread.css(SELECTORS[:profile_link]).first.try :content
+  end
+
+  def first_post
+    @_first_post ||= thread.css(SELECTORS[:first_post]).first.try(:inner_html)
+  end
+
+  def posted_by
+    @_posted_by ||= thread.css(SELECTORS[:posted_by]).first.try :text
   end
 end

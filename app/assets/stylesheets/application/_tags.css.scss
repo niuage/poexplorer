@@ -17,7 +17,7 @@
 }
 
 .tag, .item .tag {
-  &.tag-red, &.tag-green, &.tag-blue { color: white; }
+  &.tag-red, &.tag-green, &.tag-blue { color: white; text-shadow: none; }
   &.tag-red { background: red; }
   &.tag-green { background: green; }
   &.tag-blue { background: blue; }

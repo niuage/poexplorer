@@ -7,12 +7,8 @@ Poesearch::Application.routes.draw do
     member do
       post :generate_token
       get :link_character
-      post :validate_player
+      post :validate_account
     end
-
-    # scope module: :user_builds do
-    #   resources :builds
-    # end
   end
 
   resources :searches, except: [:edit] do
@@ -36,25 +32,19 @@ Poesearch::Application.routes.draw do
     end
   end
 
-  # resources :build_searches, path: "/builds/search"
-
-  # resources :builds do
-  #   member do
-  #     put :vote_up
-  #     put :vote_down
-  #   end
-  #   collection do
-  #     post :load_votes
-  #   end
-  # end
-
   resource :shopping_cart
 
   resources :authentications, only: [:create, :destroy]
 
   resources :messages
 
-  resources :players, only: [:index, :show]
+  resources :players do
+    member do
+      put :mark_online
+    end
+  end
+
+  resources :accounts
 
   resources :posts
 

@@ -1,37 +1,29 @@
 class PlayersController < ApplicationController
-  include Concerns::Search
-
-  before_filter :view_layout, only: [:show]
   skip_before_filter :store_location
+
+  before_filter :find_player, only: [:show, :edit, :update, :mark_online, :destroy]
+  before_filter :authorize_create, only: [:new, :create]
+  before_filter :authorize_update, only: [:edit, :update, :mark_online]
 
   layout :layout_for_request
   respond_to :html, :json
 
   def index
-    respond_to do |format|
-      format.json do
-        @players = Player.where(account: params[:account])
+    @players = Player.where(character: params[:characters])
 
-        league = params[:league].to_i
-        @players = @players.where(league_id: league) if league > 0
-
-        render json: @players
-      end
-      format.html do
-        @players = Player.page(params[:page]).per(20)
-        @league_id = (params[:league].presence || user_league_id.presence || League.first.try(:id)).to_i
-        @players = @players.in_league(@league_id) if @league_id > 0
-        @players = @players.sort_by(params[:sort])
-      end
+    respond_with do |format|
+      format.json { render json: @players }
     end
   end
 
+  def new
+    @player = Player.new
+    respond_with @player
+  end
+
   def show
-    @player = Player.find_by(account: params[:id])
-    if !@player
-      @player = Player.new
-      @player.account = params[:id]
-    end
+    @player = new_player if !@player
+
     respond_with @player do |format|
       format.json
       format.html do
@@ -40,21 +32,56 @@ class PlayersController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
+  def create
+    @player = Player.new(params[:player])
+    @player.account = current_user.account_name
+
+    @player.save
+
+    respond_with current_user
+  end
+
+  def update
+    @player.update_attributes(params[:player])
+    @player.account = current_user.account_name
+
+    @player.save
+
+    respond_with current_user
+  end
+
+  def mark_online
+    current_user.players.each &:offline!
+    @player.online!
+
+    respond_with current_user
+  end
+
   private
+
+  def new_player
+    Player.new do |p|
+      p.account = params[:id]
+    end
+  end
 
   def layout_for_request
     request.xhr? ? false : "application"
   end
 
-  def find_items_in_player_stash
-    @search = Search.new
-    @search.account = @player.account
-    update_from_url_params(@search)
-
-    @results = ItemDecorator.decorate_collection(
-      Elastic::PlayerStashSearch.new(@search, params).tire_search.results,
-      context: { size: layout_size }
-    )
+  def find_player
+    @player = Player.find_by(character: params[:id])
   end
 
+  def authorize_create
+    authorize! :create, Player
+  end
+
+  def authorize_update
+    authorize! :update, @player
+  end
 end

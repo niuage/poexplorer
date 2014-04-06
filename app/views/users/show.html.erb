@@ -1,19 +1,14 @@
 <%= render layout: "users/layout", locals: { sidebar: "users/sidebars/show" } do %>
 
-  <div class="bordered-section">
-    <h2>Path Of Exile accounts</h2>
-    <%= render "players/head" %>
-    <p>This feature is still in development.</p>
-    <%#= render "players/players_listing", players: @user.players %>
-  </div>
-
-  <% if false && @user.is?(current_user) %>
-  <div class="bordered-section text">
-    <h2>Add a Path of Exile character</h2>
-
-    <p>Linking characters to your account allows you to mark them as <span class="tag tag-green">online</span> manually.</p>
-
-    <%= render "users/link_character_form" %>
-  </div>
+  <% if @user.is?(current_user) %>
+    <% if @user.account %>
+      <%= render "players/players_listing", players: @user.players %>
+      <%= link_to "Add a character", new_player_path, class: "btn btn-success" %>
+    <% else %>
+      <%= render "users/link_poe_account" %>
+    <% end %>
+  <% else %>
+    <%= render "players/players_listing", players: @user.players %>
   <% end %>
+
 <% end %>

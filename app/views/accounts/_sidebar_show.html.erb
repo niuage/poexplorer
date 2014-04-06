@@ -1,0 +1,11 @@
+<% no_facet_link ||= false %>
+
+<% facets = FacetsDecorator.decorate_collection(
+      results.facets,
+      params,
+      { no_facet_link: no_facet_link }
+) %>
+
+<% facets.each do |facet| %>
+  <%= render facet %>
+<% end %>

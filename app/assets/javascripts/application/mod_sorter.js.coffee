@@ -15,7 +15,7 @@ class ModSorter
       @highlight($mods)
 
     if (order = @$orderSelect.val())
-      @highlight(@$results.find("[data-sort=#{order}]"))
+      @highlight(@$results.find("[data-sort='#{order}']"))
 
   highlight: ($elts) ->
     $elts
