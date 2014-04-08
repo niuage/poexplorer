@@ -1,25 +1,31 @@
 <h2>Link your PoE account to this account</h2>
 
-<div class="bordered-section text">
-  <p>Open any of your threads on the official forum (<a href="http://www.pathofexile.com/forum">PathOfExile.com</a>), edit the first post, and add this token anywhere: <code><%= @token %></code></p>
+<div class="bordered-section text row-fluid">
+  <div class="span1 huge faded">1</div>
+  <div class="span11">
+    <p>Open any of your threads on the official forum (<a href="http://www.pathofexile.com/forum">PathOfExile.com</a>), edit the first post, and add this token anywhere: <code><%= @token %></code></p>
 
-  <% if false %>
-  <%= simple_form_for :user, url: generate_token_user_path(@user) do |f| %>
+    <% if false %>
+    <%= simple_form_for :user, url: generate_token_user_path(@user) do |f| %>
     <%= f.submit "Generate token", class: "btn btn-success" %>
-  <% end %>
-  <% end %>
+    <% end %>
+    <% end %>
+  </div>
 </div>
 
-<div class="bordered-section text">
-  <p>Enter the URL of the thread below, and validate.</p>
+<div class="bordered-section text row-fluid">
+  <div class="span1 huge faded">2</div>
+  <div class="span11">
+    <p>Enter the URL of the thread below.</p>
 
-  <%= simple_form_for :user, url: validate_account_user_path(@user) do |f| %>
+    <p>
+      PoExplorer will validate the presence of the token, and link your PoE account
+      to this one.
+    </p>
+
+    <%= simple_form_for :user, url: validate_account_user_path(@user) do |f| %>
     <%= f.input :thread_url, input_html: { value: nil, class: "span12" } %>
-    <%= f.submit "Validate", class: "btn btn-success" %>
-  <% end %>
+    <%= f.submit "Link account", class: "btn btn-success" %>
+    <% end %>
+  </div>
 </div>
-
-<div class="bordered-section text">
-  <p></p>
-</div>
-

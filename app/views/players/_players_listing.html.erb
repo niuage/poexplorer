@@ -1,14 +1,14 @@
 <% players ||= [] %>
 
+<div class="section">
 <% if players.any? %>
   <%= render "players/head" %>
   <div id="results">
     <%= render players %>
   </div>
 <% else %>
-
   <div class="no-results">
-    <h2>No players</h2>
+    <h2>No Characters</h2>
   </div>
-
 <% end %>
+</div>

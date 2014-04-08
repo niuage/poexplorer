@@ -1,7 +1,7 @@
 <div class="slim-row row-fluid result bordered">
 
   <span class="span3 online-status">
-    <%= link_to player_path(player.account),
+    <%= link_to account_path(player.account),
                 class: "account",
                 data: { account: player.account } do %>
       <i class="fa fa-circle online-icon <%= player.online? ? "online" : "offline" %>"></i>
@@ -18,16 +18,16 @@
   </span>
 
   <span class="span4">
+    <%= link_to "Mark online", mark_online_player_path(player), data: {
+          method: :put
+    } %>
+    &bull;
     <% if can? :edit, player %>
       <%= link_to "Edit", edit_player_path(player) %>
+      /
+      <%= link_to "Destroy", player_path(player), method: :delete %>
       <% if !player.online? %>
-        &bull;
-        <%= link_to "Mark online", mark_online_player_path(player), data: {
-          method: :put
-        } %>
       <% end %>
     <% end %>
-    &bull;
-    <%= link_to "Forum Profile", "http://pathofexile.com/account/view-profile/#{player.account}", target: "_blank" %>
   </span>
 </div>

@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
   def add_to_cart
     @cart.add_item(@item)
     @cart.save
-    respond_to do |format|
+    respond_with do |format|
       format.html { redirect_to item_url(@item) }
       format.json
     end
@@ -40,7 +40,7 @@ class ItemsController < ApplicationController
   def remove_from_cart
     @cart.remove_item(@item)
     @cart.save
-    respond_to do |format|
+    respond_with do |format|
       format.html { redirect_to item_url(@item) }
       format.json
     end

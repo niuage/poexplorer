@@ -32,7 +32,7 @@ namespace :players do
           puts "New api request #{offset}"
 
           api.ladder(offset) do |response|
-            fail response.code.to_s unless response.code == PoeApi::LIMIT
+            raise response.code.to_s unless response.code == 200
 
             players_data = ActiveSupport::JSON.decode(response.body)["entries"]
 

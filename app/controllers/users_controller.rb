@@ -57,6 +57,7 @@ class UsersController < ApplicationController
     return @thread_id if @thread_id.present?
 
     url = params[:user][:thread_url]
+    url.gsub!(/\/?page(\/\d+)?/, "")
     return nil if url.blank?
 
     url = url.split("/").delete_if &:empty?

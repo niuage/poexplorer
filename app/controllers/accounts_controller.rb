@@ -1,4 +1,6 @@
 class AccountsController < ApplicationController
+  skip_before_filter :store_location
+
   include Concerns::Search
 
   layout :layout_for_request
@@ -8,7 +10,7 @@ class AccountsController < ApplicationController
   before_filter :find_account, only: [:show]
 
   def index
-    respond_to do |format|
+    respond_with do |format|
       format.json do
         @players = Player.where(account: params[:account])
 

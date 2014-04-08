@@ -16,7 +16,7 @@ class ForumThread < ActiveRecord::Base
   store :item_store, accessors: :items, coder: JSON
 
   def account=(account)
-    create_player(account)
+    # create_player(account)
     write_attribute(:account, account)
   end
 
@@ -78,6 +78,7 @@ class ForumThread < ActiveRecord::Base
 
   private
 
+  # not used
   def create_player(account)
     return if account.blank? || league_id.blank?
     Player

@@ -3,7 +3,7 @@ class PlayersController < ApplicationController
 
   before_filter :find_player, only: [:show, :edit, :update, :mark_online, :destroy]
   before_filter :authorize_create, only: [:new, :create]
-  before_filter :authorize_update, only: [:edit, :update, :mark_online]
+  before_filter :authorize_update, only: [:edit, :update, :mark_online, :destroy]
 
   layout :layout_for_request
   respond_to :html, :json
@@ -24,12 +24,7 @@ class PlayersController < ApplicationController
   def show
     @player = new_player if !@player
 
-    respond_with @player do |format|
-      format.json
-      format.html do
-        find_items_in_player_stash
-      end
-    end
+    respond_with @player
   end
 
   def edit
@@ -42,7 +37,7 @@ class PlayersController < ApplicationController
 
     @player.save
 
-    respond_with current_user
+    respond_with @player, location: @player.errors.any? ? nil : current_user
   end
 
   def update
@@ -59,6 +54,11 @@ class PlayersController < ApplicationController
     @player.online!
 
     respond_with current_user
+  end
+
+  def destroy
+    @player.destroy
+    respond_with @player, location: user_url(current_user)
   end
 
   private
