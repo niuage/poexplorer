@@ -37,7 +37,7 @@ private
     end
 
     can :create, Player do
-      user.account_name.any?
+      user.account.present?
     end
 
     can :update, Player do |player|

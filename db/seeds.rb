@@ -35,6 +35,10 @@ League::SEASON_LEAGUES.each do |league|
   l.save
 end
 
+League.where(name: League::LEAGUES + League::SEASON_LEAGUES).all.each_with_index do |l, i|
+  l.update_attribute(:hardcore, true) if i % 2 == 1
+end
+
 #############################################################
 
 Rarity::FRAME_TYPES.each do |rarity|

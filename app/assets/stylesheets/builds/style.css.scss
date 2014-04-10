@@ -4,36 +4,6 @@ label {
   font-weight: bold;
 }
 
-.box {
-  padding: 3px;
-  background: #EEE;
-  border-radius: 3px;
-
-  margin-bottom: 10px;
-
-  &:hover {
-    border-color: #d0d0d0;
-  }
-
-  &.dark {
-    .box-content {
-      background: #f9f9f9;
-    }
-  }
-
-  h3 {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ccc;
-  }
-}
-
-.box-content {
-  border: 1px solid #CACACA;
-  background-color: #FFF;
-  border-radius: 3px;
-  padding: 10px;
-}
-
 .select2-container.select, .select2-container-multi {
   width: 100%;
 }

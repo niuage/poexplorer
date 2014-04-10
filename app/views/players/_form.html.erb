@@ -1,7 +1,11 @@
 <%= simple_form_for @player do |f| %>
-  <%= f.input :character %>
-  <%= f.input :league_id, label: "League of your PoE character",
+  <div class="bordered-section">
+  <%= f.input :character, label: "Character name (IGN)" %>
+  <%= f.input :league_id, label: "League",
           collection: League.running,
-          selected: current_league_id %>
+          selected: @player.league_id || current_league_id %>
+  <%= f.input :online,
+    label: "Mark online <i class='fa fa-circle online-icon online'></i>".html_safe %>
+  </div>
   <%= f.button :submit, @player.new_record? ? "Create character" : "Update character", class: "btn btn-success" %>
 <% end %>

@@ -1,9 +1,9 @@
 class PlayersController < ApplicationController
   skip_before_filter :store_location
 
-  before_filter :find_player, only: [:show, :edit, :update, :mark_online, :destroy]
+  before_filter :find_player, only: [:show, :edit, :update, :mark_online, :mark_offline, :destroy]
   before_filter :authorize_create, only: [:new, :create]
-  before_filter :authorize_update, only: [:edit, :update, :mark_online, :destroy]
+  before_filter :authorize_update, only: [:edit, :update, :mark_online, :mark_offline, :destroy]
 
   layout :layout_for_request
   respond_to :html, :json
@@ -32,8 +32,9 @@ class PlayersController < ApplicationController
   end
 
   def create
-    @player = Player.new(params[:player])
-    @player.account = current_user.account_name
+    @player = Player.new(params[:player]) do |p|
+      p.account = current_user.account_name
+    end
 
     @player.save
 
@@ -50,8 +51,17 @@ class PlayersController < ApplicationController
   end
 
   def mark_online
-    current_user.players.each &:offline!
+    current_user  .players.reject { |p|
+      p.id == @player.id
+    }.each &:offline!
+
     @player.online!
+
+    respond_with current_user
+  end
+
+  def mark_offline
+    @player.offline!
 
     respond_with current_user
   end

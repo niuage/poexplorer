@@ -1,6 +1,6 @@
 class NumberFormatter
   constructor: ->
-    @numbers = $(".facet .tag, .main-menu .tag")
+    @numbers = $(".facet .tag, .main-menu .tag span")
 
   setup: ->
     @numbers.html @format

@@ -1,33 +1,47 @@
-<div class="slim-row row-fluid result bordered">
-
-  <span class="span3 online-status">
-    <%= link_to account_path(player.account),
-                class: "account",
-                data: { account: player.account } do %>
-      <i class="fa fa-circle online-icon <%= player.online? ? "online" : "offline" %>"></i>
-      <span><%= player.account %></span>
+<div class="box span3">
+  <div class="box-content dark">
+    <h2>
+      <i class="fa fa-circle right online-icon <%= player.online? ? "online" : "offline" %>"></i>
+      <%= player.character %>
+    </h2>
+    <p class="small faded">
+      played by
+      <%= link_to player.account, account_path(player.account) %>
+    </p>
+  </div>
+  <div class="box-content">
+    <% if !player.online? %>
+      <%= link_to mark_online_player_path(player), method: :put do %>
+        Mark online
       <% end %>
-  </span>
-
-  <span class="span3" data-character="<%= player.character %>">
-    <%= player.character %>
-  </span>
-
-  <span class="span2">
-    <%= player.league.name %>
-  </span>
-
-  <span class="span4">
-    <%= link_to "Mark online", mark_online_player_path(player), data: {
-          method: :put
-    } %>
-    &bull;
-    <% if can? :edit, player %>
-      <%= link_to "Edit", edit_player_path(player) %>
-      /
-      <%= link_to "Destroy", player_path(player), method: :delete %>
-      <% if !player.online? %>
+    <% else %>
+      <%= link_to mark_offline_player_path(player), method: :put do %>
+        Mark offline
       <% end %>
     <% end %>
-  </span>
+  </div>
+
+    <div class="box-content clearfix small">
+      <% if league = player.league %>
+        <% if league.hardcore? %>
+          <i class="fa fa-shield"></i>
+        <% end %>
+        <%= league.name.titleize %>
+      <% else %>
+        n/a
+      <% end %>
+      <% if can? :edit, player %>
+      <%= link_to player_path(player),
+            class: "ttip right",
+            title: "Destroy",
+            method: :delete do %>
+        <i class="fa fa-times"></i>
+      <% end %>
+      <%= link_to edit_player_path(player),
+          class: "ttip right",
+          title: "Edit" do %>
+        <i class="fa fa-pencil"></i>&nbsp;&nbsp;
+      <% end %>
+      <% end %>
+    </div>
 </div>

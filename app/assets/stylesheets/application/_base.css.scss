@@ -24,8 +24,8 @@ body {
   border-left: 1px solid #ccc;
   @include box-shadow(-2px 0 3px -2px rgba(0, 0, 0, 0.1));
 
-  padding-left: 2.564102564102564%;
-  *padding-left: 2.564102564102564%;
+  padding-left: 20px;
+  *padding-left: 20px;
 
   padding-bottom: $app-padding;
 }
@@ -97,5 +97,56 @@ body {
   .twitter a {
     background: #3F7ABD;
     border-color: #238aff;
+  }
+}
+
+.box {
+  padding: 3px;
+  background: #EEE;
+  border-radius: 3px;
+
+  margin-bottom: 10px;
+
+  &:hover {
+    background: #d0d0d0;
+  }
+
+  &.dark .box-content, .box-content.dark {
+    background: #f9f9f9;
+  }
+
+  h3 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+.box-content {
+  border: 1px solid #CACACA;
+  background-color: #FFF;
+  border-radius: 3px 3px 0 0;
+  padding: 10px;
+}
+
+.box-content + .box-content {
+  margin-top: -1px;
+  border-radius: 0;
+}
+
+.box-content:last-child {
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+#add-character {
+  color: #777;
+  text-align: center;
+
+  &:hover {
+    color: $header-color;
+    background: $header-color;
+    .box-content {
+      border-color: darken($header-color, 10%);
+    }
   }
 }

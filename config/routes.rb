@@ -41,6 +41,7 @@ Poesearch::Application.routes.draw do
   resources :players do
     member do
       put :mark_online
+      put :mark_offline
     end
   end
 

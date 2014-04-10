@@ -1,10 +1,10 @@
 <% results ||= nil %>
 <% total_count = results.total_count if results %>
 
-<%= render "searches/tab_nav", type: "weapon", form: @form, total_count: total_count %>
-<%= render "searches/tab_nav", type: "armour", form: @form, total_count: total_count %>
-<%= render "searches/tab_nav", type: "misc", form: @form, total_count: total_count %>
-<%= render "searches/tab_nav", type: "similar", form: @form, total_count: total_count, tab_name: "<i class='fa fa-adjust'></i> Similar items" %>
+<%= render "searches/tab_nav", type: "weapon", form: @form, total_count: total_count, icon: 'fa-gavel' %>
+<%= render "searches/tab_nav", type: "armour", form: @form, total_count: total_count, icon: 'fa-shield' %>
+<%= render "searches/tab_nav", type: "misc", form: @form, total_count: total_count, icon: 'fa-flask' %>
+<%= render "searches/tab_nav", type: "similar", form: @form, total_count: total_count, tab_name: "Similar items", icon: 'fa-adjust' %>
 
 <% if false %>
 <li class="tab-shopping right">

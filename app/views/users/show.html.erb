@@ -1,13 +1,21 @@
 <%= render layout: "users/layout", locals: { sidebar: "users/sidebars/show" } do %>
 
+  <% account_name = @user.account_name %>
+
   <% if @user.is?(current_user) %>
-    <% if @user.account %>
-      <%= render "players/players_listing", players: @user.players %>
-      <%= link_to "Add a character", new_player_path, class: "btn btn-success" %>
+    <% if account_name.present? %>
+      <h2>Characters of <%= account_name %></h2>
+      <%= render "players/players_listing",
+            players: @user.players,
+            add_character: true
+    %>
     <% else %>
       <%= render "users/link_poe_account" %>
     <% end %>
   <% else %>
+    <% if account_name.present? %>
+      <h2>Characters of <%= account_name %></h2>
+    <% end %>
     <%= render "players/players_listing", players: @user.players %>
   <% end %>
 

@@ -92,7 +92,11 @@ class SearchFormDecorator < ApplicationDecorator
 
   def item_league(options = {})
     input :league_id, input_options({
-      collection: h.simple_options_for_select(League, text: ->(name) { return nil unless League.visible?(name); name.capitalize + " league" }),
+      collection: h.simple_options_for_select(League,
+        text: ->(name) {
+          return nil unless League.visible?(name)
+          name.capitalize + " league"
+        }),
       selected: form.object.league_id || current_league_id,
       input_html: { class: "span12 search_league" }
     }, options)

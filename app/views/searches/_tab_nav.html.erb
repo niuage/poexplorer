@@ -1,15 +1,22 @@
-<% form ||= nil %>
-<% tab_name ||= nil %>
-<% current = form && form.send(:"#{type}?") %>
+<%
+  tab_name ||= type.capitalize.pluralize
+  current = form && form.send(:"#{type}?")
+%>
 
 <li class="tab-search-<%= type %>s">
   <%= link_to [:new, :"#{type}_search"] do %>
-    <% if current && type != "similar" %>
-      <i class="fa fa-search"></i>
-    <% end %>
-    <%= tab_name.try(:html_safe) || type.capitalize.pluralize %>
     <% if current %>
-      <span class="tag"><%= total_count %></span>
+      <i class="fa <%= icon %>"></i>
+    <% end %>
+
+    <%= tab_name.html_safe %>
+
+    <% if current %>
+      <span class="tag">
+        <span><%= total_count %></span>
+      </span>
+    <% elsif type == "similar" %>
+      <span class="tag">new!</span>
     <% end %>
   <% end %>
 </li>

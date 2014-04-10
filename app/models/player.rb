@@ -1,7 +1,7 @@
 class Player < ActiveRecord::Base
   include PlayerExtensions::Mapping
 
-  attr_accessible :league_id, :character
+  attr_accessible :league_id, :character, :online
 
   belongs_to :league
 

@@ -1,14 +1,24 @@
-<% players ||= [] %>
+<%
+players ||= []
+add_character ||= false
+%>
 
 <div class="section">
-<% if players.any? %>
-  <%= render "players/head" %>
-  <div id="results">
-    <%= render players %>
-  </div>
-<% else %>
-  <div class="no-results">
-    <h2>No Characters</h2>
-  </div>
-<% end %>
+  <% if add_character %>
+    <%= link_to new_player_path do %>
+    <div class="box span3" id="add-character">
+      <div class="box-content">
+        <h2>Add a character</h2>
+        <i class="fa fa-plus fa-5x"></i>
+      </div>
+    </div>
+    <% end %>
+  <% elsif players.empty? %>
+    <div class="no-results">
+      <h2>No Characters</h2>
+    </div>
+  <% end %>
+
+  <%= render players if players.any? %>
+
 </div>

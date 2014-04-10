@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140405034535) do
+ActiveRecord::Schema.define(version: 20140410032343) do
 
   create_table "accounts", force: true do |t|
     t.integer  "user_id"
@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(version: 20140405034535) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "permanent",  default: false
+    t.boolean  "hardcore",   default: false
   end
 
   add_index "leagues", ["name"], name: "index_leagues_on_name", using: :btree

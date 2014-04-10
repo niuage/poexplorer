@@ -4,13 +4,6 @@ class League < ActiveRecord::Base
     "hardcore"
   ]
 
-  OLD_SEASON_LEAGUES = [
-    "anarchy",
-    "onslaught",
-    "domination",
-    "nemesis"
-  ]
-
   SEASON_LEAGUES = [
     "anarchy",
     "onslaught",
@@ -18,6 +11,13 @@ class League < ActiveRecord::Base
     "nemesis",
     "ambush",
     "invasion"
+  ]
+
+  OLD_SEASON_LEAGUES = [
+    "anarchy",
+    "onslaught",
+    "domination",
+    "nemesis"
   ]
 
   after_save :update_all_items
