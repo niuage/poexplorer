@@ -411,13 +411,6 @@ ActiveRecord::Schema.define(version: 20140410032343) do
     t.datetime "updated_at"
   end
 
-  create_table "user_players", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "player_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", force: true do |t|
     t.string   "login",                                         null: false
     t.string   "bio"
