@@ -9,11 +9,11 @@
   <div class="span1 huge faded">1</div>
   <div class="span11">
     <p>Open any of your threads on the official forum (<a href="http://www.pathofexile.com/forum">PathOfExile.com</a>), edit the first post, and add this token anywhere:
-      <code class="tag"><%= @token %></code>
+      <code class="tag"><%= user.forum_token %></code>
     </p>
 
     <% if false %>
-    <%= simple_form_for :user, url: generate_token_user_path(@user) do |f| %>
+    <%= simple_form_for :user, url: generate_token_user_path(user) do |f| %>
     <%= f.submit "Generate token", class: "btn btn-success" %>
     <% end %>
     <% end %>
@@ -30,7 +30,7 @@
       to this one.
     </p>
 
-    <%= simple_form_for :user, url: validate_account_user_path(@user) do |f| %>
+    <%= simple_form_for :user, url: validate_account_user_path(user) do |f| %>
     <%= f.input :thread_url, input_html: { value: nil, class: "span12" } %>
     <%= f.submit "Link account", class: "btn btn-success" %>
     <% end %>

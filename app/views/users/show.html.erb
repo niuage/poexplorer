@@ -4,17 +4,20 @@
 
   <% if @user.is?(current_user) %>
     <% if account_name.present? %>
-      <h2>Characters of <%= account_name %></h2>
+      <h2>
+        <%= account_name %> characters
+        (<%= link_to "Edit account", edit_user_account_path(current_user) %>)
+      </h2>
       <%= render "players/players_listing",
             players: @user.players,
             add_character: true
     %>
     <% else %>
-      <%= render "users/link_poe_account" %>
+      <%= render "users/link_poe_account", user: @user %>
     <% end %>
   <% else %>
     <% if account_name.present? %>
-      <h2>Characters of <%= account_name %></h2>
+      <h2><%= account_name %> characters</h2>
     <% end %>
     <%= render "players/players_listing", players: @user.players %>
   <% end %>

@@ -9,26 +9,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    @token = @user.forum_token if @user.is?(current_user)
     respond_with @user
   end
 
   def generate_token
-    if @user.forum_token.blank?
-      @user.generate_forum_token
-      @user.save
-    end
+    @user.generate_forum_token
+    @user.save
 
-    respond_with @user, location: link_character_user_path(@user, ign: params[:user][:ign])
-  end
-
-  def link_character
-    if (@ign = params[:ign]).blank?
-      redirect_to @user, notice: "IGN missing"
-    else
-      @token = @user.forum_token
-      respond_with @user
-    end
+    respond_with @user
   end
 
   def validate_account

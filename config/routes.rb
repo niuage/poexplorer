@@ -9,6 +9,7 @@ Poesearch::Application.routes.draw do
       get :link_character
       post :validate_account
     end
+    resource :account
   end
 
   resources :searches, except: [:edit] do

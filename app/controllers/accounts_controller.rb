@@ -27,6 +27,14 @@ class AccountsController < ApplicationController
     respond_with @account
   end
 
+  def edit
+    @user = User.find(params[:user_id])
+    @account = @user.account
+    authorize! :update, @account
+
+    respond_with @account
+  end
+
   private
 
   def find_account

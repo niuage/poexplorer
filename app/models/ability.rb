@@ -43,6 +43,10 @@ private
     can :update, Player do |player|
       player.account == user.account_name
     end
+
+    can :update, Account do |account|
+      account.name == user.account_name
+    end
   end
 
   def visitor_abilities user

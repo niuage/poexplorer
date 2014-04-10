@@ -5,18 +5,24 @@ class ItemColorer
     mods = $item.find(".stats li")
     $.each mods, (i, li) =>
       $li = $(li)
-      text = $li.text()
+      text = $.trim($li.text())
       for color in @colors
         if text.match(new RegExp(color, "i"))
           $li.wrapInner($("<span>").addClass(color))
           break
 
-      icon = if text.match(/Resistance/)
+      icon = if text.match(/Resistance(s)?$/)
         "fa-shield"
       else if text.match(/to maximum Life/)
         "fa-tint"
+      else if text.match(/Damage$/)
+        "fa-bolt"
 
-      $li.find("span").prepend("<i class='before fa #{icon}'></i>") if icon
+      if icon && !($span = $li.find("span")).length
+        $li.wrapInner("<span>")
+
+      if icon
+        $li.find("span").prepend("<i class='before fa #{icon}'></i>")
 
 
 
