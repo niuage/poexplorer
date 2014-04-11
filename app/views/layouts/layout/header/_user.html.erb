@@ -2,11 +2,16 @@
 
   <% if user_signed_in? %>
 
-    <li class="dropdown menu-right">
+    <li>
+      <%= link_to current_user.login, current_user %>
+    </li>
+
+    <li class="sep dropdown menu-right">
+
       <%= link_to "#", class: "dropdown-toggle", data: { toggle: "dropdown" } do %>
         <i class="fa fa-align-justify"></i>
-        <%= current_user.login %>
       <% end %>
+
       <ul class="dropdown-menu">
         <% if current_user.admin? %>
           <li><%= link_to "Admin", admin_root_path %></li>
