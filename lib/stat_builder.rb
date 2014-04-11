@@ -88,6 +88,11 @@ class StatBuilder
   end
 
   def build_sum_stat(implicit_mod, stat)
+    Bugsnag.notify(StandardError.new("build_sum_stat failed"), {
+      implicit_mod: implicit_mod.inspect,
+      implicit_mod_value: implicit_mod.value,
+      stat: stat.inspect
+    })
     custom_stat_for_mod implicit_mod,
       value: implicit_mod.value + stat.value
   end
