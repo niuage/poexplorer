@@ -57,8 +57,7 @@ namespace :players do
             .by_league(league_id)
             .by_character(offline_character_names)
 
-            offline_players.update_all(online: false, updated_at: Time.zone.now)
-            TireIndex.store(league_id, offline_players)
+            Player.mark_offline(offline_players, league_id)
 
             online_players.update_all(
               online: true,

@@ -84,6 +84,22 @@ class Player < ActiveRecord::Base
     update_attribute :online, false
   end
 
+  def self.mark_offline(players, league_id = nil)
+    return unless players
+
+    players.update_all(online: false, updated_at: Time.zone.now)
+
+    if league_id
+      TireIndex.store(league_id, players)
+    else
+      players = players.to_a.sort_by! &:league_id
+      chunks = players.chunk(&:league_id)
+      chunks.each do |league_id, players|
+        TireIndex.store(league_id, players)
+      end
+    end
+  end
+
   def to_param
     character
   end

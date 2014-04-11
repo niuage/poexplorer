@@ -22,23 +22,21 @@ private
       user.id == object.id
     end
 
-    can :read, ShoppingCart
+    # can :read, ShoppingCart
 
-    can :create, UserFavorite
+    # can :create, UserFavorite
 
-    can :create, Build
+    # can :create, Build
 
-    can :update, Build do |build|
-      build.user_id == user.id
-    end
+    # can :update, Build do |build|
+    #   build.user_id == user.id
+    # end
 
     can :edit, Player do |player|
       user.account_name == player.account
     end
 
-    can :create, Player do
-      user.account.present?
-    end
+    can :create, Player if user.can_create_player?
 
     can :update, Player do |player|
       player.account == user.account_name
@@ -50,8 +48,8 @@ private
   end
 
   def visitor_abilities user
-    can :read, Build do |build|
-      build.published? || can?(:update, build)
-    end
+    # can :read, Build do |build|
+    #   build.published? || can?(:update, build)
+    # end
   end
 end

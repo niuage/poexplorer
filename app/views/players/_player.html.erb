@@ -9,17 +9,20 @@
       <%= link_to player.account, account_path(player.account) %>
     </p>
   </div>
-  <div class="box-content">
-    <% if !player.online? %>
-      <%= link_to mark_online_player_path(player), method: :put do %>
-        Mark online
+
+  <% if can? :edit, player %>
+    <div class="box-content">
+      <% if !player.online? %>
+        <%= link_to mark_online_player_path(player), method: :put do %>
+          Mark online
+        <% end %>
+      <% else %>
+        <%= link_to mark_offline_player_path(player), method: :put do %>
+          Mark offline
+        <% end %>
       <% end %>
-    <% else %>
-      <%= link_to mark_offline_player_path(player), method: :put do %>
-        Mark offline
-      <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
     <div class="box-content clearfix small">
       <% if league = player.league %>

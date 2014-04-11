@@ -1,24 +1,26 @@
 <%
 players ||= []
 add_character ||= false
+
+if add_character
+  players = players.unshift(Struct.new("AddPlayer") do
+    def to_partial_path; "players/add" end
+  end.new())
+end
 %>
 
 <div class="section">
-  <% if add_character %>
-    <%= link_to new_player_path do %>
-    <div class="box span3" id="add-character">
-      <div class="box-content">
-        <h2>Add a character</h2>
-        <i class="fa fa-plus fa-5x"></i>
+
+  <% if players.any? %>
+    <% players.each_slice(4) do |slice| %>
+      <div class="row-fluid">
+        <%= render slice %>
       </div>
-    </div>
     <% end %>
-  <% elsif players.empty? %>
+
+  <% else %>
     <div class="no-results">
       <h2>No Characters</h2>
     </div>
   <% end %>
-
-  <%= render players if players.any? %>
-
 </div>
