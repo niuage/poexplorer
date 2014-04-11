@@ -1,6 +1,8 @@
 class Player < ActiveRecord::Base
   include PlayerExtensions::Mapping
 
+  ONLINE_DURATION = 1.5.hours
+
   attr_accessible :league_id, :character, :online
 
   belongs_to :league
@@ -14,7 +16,7 @@ class Player < ActiveRecord::Base
   scope :online,  -> { where(online: true) }
   scope :offline, -> { where(online: false) }
 
-  scope :not_marked_online, -> { where("marked_online_at IS NULL OR marked_online_at < ?", 2.hours.ago) }
+  scope :not_marked_online, -> { where("marked_online_at IS NULL OR marked_online_at < ?", ONLINE_DURATION.ago) }
   scope :updated_before,    ->(time) { where('updated_at < ?', time) }
   scope :updated_after,     ->(time) { where('updated_at > ?', time) }
 
@@ -68,6 +70,7 @@ class Player < ActiveRecord::Base
 
     options[:methods] ||= []
     options[:methods] << :last_online_iso8601
+    options[:methods] << :marked_as_online
     super(options)
   end
 
@@ -77,17 +80,24 @@ class Player < ActiveRecord::Base
 
   def online!
     self.online = true
+    self.marked_online_at = Time.zone.now
     self.last_online = Time.zone.now
     save
   end
   def offline!
-    update_attribute :online, false
+    self.online = false
+    self.marked_online_at = nil
+    save
   end
 
   def self.mark_offline(players, league_id = nil)
     return unless players
 
-    players.update_all(online: false, updated_at: Time.zone.now)
+    players.update_all(
+      online: false,
+      marked_online_at: nil,
+      updated_at: Time.zone.now
+    )
 
     if league_id
       TireIndex.store(league_id, players)
@@ -102,6 +112,10 @@ class Player < ActiveRecord::Base
 
   def to_param
     character
+  end
+
+  def marked_as_online
+    marked_online_at && marked_online_at > ONLINE_DURATION.ago
   end
 
   private
