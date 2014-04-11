@@ -50,6 +50,8 @@ class ThreadIndexer
     # Save the thread
     # Sets the new item list
     forum_thread.save
+  rescue OpenURI::HTTPError => e
+    Bugsnag.notify(e, { thread_id: thread_id })
   rescue StandardError => e
     Bugsnag.notify(e, { thread_id: thread_id })
     raise e
