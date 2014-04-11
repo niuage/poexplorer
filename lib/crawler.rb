@@ -27,6 +27,10 @@ class Crawler
         page_message(i + offset + 1)
         scrawl_page(page)
       rescue Timeout::Error => e
+        Bugsnag.notify(e, {
+          league_id: league_id,
+          shop: shop
+        })
         time_out_message(i)
         timeout_count += 1
         retry unless timeout_count > 2
@@ -34,8 +38,6 @@ class Crawler
 
       old_i = i
     end
-  rescue => e
-    puts "Failure: #{e.message}\n#{e.backtrace}"
   end
 
   protected

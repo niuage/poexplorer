@@ -50,6 +50,9 @@ class ThreadIndexer
     # Save the thread
     # Sets the new item list
     forum_thread.save
+  rescue StandardError => e
+    Bugsnag.notify(e, { thread_id: thread_id })
+    raise e
   end
 
   private
