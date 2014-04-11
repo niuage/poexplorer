@@ -29,7 +29,7 @@ class ThreadIndexer
 
     # exit if thread did not change
     if !forum_thread.thread_changed?
-      return puts("forum thread didnt change") && forum_thread.save
+      return puts("forum thread didnt change (#{thread_id})") && forum_thread.save
     end
 
     # find items to update

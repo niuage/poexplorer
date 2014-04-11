@@ -89,7 +89,7 @@ class StatBuilder
 
   def build_sum_stat(implicit_mod, stat)
     custom_stat_for_mod implicit_mod,
-    value: implicit_mod.value + stat.value
+      value: implicit_mod.value + stat.value
   end
 
   # RESISTANCES
