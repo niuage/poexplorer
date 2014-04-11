@@ -12,6 +12,10 @@ class InputHighlighter
     $inputs.on "change", ->
       self.highlight($(@), true)
 
+    @$form.on "cocoon:after-insert", (event, $elt) =>
+      $elt.find("select").on "change", ->
+        self.highlight($(@))
+
   highlight: ($elt, decrement = false) ->
     if $elt.val() == "" || ($elt.is(":checkbox") && !$elt.is(":checked"))
       return if !decrement
