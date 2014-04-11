@@ -20,10 +20,12 @@ class VerifyButton
         self.success(data)
       error: ->
         self.error(self.url())
+      complete: ->
+        self.complete()
 
   startVerifyingProcess: ->
-    @$link.html("<i class='#{@loadingIcon}'></i>")
-    @$link.attr("href", "#")
+    @$link.addClass("disabled")
+      .html("<i class='#{@loadingIcon}'></i>")
 
   url: ->
     @_url ||= @$link.attr("href")
@@ -37,12 +39,13 @@ class VerifyButton
     time.timeago("update", item["indexed_at"])
 
   error: (url) ->
-    if @$link.attr("href") == "#"
-      @$link
-        .html("Failed...")
-        .removeClass("btn-success")
-        .addClass("btn-warning")
-        .attr("href", url)
+    @$link
+      .html("Failed...")
+      .removeClass("btn-success")
+      .addClass("btn-warning")
+
+  complete: ->
+    @$link.removeClass("disabled") unless @$link.is(".btn-danger")
 
   ################## After verification #####################
 
