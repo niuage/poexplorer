@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   def forum_token
     read_attribute(:forum_token).presence ||
-      (create_new_token && read_attribute(:generate_forum_token))
+      (create_new_token && read_attribute(:forum_token))
   end
 
   def cache_association_names
