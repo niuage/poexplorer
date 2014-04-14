@@ -45,7 +45,7 @@ class StatBuilder
       mod: mod,
       value: mod.value,
       implicit: implicit
-      )
+    )
 
     update_custom_stats(stat) unless search_stat
   end
@@ -87,18 +87,22 @@ class StatBuilder
     end
   end
 
+  # improve (why the need to pass the implicit mod?)
   def build_sum_stat(implicit_mod, stat)
-    begin
-      custom_stat_for_mod implicit_mod,
-        value: implicit_mod.value + stat.value
-    rescue StandardError => e
-      Bugsnag.notify(StandardError.new("build_sum_stat failed"), {
-        implicit_mod: implicit_mod.inspect,
-        implicit_mod_value: implicit_mod.value,
-        stat: stat.inspect
-      })
-      raise e
+    # begin
+    value = implicit_mod.value
+    options = {}.tap do |opts|
+      opts[:value] = implicit_mod.value + stat.value if implicit_mod.value
     end
+    custom_stat_for_mod implicit_mod, options
+    # rescue StandardError => e
+    #   Bugsnag.notify(StandardError.new("build_sum_stat failed"), {
+    #     implicit_mod: implicit_mod.inspect,
+    #     implicit_mod_value: implicit_mod.value,
+    #     stat: stat.inspect
+    #   })
+    #   raise e
+    # end
   end
 
   # RESISTANCES
@@ -125,7 +129,7 @@ class StatBuilder
       name: name,
       mod_id: mod.id,
       hidden: true
-      }.merge(options))
+    }.merge(options))
   end
 
   def log_missing_mod(raw_mod, missing_type = false)
