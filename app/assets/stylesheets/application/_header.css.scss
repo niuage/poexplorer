@@ -37,7 +37,6 @@
       .dropdown-toggle {
         background-color: white;
         z-index: 1001;
-        &.ico:after { background: white; }
         color: $top-nav-hover-bg-color;
       }
     }
@@ -51,6 +50,8 @@
       width: 1px;
       height: 24px;
     }
+
+    &.sep.open:after { background: white; }
   }
 
   a {

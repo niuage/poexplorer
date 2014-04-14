@@ -2,7 +2,7 @@
 
   <% account_name = @user.account_name %>
 
-  <% if @user.is?(current_user) %>
+  <% if can? :edit, @user %>
     <% if account_name.present? %>
       <h2>
         <%= account_name %> characters
@@ -11,7 +11,7 @@
       <%= render "players/players_listing",
             players: @user.players,
             add_character: true
-    %>
+      %>
     <% else %>
       <%= render "users/link_poe_account", user: @user %>
     <% end %>

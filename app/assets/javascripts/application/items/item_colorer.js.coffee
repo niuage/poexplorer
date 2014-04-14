@@ -15,7 +15,7 @@ class ItemColorer
   @iconRegexps:
     resistances: /Resistance(s)?$/
     life: /to maximum Life/
-    damage: /(?:Adds.*Damage|increased (?:Spell|Physical) Damage)$/
+    damage: /(?:(?:Adds|increased).*Damage)$/
 
   @color: ($item) ->
     mods = $item.find(".stats li")

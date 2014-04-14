@@ -42,6 +42,10 @@ class User < ActiveRecord::Base
     generate_forum_token && save
   end
 
+  def can_create_player?
+    account.present? && (!players || players.count <= 12)
+  end
+
   def admin?
     role == "admin"
   end

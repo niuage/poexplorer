@@ -37,6 +37,7 @@ class PlayersController < ApplicationController
     end
 
     @player.save
+    set_other_player_as_offline if @player.online?
 
     respond_with @player, location: @player.errors.any? ? nil : current_user
   end
@@ -46,16 +47,14 @@ class PlayersController < ApplicationController
     @player.account = current_user.account_name
 
     @player.save
+    set_other_player_as_offline if @player.online?
 
     respond_with current_user
   end
 
   def mark_online
-    current_user  .players.reject { |p|
-      p.id == @player.id
-    }.each &:offline!
-
     @player.online!
+    set_other_player_as_offline
 
     respond_with current_user
   end
@@ -93,5 +92,9 @@ class PlayersController < ApplicationController
 
   def authorize_update
     authorize! :update, @player
+  end
+
+  def set_other_player_as_offline
+    Player.mark_offline(current_user.players.where('id <> ?', @player.id))
   end
 end

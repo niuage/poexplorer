@@ -29,7 +29,7 @@ class ThreadIndexer
 
     # exit if thread did not change
     if !forum_thread.thread_changed?
-      return puts("forum thread didnt change") && forum_thread.save
+      return puts("forum thread didnt change (#{thread_id})") && forum_thread.save
     end
 
     # find items to update
@@ -50,6 +50,11 @@ class ThreadIndexer
     # Save the thread
     # Sets the new item list
     forum_thread.save
+  rescue OpenURI::HTTPError => e
+    Bugsnag.notify(e, { thread_id: thread_id })
+  rescue StandardError => e
+    Bugsnag.notify(e, { thread_id: thread_id })
+    raise e
   end
 
   private

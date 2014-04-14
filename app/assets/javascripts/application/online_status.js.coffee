@@ -41,7 +41,11 @@ class OnlineStatus
 
   setOnlineStatus: ($account, icon, player) ->
     klass = if player.online then "online" else "offline"
+
     icon.addClass(klass)
+    if player.online && !player.marked_as_online
+      icon.removeClass("fa-circle").addClass("fa-check-circle")
+
     $onlineStatus = $account.parent()
 
     if player.online && player.character

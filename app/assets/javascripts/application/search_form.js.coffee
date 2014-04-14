@@ -21,11 +21,8 @@ class SearchForm
 
     @$form.find("select:not(.no-select2)").select2()
 
-    @$form.on "cocoon:after-insert", (event, elt) =>
-      elt.find("select")
-      .on "change", ->
-        self.highlight($(@))
-      .select2
+    @$form.on "cocoon:after-insert", (event, $elt) =>
+      $elt.find("select").select2
         matcher: $.proxy(@typeMatcher, @)
 
     @socketPreview()
