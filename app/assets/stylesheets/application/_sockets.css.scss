@@ -1,5 +1,7 @@
 .item-icon {
   position: relative;
+
+  &:hover .sockets { display: none; }
 }
 
 .sockets {
@@ -63,55 +65,3 @@
   .socket-link-3 { @extend .vertical-link;   top: 75px;  left: 16px; }
   .socket-link-4 { @extend .horizontal-link; top: 110px; left: 28px; }
 }
-
-////////////////////////////////////////////////////
-////////////////// SMALL LAYOUT ////////////////////
-////////////////////////////////////////////////////
-
-.layout_s {
-  .socket {
-    height: 23px;
-    width: 23px;
-
-    &.socket-D { background: image-url("sockets/small/dex.png") 0 0 no-repeat; }
-    &.socket-I { background: image-url("sockets/small/int.png") 0 0 no-repeat; }
-    &.socket-S { background: image-url("sockets/small/str.png") 0 0 no-repeat; }
-    &.socket-G { background: image-url("sockets/small/gen.png") 0 0 no-repeat; }
-  }
-
-  .w-2 .sockets { width: 47px; }
-  .w-1 .sockets { width: 23px; }
-
-  .horizontal-link {
-    background: image-url("sockets/small/h-link.png") 0 0 no-repeat;
-    width: 19px;
-    height: 8px;
-  }
-  .vertical-link {
-    background: image-url("sockets/small/v-link.png") 0 0 no-repeat;
-    height: 19px;
-    width: 8px;
-  }
-
-  .w-1 {
-    .socket-link { @extend .vertical-link; }
-    .socket-link-0 { top: 14px;  left: 8px; }
-    .socket-link-1 { top: 37px;  left: 8px; }
-  }
-
-  .w-2 {
-    .socket-link-0 { @extend .horizontal-link; top: 8px;  left: 14px; }
-    .socket-link-1 { @extend .vertical-link;   top: 14px;  left: 31px; }
-    .socket-link-2 { @extend .horizontal-link; top: 31px;  left: 14px; }
-    .socket-link-3 { @extend .vertical-link;   top: 37px;  left: 8px; }
-    .socket-link-4 { @extend .horizontal-link; top: 55px; left: 14px; }
-  }
-}
-
-//.sockets {
-//  width: 94px;
-
-//  @media (max-width: 1212px) {
-//    display: none;
-//  }
-//}

@@ -1,14 +1,10 @@
-<%
-item_size = result.item_span_size
-%>
-
 <div class="result item bb bb-dark row-fluid" data-item-type="<%= result.item_type.titleize %>" data-id="<%= result.id %>">
-  <div class="span<%= item_size %>">
+  <div class="span2">
     <%= render "items/item/icon_with_sockets", item: result %>
     <span class="faded small"><%= result.indexed_at %></span>
   </div>
 
-  <div class="span<%= 12 - item_size %>">
+  <div class="span10">
 
     <div class="row-fluid">
       <div class="span12">

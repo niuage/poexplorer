@@ -73,76 +73,42 @@ class ItemDecorator < ApplicationDecorator
     end
   end
 
-    # def signed_out_cart_button(size = nil)
-    #   h.link_to h.shopping_cart_path,
-    #     class: "btn #{button_size_class} ttip",
-    #     data: { container: "body" },
-    #     title: "Sign up to use the shopping cart" do
-    #       h.content_tag(:i, "", class: "fa-shopping-cart")
-    #   end
-    # end
-
-    def pm_button
-      h.link_to "#", class: "send-pm btn #{button_size_class}" do
-        'PM <i class="fa fa-comments-o"></i>'.html_safe
-      end
+  def pm_button
+    h.link_to "#", class: "send-pm btn #{button_size_class}" do
+      'PM <i class="fa fa-comments-o"></i>'.html_safe
     end
+  end
 
-    def price_button
-      return "".html_safe unless (price = source.price.try(:to_hash)).present?
-      orb = price.keys.first
+  def price_button
+    return "".html_safe unless (price = source.price.try(:to_hash)).present?
+    orb = price.keys.first
 
-      h.link_to "#",
-        class: "btn #{button_size_class} ttip price",
-        data: { container: "body" },
-        title: "Item b/o" do
-          "#{price[orb]} x <span class='orb #{orb}'>#{orb}</span>".html_safe
+    h.link_to "#",
+    class: "btn #{button_size_class} ttip price",
+      data: { container: "body" },
+      title: "Item b/o" do
+        "#{price[orb]} x <span class='orb #{orb}'>#{orb}</span>".html_safe
       end
-    end
+  end
 
-    def verify_button
-      h.link_to h.verify_item_path(source.id),
-        class: "btn btn-warning #{button_size_class} ttip verify",
-          title: "Verify this item",
-          data: { placement: "top", container: "body" } do
+  def verify_button
+    h.link_to h.verify_item_path(source.id),
+    class: "btn btn-warning #{button_size_class} ttip verify",
+      title: "Verify this item",
+      data: { placement: "top", container: "body" } do
         h.concat h.content_tag(:i, "", class: "fa fa-check")
       end
-    end
+  end
 
-    # def cart_button(size = nil)
-    #   return signed_out_cart_button(size) if !h.user_signed_in?
-    #   h.link_to "#",
-    #     class: "btn btn-cart #{button_size_class} disabled",
-    #     data: {
-    #       item_id: source.id,
-    #       add: h.add_to_cart_item_path(source.id),
-    #       add_title: "Add to cart",
-    #       remove: h.remove_from_cart_item_path(source.id),
-    #       remove_title: "Remove from cart",
-    #       placement: "top",
-    #       container: "body"
-    #     } do
-    #     h.content_tag(:i, "", class: "fa-shopping-cart")
-    #   end
-    # end
+  def skill?
+    source.item_type == "Skill"
+  end
 
-    def disqus_id
-      "item_#{source.id}"
-    end
+  def size
+    @_size ||= context.fetch(:size, :small)
+  end
 
-    def skill?
-      source.item_type == "Skill"
-    end
-
-    def size
-      @_size ||= context.fetch(:size, :small)
-    end
-
-    def item_span_size
-      { large: 2, small: 1 }[size]
-    end
-
-    def link_to_item_view
+  def link_to_item_view
     h.link_to h.item_path(source.id), class: "", target: "_blank" do
       "<i class='fa fa-adjust'></i> Find similar items".html_safe
     end

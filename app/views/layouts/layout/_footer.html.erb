@@ -1,7 +1,7 @@
 <div id="footer">
   <div class="wrapper-l">
 
-    <div class="row-fluid">
+    <div class="row-fluid bordered-section">
       <div class="span2 text">
         <h4>PoExplorer&#8482; 2014</h4>
         <p class="small">PoExplorer is a Path of Exile shop indexer.</p>
@@ -55,6 +55,15 @@
         <%= render "layouts/common/donate" %>
         <p class="small">Every donation will be used to maintain the site. <s>And beers</s>.<br/>Any amount helps! <i class="fa fa-gift" style="color: #da4f49;"></i></p>
       </div>
+    </div>
+
+    <div class="row-fluid pagination-centered">
+      <p class="small">
+        Powered by <%= link_to "http://cloudseeds.de", target: "_blank" do %>
+          CloudSeeds.de&nbsp;&nbsp;
+          <%= image_tag "cloudseeds.png" %>
+        <% end %>
+      </p>
     </div>
 
 
