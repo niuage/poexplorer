@@ -16,7 +16,7 @@ namespace :crawler do
   task :permanent => :environment do
 
     while true do
-      puts "ccrawl infinite new cycle"
+      puts "New cycle (permanent leagues)"
       break if League.permanent.count == 0
 
       League.permanent.pluck(:id).each do |league_id|
@@ -29,7 +29,7 @@ namespace :crawler do
     while true do
       leagues = League.seasonal.visible
 
-      puts "temp league crawl new cycle"
+      puts "New cycle (seasonal leagues)"
       break if leagues.count == 0
 
       League.seasonal.visible.select("id, name").each do |league|
