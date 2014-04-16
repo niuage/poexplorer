@@ -53,7 +53,10 @@
   .props li {
     font-size: 0.825em;
 
-    &[data-mod] span { display: none; }
+    &[data-mod] span {
+      display: none;
+      &.tag { display: block }
+    }
   }
 
   .props li[data-sort],

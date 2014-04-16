@@ -30,7 +30,7 @@ namespace :players do
       .updated_after(starting_time)
       .online
       .find_in_batches do |players|
-        puts "reupdating ", players.length, " items"
+        puts "reupdating ", players.length, " players"
         TireIndex.store(league_id, players)
       end
   end

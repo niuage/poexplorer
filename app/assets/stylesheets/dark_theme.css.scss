@@ -9,6 +9,9 @@ $dex-color: #51A531;
 .magic                { color: #6BB2FF }
 .rare, .lightning     { color: #DDBF22 }
 .normal               { color: #fff }
+.physical             { color: #C48C59 }
+.spell                { color: #B39CE4 }
+.speed                { color: #63AC63 }
 
 body {
   background: #484852 image-url("dark-bg.png") center 0 repeat-y;
@@ -36,10 +39,6 @@ a {
 
 hr {
   border-top: 1px solid #626568;
-}
-
-.item:hover h2 a {
-  background: #303030;
 }
 
 .tag {
