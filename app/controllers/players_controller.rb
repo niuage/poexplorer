@@ -22,8 +22,9 @@ class PlayersController < ApplicationController
   end
 
   def show
-    @player = new_player if !@player
-
+    if !@player
+      return redirect_to root_url, notice: "This player couldn't be found on PoExplorer."
+    end
     respond_with @player
   end
 
