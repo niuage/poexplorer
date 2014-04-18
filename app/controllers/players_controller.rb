@@ -13,6 +13,7 @@ class PlayersController < ApplicationController
 
     respond_with do |format|
       format.json { render json: @players }
+      format.html { redirect_to root_path }
     end
   end
 
