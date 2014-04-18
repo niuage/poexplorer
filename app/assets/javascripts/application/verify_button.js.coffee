@@ -35,7 +35,7 @@ class VerifyButton
   success: (item) ->
     if item["verified"] then @itemVerified(item) else @itemSold()
 
-    time = @$item.find("time")
+    time = @$item.find(".span2 time")
     time.timeago("update", item["indexed_at"])
 
   error: (url) ->
