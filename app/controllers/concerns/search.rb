@@ -36,26 +36,15 @@ module Concerns::Search
 
     attrs = {}
 
-    attrs.merge!({
-      rarity: rarity.empty? ? nil : Rarity.find_by(name: rarity.capitalize)
-    }) unless rarity.nil?
+    attrs.merge!({ rarity: find_rarity_by_name(rarity) }) unless rarity.nil?
+    attrs.merge!({ league: find_league_by_name(league) }) unless league.nil?
 
     attrs.merge!({
-      league: league.empty? ? League.find(current_league_id) : League.find_by(name: league)
-    }) unless league.nil?
+      linked_socket_count: find_linked_sockets_count(linked_sockets),
+      max_linked_socket_count: find_linked_sockets_count(linked_sockets)
+    }) unless linked_sockets.nil?
 
-    unless linked_sockets.nil?
-      linked_sockets_count = linked_sockets.empty? ? nil : linked_sockets.to_i
-      attrs.merge!({
-        linked_socket_count: linked_sockets_count,
-        max_linked_socket_count: linked_sockets_count
-      })
-    end
-
-    attrs.merge!({
-      base_name: name.empty? ? nil : name
-      }) if !name.nil? && (name.empty? || Item::BASE_NAMES.include?(name))
-
+    attrs.merge!({ base_name: name.empty? ? nil : name }) if valid_base_name?(name)
     attrs.merge!({ item_type: type.empty? ? nil : type }) unless type.nil?
 
     search.assign_attributes attrs
@@ -64,6 +53,26 @@ module Concerns::Search
   def find_search
     @search = typed_search.find_by(uid: params[:id])
     return redirect_to(root_url, notice: "This search could not be found, sorry.") unless @search
+  end
+
+  def find_league_by_name(league)
+    if league.empty?
+      League.find(current_league_id)
+    else
+      League.visible.where(name: league).first
+    end
+  end
+
+  def find_rarity_by_name(rarity)
+    rarity.empty? ? nil : Rarity.find_by(name: rarity.capitalize)
+  end
+
+  def find_linked_sockets_count(linked_sockets)
+    linked_sockets.empty? ? nil : linked_sockets.to_i
+  end
+
+  def valid_base_name?(name)
+    !name.nil? && (name.empty? || Item::BASE_NAMES.include?(name))
   end
 
   def search_params
