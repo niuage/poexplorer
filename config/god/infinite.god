@@ -1,8 +1,8 @@
-RAILS_ROOT = "/Users/robinboutros/localhost/poexplorer"
-RAILS_ENV = "development"
+RAILS_ROOT = Dir.pwd
+RAILS_ENV = ENV['RAILS_ENV'] || 'development'
 
 def base(w)
-  w.dir = "#{RAILS_ROOT}"
+  w.dir = RAILS_ROOT
 
   w.pid_file = File.join(RAILS_ROOT, "log/#{w.name}.pid")
 
