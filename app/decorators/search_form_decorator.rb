@@ -97,7 +97,7 @@ class SearchFormDecorator < ApplicationDecorator
           return nil unless League.visible?(name)
           name.capitalize + " league"
         }),
-      selected: form.object.league_id || current_league_id,
+      selected: form.object.league_id || h.current_league_id,
       input_html: { class: "span12 search_league" }
     }, options)
   end

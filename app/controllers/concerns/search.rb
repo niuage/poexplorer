@@ -41,7 +41,7 @@ module Concerns::Search
     }) unless rarity.nil?
 
     attrs.merge!({
-      league: league.empty? ? current_user.try(:league) : League.find_by(name: league)
+      league: league.empty? ? League.find(current_league_id) : League.find_by(name: league)
     }) unless league.nil?
 
     unless linked_sockets.nil?

@@ -17,6 +17,8 @@ class Search < ActiveRecord::Base
     :minimum_mod_match, :same_item_type, :has_price, :corrupted, :online,
     :order_by_mod_id
 
+  belongs_to :league
+
   delegate :count, to: :stats, prefix: true
 
   has_many :stats, class_name: "SearchStat"
