@@ -14,6 +14,7 @@ namespace :crawler do
 
   desc "Scrawl infintely"
   task :permanent => :environment do
+    File.open(ENV['PIDFILE'], 'w') { |f| f << Process.pid } if ENV['PIDFILE']
 
     while true do
       puts "New cycle (permanent leagues)"
@@ -26,6 +27,7 @@ namespace :crawler do
   end
 
   task :seasonal => :environment do
+    File.open(ENV['PIDFILE'], 'w') { |f| f << Process.pid } if ENV['PIDFILE']
     while true do
       leagues = League.seasonal.visible
 
