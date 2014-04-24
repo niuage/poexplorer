@@ -1,7 +1,7 @@
 class SearchesController < ApplicationController
-  include Concerns::Search # I shouldnt create a SearchService instead (use virtus too)
+  include Concerns::Search # I should create a SearchService instead (use virtus too)
 
-  respond_to :html
+  respond_to :html, :json
 
   before_filter :view_layout
   before_filter :find_search, only: [:show, :update, :destroy]
