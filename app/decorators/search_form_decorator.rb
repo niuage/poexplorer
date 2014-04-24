@@ -212,7 +212,7 @@ class SearchFormDecorator < ApplicationDecorator
 
   def has_price(options = {})
     input :has_price, input_options({
-      label: "Has a buyout price",
+      label: "Has a buyout price <i class='fa fa-usd'></i>".html_safe,
       input_html: { class: "" }
     }, options)
   end
