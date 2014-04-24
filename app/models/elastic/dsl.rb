@@ -15,6 +15,7 @@ module Elastic
       def must_be_gte(attr)
         return unless (attr_value = search.send(attr)).present?
         attr_value = yield attr_value if block_given?
+        attr_value = attr_value.to_i
         if attr_value <= 0
           context.must { term attr, 0 }
         else
