@@ -26,7 +26,17 @@ class SearchesController < ApplicationController
     @search.save
     search if !@search.valid?
 
-    respond_with @search, location: location
+    respond_with @search, location: location do |format|
+      format.html
+      format.json do
+        search
+
+        render json: {
+          results: @tire_search.results,
+          facets: @results.facets
+        }
+      end
+    end
   end
 
   def update

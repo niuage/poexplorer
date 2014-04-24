@@ -23,6 +23,7 @@ gem "protected_attributes"
 gem 'httparty'
 gem 'redcarpet',            git: "https://github.com/vmg/redcarpet"
 gem 'make_voteable'
+gem 'ruby-fann'
 
 gem 'omniauth'
 gem "omniauth-facebook"
