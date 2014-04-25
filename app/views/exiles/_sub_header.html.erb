@@ -1,0 +1,17 @@
+<% stylesheet "exiles" %>
+<%# javascript "builds" %>
+
+<% content_for :h1 do %>
+  <%= link_to "Exiles", exiles_path %>
+<% end %>
+
+<% content_for :main_menu do %>
+  <li class="tab-search">
+    <%= link_to exiles_path do %>
+      <i class="fa fa-align-justify"></i> Browse
+    <% end %>
+  </li>
+  <li class="tab-add-exile">
+    <%= link_to "<i class='fa fa-plus'></i> Submit new exile".html_safe, new_exile_path %>
+  </li>
+<% end %>

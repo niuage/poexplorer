@@ -4,20 +4,16 @@
   <% stylesheet "authentication" %>
   <%= render "layouts/head" %>
 </head>
-<body class="authentication <%= body_classes %>">
-
-  <%= render "layouts/layout/header/authentication_header" %>
+<body class="exiles <%= body_classes %>">
+  <%= render "layouts/layout/header/header" %>
+  <%= render "sub_header" %>
   <%= render "layouts/flash", flash: flash %>
+
+  <%= yield :cover %>
 
   <div id="content" class="wrapper-l">
     <div class="row-fluid">
-
-      <div class="span6 offset3">
-        <div class="signin-box">
-        <%= yield %>
-        </div>
-      </div>
-
+      <%= yield %>
     </div>
 
   </div>

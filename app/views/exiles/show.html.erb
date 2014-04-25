@@ -1,4 +1,7 @@
-<div id="cover" style="background: ">
+<% content_for :cover do %>
+<%= render "sub_header" %>
+
+<div id="cover" style="background-image: url(http://i.imgur.com/FAkTFdy.png)">
 
   <h1><%= @exile.name %></h1>
   <% if @exile.tagline.present? %>
@@ -6,3 +9,4 @@
   <% end %>
 
 </div>
+<% end %>
