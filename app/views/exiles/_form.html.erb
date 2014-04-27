@@ -1,10 +1,11 @@
 <div id="main-content">
 
-  <div class="box span6 offset3">
-    <div class="box-content">
-      <%= simple_form_for @exile do |f| %>
+  <%= simple_form_for @exile do |f| %>
+  <div class="row-fluid">
+    <div class="exile span6">
+      <div class="box-content">
+        <h2>Basic info</h2>
 
-      <div class="section">
         <%= f.input :name, input_html: { class: "span12" } %>
 
         <%= f.input :tagline, input_html: { class: "span12" } %>
@@ -16,18 +17,55 @@
         %>
 
         <%= f.input :klass_id,
-              label: "Class",
-              as: :select,
-              selected: f.object.klass_id,
-              collection: Klass.pluck(:id, :name).map { |k| [k[1], k[0]] } %>
+          label: false,
+          as: :select,
+          selected: f.object.klass_id,
+          collection: Klass.pluck(:id, :name).map { |k| [k[1], k[0]] },
+          input_html: { class: "span12" },
+          wrapper_html: { class: "clearfix" } %>
 
-        <%= f.input :description, input_html: { class: "span12" } %>
+        <%= f.input :description, input_html: { class: "span12", style: "height: 128px;" } %>
 
       </div>
+    </div>
 
-      <%= f.button :submit, class: "btn-success" %>
-      <% end %>
+    <div class="exile span6">
+      <div class="box-content clearfix">
+        <h2>Gear</h2>
+        <div class="bordered-section">
+          <%= f.association :uniques %>
+        </div>
+
+        <% main_weapons = G_BASE_NAMES["weapon"].values.flatten %>
+        <%= gear_input(f, :helmet, G_BASE_NAMES["armour"]["helmet"]) %>
+        <%= gear_input(f, :main_weapon, main_weapons) %>
+        <%= gear_input(f, :offhand_weapon, main_weapons) %>
+        <%= gear_input(f, :body_armour, G_BASE_NAMES["armour"]["body_armour"]) %>
+        <%= gear_input(f, :belt, G_BASE_NAMES["misc"]["belt"]) %>
+        <%= gear_input(f, :gloves, G_BASE_NAMES["armour"]["glove"]) %>
+        <%= gear_input(f, :boots, G_BASE_NAMES["armour"]["boot"]) %>
+      </div>
     </div>
   </div>
 
+  <div class="row-fluid">
+  <div class="exile span12">
+    <div class="box-content">
+      <%= f.button :submit, class: "btn-success" %>
+    </div>
+  </div>
+  </div>
+
+  <% end %>
+
 </div>
+
+<% content_for :dom_ready do %>
+  $("select").select2();
+<% end %>
+
+<% content_for :head do %>
+  <style type="text/css">
+    .input.select { padding: 10px 0; }
+  </style>
+<% end %>

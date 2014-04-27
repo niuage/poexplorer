@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140425124126) do
+ActiveRecord::Schema.define(version: 20140427205311) do
 
   create_table "accounts", force: true do |t|
     t.integer  "user_id"
@@ -114,15 +114,24 @@ ActiveRecord::Schema.define(version: 20140425124126) do
     t.integer  "views",          default: 0
   end
 
+  create_table "exile_uniques", force: true do |t|
+    t.integer  "unique_id"
+    t.integer  "exile_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "exiles", force: true do |t|
     t.string   "name"
     t.text     "tagline"
     t.text     "description"
+    t.integer  "views"
     t.integer  "user_id"
     t.integer  "klass_id"
     t.string   "video_uid"
     t.string   "album_uid"
     t.text     "cached_photos"
+    t.text     "items"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

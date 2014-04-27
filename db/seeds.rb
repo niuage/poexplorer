@@ -88,6 +88,54 @@ type_id = {
   misc: ItemType.find_by(name: "Misc").id
 }
 
+if Rails.env.development?
+  user = User.first
+
+  exiles = [
+    {
+      name: "Exile 1",
+      tagline: "I got mangos, in god damn January.",
+      description: "Ain't that right Johnny?",
+      klass_id: rand(7),
+      album_uid: "http://imgur.com/a/FzHdl"
+    },
+    {
+      name: "Exile 2",
+      tagline: "I got mangos, in god damn January.",
+      description: "Ain't that right Johnny?",
+      klass_id: rand(7),
+      album_uid: "http://imgur.com/a/XWyKz"
+    },
+    {
+      name: "Exile 3",
+      tagline: "I got mangos, in god damn January.",
+      description: "Ain't that right Johnny?",
+      klass_id: rand(7),
+      album_uid: "http://imgur.com/a/kLjHd"
+    },
+    {
+      name: "Exile 4",
+      tagline: "I got mangos, in god damn January.",
+      description: "Ain't that right Johnny?",
+      klass_id: rand(7),
+      album_uid: "http://imgur.com/a/zUHSD"
+    },
+    {
+      name: "Exile 5",
+      tagline: "I got mangos, in god damn January.",
+      description: "Ain't that right Johnny?",
+      klass_id: rand(7),
+      album_uid: "http://imgur.com/a/mGWRY"
+    }
+  ]
+
+  exiles.each do |exile|
+    Exile.create(exile) do |ex|
+      ex.user = user
+    end
+  end
+end
+
 G_MODIFIER_TYPES.each do |mod_name, types|
   mod = create_mod(mod_name)
   types.each do |type|

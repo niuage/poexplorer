@@ -2,9 +2,17 @@ class Exile < ActiveRecord::Base
   belongs_to :user
   belongs_to :klass
 
-  store :cached_photos, accessors: [:photos, :cover], coder: JSON
+  has_many :exile_uniques
+  has_many :uniques, through: :exile_uniques
 
-  attr_accessible :name, :tagline, :description, :album_uid, :video_uid, :klass_id
+  store :cached_photos, accessors: [:photos, :cover], coder: JSON
+  store :items, accessors: [
+    :helmet, :main_weapon, :offhand_weapon, :body_armour, :gloves, :belt, :boots
+  ], coder: JSON
+
+  attr_accessible :name, :tagline, :description, :album_uid, :video_uid,
+    :klass_id, :unique_ids,
+    :helmet, :main_weapon, :offhand_weapon, :body_armour, :gloves, :belt, :boots
 
   before_validation :set_album_uid, if: :album_uid_changed?
 
@@ -21,18 +29,34 @@ class Exile < ActiveRecord::Base
   validates :name, presence: true
   validates :klass, presence: true
 
+  delegate :login, to: :user, prefix: true
+  delegate :name, to: :klass, prefix: true
+
+  make_voteable
+
   def to_params
     "#{id}-#{name.parameterize}"
   end
 
-  def cover(size = "")
+  def cover(size = nil)
     return cached_photos["cover"] if size.blank?
-    parts = cached_photos["cover"].split(".")
-    parts[-2] << size.to_s
-    parts.join(".")
+    resized_photo(cached_photos["cover"], size)
+  end
+
+  def photos(size = nil)
+    return cached_photos["photos"] if size.blank?
+    cached_photos["photos"].map do |photo|
+      resized_photo(photo, size)
+    end
   end
 
   private
+
+  def resized_photo(photo, size)
+    parts = photo.split(".")
+    parts[-2] << size.to_s
+    parts.join(".")
+  end
 
   def set_album_uid
     return unless album_uid.present?

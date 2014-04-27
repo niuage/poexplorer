@@ -19,10 +19,72 @@
   </div>
 
 </div>
+
+<div class="white bordered-section">
+  <div class="wrapper-l">
+    <div class="row-fluid">
+      <div class="span12">
+        effewes
+      </div>
+    </div>
+  </div>
+</div>
+
 <% end %>
 
 <% if @exile.description.present? %>
-  <%= to_html @exile.description %>
+<div class="row-fluid bordered-section">
+  <div class="span2">
+    <h2>Description</h2>
+  </div>
+  <div class="span10">
+    <%= to_html @exile.description %>
+  </div>
+</div>
 <% end %>
 
-<%= @exile.cached_photos %>
+<% if @exile.photos.any? %>
+  <div class="bordered-section clearfix">
+    <div class="span2">
+      <h2>Screenshots</h2>
+    </div>
+    <div class="span10">
+      <% @exile.photos(:b).each_slice(4) do |photos| %>
+        <div class="row-fluid">
+          <% photos.each do |photo| %>
+            <%= link_to "#", class: "left thumbnail" do %>
+              <div class="box-content"><%= image_tag photo %></div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+
+<% if @exile.uniques.any? %>
+<div class="row-fluid">
+  <div class="span2">
+    <h2>Gear</h2>
+  </div>
+  <div class="span10">
+    <% @exile.uniques.each_slice(4) do |uniques| %>
+      <div class="row-fluid">
+        <% uniques.each do |unique| %>
+          <%= link_to "http://pathofexile.gamepedia.com/#{unique.name}",
+                target: "_blank",
+                class: "span3 thumbnail exile" do %>
+              <div class="box-content">
+                <h5><%= unique.name %></h5>
+                <p class="text faded"><%= unique.base_name %></p>
+                <%= image_tag unique.image_url %>
+              </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% end %>

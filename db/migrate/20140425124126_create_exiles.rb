@@ -4,6 +4,7 @@ class CreateExiles < ActiveRecord::Migration
       t.string      :name
       t.text        :tagline
       t.text        :description
+      t.integer     :views
 
       t.references  :user
       t.references  :klass
@@ -12,6 +13,7 @@ class CreateExiles < ActiveRecord::Migration
       t.string      :album_uid
 
       t.text        :cached_photos
+      t.text        :items
 
       t.timestamps
     end

@@ -1,3 +1,5 @@
+require 'open-uri'
+
 namespace :datafix do
 
   # FAIRE GAFFE A PAS CREER PLUSIEURS FOIS CES CUSTOMS MODS
