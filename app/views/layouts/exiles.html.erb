@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <% stylesheet "authentication" %>
+  <% stylesheet "exiles" %>
   <%= render "layouts/head" %>
 </head>
 <body class="exiles <%= body_classes %>">
   <%= render "layouts/layout/header/header" %>
-  <%= render "sub_header" %>
+  <%= render "exiles/sub_header" unless params[:action] == "show" %>
+  <%= render "application/sub_header" %>
   <%= render "layouts/flash", flash: flash %>
 
   <%= yield :cover %>

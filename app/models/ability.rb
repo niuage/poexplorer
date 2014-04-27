@@ -45,6 +45,9 @@ private
     can :update, Account do |account|
       account.name == user.account_name
     end
+
+    can :create, Exile
+    can :update, Exile, user_id: user.id
   end
 
   def visitor_abilities user

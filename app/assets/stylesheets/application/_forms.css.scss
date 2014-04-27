@@ -65,6 +65,9 @@ form {
   .hint {
     color: #777;
     font-size: 12px;
+  }
+
+  &.horizontal .hint {
     padding-left: 10px;
   }
 
@@ -83,7 +86,8 @@ form {
   }
   .error {
     color: #B94A48;
-    padding-left: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
   }
 }
 

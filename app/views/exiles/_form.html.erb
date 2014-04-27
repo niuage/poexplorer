@@ -1,0 +1,33 @@
+<div id="main-content">
+
+  <div class="box span6 offset3">
+    <div class="box-content">
+      <%= simple_form_for @exile do |f| %>
+
+      <div class="section">
+        <%= f.input :name, input_html: { class: "span12" } %>
+
+        <%= f.input :tagline, input_html: { class: "span12" } %>
+
+        <%= f.input :album_uid,
+          label: "Imgur album",
+          input_html: { class: "span12" },
+          hint: "Enter the URL or the id of an Imgur album. Ex: http://imgur.com/a/19jWK"
+        %>
+
+        <%= f.input :klass_id,
+              label: "Class",
+              as: :select,
+              selected: f.object.klass_id,
+              collection: Klass.pluck(:id, :name).map { |k| [k[1], k[0]] } %>
+
+        <%= f.input :description, input_html: { class: "span12" } %>
+
+      </div>
+
+      <%= f.button :submit, class: "btn-success" %>
+      <% end %>
+    </div>
+  </div>
+
+</div>

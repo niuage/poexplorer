@@ -1,0 +1,13 @@
+<div class="span4 exile">
+  <%= link_to exile_path(exile) do %>
+    <div class="cover" style="background-image: url(<%= exile.cover(:l) %>)">
+
+      <h3><%= exile.name %></h3>
+    </div>
+  <% end %>
+
+  <% if exile.tagline.present? %>
+    <p><%= exile.tagline %></p>
+  <% end %>
+
+</div>

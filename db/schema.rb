@@ -119,8 +119,10 @@ ActiveRecord::Schema.define(version: 20140425124126) do
     t.text     "tagline"
     t.text     "description"
     t.integer  "user_id"
+    t.integer  "klass_id"
     t.string   "video_uid"
     t.string   "album_uid"
+    t.text     "cached_photos"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

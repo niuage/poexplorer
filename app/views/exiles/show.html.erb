@@ -1,12 +1,28 @@
 <% content_for :cover do %>
-<%= render "sub_header" %>
+<div id="cover">
 
-<div id="cover" style="background-image: url(http://i.imgur.com/FAkTFdy.png)">
+  <div id="faded-background" style="background-image: url(<%= @exile.cover %>)">
+    <div id="overlay"></div>
+  </div>
 
-  <h1><%= @exile.name %></h1>
-  <% if @exile.tagline.present? %>
-    <p><%= @exile.tagline %></p>
-  <% end %>
+  <div class="wrapper-l">
+    <div class="row-fluid">
+      <div class="span12">
+        <div id="intro">
+          <h1><%= @exile.name %></h1>
+          <% if @exile.tagline.present? %>
+          <p><%= @exile.tagline %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 <% end %>
+
+<% if @exile.description.present? %>
+  <%= to_html @exile.description %>
+<% end %>
+
+<%= @exile.cached_photos %>

@@ -18,6 +18,12 @@
         <% end %>
         <li><%= link_to "Profile", current_user %></li>
 
+        <li class="separator"></li>
+
+        <li class="tn-help sep">
+          <%= link_to "Help", faq_path %>
+        </li>
+
         <% if false %>
         <li><%= link_to "Shopping cart", shopping_cart_path %></li>
         <% end %>
@@ -29,22 +35,42 @@
     </li>
 
   <% else %>
-    <li class="tn-signin"><%= link_to "Sign in", new_user_registration_path %></li>
-
-    <li class="social facebook">
-      <%= link_to my_provider_path(:facebook) do %>
-        <i class="fa fa-facebook"></i>
+    <li class="dropdown">
+      <%= link_to "#",
+          class: "dropdown-toggle",
+          data: { toggle: "dropdown" } do %>
+          Sign in <i class="fa fa-caret-down"></i>
       <% end %>
-    </li>
-    <li class="social twitter">
-      <%= link_to my_provider_path(:twitter) do %>
-        <i class="fa fa-twitter"></i>
-      <% end %>
+      <ul class="dropdown-menu">
+        <li>
+          <%= link_to my_provider_path(:facebook) do %>
+            <i class="fa fa-facebook fa-fw"></i> Facebook
+          <% end %>
+        </li>
+        <li>
+          <%= link_to my_provider_path(:twitter) do %>
+            <i class="fa fa-twitter fa-fw"></i> Twitter
+          <% end %>
+        </li>
+        <li class="separator"></li>
+        <li><%= link_to "Sign in", new_user_session_path %></li>
+        <li><%= link_to "Sign up", new_user_registration_path %></li>
+      </ul>
     </li>
   <% end %>
 
-  <li class="tn-help sep">
-    <%= link_to "Help", faq_path %>
+  <li class="sep dropdown menu-right">
+    <%= link_to "#",
+          class: "dropdown-toggle",
+          data: { toggle: "dropdown" } do %>
+      Tools <i class="fa fa-caret-down"></i>
+    <% end %>
+    <ul class="dropdown-menu">
+      <li><%= link_to "PoExchange", "http://poexchange.info" %></li>
+      <li class="separator"></li>
+      <li><%= link_to "Path of PoE", "http://pathofpoe.com" %></li>
+      <li><%= link_to "RNG Hell", "http://www.rnghell.com" %></li>
+    </ul>
   </li>
 
 </ul>

@@ -24,6 +24,8 @@ gem 'httparty'
 gem 'redcarpet',            git: "https://github.com/vmg/redcarpet"
 gem 'make_voteable'
 
+gem 'simple_imgur', require: 'imgur'
+
 gem 'omniauth'
 gem "omniauth-facebook"
 gem "omniauth-twitter"

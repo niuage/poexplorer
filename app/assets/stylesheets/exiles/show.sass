@@ -1,6 +1,45 @@
+#cover, #cover .span12, #faded-background, #overlay
+  height: 360px
+
 #cover
+  .span12
+    position: relative
+
+  #intro
+    text-shadow: 0 0 6px #444
+    top: auto
+    bottom: 40px
+    left: 0
+    position: absolute
+
+  h1, p
+    color: white
+    font-size: 1.3em
+
+  h1
+    font-size: 2.5em
+    margin-bottom: 10px
+
+#faded-background
+  position: absolute
+  width: 100%
   background-size: cover
   background-repeat: no-repeat
-  background-position-y: 50%
+  background-position-y: 30%
+  background-position-x: 50%
 
-  height: 300px
+#overlay
+  display: inline-block
+  position: absolute
+  top: 0
+  left: 0
+  width: 102%
+  background-image: radial-gradient(ellipse at center, rgba(47, 47, 47, 0.1) 30%, #2F2F2F 100%)
+
+#splash
+  position: relative
+  display: inline-block
+
+  img
+    max-height: 250%
+    min-width: 450px
