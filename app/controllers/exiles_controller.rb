@@ -3,8 +3,8 @@ class ExilesController < ApplicationController
 
   respond_to :html
 
-  before_filter :authorize_create, only: [:new, :create]
-  before_filter :find_exile, only: [:show, :edit, :update, :destroy]
+  before_filter :authorize_create, only: [:new, :create, :vote_up]
+  before_filter :find_exile, only: [:show, :edit, :update, :destroy, :vote_up]
   before_filter :authorize_update, only: [:edit, :update, :destroy]
 
   def index
@@ -42,6 +42,30 @@ class ExilesController < ApplicationController
 
   def destroy
 
+  end
+
+  def vote_up
+    current_user.up_vote!(@exile)
+    respond_with @exile do |format|
+      format.json { render json: { count: @exile.votes } }
+    end
+  end
+
+  def load_votes
+    if user_signed_in? && (ids = params[:ids]) && ids.any?
+      votes = MakeVoteable::Voting.where(
+        voteable_type: "Exile", voteable_id: ids,
+        voter_id: current_user.id
+      ).map do |v|
+        { id: v.voteable_id, upvote: v.up_vote }
+      end
+    else
+      votes = {}
+    end
+
+    respond_with @exile do |format|
+      format.json { render json: { votes: votes } }
+    end
   end
 
   private

@@ -1,6 +1,9 @@
 <div class="span4 exile">
   <%= link_to exile_path(exile) do %>
-    <div class="cover" style="background-image: url(<%= exile.cover(:l) %>)">
+    <div class="cover">
+      <div class="faded-background" style="background-image: url(<%= exile.cover(:l) %>)">
+        <div class="overlay"></div>
+      </div>
       <h3>
         <span>10 <i class="fa fa-heart"></i></span>
         <%= exile.name %>

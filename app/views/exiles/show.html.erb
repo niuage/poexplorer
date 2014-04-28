@@ -1,9 +1,11 @@
 <% content_for :cover do %>
 <div id="cover">
 
-  <div id="faded-background" style="background-image: url(<%= @exile.cover %>)">
-    <div id="overlay"></div>
-  </div>
+  <% if @exile.cover.present? %>
+    <div class="faded-background" style="background-image: url(<%= @exile.cover %>)">
+      <div class="overlay"></div>
+    </div>
+  <% end %>
 
   <div class="wrapper-l">
     <div class="row-fluid">
@@ -37,34 +39,30 @@
   <div class="span2">
     <h2>Description</h2>
   </div>
-  <div class="span10">
+  <div class="span10 description">
     <%= to_html @exile.description %>
   </div>
 </div>
 <% end %>
 
-<% if @exile.photos.any? %>
+<% if @exile.any_photos? %>
   <div class="bordered-section clearfix">
     <div class="span2">
       <h2>Screenshots</h2>
     </div>
     <div class="span10">
-      <% @exile.photos(:b).each_slice(4) do |photos| %>
-        <div class="row-fluid">
-          <% photos.each do |photo| %>
-            <%= link_to "#", class: "left thumbnail" do %>
-              <div class="box-content"><%= image_tag photo %></div>
-            <% end %>
-          <% end %>
-        </div>
+      <% @exile.photos.each do |photo| %>
+        <%= link_to photo, class: "left thumbnail photo" do %>
+          <div class="box-content"><%= image_tag @exile.resized_photo(photo, :b) %></div>
+        <% end %>
       <% end %>
     </div>
   </div>
 <% end %>
 
 
-<% if @exile.uniques.any? %>
-<div class="row-fluid">
+<% if @exile.uniques.any? || @exile.gear.any? %>
+<div class="row-fluid section">
   <div class="span2">
     <h2>Gear</h2>
   </div>
@@ -83,8 +81,27 @@
           <% end %>
         <% end %>
       </div>
+    <% end if @exile.uniques.any? %>
+
+    <% if @exile.gear.any? %>
+      <div class="row-fluid">
+        <% @exile.gear.each do |gear| %>
+        <div class="span3 thumbnail exile">
+          <div class="box-content">
+            <h5><%= link_to gear[:name], "http://pathofexile.gamepedia.com/#{gear[:name]}" %></h5>
+            <p class="text faded"><%= gear[:type] %></p>
+          </div>
+        </div>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>
+<% end %>
 
+<% javascript "jquery.colorbox" %>
+<% stylesheet "colorbox" %>
+
+<% content_for :dom_ready do %>
+  $(".photo").colorbox({ rel: "g1" })
 <% end %>

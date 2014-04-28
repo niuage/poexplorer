@@ -1,6 +1,5 @@
 body
   background: #E9EAED
-  min-height: 2000px
 
 #main-content
   background: none
@@ -14,6 +13,10 @@ body
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.09)
   margin-bottom: 2.5%
   font-size: 0.875em
+
+  &:hover
+    .cover .overlay
+      display: block
 
   section
     padding: 10px 20px
@@ -29,12 +32,22 @@ body
     font-style: italic
 
   .cover
-    height: 160px
-    background-size: cover
-    background-position-y: 50%
-    background-position-x: 50%
     position: relative
-    border-radius: 3px 3px 0 0
+
+    .faded-background, .overlay
+      height: 160px
+      border-radius: 3px 3px 0 0
+
+    .overlay
+      display: none
+
+    .faded-background
+      height: 160px
+      background-size: cover
+      background-repeat: no-repeat
+      background-position-y: 50%
+      background-position-x: 50%
+      position: relative
 
     h3
       color: white

@@ -1,4 +1,6 @@
 class Exile < ActiveRecord::Base
+  GEAR_TYPES = [:helmet, :main_weapon, :offhand_weapon, :body_armour, :gloves, :belt, :boots]
+
   belongs_to :user
   belongs_to :klass
 
@@ -6,9 +8,7 @@ class Exile < ActiveRecord::Base
   has_many :uniques, through: :exile_uniques
 
   store :cached_photos, accessors: [:photos, :cover], coder: JSON
-  store :items, accessors: [
-    :helmet, :main_weapon, :offhand_weapon, :body_armour, :gloves, :belt, :boots
-  ], coder: JSON
+  store :items, accessors: [GEAR_TYPES], coder: JSON
 
   attr_accessible :name, :tagline, :description, :album_uid, :video_uid,
     :klass_id, :unique_ids,
@@ -28,6 +28,8 @@ class Exile < ActiveRecord::Base
   validates :album_uid, presence: true, imgur_album: true
   validates :name, presence: true
   validates :klass, presence: true
+  validates :tagline, length: { maximum: 128 }
+  validates :description, length: { maximum: 3000 }
 
   delegate :login, to: :user, prefix: true
   delegate :name, to: :klass, prefix: true
@@ -39,8 +41,9 @@ class Exile < ActiveRecord::Base
   end
 
   def cover(size = nil)
-    return cached_photos["cover"] if size.blank?
-    resized_photo(cached_photos["cover"], size)
+    c = cached_photos["cover"]
+    return c if size.blank? || c.blank?
+    resized_photo(c, size)
   end
 
   def photos(size = nil)
@@ -50,13 +53,25 @@ class Exile < ActiveRecord::Base
     end
   end
 
-  private
-
   def resized_photo(photo, size)
     parts = photo.split(".")
     parts[-2] << size.to_s
     parts.join(".")
   end
+
+  def gear
+    GEAR_TYPES.map do |type|
+      next unless (name = send(type)).present?
+      { type: type.to_s.titleize, name: name }
+    end.compact
+  end
+
+  def any_photos?
+    photos && photos.any?
+  end
+
+  private
+
 
   def set_album_uid
     return unless album_uid.present?

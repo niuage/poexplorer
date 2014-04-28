@@ -4,9 +4,7 @@
 }
 
 .c-searches, .c-misc_searches, .c-armour_searches, .c-weapon_searches, .c-similar_searches {
-
   .tn-search a { @extend .tn-selected; }
-
 }
 
 .c-weapon_searches, .c-searches {
@@ -19,6 +17,18 @@
 
 .c-items {
   .tn-search a { @extend .tn-selected; }
+}
+
+.c-exiles {
+  .tn-exiles a { @extend .tn-selected; }
+
+  &.a-index {
+    .tab-search a { @extend .tab-selected; }
+  }
+
+  &.a-new, &.a-create, &.a-edit, &.a-update {
+    .tab-add-exile a { @extend .tab-selected; }
+  }
 }
 
 .c-about {
