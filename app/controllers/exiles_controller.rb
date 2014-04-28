@@ -8,7 +8,7 @@ class ExilesController < ApplicationController
   before_filter :authorize_update, only: [:edit, :update, :destroy]
 
   def index
-    @exiles = Exile.page(params[:page]).per(20)
+    @exiles = Exile.page(params[:page]).per(20).order('up_votes DESC, created_at ASC')
   end
 
   def new

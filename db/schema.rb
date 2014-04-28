@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140427205311) do
+ActiveRecord::Schema.define(version: 20140428020340) do
 
   create_table "accounts", force: true do |t|
     t.integer  "user_id"
@@ -134,6 +134,8 @@ ActiveRecord::Schema.define(version: 20140427205311) do
     t.text     "items"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "up_votes",      default: 0, null: false
+    t.integer  "down_votes",    default: 0, null: false
   end
 
   create_table "favoriteds", force: true do |t|

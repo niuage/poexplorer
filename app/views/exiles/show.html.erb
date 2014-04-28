@@ -22,11 +22,34 @@
 
 </div>
 
-<div class="white bordered-section">
+<div id="stats" class="white bordered-section">
   <div class="wrapper-l">
     <div class="row-fluid">
-      <div class="span12">
-        effewes
+      <div class="span12" data-vote="base">
+
+        <%= link_to vote_up_exile_path(@exile),
+              data: { vote: "button" },
+              class: 'border-button stat' do %>
+          <span class="value">
+            <span data-vote-count><%= @exile.up_votes %></span>
+            <i class="fa fa-caret-up"></i>
+          </span>
+        <% end %>
+
+        <div class="stat">
+          <span class="value"><%= @exile.photos.try(:count).to_i %></span>
+          <span class="side-label">
+            <span>screenshots</span>
+          </span>
+        </div>
+
+        <div class="stat">
+          <span class="value"><%= @exile.uniques.count %></span>
+          <span class="side-label">
+            <span>Unique</span>
+            <span>items</span>
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -49,6 +72,9 @@
   <div class="bordered-section clearfix">
     <div class="span2">
       <h2>Screenshots</h2>
+      <p class="small">
+        <%= link_to "Imgur album", "http://imgur.com/a/#{@exile.album_uid}", target: "_blank" %>
+      </p>
     </div>
     <div class="span10">
       <% @exile.photos.each do |photo| %>
@@ -103,5 +129,6 @@
 <% stylesheet "colorbox" %>
 
 <% content_for :dom_ready do %>
+  App.Vote.setup();
   $(".photo").colorbox({ rel: "g1" })
 <% end %>

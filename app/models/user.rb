@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   delegate :name, to: :account, prefix: true, allow_nil: true
   delegate :players, to: :account, allow_nil: true
 
-  # make_voter
+  make_voter
 
   def forum_token
     read_attribute(:forum_token).presence ||

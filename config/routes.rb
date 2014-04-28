@@ -59,7 +59,11 @@ Poesearch::Application.routes.draw do
     resources :scrawls
   end
 
-  resources :exiles
+  resources :exiles do
+    member do
+      put :vote_up
+    end
+  end
 
   get "/feedback",  to: "feedback#index", as: :feedback
   get "/about/item_prices", to: "about#item_prices", as: :item_prices
