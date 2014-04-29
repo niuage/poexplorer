@@ -10,14 +10,14 @@ module ExileExtensions::Mapping
 
     tire do
       mapping do
-        indexes :id, key: "value", index: :not_analyzed
+        indexes :id, key: "value", index: :not_analyzed, included_in_all: false
 
         indexes :name, analyzer: 'snowball', boost: 50
         indexes :tagline, analyzer: 'snowball', boost: 20
         indexes :description, analyzer: 'snowball', boost: 10
 
-        indexes :klass_id, type: "string"
-        indexes :unique_ids, type: "string"
+        indexes :klass_id, type: "string", included_in_all: false
+        indexes :unique_ids, type: "string", included_in_all: false
       end
     end
 

@@ -20,10 +20,16 @@ module Elastic
 
             query do
               boolean do
+                must { string search.keywords } if search.keywords.present?
               end
             end
           }
         }
+
+        sort do
+
+          by :updated_at, 'desc'
+        end
 
         facet "klasses" do
           terms :klass_id, size: 5
@@ -34,7 +40,9 @@ module Elastic
         end
       end.to_hash
 
-      @_tire_search_query[:query][:filtered].merge!(find_all)
+      if @_tire_search_query[:query][:filtered][:query][:bool].empty?
+        @_tire_search_query[:query][:filtered].update(find_all)
+      end
 
       @_tire_search_query
     end
