@@ -1,4 +1,4 @@
-class Elastic::SimilarItemSearch < Elastic::BaseSearch
+class Elastic::SimilarItemSearch < Elastic::BaseItemSearch
   include Elastic::Concerns::Facets
   include Elastic::Concerns::Sort
 

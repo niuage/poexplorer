@@ -16,6 +16,18 @@ label {
   margin-top: 6px;
 }
 
+.select2-container .select2-choice span {
+  line-height: 32px;
+}
+
+.select2-container .select2-choice {
+  height: 32px;
+}
+
+form .input.string input {
+  height: 34px;
+}
+
 .sockets {
   position: relative;
 }
@@ -32,18 +44,6 @@ label {
 
 #build_summary {
   height: 80px;
-}
-
-.select2-container .select2-choice span {
-  line-height: 32px;
-}
-
-.select2-container .select2-choice {
-  height: 32px;
-}
-
-form .input.string input {
-  height: 34px;
 }
 
 .input.boolean {

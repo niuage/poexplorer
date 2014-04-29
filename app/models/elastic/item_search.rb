@@ -1,4 +1,4 @@
-class Elastic::ItemSearch < Elastic::BaseSearch
+class Elastic::ItemSearch < Elastic::BaseItemSearch
   include Elastic::Concerns::Sort
   include Elastic::Concerns::Facets
   include Elastic::Concerns::Item

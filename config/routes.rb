@@ -59,6 +59,9 @@ Poesearch::Application.routes.draw do
     resources :scrawls
   end
 
+
+  resources :exile_searches, path: "/exiles/search"
+
   resources :exiles do
     member do
       put :vote_up

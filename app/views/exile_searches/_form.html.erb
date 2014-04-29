@@ -1,0 +1,22 @@
+<div class="exile">
+  <div class="box-content">
+    <%= simple_form_for @search do |f| %>
+    <% form = ExileSearchFormDecorator.new(f) %>
+
+    <div class="row-fluid">
+      <%= form.keywords %>
+
+      <%= form.klasses %>
+      <%= form.uniques %>
+
+      <div class="span1">
+        <%= f.button :submit, "Filter", class: "btn-success span12" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :dom_ready do %>
+  $("select").select2()
+<% end %>

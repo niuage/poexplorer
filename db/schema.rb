@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140428020340) do
+ActiveRecord::Schema.define(version: 20140428235308) do
 
   create_table "accounts", force: true do |t|
     t.integer  "user_id"
@@ -112,6 +112,17 @@ ActiveRecord::Schema.define(version: 20140428020340) do
     t.integer  "up_votes",       default: 0,    null: false
     t.integer  "down_votes",     default: 0,    null: false
     t.integer  "views",          default: 0
+  end
+
+  create_table "exile_searches", force: true do |t|
+    t.string   "uid"
+    t.string   "keywords"
+    t.string   "unique_ids"
+    t.string   "klass_ids"
+    t.integer  "user_id"
+    t.integer  "user_uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "exile_uniques", force: true do |t|

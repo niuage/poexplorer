@@ -1,0 +1,32 @@
+<div class="span4 exile" data-vote="base">
+  <%= link_to exile_path(exile) do %>
+    <div class="cover">
+      <div class="faded-background" style="background-image: url(<%= exile.large_cover %>)">
+        <div class="overlay"></div>
+      </div>
+      <h3>
+        <span><b data-vote-count><%= exile.up_votes %></b> <i class="fa fa-caret-up"></i></span>
+        <%= exile.name %>
+      </h3>
+    </div>
+  <% end %>
+
+  <% if exile.tagline.present? %>
+    <section class="tagline">
+      <p><%= exile.tagline %></p>
+    </section>
+  <% end %>
+
+  <section>
+    <%= exile.klass_name %>
+  </section>
+
+  <footer>
+    <%= link_to vote_up_exile_path(exile),
+          data: { vote: "button" } do %>
+          <i class="fa fa-caret-up"></i> Upvote!
+    <% end %>
+    &middot;
+    by <%= exile.user_login %>
+  </footer>
+</div>

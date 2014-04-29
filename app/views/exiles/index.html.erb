@@ -2,6 +2,8 @@
 
 <div class="span10">
   <div id="main-content">
+    <%= render "exile_searches/form" %>
+
     <% @exiles.each_slice(3) do |slice| %>
     <div class="row-fluid">
       <%= render slice %>

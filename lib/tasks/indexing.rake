@@ -36,6 +36,19 @@ namespace :index do
     end
   end
 
+  task :index_exiles, [:prefix] => :environment do |t, args|
+    index_name = "poe_#{args[:prefix]}_exiles"
+    index = Tire.index(index_name)
+    index.create(mappings: Exile.tire.mapping_to_hash, settings: {})
+
+    a = Tire::Alias.new
+    a.index index_name
+    a.name Exile.tire.index_name
+    a.save
+
+    Exile.find_each &:update_index
+  end
+
   def mappings
     Item::TYPES.first.constantize.tire.mapping_to_hash.merge \
       Player.tire.mapping_to_hash

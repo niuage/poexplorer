@@ -1,0 +1,24 @@
+<%= render "exiles/sub_header" %>
+
+<%= render "exile_searches/facets" %>
+
+<div class="span10">
+  <div id="main-content">
+    <%= render "form" %>
+
+    <% @results.each_slice(3) do |slice| %>
+      <div class="row-fluid">
+        <% slice.each do |result| %>
+          <%= render "exiles/result", exile: result %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% pagination = paginate(@results) %>
+    <%= render "application/pagination", pagination: pagination %>
+  </div>
+</div>
+
+<% content_for :dom_ready do %>
+  App.Vote.setup()
+<% end %>

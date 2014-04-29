@@ -1,4 +1,6 @@
 class Exile < ActiveRecord::Base
+  include ExileExtensions::Mapping
+
   GEAR_TYPES = [:helmet, :main_weapon, :offhand_weapon, :body_armour, :gloves, :belt, :boots]
 
   belongs_to :user
@@ -45,6 +47,7 @@ class Exile < ActiveRecord::Base
     return c if size.blank? || c.blank?
     resized_photo(c, size)
   end
+  def large_cover; cover(:l) end
 
   def photos(size = nil)
     return cached_photos["photos"] if size.blank?
