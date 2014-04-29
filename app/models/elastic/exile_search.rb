@@ -24,6 +24,14 @@ module Elastic
             end
           }
         }
+
+        facet "klasses" do
+          terms :klass_id, size: 5
+        end
+
+        facet "uniques" do
+          terms :unique_ids, size: 5
+        end
       end.to_hash
 
       @_tire_search_query[:query][:filtered].merge!(find_all)

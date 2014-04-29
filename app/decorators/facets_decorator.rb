@@ -1,6 +1,4 @@
 class FacetsDecorator
-
-
   attr_accessor :params, :facets, :collection, :options
 
   delegate :each, to: :collection
