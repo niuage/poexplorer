@@ -19,12 +19,16 @@
   .tn-search a { @extend .tn-selected; }
 }
 
-.c-exiles {
+.c-exile_searches {
   .tn-exiles a { @extend .tn-selected; }
 
   &.a-index {
     .tab-search a { @extend .tab-selected; }
   }
+}
+
+.c-exiles {
+  .tn-exiles a { @extend .tn-selected; }
 
   &.a-new, &.a-create, &.a-edit, &.a-update {
     .tab-add-exile a { @extend .tab-selected; }

@@ -31,11 +31,11 @@ module Elastic
           by :updated_at, 'desc'
         end
 
-        facet "klasses" do
-          terms :klass_id, size: 5
+        facet "class" do
+          terms :klass_name, size: 5
         end
 
-        facet "uniques" do
+        facet "unique" do
           terms :unique_ids, size: 5
         end
       end.to_hash

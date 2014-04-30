@@ -17,6 +17,7 @@ module ExileExtensions::Mapping
         indexes :description, analyzer: 'snowball', boost: 10
 
         indexes :klass_id, type: "string", included_in_all: false
+        indexes :klass_name, type: "string", index: :not_analyzed
         indexes :unique_ids, type: "string", included_in_all: false
       end
     end

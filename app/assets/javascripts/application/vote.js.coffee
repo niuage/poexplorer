@@ -9,7 +9,7 @@ class Vote
       $button = $(e.currentTarget)
       return if $button.is(".voted")
 
-      url = $button.attr("href")
+      url = $button.data("url")
 
       $.ajax
         url: url

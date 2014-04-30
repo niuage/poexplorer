@@ -3,6 +3,8 @@ class ExilesController < ApplicationController
 
   respond_to :html
 
+  before_filter :view_layout, only: [:new, :show]
+
   before_filter :authorize_create, only: [:new, :create, :vote_up]
   before_filter :find_exile, only: [:show, :edit, :update, :destroy, :vote_up]
   before_filter :authorize_update, only: [:edit, :update, :destroy]

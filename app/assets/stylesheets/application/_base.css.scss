@@ -30,10 +30,13 @@ body {
   padding-bottom: $app-padding;
 }
 
-#right-sidebar, #left-sidebar, #main-content {
+#right-sidebar, #main-content {
   padding-top: $app-padding;
 }
+
 #left-sidebar {
+  padding-top: 28px;
+
   h1 {
     word-wrap: break-word;
     margin-bottom: 24px;

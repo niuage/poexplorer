@@ -3,7 +3,9 @@ class FacetDecorator
     rarity: "Rarity",
     linked_sockets: "Linked sockets",
     item_type: "Top 5 Types",
-    name: "Top 5 Names"
+    name: "Top 5 Names",
+    class: "Classes",
+    unique: "Uniques"
   }
 
   attr_accessor :facet_name, :facet_data, :params, :term, :no_facet_link

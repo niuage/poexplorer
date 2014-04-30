@@ -1,3 +1,24 @@
+<%
+  def update_facet(terms, klass)
+    klass_ids = terms.map { |t| t["term"].to_i }
+    klasses = klass.select("id, name").where(id: klass_ids).all
+
+    terms = terms.map do |term|
+      term.tap { |t| t["term"] = klasses.find { |k| k.id == term["term"].to_i }.name }
+    end
+  end
+
+  update_facet(@results.facets["unique"]["terms"], Unique)
+%>
+
 <div id="left-sidebar" class="span2">
-  <%= @results.facets.inspect %>
+  <% facets = FacetsDecorator.decorate_collection(
+      @results.facets,
+      params
+  ) %>
+
+  <% facets.each do |facet| %>
+    <%= render facet %>
+  <% end %>
+
 </div>

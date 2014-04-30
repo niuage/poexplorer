@@ -27,8 +27,11 @@
     <div class="row-fluid">
       <div class="span12" data-vote="base">
 
-        <%= link_to vote_up_exile_path(@exile),
-              data: { vote: "button" },
+        <%= content_tag :span,
+              data: {
+                url: user_signed_in? ? vote_up_exile_path(@exile) : new_user_registration_path,
+                vote: user_signed_in? ? "button" : "visitor"
+              },
               class: 'border-button stat' do %>
           <span class="value">
             <span data-vote-count><%= @exile.up_votes %></span>

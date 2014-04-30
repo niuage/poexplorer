@@ -4,6 +4,7 @@ class ExileSearchesController < ApplicationController
   respond_to :html
 
   before_filter :find_search, only: [:show, :edit, :update]
+  before_filter :view_layout, only: [:index, :new, :show, :create]
 
   def index
     search
@@ -41,12 +42,27 @@ class ExileSearchesController < ApplicationController
 
   def search
     build_search
-    # update_from_url_params(@search)
+    update_from_url_params(@search)
 
     @searchable = Elastic::ExileSearch.new(@search, params)
     @tire_search = @searchable.tire_search
     @results = ExileDecorator.decorate_collection(@tire_search.results)
   end
+
+  def update_from_url_params(search)
+      klass_name = params[:class]
+      unique_name = params[:unique]
+
+      klass_id = Klass.select("id").find_by(name: klass_name).try :id
+      unique_id = Unique.select("id").find_by(name: unique_name).try :id
+
+      attrs = {}
+
+      attrs.merge!({ klass_ids: [klass_id] }) unless klass_name.nil?
+      attrs.merge!({ unique_ids: [unique_id] }) unless unique_name.nil?
+
+      search.assign_attributes attrs
+    end
 
   def search_params
     params[:search] # ??????????

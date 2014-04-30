@@ -53,4 +53,8 @@ module ApplicationHelper
     end
   end
 
+  def current_page?(options)
+    !!options.each { |k, v| return false unless params[k.to_s] == v }
+  end
+
 end
