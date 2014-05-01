@@ -10,10 +10,23 @@
   <div class="wrapper-l">
     <div class="row-fluid">
       <div class="span12">
+        <div id="user-actions">
+          <%= link_to new_exile_path, class: "border-button" do %>
+            <i class="fa fa-plus"></i> new<% end %>
+          <% if can?(:update, @exile) %>
+            <%= link_to edit_exile_path(@exile), class: "border-button" do %>
+              <i class="fa fa-magic"></i> Edit
+            <% end %>
+          <% end %>
+        </div>
+
         <div id="intro">
-          <h1><%= @exile.name %></h1>
+          <h1>
+            <%= @exile.name %>
+          </h1>
+
           <% if @exile.tagline.present? %>
-          <p><%= @exile.tagline %></p>
+            <p><%= @exile.tagline %></p>
           <% end %>
         </div>
       </div>

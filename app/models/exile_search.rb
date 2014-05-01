@@ -21,4 +21,12 @@ class ExileSearch < ActiveRecord::Base
   def unique_ids
     read_attribute(:unique_ids)[:ids]
   end
+
+  def popular?
+    order == "popular"
+  end
+
+  def recent?
+    order.blank? || order == "recent"
+  end
 end

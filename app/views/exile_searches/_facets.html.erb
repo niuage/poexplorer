@@ -17,13 +17,13 @@
 
     <ul>
       <li>
-        <%= link_to params.merge(order: "popular") do %>
-          <span class="facet-title">Popular</span>
+        <%= link_to params.merge(order: "recent"), class: (:current if @search.recent?) do %>
+          <span class="facet-title">Recent</span>
         <% end %>
       </li>
       <li>
-        <%= link_to params.merge(order: "recent") do %>
-          <span class="facet-title">Recent</span>
+        <%= link_to params.merge(order: "popular"), class: (:current if @search.popular?) do %>
+          <span class="facet-title">Popular</span>
         <% end %>
       </li>
     </ul>

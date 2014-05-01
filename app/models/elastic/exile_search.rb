@@ -49,7 +49,9 @@ module Elastic
           by "created_at", order: "desc"
         end
 
-        exile.paginate(self)
+        exile.with_context(self) do
+          exile.paginate
+        end
 
       end.to_hash
 
