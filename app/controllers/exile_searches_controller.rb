@@ -50,19 +50,21 @@ class ExileSearchesController < ApplicationController
   end
 
   def update_from_url_params(search)
-      klass_name = params[:class]
-      unique_name = params[:unique]
+    klass_name = params[:class]
+    unique_name = params[:unique]
+    order = params[:order]
 
-      klass_id = Klass.select("id").find_by(name: klass_name).try :id
-      unique_id = Unique.select("id").find_by(name: unique_name).try :id
+    klass_id = Klass.select("id").find_by(name: klass_name).try :id
+    unique_id = Unique.select("id").find_by(name: unique_name).try :id
 
-      attrs = {}
+    attrs = {}
 
-      attrs.merge!({ klass_ids: [klass_id] }) unless klass_name.nil?
-      attrs.merge!({ unique_ids: [unique_id] }) unless unique_name.nil?
+    attrs.merge!({ klass_ids: [klass_id] }) unless klass_name.nil?
+    attrs.merge!({ unique_ids: [unique_id] }) unless unique_name.nil?
+    attrs.merge!({ order: order }) unless order.nil?
 
-      search.assign_attributes attrs
-    end
+    search.assign_attributes attrs
+  end
 
   def search_params
     params[:search] # ??????????

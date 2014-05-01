@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 20140428235308) do
     t.string   "klass_ids"
     t.integer  "user_id"
     t.integer  "user_uid"
+    t.string   "order"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

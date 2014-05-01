@@ -3,7 +3,7 @@ class ExileSearch < ActiveRecord::Base
 
   belongs_to :user
 
-  attr_accessible :keywords, :klass_ids, :unique_ids
+  attr_accessible :keywords, :klass_ids, :unique_ids, :order
 
   store :klass_ids, coder: JSON
   store :unique_ids, coder: JSON

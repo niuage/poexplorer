@@ -12,6 +12,24 @@
 %>
 
 <div id="left-sidebar" class="span2">
+  <div class="bordered-section facet">
+    <h3>Order</h3>
+
+    <ul>
+      <li>
+        <%= link_to params.merge(order: "popular") do %>
+          <span class="facet-title">Popular</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to params.merge(order: "recent") do %>
+          <span class="facet-title">Recent</span>
+        <% end %>
+      </li>
+    </ul>
+
+  </div>
+
   <% facets = FacetsDecorator.decorate_collection(
       @results.facets,
       params

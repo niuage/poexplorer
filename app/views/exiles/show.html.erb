@@ -61,13 +61,8 @@
 <% end %>
 
 <% if @exile.description.present? %>
-<div class="row-fluid bordered-section">
-  <div class="span2">
-    <h2>Description</h2>
-  </div>
-  <div class="span10 description">
-    <%= to_html @exile.description %>
-  </div>
+<div class="bordered-section description text">
+  <%= to_html @exile.description %>
 </div>
 <% end %>
 

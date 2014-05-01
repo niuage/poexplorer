@@ -7,6 +7,7 @@ class CreateExileSearches < ActiveRecord::Migration
       t.string      :klass_ids
       t.references  :user     # search owner
       t.integer     :user_uid # exile creator id
+      t.string      :order
       t.timestamps
     end
   end

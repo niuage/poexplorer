@@ -38,6 +38,19 @@ module Elastic
         facet "unique" do
           terms :unique_ids, size: 5
         end
+
+        sort do
+          if search.order.present?
+            case search.order
+            when "popular"
+              by "up_votes", order: "desc"
+            end
+          end
+          by "created_at", order: "desc"
+        end
+
+        exile.paginate(self)
+
       end.to_hash
 
       if @_tire_search_query[:query][:filtered][:query][:bool].empty?

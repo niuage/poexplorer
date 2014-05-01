@@ -19,6 +19,11 @@ module ExileExtensions::Mapping
         indexes :klass_id, type: "string", included_in_all: false
         indexes :klass_name, type: "string", index: :not_analyzed
         indexes :unique_ids, type: "string", included_in_all: false
+
+        indexes :up_votes, type: "integer", included_in_all: false
+        indexes :views, type: "integer", included_in_all: false
+
+        indexes :created_at, type: "date", index: :not_analyzed, included_in_all: false
       end
     end
 
@@ -28,7 +33,7 @@ module ExileExtensions::Mapping
   def to_indexed_json
     to_json(
       methods: [:user_login, :large_cover, :klass_name, :unique_ids],
-      except: [:cached_photos, :items]
+      except: [:cached_photos, :items, :down_votes]
     )
   end
 end
