@@ -47,8 +47,8 @@ Poesearch::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
-  config.assets.precompile += %w(authentication.css blog.css builds.css dark_theme.css exiles.css colorbox.css)
-  config.assets.precompile += %w(builds.js jquery.colorbox.js)
+  config.assets.precompile += %w(authentication.css dark_theme.css exiles.css colorbox.css)
+  config.assets.precompile += %w(jquery.colorbox.js exiles.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

@@ -66,6 +66,9 @@ Poesearch::Application.routes.draw do
     member do
       put :vote_up
     end
+    collection do
+      post :load_votes
+    end
   end
 
   get "/feedback",  to: "feedback#index", as: :feedback

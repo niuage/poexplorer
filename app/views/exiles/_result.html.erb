@@ -1,11 +1,17 @@
-<div class="span4 exile" data-vote="base">
+<div class="span4 exile result" data-vote="base" data-id="<%= exile.id %>">
   <%= link_to exile_path(exile) do %>
     <div class="cover">
       <div class="faded-background" style="background-image: url(<%= exile.large_cover %>)">
         <div class="overlay"></div>
       </div>
       <h3>
-        <span><b data-vote-count><%= exile.up_votes %></b> <i class="fa fa-caret-up"></i></span>
+        <%= content_tag :span, data: {
+          vote: "button",
+          url: user_signed_in? ? vote_up_exile_path(exile) : new_user_registration_path,
+          login: !user_signed_in?
+        }, class: "border-button" do %>
+          <b data-vote-count><%= exile.up_votes %></b> <i class="fa fa-caret-up"></i>
+        <% end %>
         <%= exile.name %>
       </h3>
     </div>
@@ -25,8 +31,9 @@
     <div class="right">by <%= exile.user_login %></div>
 
     <%= content_tag :span, data: {
-          vote: user_signed_in? ? "button" : "visitor",
-          url: user_signed_in? ? vote_up_exile_path(exile) : new_user_registration_path
+          vote: "button",
+          url: user_signed_in? ? vote_up_exile_path(exile) : new_user_registration_path,
+          login: !user_signed_in?
         } do %>
           <i class="fa fa-caret-up"></i> Upvote!
     <% end %>

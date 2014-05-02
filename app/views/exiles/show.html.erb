@@ -1,3 +1,5 @@
+<div data-model="base" data-id="<%= @exile.id %>">
+
 <% content_for :cover do %>
 <div id="cover">
 
@@ -20,7 +22,23 @@
           <% end %>
         </div>
 
-        <div id="intro">
+        <div id="intro" data-vote="base">
+          <div class="span2">
+            <%= content_tag :div,
+              data: {
+                url: user_signed_in? ? vote_up_exile_path(@exile) : new_user_registration_path,
+                vote: "button",
+                login: !user_signed_in?
+              },
+              class: 'border-button stat' do %>
+              <span class="value">
+                <span data-vote-count><%= @exile.up_votes %></span>
+                <i class="fa fa-caret-up"></i>
+              </span>
+            <% end %>
+          </div>
+
+          <div class="span10">
           <h1>
             <%= @exile.name %>
           </h1>
@@ -28,6 +46,7 @@
           <% if @exile.tagline.present? %>
             <p><%= @exile.tagline %></p>
           <% end %>
+          </div>
         </div>
       </div>
     </div>
@@ -38,19 +57,8 @@
 <div id="stats" class="white bordered-section">
   <div class="wrapper-l">
     <div class="row-fluid">
-      <div class="span12" data-vote="base">
-
-        <%= content_tag :span,
-              data: {
-                url: user_signed_in? ? vote_up_exile_path(@exile) : new_user_registration_path,
-                vote: user_signed_in? ? "button" : "visitor"
-              },
-              class: 'border-button stat' do %>
-          <span class="value">
-            <span data-vote-count><%= @exile.up_votes %></span>
-            <i class="fa fa-caret-up"></i>
-          </span>
-        <% end %>
+      <div class="span2"></div>
+      <div class="span10">
 
         <div class="stat">
           <span class="value"><%= @exile.photos.try(:count).to_i %></span>
@@ -74,8 +82,11 @@
 <% end %>
 
 <% if @exile.description.present? %>
-<div class="bordered-section description text">
-  <%= to_html @exile.description %>
+<div class="bordered-section description text row-fluid">
+  <div class="span2"></div>
+  <div class="span10">
+    <%= to_html @exile.description %>
+  </div>
 </div>
 <% end %>
 
@@ -121,20 +132,29 @@
     <% end if @exile.uniques.any? %>
 
     <% if @exile.gear.any? %>
-      <div class="row-fluid">
-        <% @exile.gear.each do |gear| %>
-        <div class="span3 thumbnail exile">
-          <div class="box-content">
-            <h5><%= link_to gear[:name], "http://pathofexile.gamepedia.com/#{gear[:name]}" %></h5>
-            <p class="text faded"><%= gear[:type] %></p>
-          </div>
+      <% @exile.gear.each_slice(4) do |gears| %>
+        <div class="row-fluid">
+          <% gears.each do |gear| %>
+            <div class="span3 thumbnail exile">
+              <div class="box-content">
+                <h5>
+                  <%= link_to gear[:name],
+                        "http://pathofexile.gamepedia.com/#{gear[:name]}",
+                        target: "_blank" %>
+                </h5>
+                <p class="text faded"><%= gear[:type] %></p>
+              </div>
+            </div>
+          <% end %>
         </div>
-        <% end %>
-      </div>
+      <% end %>
     <% end %>
+
   </div>
 </div>
 <% end %>
+
+</div>
 
 <% javascript "jquery.colorbox" %>
 <% stylesheet "colorbox" %>

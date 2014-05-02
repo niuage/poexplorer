@@ -68,13 +68,11 @@ body
       -webkit-box-sizing: border-box
       -moz-box-sizing: border-box
 
-      span
+      .border-button
         font-size: 0.75em
-        border: 1px solid #ccc
-        display: inline-block
-        border-radius: 2px
         padding: 0 3px 2px
         float: right
+        color: white
 
 .white
   padding: 15px 0
@@ -110,6 +108,9 @@ form .input.string input, .btn
 [data-vote=button]
   cursor: pointer
   color: $a-color
+
+  &.voted i
+    color: $orange
 
 .border-button
   border: 1px solid white

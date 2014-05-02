@@ -1,7 +1,7 @@
 class ExilesController < ApplicationController
   layout 'exiles'
 
-  respond_to :html
+  respond_to :html, :json
 
   before_filter :view_layout, only: [:new, :show]
 
