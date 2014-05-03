@@ -7,6 +7,7 @@ class ExilesController < ApplicationController
 
   before_filter :authorize_create, only: [:new, :create, :vote_up]
   before_filter :find_exile, only: [:show, :edit, :update, :destroy, :vote_up]
+  before_filter :set_update_album, only: [:update, :vote_up]
   before_filter :authorize_update, only: [:edit, :update, :destroy]
 
   def index
@@ -21,12 +22,18 @@ class ExilesController < ApplicationController
   end
 
   def show
-
+    session[:view_exile] ||= []
+    if !session[:view_exile].include? @exile.id
+      session[:view_exile] << @exile.id
+      @exile.update_column(:views, @exile.views.to_i + 1)
+      @exile.update_index if rand(5) == 0
+    end
   end
 
   def create
     @exile = Exile.create(exile_params) do |exile|
       exile.user = current_user
+      exile.update_album = true
     end
 
     if @exile.errors.any?
@@ -86,5 +93,9 @@ class ExilesController < ApplicationController
 
   def authorize_create
     authorize! :create, Exile
+  end
+
+  def set_update_album
+    @exile.update_album = true
   end
 end

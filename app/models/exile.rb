@@ -18,7 +18,9 @@ class Exile < ActiveRecord::Base
 
   before_validation :set_album_uid, if: :album_uid_changed?
 
-  before_save :cache_photos #, if: :album_uid_changed?
+  attr_accessor :update_album
+  def update_album?; update_album end
+  before_save :cache_photos, if: :update_album?
 
   class ImgurAlbumValidator < ActiveModel::EachValidator
     def validate_each(record, attribute, value)

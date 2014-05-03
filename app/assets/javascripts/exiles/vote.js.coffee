@@ -15,16 +15,25 @@ class Vote
         window.location = url
         return
 
+      $base = $button.closest("[data-vote=base]")
+      $buttons = $base.find("[data-vote=button]")
+
+      $buttons.find(".fa-caret-up")
+        .removeClass("fa-caret-up")
+        .addClass("fa-spin fa-spinner")
+
       $.ajax
         url: url
         type: "PUT"
         dataType: "json"
         success: (data) ->
           if (data.count)
-            $base = $button.closest("[data-vote=base]")
-
-            $base.find("[data-vote=button]").addClass("voted").end()
+            $buttons.addClass("voted").end()
               .find("[data-vote-count]").html(data.count)
+        complete: ->
+          $buttons.find(".fa-spin")
+            .removeClass("fa-spin fa-spinner")
+            .addClass("fa-caret-up")
 
     @loadVotes()
 
