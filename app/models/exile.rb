@@ -32,7 +32,7 @@ class Exile < ActiveRecord::Base
   validates :album_uid, presence: true, imgur_album: true
   validates :name, presence: true
   validates :klass, presence: true
-  validates :tagline, length: { maximum: 128 }
+  validates :tagline, presence: true, length: { maximum: 128 }
   validates :description, length: { maximum: 3000 }
 
   delegate :login, to: :user, prefix: true
