@@ -60,6 +60,11 @@
       <div class="span2"></div>
       <div class="span10">
 
+        <div class="stat author">
+          <span class="">By</span> <b><%= @exile.user_login %></b><br>
+          <time class="small faded" datetime="<%= @exile.created_at.iso8601 %>"></time>
+        </div>
+
         <div class="stat">
           <span class="value"><%= @exile.photos.try(:count).to_i %></span>
           <span class="side-label">
