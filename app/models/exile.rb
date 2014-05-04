@@ -12,7 +12,7 @@ class Exile < ActiveRecord::Base
   store :cached_photos, accessors: [:photos, :cover], coder: JSON
   store :items, accessors: [GEAR_TYPES], coder: JSON
 
-  attr_accessible :name, :tagline, :description, :album_uid, :video_uid,
+  attr_accessible :name, :tagline, :description, :album_uid, :video_uid, :gear_description,
     :klass_id, :unique_ids,
     :helmet, :main_weapon, :offhand_weapon, :body_armour, :gloves, :belt, :boots
 

@@ -9,6 +9,11 @@ module GearHelper
       placeholder: type.to_s.titleize
   end
 
+  def gear_description(f)
+    f.input :gear_description,
+      input_html: { class: "span12" }
+  end
+
   # def collection_for_type(type, collection)
   #   Rails.cache.fetch("collection_for_#{type}") do
   #     collection

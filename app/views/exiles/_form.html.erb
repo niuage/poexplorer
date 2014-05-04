@@ -6,16 +6,32 @@
       <div class="box-content">
         <h2>Basic info</h2>
 
+        <div class="control-group">
         <%= f.input :name, input_html: { class: "span12" } %>
+        </div>
 
-        <%= f.input :tagline, input_html: { class: "span12" } %>
+        <div class="control-group">
+        <%= f.input :tagline, as: :string, input_html: { class: "span12" } %>
+        </div>
 
+        <div class="control-group">
         <%= f.input :album_uid,
           label: "Imgur album",
-          input_html: { class: "span12" },
-          hint: "Enter the URL or the id of an Imgur album. Ex: http://imgur.com/a/19jWK"
+          input_html: { class: "span12" }
         %>
 
+        <p class="faded">
+          <% if @exile.new_record? %>
+            Enter the URL or the id of an Imgur album. Ex: http://imgur.com/a/19jWK
+          <% else %>
+            To update the screenshot gallery on PoExplorer, just update
+            your Imgur album, and re-save your Exile.
+          <% end %>
+        </p>
+        </div>
+
+        <div class="control-group">
+        <%= f.label :klass_id, label: "Class", required: true %>
         <%= f.input :klass_id,
           label: false,
           as: :select,
@@ -23,6 +39,7 @@
           collection: Klass.pluck(:id, :name).map { |k| [k[1], k[0]] },
           input_html: { class: "span12" },
           wrapper_html: { class: "clearfix" } %>
+        </div>
 
         <%= f.input :description, input_html: { class: "span12", style: "height: 128px;" } %>
 
@@ -31,11 +48,17 @@
 
     <div class="exile span6">
       <div class="box-content clearfix">
-        <h2>Gear</h2>
+        <h2>Gear <span class="faded small">(optional)</span></h2>
+
         <div class="bordered-section">
-          <%= f.association :uniques %>
+          <%= gear_description(f) %>
         </div>
 
+        <div class="bordered-section">
+          <%= f.association :uniques, placeholder: "Select uniques" %>
+        </div>
+
+        <label>Generic gear</label>
         <% main_weapons = G_BASE_NAMES["weapon"].values.flatten %>
         <%= gear_input(f, :helmet, G_BASE_NAMES["armour"]["helmet"]) %>
         <%= gear_input(f, :main_weapon, main_weapons) %>
@@ -61,11 +84,13 @@
 </div>
 
 <% content_for :dom_ready do %>
-  $("select").select2();
+  $("select").select2({
+    allowClear: true
+  });
 <% end %>
 
 <% content_for :head do %>
   <style type="text/css">
-    .input.select { padding: 10px 0; }
+    .input.select { padding: 5px 0; }
   </style>
 <% end %>
