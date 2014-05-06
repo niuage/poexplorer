@@ -1,5 +1,5 @@
 class ExilesController < ApplicationController
-  layout 'exiles'
+  layout :layout
 
   respond_to :html, :json
 
@@ -97,5 +97,13 @@ class ExilesController < ApplicationController
 
   def set_update_album
     @exile.update_album = true
+  end
+
+  def layout
+    if action_name == "show"
+      "exile_show"
+    else
+      "exiles"
+    end
   end
 end

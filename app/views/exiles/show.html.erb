@@ -1,5 +1,35 @@
 <div data-model="base" data-id="<%= @exile.id %>">
 
+<% content_for :side_cover do %>
+
+  <div id="intro">
+    <p>By <%= @exile.user_login %></p>
+  </div>
+
+<% end %>
+
+<div class="large-section bordered-section">
+<h1>
+  <%= @exile.name %>
+</h1>
+
+<% if @exile.tagline.present? %>
+  <p class="tagline"><%= @exile.tagline %></p>
+<% end %>
+</div>
+
+<% if @exile.any_photos? %>
+  <div class="large-section bordered-section clearfix">
+    <% @exile.photos.each do |photo| %>
+      <%= link_to photo, class: "left thumbnail photo" do %>
+        <div class="box-content"><%= image_tag @exile.resized_photo(photo, :b) %></div>
+      <% end %>
+    <% end %>
+
+    <%= link_to "Imgur album", "http://imgur.com/a/#{@exile.album_uid}", target: "_blank" %>
+  </div>
+<% end %>
+
 <% content_for :cover do %>
 <div id="cover">
 
@@ -39,13 +69,7 @@
           </div>
 
           <div class="span10">
-          <h1>
-            <%= @exile.name %>
-          </h1>
 
-          <% if @exile.tagline.present? %>
-            <p><%= @exile.tagline %></p>
-          <% end %>
           </div>
         </div>
       </div>
@@ -87,75 +111,53 @@
 <% end %>
 
 <% if @exile.description.present? %>
-<div class="bordered-section description text row-fluid">
-  <div class="span2"></div>
-  <div class="span10">
-    <%= to_html @exile.description %>
-  </div>
+<div class="large-section bordered-section description text row-fluid">
+  <%= to_html @exile.description %>
 </div>
 <% end %>
 
-<% if @exile.any_photos? %>
-  <div class="bordered-section clearfix">
-    <div class="span2">
-      <h2>Screenshots</h2>
-      <p class="small">
-        <%= link_to "Imgur album", "http://imgur.com/a/#{@exile.album_uid}", target: "_blank" %>
-      </p>
-    </div>
-    <div class="span10">
-      <% @exile.photos.each do |photo| %>
-        <%= link_to photo, class: "left thumbnail photo" do %>
-          <div class="box-content"><%= image_tag @exile.resized_photo(photo, :b) %></div>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-<% end %>
+
 
 
 <% if @exile.uniques.any? || @exile.gear.any? %>
 <div class="row-fluid section">
-  <div class="span2">
-    <h2>Gear</h2>
-  </div>
-  <div class="span10">
-    <% @exile.uniques.each_slice(4) do |uniques| %>
+
+  <h2>Gear</h2>
+
+  <% @exile.uniques.each_slice(4) do |uniques| %>
+    <div class="row-fluid">
+      <% uniques.each do |unique| %>
+        <%= link_to "http://pathofexile.gamepedia.com/#{unique.name}",
+              target: "_blank",
+              class: "span3 thumbnail exile" do %>
+            <div class="box-content">
+              <h5><%= unique.name %></h5>
+              <p class="text faded"><%= unique.base_name %></p>
+              <%= image_tag unique.image_url %>
+            </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end if @exile.uniques.any? %>
+
+  <% if @exile.gear.any? %>
+    <% @exile.gear.each_slice(4) do |gears| %>
       <div class="row-fluid">
-        <% uniques.each do |unique| %>
-          <%= link_to "http://pathofexile.gamepedia.com/#{unique.name}",
-                target: "_blank",
-                class: "span3 thumbnail exile" do %>
-              <div class="box-content">
-                <h5><%= unique.name %></h5>
-                <p class="text faded"><%= unique.base_name %></p>
-                <%= image_tag unique.image_url %>
-              </div>
-          <% end %>
+        <% gears.each do |gear| %>
+          <div class="span3 thumbnail exile">
+            <div class="box-content">
+              <h5>
+                <%= link_to gear[:name],
+                      "http://pathofexile.gamepedia.com/#{gear[:name]}",
+                      target: "_blank" %>
+              </h5>
+              <p class="text faded"><%= gear[:type] %></p>
+            </div>
+          </div>
         <% end %>
       </div>
-    <% end if @exile.uniques.any? %>
-
-    <% if @exile.gear.any? %>
-      <% @exile.gear.each_slice(4) do |gears| %>
-        <div class="row-fluid">
-          <% gears.each do |gear| %>
-            <div class="span3 thumbnail exile">
-              <div class="box-content">
-                <h5>
-                  <%= link_to gear[:name],
-                        "http://pathofexile.gamepedia.com/#{gear[:name]}",
-                        target: "_blank" %>
-                </h5>
-                <p class="text faded"><%= gear[:type] %></p>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
     <% end %>
-
-  </div>
+  <% end %>
 </div>
 <% end %>
 

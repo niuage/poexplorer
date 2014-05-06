@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% stylesheet "exiles" %>
+  <%= render "layouts/head" %>
+</head>
+<body class="exiles <%= body_classes %>">
+  <%= render "layouts/layout/header/header" %>
+  <%= render "exiles/sub_header" unless current_page?(action: "show", controller: "exiles") %>
+  <%= render "application/sub_header" %>
+  <%= render "layouts/flash", flash: flash %>
+
+  <div id="container">
+
+    <aside class="cover">
+      <!-- http://i.imgur.com/LAqY99Z.png -->
+      <!-- http://i.imgur.com/Q1Onw11.png -->
+      <div class="cover-img" style="background-image: url('<%= @exile.cover %>')"></div>
+
+      <%= yield :side_cover %>
+
+      <div class="overlay"></div>
+
+
+    </aside>
+
+    <div id="wrapper" class="wrapper">
+      <div class="wrapper-inner">
+        <%= yield %>
+      </div>
+    </div>
+
+  </div>
+
+  <% javascript "exiles" %>
+  <%= render "layouts/common/bottom" %>
+</body>
+</html>
