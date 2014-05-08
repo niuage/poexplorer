@@ -4,16 +4,22 @@ body, html, #container
   background: white
 
 body.c-exiles.a-show
+  .wrapper-l
+    margin: 0
+    max-width: 10000
+
+  .tagline
+    color: #555
+
   #container
     overflow: hidden
-
 
   .cover
     position: absolute
     z-index: 100
     top: 0
     left: 0
-    width: 40%
+    width: 35%
     height: 100%
     max-width: 800px
 
@@ -31,14 +37,16 @@ body.c-exiles.a-show
     z-index: 100
 
   #wrapper
-    left: 40%
+    left: 35%
+    box-shadow: 0 0 7px #000
+    z-index: 300
 
-    @media (min-width: 800px * 100 / 40)
+    @media (min-width: 800px * 100 / 35)
       left: 800px
       max-width: 1000px
 
     .wrapper-inner
-      padding: 80px 0 0 5%
+      padding: 70px 5% 0 5%
 
   .wrapper
     overflow: auto
@@ -51,14 +59,14 @@ body.c-exiles.a-show
     background-color: #FFF
 
   h1
-    padding-bottom: 22px
+    padding-bottom: 10px
     color: #333
 
   p
     font-size: 1.3em
 
   h1
-    font-size: 4em
+    font-size: 2.8em
 
   #intro
     text-shadow: 0 0 6px #444
@@ -66,13 +74,47 @@ body.c-exiles.a-show
     z-index: 300
     width: 100%
     position: absolute
-    bottom: 40px
+    bottom: 28px
 
     p
       color: white
-      padding-bottom: 22px
-      margin: 0 40px
-      border-bottom: 3px solid white
+      padding-top: 18px
+      margin: 0 28px
+      border-top: 3px solid white
+
+  #vote
+    position: absolute
+    top: 70px
+    right: 70 - 42px
+    z-index: 400
+
+    .border-button
+      color: white
+      font-size: 2.2em
+      float: left
+      margin-top: 1px
+      padding: 10px
+
+  .imgur-album
+    background: #f0f0f0
+    height: 159px
+    width: 159px
+    border: 1px solid #e6e6e6
+    display: block
+    float: left
+    color: #aaa
+    text-align: center
+
+    &:hover
+      color: #777
+
+    i
+      margin-top: 40px
+
+  #stats
+    .border-button
+      border-color: #aaa
+      margin-left: 3px
 
 /////////////////////////////////////
 
@@ -93,17 +135,10 @@ body.c-exiles.a-show
   #intro
     text-shadow: 0 0 6px #444
     top: auto
-    bottom: 40px
+    bottom: 28px
     left: 0
     position: absolute
     width: 100%
-
-    .border-button
-      color: white
-      font-size: 2.2em
-      float: left
-      margin-top: 1px
-      padding: 10px
 
   h1, p
     color: white
@@ -143,7 +178,7 @@ body.c-exiles.a-show
     min-width: 450px
 
 .photo
-  margin: 0 20px 20px 0
+  margin: 0 4px 4px 0
 
 .description p
   font-size: 1.4em
@@ -177,15 +212,3 @@ body.c-exiles.a-show
 
     span
       display: block
-
-#user-actions
-  position: absolute
-  top: 20px
-  right: 0
-
-  .border-button
-    color: white
-    opacity: 0.6
-
-    &:hover
-      opacity: 1

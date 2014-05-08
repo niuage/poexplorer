@@ -6,8 +6,6 @@
 </head>
 <body class="exiles <%= body_classes %>">
   <%= render "layouts/layout/header/header" %>
-  <%= render "exiles/sub_header" unless current_page?(action: "show", controller: "exiles") %>
-  <%= render "application/sub_header" %>
   <%= render "layouts/flash", flash: flash %>
 
   <div id="container">
