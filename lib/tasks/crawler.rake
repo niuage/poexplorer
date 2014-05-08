@@ -24,13 +24,13 @@ namespace :crawler do
       break if League.permanent.count == 0
 
       finished_at = nil
-      League.permanent.pluck([:id, :name]).each do |league|
+      League.permanent.pluck("id, name").each do |league|
         started_at = Time.zone.now
 
         league_id = league[0]
         league_name = league[1]
 
-        Bugsnag.notify(error("New cycle: #{league_name}"), {
+        Bugsnag.notify(error("New cycle: #{league_name} #{started_at}"), {
           seasonal: false,
           started_at: started_at,
           last_finished_at: finished_at
@@ -56,7 +56,7 @@ namespace :crawler do
       leagues.select("id, name").each do |league|
         started_at = Time.zone.now
 
-        Bugsnag.notify(error("New cycle: #{league.name}"), {
+        Bugsnag.notify(error("New cycle: #{league.name} #{started_at}"), {
           seasonal: true,
           started_at: started_at,
           last_finished_at: finished_at

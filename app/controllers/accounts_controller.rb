@@ -11,6 +11,7 @@ class AccountsController < ApplicationController
 
   def index
     respond_with do |format|
+      format.html { redirect_to root_url }
       format.json do
         @players = Player.where(account: params[:account])
 
