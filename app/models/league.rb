@@ -10,7 +10,8 @@ class League < ActiveRecord::Base
     "domination",
     "nemesis",
     "ambush",
-    "invasion"
+    "invasion",
+    "2 Week Charity Event"
   ]
 
   OLD_SEASON_LEAGUES = [

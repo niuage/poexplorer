@@ -39,10 +39,6 @@ body
   .cover
     position: relative
 
-    .faded-background, .overlay
-      height: 160px
-      border-radius: 3px 3px 0 0
-
     .overlay
       display: none
 
@@ -53,6 +49,7 @@ body
       background-position-y: 50%
       background-position-x: 50%
       position: relative
+      border-radius: 3px 3px 0 0
 
     h3
       color: white
@@ -67,6 +64,7 @@ body
       box-sizing: border-box
       -webkit-box-sizing: border-box
       -moz-box-sizing: border-box
+      z-index: 400
 
       .border-button
         font-size: 0.75em

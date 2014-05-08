@@ -1,6 +1,6 @@
 <h2>
   <%= link_to [:admin, @message] do %>
-  <%= @message.title.present? ? @message.title : "no title" %>
+    <%= @message.title.present? ? @message.title : "no title" %>
   <% end %>
 </h2>
 <p><%= @message.body %></p>

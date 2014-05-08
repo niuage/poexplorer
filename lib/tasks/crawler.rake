@@ -12,31 +12,60 @@ namespace :crawler do
     end
   end
 
+  def error(message)
+    RuntimeError.new(message)
+  end
+
   desc "Scrawl infintely"
   task :permanent => :environment do
-    File.open(ENV['PIDFILE'], 'w') { |f| f << Process.pid } if ENV['PIDFILE']
+    File.open(ENV['PIDFILE'], 'w') { |f| f << Process.pid } if ENV['PIDFILE'].present?
 
     while true do
-      puts "New cycle (permanent leagues)"
       break if League.permanent.count == 0
 
-      League.permanent.pluck(:id).each do |league_id|
+      finished_at = nil
+      League.permanent.pluck([:id, :name]).each do |league|
+        started_at = Time.zone.now
+
+        league_id = league[0]
+        league_name = league[1]
+
+        Bugsnag.notify(error("New cycle: #{league_name}"), {
+          seasonal: false,
+          started_at: started_at,
+          last_finished_at: finished_at
+        })
+
         crawl_league_by_id(league_id)
+
+        finished_at = Time.zone.now
+        sleep(60)
       end
     end
   end
 
   task :seasonal => :environment do
-    File.open(ENV['PIDFILE'], 'w') { |f| f << Process.pid } if ENV['PIDFILE']
+    File.open(ENV['PIDFILE'], 'w') { |f| f << Process.pid } if ENV['PIDFILE'].present?
     while true do
       leagues = League.seasonal.visible
 
-      puts "New cycle (seasonal leagues)"
       break if leagues.count == 0
 
-      League.seasonal.visible.select("id, name").each do |league|
+      finished_at = nil
+
+      leagues.select("id, name").each do |league|
+        started_at = Time.zone.now
+
+        Bugsnag.notify(error("New cycle: #{league.name}"), {
+          seasonal: true,
+          started_at: started_at,
+          last_finished_at: finished_at
+        })
+
         puts "Crawling #{league.name} league"
         crawl_league_by_id(league.id)
+
+        finished_at = Time.zone.now
       end
     end
   end

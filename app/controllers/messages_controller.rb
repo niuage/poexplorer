@@ -13,6 +13,13 @@ class MessagesController < ApplicationController
 
     if @message.save
       flash[:notice] = "Message successfully sent! Thanks."
+
+      Bugsnag.notify(RuntimeError.new("New message"), {
+        title: @message.title,
+        body: @message.body,
+        contact: @message.contact_info
+      })
+
       respond_with @message, location: feedback_path
     else
       render "feedback/index"
