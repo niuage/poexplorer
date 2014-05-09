@@ -49,7 +49,7 @@ namespace :index do
   task :reindex, [:prefix, :env] => :environment do |t, args|
     League.running.each do |league|
       lid = league.id
-      index_name = TireIndex.index_name(args[:prefix, lid)
+      index_name = TireIndex.index_name(args[:prefix], lid)
       index = Tire.index(index_name)
       index.create(mappings: mappings, settings: {})
       # Tire::Tasks::Import.create_index(index, )
