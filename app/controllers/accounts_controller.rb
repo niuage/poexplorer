@@ -18,6 +18,8 @@ class AccountsController < ApplicationController
         league = params[:league].to_i
         @players = @players.where(league_id: league) if league > 0
 
+        clean_up_players
+
         render json: @players
       end
     end
@@ -53,6 +55,10 @@ class AccountsController < ApplicationController
     )
   end
 
+  def clean_up_players
+    @players = @players.as_json
+    @players.sort_by! { |p1, p2| p1["online"] ? 0 : 1 }.uniq! { |a| a["account"] }
+  end
 
   def layout_for_request
     request.xhr? ? false : "application"

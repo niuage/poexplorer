@@ -64,13 +64,14 @@ class Player < ActiveRecord::Base
     )
   end
 
-  def as_json(options)
+  def as_json(options = {})
     options[:except] ||= []
     options[:except] << :last_online
 
     options[:methods] ||= []
     options[:methods] << :last_online_iso8601
     options[:methods] << :marked_as_online
+
     super(options)
   end
 
