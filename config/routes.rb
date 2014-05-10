@@ -71,6 +71,8 @@ Poesearch::Application.routes.draw do
     end
   end
 
+  resources :forum_threads, path: "/threads", only: [:show]
+
   get "/feedback",  to: "feedback#index", as: :feedback
   get "/about/item_prices", to: "about#item_prices", as: :item_prices
   get "/about/search_by_price", to: "about#search_by_price", as: :search_by_price

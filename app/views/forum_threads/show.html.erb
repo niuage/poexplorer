@@ -1,0 +1,4 @@
+<%= render "searches/results", results: @results %>
+
+<% pagination = paginate(@results) %>
+<%= render "application/pagination", pagination: pagination %>

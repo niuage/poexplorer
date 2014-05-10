@@ -3,12 +3,6 @@
   App.ItemVerification.setup({ root: "#results" });
   App.OnlineStatus.accountStatuses("#results");
   App.PM.setup("#results");
-
-  <% if false && user_signed_in? %>
-    App.CartButton.setup(".btn-cart", {
-      itemIds: <%= current_user.cached_favorite_item_ids %>
-    });
-  <% end %>
 <% end %>
 
 <div id="results" class="<%= @layout.to_class %>">

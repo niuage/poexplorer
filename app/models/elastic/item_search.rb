@@ -3,6 +3,8 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
   include Elastic::Concerns::Facets
   include Elastic::Concerns::Item
 
+  attr_accessor :any_type
+
   def tire_search
     Tire.search(Indices.item_indices(search), tire_search_query)
   end
@@ -41,7 +43,7 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
         item.filter_match :account
         item.filter_match :thread_id
         item.filter_match :rarity_id
-        item.filter_match :archetype
+        item.filter_match :archetype if item.typed?
         item.filter_match :corrupted if item.corrupted?
 
         item.filter_armour_requirements
@@ -85,5 +87,9 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
     end.to_hash
 
     query[:query][:bool].empty? ? find_all : query
+  end
+
+  def typed?
+    !any_type
   end
 end
