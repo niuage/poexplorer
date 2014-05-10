@@ -16,7 +16,7 @@ class ForumThreadPage
     [432, 430],     # [nemesis selling, nemesis shop]
     [508, 506],     # [ambush selling, ambush shop]
     [511, 509],     # [invasion selling, invasion shop]
-    [511, 509]      # [2 week selling, 2 week shop]
+    [516, 514]      # [2 week selling, 2 week shop]
   ]
 
   attr_accessor :league_id, :shop, :page_number
