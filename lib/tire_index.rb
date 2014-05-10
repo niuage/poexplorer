@@ -1,3 +1,6 @@
+require File.join(Rails.root, "app", "models", "helmet")
+require File.join(Rails.root, "app", "models", "player")
+
 class TireIndex
   INDEX_PREFIX = "poe_master"
 
@@ -38,7 +41,7 @@ class TireIndex
   end
 
   def self.mappings
-    Item::TYPES.first.constantize.tire.mapping_to_hash.merge(
+    ::Helmet.tire.mapping_to_hash.merge(
       Player.tire.mapping_to_hash
     )
   end
