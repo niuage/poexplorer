@@ -10,10 +10,7 @@ class ForumThreadsController < ApplicationController
     thread = ForumThread.find_by uid: thread_id
     league_id = thread.league_id if thread
 
-    unless league_id
-      item = Item.find_by(thread_id: thread_id)
-      league_id = item.league_id
-    end
+    return unless league_id
 
     @search = Search.new(
       league_id: league_id, thread_id: thread_id

@@ -1,4 +1,8 @@
-<%= render "searches/results", results: @results %>
+<% if @results %>
+  <%= render "searches/results", results: @results %>
 
-<% pagination = paginate(@results) %>
-<%= render "application/pagination", pagination: pagination %>
+  <% pagination = paginate(@results) %>
+  <%= render "application/pagination", pagination: pagination %>
+<% else %>
+  <p>Forum Thread not found. I'll let users index it from this page in the future.</p>
+<% end %>
