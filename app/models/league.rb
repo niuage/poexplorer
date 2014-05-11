@@ -23,8 +23,8 @@ class League < ActiveRecord::Base
     "nemesis"
   ]
 
-  after_save :update_all_items
-  after_save :update_all_users
+  # after_save :update_all_items
+  # after_save :update_all_users
 
   has_many :items
   has_many :users
