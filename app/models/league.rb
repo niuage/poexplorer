@@ -14,6 +14,8 @@ class League < ActiveRecord::Base
     "2 Week Charity Event"
   ]
 
+  MERGED_LEAGUES = ["2 Week Charity Event"]
+
   OLD_SEASON_LEAGUES = [
     "anarchy",
     "onslaught",

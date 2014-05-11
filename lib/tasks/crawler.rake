@@ -54,6 +54,8 @@ namespace :crawler do
       finished_at = nil
 
       leagues.select("id, name").each do |league|
+        next if league.name.in? League::MERGED_LEAGUES
+
         started_at = Time.zone.now
 
         Bugsnag.notify(error("New cycle: #{league.name} #{started_at}"), {
