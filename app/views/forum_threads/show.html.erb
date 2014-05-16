@@ -6,7 +6,7 @@
 
   <% content_for :dom_ready do %>
     $.ajax({
-      url: '<%= forum_thread_path(params[:id]) %>',
+      url: '<%= forum_thread_path(params[:id], page: params[:page]) %>',
       success: function(data) {
         $("body").prepend(data);
 
