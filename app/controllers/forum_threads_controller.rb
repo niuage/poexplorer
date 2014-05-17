@@ -7,30 +7,43 @@ class ForumThreadsController < ApplicationController
   def show
     return if thread_id == 0
 
-    if request.xhr?
-      sleep(3)
-      @js = true
+    respond_to do |format|
 
-      thread = ForumThread.find_by uid: thread_id
-      league_id = thread.league_id if thread
+      format.json do
+        results = find_league ? tire_search.results : {}
+        return render json: results
+      end
 
-      return unless league_id
+      format.html do
+        if request.xhr?
+          @js = true
+          return unless find_league
+          @results = ItemDecorator.decorate_collection(tire_search.results)
+        end
+      end
 
-      search = Search.new(
-        league_id: league_id, thread_id: thread_id
-      )
-
-      searchable = Elastic::ItemSearch.new(search, params)
-      searchable.any_type = true
-      tire_search = searchable.tire_search
-
-      @results = ItemDecorator.decorate_collection(
-        tire_search.results
-      )
     end
   end
 
   private
+
+  def find_league
+    thread = ForumThread.find_by uid: thread_id
+    @league_id = thread.league_id if thread
+    @league_id
+  end
+
+  def tire_search
+    return @tire_search if @tire_search
+
+    search = Search.new(
+      league_id: @league_id, thread_id: thread_id
+    )
+
+    searchable = Elastic::ItemSearch.new(search, params)
+    searchable.any_type = true # is that necessary? cant I just check that it's just a Search object?
+    @tire_search = searchable.tire_search
+  end
 
   def thread_id
     @thread_id ||= params[:id].to_i
