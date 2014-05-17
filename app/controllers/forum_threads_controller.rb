@@ -8,10 +8,19 @@ class ForumThreadsController < ApplicationController
     return if thread_id == 0
 
     respond_to do |format|
-
       format.json do
         results = find_league ? tire_search.results : {}
-        return render json: results
+        return render json: results, except: [
+          :_score,
+          :_type,
+          :_index,
+          :_version,
+          :highlight,
+          :_explanation,
+          :sold,
+          :rarity_id,
+          :league_id
+        ]
       end
 
       format.html do
@@ -21,7 +30,6 @@ class ForumThreadsController < ApplicationController
           @results = ItemDecorator.decorate_collection(tire_search.results)
         end
       end
-
     end
   end
 
