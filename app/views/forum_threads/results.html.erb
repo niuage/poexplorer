@@ -1,0 +1,12 @@
+<% if @results %>
+  <%= render "searches/results", results: @results %>
+
+  <% pagination = paginate(@results) %>
+  <%= render "application/pagination", pagination: pagination %>
+<% else %>
+  <p style="text-align: center" class="text">
+    Forum Thread not found.
+    <br>
+    If the thread was created or bumped a few hours ago, let me know at niuage[at]gmail.com.
+  </p>
+<% end %>

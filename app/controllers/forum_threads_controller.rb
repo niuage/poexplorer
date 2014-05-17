@@ -26,8 +26,12 @@ class ForumThreadsController < ApplicationController
       format.html do
         if request.xhr?
           @js = true
-          return unless find_league
-          @results = ItemDecorator.decorate_collection(tire_search.results)
+
+          if find_league
+            @results = ItemDecorator.decorate_collection(tire_search.results)
+          end
+
+          return render :results
         end
       end
     end

@@ -1,40 +1,25 @@
-<% if !@js %>
-  <%= content_tag :div, "",
-    id: "poexplorer-loader",
-    style: "height: 560px; width: 100%; background: url(#{asset_path('loader.gif')}) center 30% no-repeat;"
-  %>
+<%= content_tag :div, "",
+  id: "poexplorer-loader",
+  style: "height: 560px; width: 100%; background: url(#{asset_path('loader.gif')}) center 30% no-repeat;"
+%>
 
-  <% content_for :dom_ready do %>
-    $.ajax({
-      url: '<%= forum_thread_path(params[:id], page: params[:page]) %>',
-      dataType: "html",
-      success: function(data) {
-        $("body").prepend(data);
+<% content_for :dom_ready do %>
+  $.ajax({
+    url: '<%= forum_thread_path(params[:id], page: params[:page]) %>',
+    dataType: "html",
+    success: function(data) {
+      $("body").prepend(data);
 
-        App.ItemRenderer.setup("#results .result");
-        App.ItemVerification.setup({ root: "#results" });
-        App.OnlineStatus.accountStatuses("#results");
-        App.PM.setup("#results");
-      },
-      error: function() {
-        $("body").prepend("<p>An error occured, please try again later.</p><p>Contact niuage[at]gmail.com if the issue persists.</p>")
-      },
-      complete: function() {
-        $("#poexplorer-loader").remove()
-      }
-    });
-  <% end %>
-<% else %>
-  <% if @results %>
-    <%= render "searches/results", results: @results %>
-
-    <% pagination = paginate(@results) %>
-    <%= render "application/pagination", pagination: pagination %>
-  <% else %>
-    <p style="text-align: center" class="text">
-      Forum Thread not found.
-      <br>
-      If the thread was created or bumped a few hours ago, let me know at niuage[at]gmail.com.
-    </p>
-  <% end %>
+      App.ItemRenderer.setup("#results .result");
+      App.ItemVerification.setup({ root: "#results" });
+      App.OnlineStatus.accountStatuses("#results");
+      App.PM.setup("#results");
+    },
+    error: function() {
+      $("body").prepend("<p>An error occured, please try again later.</p><p>Contact niuage[at]gmail.com if the issue persists.</p>")
+    },
+    complete: function() {
+      $("#poexplorer-loader").remove()
+    }
+  });
 <% end %>
