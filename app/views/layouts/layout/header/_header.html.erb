@@ -8,7 +8,7 @@
           <% end %>
         </span>
 
-        <span class="span4">
+        <span class="span4 hidden-phone">
 
           <ul class="clearfix main-menu">
             <li class="tn-search">
@@ -26,7 +26,32 @@
           </ul>
         </span>
 
-        <span class="span6">
+        <span class="phone-menu visible-phone">
+          <ul>
+            <li class="dropdown menu-right">
+
+              <%= link_to "#", class: "dropdown-toggle", data: { toggle: "dropdown" } do %>
+                <i class="fa fa-align-justify"></i>
+              <% end %>
+
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to "Find items", new_search_path %>
+                </li>
+                <li>
+                  <%= link_to "Exiles", exiles_path %>
+                </li>
+                <% if user_signed_in? %>
+                  <li class="separator"></li>
+                  <li><%= link_to "Profile", current_user %></li>
+                  <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+                <% end %>
+              </ul>
+            </li>
+          </ul>
+        </span>
+
+        <span class="span6 hidden-phone">
           <%= render "layouts/layout/header/user" %>
         </span>
 

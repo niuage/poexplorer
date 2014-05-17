@@ -28,6 +28,9 @@ class ExilesController < ApplicationController
       @exile.update_column(:views, @exile.views.to_i + 1)
       @exile.update_index if rand(5) == 0
     end
+
+    @next_exile = Exile.where('id > ?', @exile.id).limit(1).first
+    @prev_exile = Exile.where('id < ?', @exile.id).order('id DESC').limit(1).first
   end
 
   def create

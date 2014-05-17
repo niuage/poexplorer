@@ -9,6 +9,13 @@
     }
   }
 
+  .phone-menu {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    z-index: 10001;
+  }
+
   #inner-header {
     border-bottom: 1px solid $border-bottom-color;
     background: $header-color;

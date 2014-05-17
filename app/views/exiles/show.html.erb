@@ -126,7 +126,7 @@
 
 
 <% if @exile.uniques.any? || @exile.gear.any? %>
-<div class="row-fluid section">
+<div class="large-section bordered-section row-fluid">
 
   <h2>Gear</h2>
 
@@ -169,10 +169,40 @@
 
 </div>
 
+<div id="recent-exiles" class="large-section bordered-section row-fluid">
+  <div class="span6">
+    <% if @prev_exile %>
+      <%= link_to exile_path(@prev_exile) do %>
+        <div class="span1">
+          <i class="fa fa-caret-left fa-2x"></i>
+        </div>
+        <div class="span11">
+          <h3><%= @prev_exile.name %></h3>
+          <%= @prev_exile.tagline %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="span6">
+    <% if @next_exile %>
+      <%= link_to exile_path(@next_exile) do %>
+        <div class="span11">
+          <h3><%= @next_exile.name %></h3>
+          <%= @next_exile.tagline %>
+        </div>
+        <div class="span1">
+          <i class="fa fa-caret-right fa-2x"></i>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
 <% javascript "jquery.colorbox" %>
 <% stylesheet "colorbox" %>
 
 <% content_for :dom_ready do %>
   App.Vote.setup();
-  $(".photo").colorbox({ rel: "g1" })
+  $(".photo").colorbox({ rel: "g1", maxWidth: '80%', maxHeight: '90%' })
 <% end %>

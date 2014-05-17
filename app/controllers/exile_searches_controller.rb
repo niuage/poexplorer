@@ -42,7 +42,7 @@ class ExileSearchesController < ApplicationController
 
   def search
     build_search
-    update_from_url_params(@search)
+    update_from_url_params(@search) unless request.xhr?
 
     @searchable = Elastic::ExileSearch.new(@search, params)
     @tire_search = @searchable.tire_search

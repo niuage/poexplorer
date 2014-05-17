@@ -1,0 +1,7 @@
+<% @results.each_slice(3) do |slice| %>
+  <div class="row-fluid">
+    <% slice.each do |result| %>
+      <%= render "exiles/result", exile: result %>
+    <% end %>
+  </div>
+<% end %>

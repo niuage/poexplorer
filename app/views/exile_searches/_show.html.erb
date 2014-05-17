@@ -4,13 +4,7 @@
   <div id="main-content">
     <%= render "form" %>
 
-    <% @results.each_slice(3) do |slice| %>
-      <div class="row-fluid">
-        <% slice.each do |result| %>
-          <%= render "exiles/result", exile: result %>
-        <% end %>
-      </div>
-    <% end %>
+    <%= render "results" %>
 
     <% pagination = paginate(@results) %>
     <%= render "application/pagination", pagination: pagination %>
