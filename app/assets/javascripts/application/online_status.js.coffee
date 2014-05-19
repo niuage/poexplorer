@@ -2,6 +2,16 @@ class OnlineStatus
   constructor: (root) ->
     @$root = $(root)
     @$onlineStatus = @$root.find(".online-status")
+    @itemLoaded()
+
+  itemLoaded: ->
+    $("#search-form").on "itemLoaded", (e) =>
+      if e.results && e.results.length > 0
+        accounts = $.map e.results, (result, i) ->
+          result.account
+
+        @$onlineStatus = @$root.find(".online-status")
+        @updateAccountStatuses(accounts)
 
   accountStatuses: -> @updateAccountStatuses()
 
@@ -17,12 +27,14 @@ class OnlineStatus
 
     players
 
-  updateAccountStatuses: ->
+  updateAccountStatuses: (accountNames = nil) ->
     self = @
+    accountNames = accountNames || @accountNames()
+
     $.ajax
       url: "/accounts"
       data:
-        account: @accountNames()
+        account: accountNames
         league: @league()
       dataType: "json"
       success: (data) ->
@@ -71,5 +83,8 @@ class OnlineStatus
 
   @accountStatuses: (root) ->
     new OnlineStatus(root).accountStatuses()
+
+  @setup: (root) ->
+    new OnlineStatus(root)
 
 @App.OnlineStatus = OnlineStatus

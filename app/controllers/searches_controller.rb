@@ -50,7 +50,10 @@ class SearchesController < ApplicationController
     render json: {
       results: @tire_search.results,
       facets: @results.facets,
-      pagination: { total_pages: @results.total_pages }
+      pagination: {
+        total_pages: @results.total_pages,
+        current_page: @results.current_page
+      }
     }
   end
 

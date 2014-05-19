@@ -16,6 +16,7 @@ class Item
     visible_stats: @visibleStats()
     isSkill: @isSkill()
     properties: @properties()
+    account: @account()
 
   # Helpers
 
@@ -84,6 +85,9 @@ class Item
         stat: stat
         value: stat_value
 
+  account: ->
+    Item.templates["account"] { account: @item.account }
+
   fullName: ->
     @item.full_name
 
@@ -111,6 +115,8 @@ class Item
     @templatesCached = true
     Item.templates = {}
     Item.templates["requirements"] = Handlebars.compile($("#requirements-template").html())
+    Item.templates["account"] = Handlebars.compile($("#account-template").html())
+    Item.templates["no-results"] = Handlebars.compile($("#no-results-template").html())
 
   @create: (item) ->
     new Item(item)

@@ -13,11 +13,21 @@
   <%= render "searches/handlebars/result" %>
 </script>
 
+<script id="no-results-template" type="text/x-handlebars-template">
+  <%= render "searches/handlebars/no_results" %>
+</script>
+
 <script id="requirements-template" type="text/x-handlebars-template">
   <%= render "searches/handlebars/requirements" %>
 </script>
 
+<script id="account-template" type="text/x-handlebars-template">
+  <%= render "searches/handlebars/account" %>
+</script>
+
 <% content_for :dom_ready do %>
+  App.OnlineStatus.setup("#results")
+
   App.NumberFormatter.setup();
   App.Tabs.setup(".search-tabs");
 <% end %>
