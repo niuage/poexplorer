@@ -25,7 +25,7 @@ Poesearch::Application.routes.draw do
 
   resources :similar_searches
 
-  resources :items, only: [:show, :destroy] do
+  resources :items, only: [:index, :show, :destroy] do
     member do
       post    :add_to_cart
       delete  :remove_from_cart

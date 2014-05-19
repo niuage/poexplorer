@@ -217,16 +217,20 @@ class SearchFormDecorator < ApplicationDecorator
     }, options)
   end
 
-  def order_by_mod_id
-    return "" unless search.order_by_mod_id.to_i > 0
+  def order_by_mod?
+    search.order_by_mod_id.to_i > 0
+  end
 
-    h.link_to("#", class: "span3 inputy ttip",
-      title: "Remove filter",
-      data: { mod_sort: "remove" }) do
-      "<i class='fa fa-times right'></i>Sorting by mod value".html_safe
-    end + \
-    h.content_tag(:p, class: "span1 inputy") do
-      "then by"
+  def order_by_mod_id
+    h.content_tag :div, class: "span3 #{"hide" unless order_by_mod?}" do
+      h.link_to("#", class: "span9 inputy ttip",
+        title: "Remove filter",
+        data: { mod_sort: "remove" }) do
+        "<i class='fa fa-times right'></i>Sorting by mod value".html_safe
+      end + \
+      h.content_tag(:p, class: "span3 inputy") do
+        "then by"
+      end
     end
   end
 

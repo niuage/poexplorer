@@ -4,4 +4,20 @@
 
 <%= render "searches/form" %>
 
-<%= render "searches/results_and_facets" %>
+<%#= render "searches/results_and_facets" %>
+
+<div id="results" class="<%= @layout.to_class %>">
+</div>
+
+<script id="result-template" type="text/x-handlebars-template">
+  <%= render "searches/handlebars/result" %>
+</script>
+
+<script id="requirements-template" type="text/x-handlebars-template">
+  <%= render "searches/handlebars/requirements" %>
+</script>
+
+<% content_for :dom_ready do %>
+  App.NumberFormatter.setup();
+  App.Tabs.setup(".search-tabs");
+<% end %>

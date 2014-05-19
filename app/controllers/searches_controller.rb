@@ -26,17 +26,33 @@ class SearchesController < ApplicationController
     @search.save
     search if !@search.valid?
 
-    respond_with @search, location: location
+    respond_with @search, location: location do |format|
+      format.html
+      format.json { ajax_search }
+    end
   end
 
   def update
     @search.update_attributes(search_params)
     search if !@search.valid?
 
-    respond_with @search, location: location
+    respond_with @search, location: location do |format|
+      format.html
+      format.json { ajax_search }
+    end
   end
 
   private
+
+  def ajax_search
+    search
+
+    render json: {
+      results: @tire_search.results,
+      facets: @results.facets,
+      pagination: { total_pages: @results.total_pages }
+    }
+  end
 
   def location
     (@search && @search.valid?) ? @search : nil

@@ -24,7 +24,7 @@ module Concerns::Search
     update_from_url_params(@search)
 
     @search.stats.build unless @search.stats.any?
-    @form = form_decorator_class.new(@search)
+    @form = form_decorator_class.new(@search) unless request.xhr?
   end
 
   def update_from_url_params(search)

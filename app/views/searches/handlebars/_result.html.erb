@@ -1,0 +1,88 @@
+<% thread_url = ForumThreadHtml::THREAD_ROOT %>
+{{id}}
+<div class="result item bb bb-dark row-fluid" data-item-type="{{item_type}}" data-id="{{id}}">
+  <div class="span2">
+
+    {{#if raw_icon}}
+      <div class="item-icon w-{{w}} h-{{h}}">
+        <img src="{{raw_icon}}" alt="item icon">
+        <div class="sockets" data-sockets="{{sockets}}"></div>
+      </div>
+    {{/if}}
+
+    <span class="faded small">
+      <i class='fa fa-clock-o'></i>
+      <time datetime="{{indexed_at}}"></time>
+    </span>
+  </div>
+
+  <div class="span10">
+
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="h2-title">
+          <span class="small faded right">
+            buttons
+          </span>
+          <h2>
+            <a href="<%= thread_url %>/{{thread_id}}" target="_blank">
+              <span class="{{rarity_name}}">
+                {{full_name}}
+              </span>
+            </a>
+          </h2>
+        </div>
+      </div>
+    </div>
+
+    <p class="requirements">{{{requirements}}}</p>
+
+    <div class="row-fluid section small-section">
+
+      <div class="span8">
+        {{#unless isSkill}}
+          <ul class="stats">
+            {{#each visible_stats}}
+              <li data-mod="{{mod_id}}" data-value="{{value}}" class="{{klass}}">
+                {{name}}
+              </li>
+            {{/each}}
+          </ul>
+
+          {{#if corrupted}}
+            <li class="corrupted">Corrupted</li>
+          {{/if}}
+        {{/unless}}
+
+      </div>
+
+      <div class="span4">
+        <ul class="props">
+          {{#each properties}}
+            <li data-{{data_attr}}="{{meta_data}}">
+              <span>{{value}}</span> {{name}}
+            </li>
+          {{/each}}
+        </ul>
+
+      </div>
+
+    </div>
+
+    <hr>
+    <div class="row-fluid">
+      <div class="span8">
+        <p class="footer faded small">
+        result.online_status
+      </p>
+      </div>
+      <div class="span4">
+        <p class="footer">
+          <a href="<%= items_path %>/{{id}}" target="_blank">
+            <i class='fa fa-adjust'></i> Find similar items
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

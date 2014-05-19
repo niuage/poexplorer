@@ -16,7 +16,7 @@ class ItemDecorator < ApplicationDecorator
     props = case source.archetype
     when 0; weapon_stats
     when 1; armour_stats
-    when 2;   misc_stats
+    when 2; misc_stats
     end.to_a
 
     props.concat(stats.select(&:hidden).map { |s| [s.name, s.value, s.mod_id] })
