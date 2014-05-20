@@ -9,14 +9,14 @@ class PM
       @sendPMForItem($(e.currentTarget).closest(".item"))
 
   sendPMForItem: ($item) ->
-    name = $item.find("h2").text()
+    name = $.trim($item.find("h2").text())
 
     $subject = $("<input>").attr("type", "text")
       .val("WTB #{name}")
       .attr("name", "subject")
 
     $content = $("<textarea>")
-      .val(@pmContent($item))
+      .val(@pmContent($item, name))
       .attr("name", "content")
 
     $form = $("<form>")
@@ -33,8 +33,7 @@ class PM
       $form.remove()
     , 500)
 
-  pmContent: ($item) ->
-    name = $item.find("h2").text()
+  pmContent: ($item, name) ->
     account = $item.find("a[data-account]").data("account")
     itemType = $item.data("itemType")
     $stats = $.map($item.find(".stats li"), (stat, i) ->
