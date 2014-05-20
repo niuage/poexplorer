@@ -122,8 +122,11 @@
 </div>
 <% end %>
 
-
-
+<% if @exile.gear_description.present? %>
+<div class="large-section bordered-section description text row-fluid">
+  <%= to_html @exile.gear_description %>
+</div>
+<% end %>
 
 <% if @exile.uniques.any? || @exile.gear.any? %>
 <div class="large-section bordered-section row-fluid">
