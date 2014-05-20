@@ -1,18 +1,8 @@
 class SearchForm
   constructor: ->
     @$form = $("#search-form")
-
-    @$type = @$form.find([
-      "#weapon_search_item_type",
-      "#armour_search_item_type",
-      "#misc_search_item_type"
-    ].join(","))
-
-    @$name = @$form.find([
-      "#weapon_search_base_name",
-      "#armour_search_base_name",
-      "#misc_search_base_name"
-    ].join(","))
+    @$type = @$form.find("#item-type-select")
+    @$name = @$form.find("#base-name-select")
 
     @selectedType = null
 

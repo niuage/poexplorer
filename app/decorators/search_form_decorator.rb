@@ -37,7 +37,8 @@ class SearchFormDecorator < ApplicationDecorator
       form.select :item_type,
         h.options_for_select(item_types_select, form.object.item_type),
         { include_blank: "Any type of #{search}" },
-        class: "span12"
+        class: "span12",
+        id: "item-type-select"
     end
   end
 
@@ -49,7 +50,7 @@ class SearchFormDecorator < ApplicationDecorator
     input :base_name, input_options({
       collection: base_names_select,
       include_blank: "Any name",
-      input_html: { class: classes },
+      input_html: { class: classes, id: "base-name-select" },
       selected: form.object.base_name
     }, options)
   end
@@ -83,7 +84,10 @@ class SearchFormDecorator < ApplicationDecorator
   def item_linked_socket_count(options = {})
     max = options.delete(:max)
     method = max ? :max_linked_socket_count : :linked_socket_count
-    input method, input_options({ as: :integer }, options)
+    input method, input_options(
+      { as: :integer, input_html: { class: "span12 select_#{method}" } },
+      options
+    )
   end
 
   def item_socket_combination(options = {})
