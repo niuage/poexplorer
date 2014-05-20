@@ -1,0 +1,7 @@
+{{#if price_button}}
+  {{#with price_button}}
+    <%= link_to "#", class: "btn {{btn_class}} ttip price" do %>
+      {{price}} x <span class='orb {{orb}}'>{{orb}}</span>
+    <% end %>
+  {{/with}}
+{{/if}}

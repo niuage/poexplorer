@@ -106,7 +106,8 @@ class SearchFormDecorator < ApplicationDecorator
     input :rarity_id, input_options({
       collection: h.simple_options_for_select(Rarity),
       selected: form.object.rarity_id,
-      include_blank: "Any rarity"
+      include_blank: "Any rarity",
+      input_html: { class: "span12", id: "rarity-select" }
     }, options)
   end
 
@@ -222,13 +223,13 @@ class SearchFormDecorator < ApplicationDecorator
   end
 
   def order_by_mod_id
-    h.content_tag :div, class: "span3 #{"hide" unless order_by_mod?}" do
-      h.link_to("#", class: "span9 inputy ttip",
+    h.content_tag :div, class: "span4 #{"hide" unless order_by_mod?}" do
+      h.link_to("#", class: "span8 inputy ttip",
         title: "Remove filter",
         data: { mod_sort: "remove" }) do
         "<i class='fa fa-times right'></i>Sorting by mod value".html_safe
       end + \
-      h.content_tag(:p, class: "span3 inputy") do
+      h.content_tag(:p, class: "span4 inputy") do
         "then by"
       end
     end

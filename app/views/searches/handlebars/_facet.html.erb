@@ -1,0 +1,25 @@
+{{#if terms}}
+<div class="facet" data-name="{{name}}">
+  <h3>
+    {{#if resetable}}
+      <%= link_to "reset", "#", class: "reset-facet {{reset_on}}" %>
+    {{/if}}
+
+    {{title}}
+  </h3>
+  <ul>
+    {{#each terms}}
+      <li>
+        <%= link_to "#" do %>
+          <span class="facet-title">
+            <span class="right small tag">
+              {{count}}
+            </span>
+            <span class="facet-name">{{title}}</span>
+          </span>
+        <% end %>
+      </li>
+    {{/each}}
+  </ul>
+</div>
+{{/if}}

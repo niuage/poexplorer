@@ -4,6 +4,6 @@
   // App.PM.setup("#results");
 <% end %>
 
-<div id="results" class="<%= @layout.to_class %>">
+<div id="results" class="<%= @layout.to_class %>" data-size="<%= @layout.size %>">
   <%= render partial: "searches/result", collection: results %>
 </div>

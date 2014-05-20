@@ -37,6 +37,8 @@ body {
 #left-sidebar {
   padding-top: 31px;
 
+  &.loading { opacity: 0.8 }
+
   h1 {
     word-wrap: break-word;
     margin-bottom: 24px;

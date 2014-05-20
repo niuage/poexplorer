@@ -6,11 +6,15 @@
 
 <%#= render "searches/results_and_facets" %>
 
-<div id="results" class="<%= @layout.to_class %>">
+<div id="results" class="<%= @layout.to_class %>" data-size="<%= @layout.size %>">
 </div>
 
 <script id="result-template" type="text/x-handlebars-template">
   <%= render "searches/handlebars/result" %>
+</script>
+
+<script id="facet-template" type="text/x-handlebars-template">
+  <%= render "searches/handlebars/facet" %>
 </script>
 
 <script id="no-results-template" type="text/x-handlebars-template">

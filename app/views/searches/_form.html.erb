@@ -41,12 +41,12 @@
 <% end %>
 
 <% content_for :dom_ready do %>
+  App.Item.cacheTemplates();
+  App.AjaxForm.setup();
+  $("#search-form").submit();
+
   App.SearchForm.setup();
   App.InputHighlighter.setup();
   App.ModToggle.setup();
   App.ModSorter.setup();
-  App.Item.cacheTemplates()
-  App.AjaxForm.setup();
-
-  $("#search-form").submit();
 <% end %>

@@ -1,5 +1,5 @@
 class Item
-  constructor: (@item) ->
+  constructor: (@item, @layoutSize) ->
 
   toJson: ->
     id: @item.id
@@ -17,8 +17,35 @@ class Item
     isSkill: @isSkill()
     properties: @properties()
     account: @account()
+    price_button: @priceButton()
+    verify_button: @verifyButton()
+    pm_button: @pmButton()
+    layout_size: @layoutSize # might not be needed
 
   # Helpers
+
+  layoutSize: ->
+
+
+  priceButton: ->
+    return if $.isEmptyObject(@item.price)
+
+    [orb, price] = [null, null]
+
+    $.each @item.price, (_orb, _price) -> orb = _orb; price = _price
+
+    price: price
+    orb: orb
+    btn_class: @btnClass()
+
+  verifyButton: ->
+    id: @item.id
+    btn_class: @btnClass()
+
+  pmButton: ->
+
+  btnClass: ->
+    "btn-#{@layoutSize}" if @layoutSize != "large"
 
   properties: ->
     props = switch @item.archetype
@@ -118,7 +145,7 @@ class Item
     Item.templates["account"] = Handlebars.compile($("#account-template").html())
     Item.templates["no-results"] = Handlebars.compile($("#no-results-template").html())
 
-  @create: (item) ->
-    new Item(item)
+  @create: (item, layoutSize = "large") ->
+    new Item(item, layoutSize)
 
 @App.Item = Item

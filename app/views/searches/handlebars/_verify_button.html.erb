@@ -1,0 +1,8 @@
+{{#with verify_button}}
+  <%= link_to "/items/{{id}}/verify",
+        class: "btn btn-warning {{btn_class}} ttip verify",
+        title: "Verify this item",
+        data: { placement: "top", container: "body" } do
+    content_tag(:i, "", class: "fa fa-check")
+  end %>
+{{/with}}
