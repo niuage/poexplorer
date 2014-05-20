@@ -73,7 +73,7 @@ class AjaxForm
       $.each results, (i, result) =>
         @$results.append @resultTemplate(App.Item.create(result).toJson())
     else
-      self.$results.append App.Item.templates["no-results"]()
+      @$results.append App.Item.templates["no-results"]()
 
   beforeSubmit: ->
     @$results.addClass("loading")
