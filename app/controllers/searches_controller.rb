@@ -57,6 +57,9 @@ class SearchesController < ApplicationController
     render json: {
       results: @tire_search.results,
       facets: @results.facets,
+      stats: @search.stats.map do |stat|
+        { mod_id: stat.mod_id, id: stat.id }
+      end,
       page: {
         path: @search.persisted? ? search_path : new_polymorphic_search_path,
         formPath: polymorphic_path(@search),

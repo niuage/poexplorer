@@ -131,10 +131,21 @@ class AjaxForm
     @$sidebar.removeClass("loading")
     @$form.find("input[type=submit]").removeAttr("disabled")
 
-    $removedStats = @$form.find(".nested-fields [id$=_destroy][value=1]")
+    $nestedFields = @$form.find(".nested-fields")
+
+    $removedStats = $nestedFields.find("[id$=_destroy][value=1]")
       .closest(".nested-fields")
     $removedStats.next("input").remove()
     $removedStats.remove()
+
+    # $.each $nestedFields, (i, e) ->
+    #   $field = $(e)
+    #   name = $field.find("input[name*=stats_attributes]").attr("name")
+    #   if name
+    #     name = name.replace(/(.*\[stats_attributes\]\[\d+\]).*/, "$1[id]")
+    #     $field.after $("<input>").attr
+    #       type: "hidden"
+    #       name: name,
 
   layoutSize: ->
     @$results.data("size")
