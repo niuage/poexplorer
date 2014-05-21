@@ -1,4 +1,4 @@
-<%= simple_form_for @search, html: { id: "search-form" } do |f| %>
+<%= simple_form_for @search, url: polymorphic_path(@search, first: true), html: { id: "search-form" } do |f| %>
   <% @form.form = f %>
 
   <%= render @form %>
@@ -38,12 +38,17 @@
   </div>
 
   <%= f.input :order_by_mod_id, as: :hidden, input_html: { id: "order-by-mod-id" } %>
+
+  <%= hidden_field_tag :page, nil, id: "search-page" %>
 <% end %>
 
 <% content_for :dom_ready do %>
   App.Item.cacheTemplates();
   App.AjaxForm.setup();
-  $("#search-form").submit();
+  $("#search-form").trigger({
+    type: "submit",
+    page: '<%= params[:page].to_i %>'
+  });
 
   App.SearchForm.setup();
   App.InputHighlighter.setup();

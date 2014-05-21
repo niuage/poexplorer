@@ -29,6 +29,10 @@
   <%= render "searches/handlebars/account" %>
 </script>
 
+<script id="show-more-template" type="text/x-handlebars-template">
+  <%= render "searches/handlebars/show_more" %>
+</script>
+
 <% content_for :dom_ready do %>
   App.OnlineStatus.setup("#results")
 

@@ -3,6 +3,10 @@ class ArmourSearchesController < ::SearchesController
     ArmourSearch
   end
 
+  def new_polymorphic_search_path
+    new_armour_search_path
+  end
+
   def search_params
     params[:armour_search]
   end

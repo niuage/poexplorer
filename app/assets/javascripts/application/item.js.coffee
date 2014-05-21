@@ -144,6 +144,7 @@ class Item
     Item.templates["requirements"] = Handlebars.compile($("#requirements-template").html())
     Item.templates["account"] = Handlebars.compile($("#account-template").html())
     Item.templates["no-results"] = Handlebars.compile($("#no-results-template").html())
+    Item.templates["show-more"] = Handlebars.compile($("#show-more-template").html())
 
   @create: (item, layoutSize = "large") ->
     new Item(item, layoutSize)

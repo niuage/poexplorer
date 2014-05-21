@@ -8,6 +8,9 @@
         <%= account_name %> characters
         (<%= link_to "Edit account", edit_user_account_path(current_user) %>)
       </h2>
+
+      <p class="text">Adding characters allows you to mark them as online manually.</p>
+
       <%= render "players/players_listing",
             players: @user.players,
             add_character: true

@@ -3,6 +3,10 @@ class MiscSearchesController < ::SearchesController
     MiscSearch
   end
 
+  def new_polymorphic_search_path
+    new_misc_search_path
+  end
+
   def search_params
     params[:misc_search]
   end

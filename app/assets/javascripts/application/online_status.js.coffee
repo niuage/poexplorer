@@ -27,7 +27,7 @@ class OnlineStatus
 
     players
 
-  updateAccountStatuses: (accountNames = nil) ->
+  updateAccountStatuses: (accountNames = null) ->
     self = @
     accountNames = accountNames || @accountNames()
 

@@ -23,8 +23,8 @@ class SearchesController < ApplicationController
 
   def create
     @search = typed_search.new(search_params)
-    @search.save
-    search if !@search.valid?
+    @search.save unless first_request?
+    search unless @search.valid?
 
     respond_with @search, location: location do |format|
       format.html
@@ -34,7 +34,7 @@ class SearchesController < ApplicationController
 
   def update
     @search.update_attributes(search_params)
-    search if !@search.valid?
+    search unless @search.valid?
 
     respond_with @search, location: location do |format|
       format.html
@@ -44,15 +44,29 @@ class SearchesController < ApplicationController
 
   private
 
+  def first_request?
+    request.xhr? && params[:first]
+  end
+
   def ajax_search
     search
+
+    page = params[:page].to_i
+    search_path = polymorphic_path(@search, page: page > 1 ? page : nil)
 
     render json: {
       results: @tire_search.results,
       facets: @results.facets,
-      pagination: {
-        total_pages: @results.total_pages,
-        current_page: @results.current_page
+      page: {
+        path: @search.persisted? ? search_path : new_polymorphic_search_path,
+        formPath: polymorphic_path(@search),
+        current: @results.current_page,
+        title: @search.to_s,
+        persisted: @search.persisted?,
+        results: {
+          totalPages: @results.total_pages,
+          totalCount: @results.total_count,
+        }
       }
     }
   end

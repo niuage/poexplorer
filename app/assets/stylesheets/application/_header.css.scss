@@ -16,7 +16,7 @@
     z-index: 10001;
   }
 
-  #inner-header {
+  .inner-header {
     border-bottom: 1px solid $border-bottom-color;
     background: $header-color;
 //    @include box-shadow(0 1px 3px -2px rgba(0, 0, 0, 0.7));
@@ -190,7 +190,7 @@
     }
   }
 
-  #inner-header {
+  .inner-header {
     background: $sub-header-color image-url("subbg.png") center center repeat-y;
     border-bottom: 1px solid $sub-header-bottom-border-color;
 

@@ -7,7 +7,10 @@ module Elastic
 
     def initialize(search, options)
       @search = search
-      @page = (options[:page] || 1).to_i
+
+      @page = (options[:page].presence || 1).to_i
+      @page = 1 if @page < 1
+
       self.per_page = options[:per_page]
 
       @context = nil
