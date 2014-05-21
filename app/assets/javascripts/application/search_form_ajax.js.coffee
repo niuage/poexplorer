@@ -29,10 +29,6 @@ class AjaxForm
       @updateTotalCount(e.page)
       @setPageNb(e.page.current)
 
-    @$form.on "click", "input[type=submit]", (e) =>
-      e.preventDefault()
-      @$form.trigger({ type: "submit", page: @$form.find("#search-page").val() })
-
     $("body").on "submit", "#search-form", (e) ->
       e.preventDefault()
       return false if self.working
