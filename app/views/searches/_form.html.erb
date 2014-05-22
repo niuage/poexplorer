@@ -43,12 +43,14 @@
 <% end %>
 
 <% content_for :dom_ready do %>
-  App.Item.cacheTemplates();
-  App.AjaxForm.setup();
-  $("#search-form").trigger({
-    type: "submit",
-    page: '<%= params[:page].to_i %>'
-  });
+  <% if !@form.similar? %>
+    App.Item.cacheTemplates();
+    App.AjaxForm.setup();
+    $("#search-form").trigger({
+      type: "submit",
+      page: '<%= params[:page].to_i %>'
+    });
+  <% end %>
 
   App.SearchForm.setup();
   App.InputHighlighter.setup();

@@ -1,3 +1,5 @@
-<%= link_to "#", class: "send-pm btn {{btn_class}}" do %>
-  PM <i class="fa fa-comments-o"></i>
-<% end %>
+{{#with pm_button}}
+  <%= link_to "#", class: "send-pm btn {{btn_class}}" do %>
+    PM <i class="fa fa-comments-o"></i>
+  <% end %>
+{{/with}}

@@ -1,12 +1,12 @@
 class ViewLayout < ApplicationDecorator
   SIZES = {
-    large:  { param: "l", name: "Large layout", ico: :l_layout },
-    small:  { param: "s", name: "Small layout", ico: :s_layout }
+    large:  { param: "l", name: "Large layout", ico: "fa-list-ul" },
+    small:  { param: "s", name: "Small layout", ico: "fa-list" }
   }
 
   TIMES = {
-    day:   { param: "day",   name: "Day",   ico: :day_layout },
-    night: { param: "night", name: "Night", ico: :night_layout }
+    day:   { param: "day",   name: "Day",   ico: "fa-lightbulb-o" },
+    night: { param: "night", name: "Night", ico: "fa-moon-o" }
   }
 
   attr_accessor :size, :time, :session, :params
@@ -76,14 +76,27 @@ class ViewLayout < ApplicationDecorator
 
   def buttons
     buttons = ""
-    (sizes.merge(times)).each do |k, l|
-      buttons += h.content_tag :li do
-        h.link_to(h.url_for((@params).merge layout: l[:param]),
-          class: "ttip ico ir view_layout #{l[:ico]} #{ "current" if size?(k) || time?(k) }") do
-          (l[:name] + h.content_tag(:span, "", class: "ico #{l[:ico]}")).html_safe
+
+    {
+      size: sizes,
+      time: times
+    }.each do |type, layouts|
+      layouts.each do |name, layout|
+
+        klasses = ["view-layout"]
+        klasses << "current" if size?(name) || time?(name)
+
+        buttons += h.content_tag :li do
+          h.link_to(h.url_for((@params).merge layout: layout[:param]),
+            class: klasses,
+            data: { layout: layout[:param], type: type }) do
+            "<i class='fa #{layout[:ico]}'></i>".html_safe
+          end
         end
+
       end
     end
+
     h.content_tag :ul, class: "layouts" do
       buttons.html_safe
     end

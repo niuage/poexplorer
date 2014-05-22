@@ -145,44 +145,6 @@
   @extend .grey-box;
 }
 
-.layout_s {
-  .item {
-    .span12 { min-height: 0; }
-
-    .h2-title { margin-bottom: 2px; }
-
-    h2 {
-      font-size: 20px;
-    }
-
-    li, p {
-      margin-bottom: 1px;
-      font-size: 13px;
-    }
-
-    li {
-      i.before { left: -12px; top: 4px }
-    }
-
-    .requirements {
-      padding: 5px 0 4px;
-      height: 21px;
-    }
-
-    .section { margin: 0; }
-
-    .footer { padding: 4px 0; }
-
-    hr {
-      margin: 3px 0 0px;
-    }
-
-    .item-icon img {
-      max-height: 135px;
-    }
-  }
-}
-
 .fa-loading {
   background: image-url("loader.gif") 0 0;
 }

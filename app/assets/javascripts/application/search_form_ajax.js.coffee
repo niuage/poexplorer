@@ -47,7 +47,6 @@ class AjaxForm
           page = data.page
 
           self.resetPageHtml()
-          layoutSize = self.layoutSize()
 
           self.renderItems(data.results, data.page)
           self.renderFacets(data.facets)
@@ -96,6 +95,7 @@ class AjaxForm
       return if @working
       $a = $(e.currentTarget)
       page = $a.data("page")
+      return unless page
       @$form.find("#search-page").val(page)
       @$form.trigger({ type: "submit", page: page })
       $('html, body').stop(true).animate(
@@ -111,10 +111,12 @@ class AjaxForm
 
   renderItems: (results, page) ->
     if results && results.length > 0
+      layoutSize = @layoutSize()
+
       @renderPagination(page)
 
       $.each results, (i, result) =>
-        @$results.append @resultTemplate(App.Item.create(result).toJson())
+        @$results.append @resultTemplate(App.Item.create(result, layoutSize).toJson())
 
       @renderPagination(page)
     else
@@ -129,7 +131,8 @@ class AjaxForm
       App.Item.templates["pagination"](
         nextPage: if currentPage < page.total then nextPage else null,
         previousPage: if currentPage > 1 then previousPage else null,
-        currentPage: currentPage
+        currentPage: currentPage,
+        totalCount: page.results.totalCount
       )
     )
 

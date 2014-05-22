@@ -5,11 +5,13 @@
       <a href="" id="previous-page" class="span12 nav-link text-center" data-page="{{previousPage}}">
         <span class="page"><i class="fa fa-caret-left"></i> Prev</span>
       </a>
+    {{else}}
+      <div class="nav-link faded text-center">Prev</div>
     {{/if}}
   </div>
 
-  <div class="span8 text-center">
-    Page {{currentPage}}
+  <div class="span8 text-center faded">
+    Page {{currentPage}} &mdash; {{totalCount}} results
   </div>
 
 

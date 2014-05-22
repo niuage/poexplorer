@@ -20,12 +20,8 @@ class Item
     price_button: @priceButton()
     verify_button: @verifyButton()
     pm_button: @pmButton()
-    layout_size: @layoutSize # might not be needed
 
   # Helpers
-
-  layoutSize: ->
-
 
   priceButton: ->
     return if $.isEmptyObject(@item.price)
@@ -43,6 +39,7 @@ class Item
     btn_class: @btnClass()
 
   pmButton: ->
+    btn_class: @btnClass()
 
   btnClass: ->
     "btn-#{@layoutSize}" if @layoutSize != "large"

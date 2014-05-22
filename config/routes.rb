@@ -9,6 +9,9 @@ Poesearch::Application.routes.draw do
       get :link_character
       post :validate_account
     end
+    collection do
+      get :update_layout
+    end
     resource :account
   end
 

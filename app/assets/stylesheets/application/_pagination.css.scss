@@ -6,21 +6,31 @@ $bottom-pagination-color: darken($pagination-color, 2%);
   border: 1px solid $pagination-border-color;
   background: $bottom-pagination-color;
   border-radius: 2px;
-  margin: 10px 0 16px;
+  margin: 10px 0;
 
   .ajax-pagination {
     font-size: 14px;
     line-height: 30px;
+
+    .nav-link { color: white; }
   }
 
   .pagination, .ajax-pagination {
-    a {
+    a, .nav-link {
       display: block;
       padding: 0 12px;
 
       &:hover {
         background-color: $pagination-border-color;
         color: white;
+      }
+    }
+
+    .nav-link {
+      background: lighten($pagination-border-color, 10%);
+
+      &.faded {
+        opacity: 0.7
       }
     }
   }

@@ -13,6 +13,11 @@ module ApplicationHelper
     "#{"#{@module_name} " if @module_name}c-#{controller.controller_name} a-#{controller.action_name} #{"signed_in" if user_signed_in?}"
   end
 
+  def body_layout(klasses = nil)
+    return "" unless @layout
+    "class='#{body_classes} #{klasses}' data-time='#{@layout.layout_time}' data-size='#{@layout.layout_size}'".html_safe
+  end
+
   def page_title(title = nil)
     content_for(:title, internal_title(title))
   end

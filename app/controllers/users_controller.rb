@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  respond_to :html
+  respond_to :html, :json
 
-  before_filter :find_user, except: [:index]
-  before_filter :authorize, except: [:index, :show]
+  before_filter :find_user, except: [:index, :update_layout]
+  before_filter :authorize, except: [:index, :show, :update_layout]
 
   def index
     @users = User.page(params[:page]).per(20)
@@ -37,6 +37,11 @@ class UsersController < ApplicationController
     @user.save
 
     redirect_to @user, notice: "The account '#{account}'' was linked to this account successfully!"
+  end
+
+  def update_layout
+    view_layout
+    render json: { success: true }
   end
 
   private
