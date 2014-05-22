@@ -57,6 +57,10 @@ hr {
   background: #3b3b45;
   border-color: #24242B;
 
+  .ajax-pagination {
+    a:hover { background: #24242B; }
+  }
+
   .pagination {
     span:hover, span.current {
       background: #24242B;

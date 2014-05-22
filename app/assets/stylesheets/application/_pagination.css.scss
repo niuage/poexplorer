@@ -8,13 +8,25 @@ $bottom-pagination-color: darken($pagination-color, 2%);
   border-radius: 2px;
   margin: 10px 0 16px;
 
-  .pagination {
-    margin: 0;
+  .ajax-pagination {
+    font-size: 14px;
+    line-height: 30px;
+  }
 
+  .pagination, .ajax-pagination {
     a {
       display: block;
       padding: 0 12px;
+
+      &:hover {
+        background-color: $pagination-border-color;
+        color: white;
+      }
     }
+  }
+
+  .pagination {
+    margin: 0;
 
     span {
       font-size: 14px;

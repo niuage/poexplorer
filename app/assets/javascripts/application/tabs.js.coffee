@@ -1,3 +1,5 @@
+# Search tabs
+
 class Tabs
   constructor: (tabs_wrapper) ->
     @$wrapper = $(tabs_wrapper)

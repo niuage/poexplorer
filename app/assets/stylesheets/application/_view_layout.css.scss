@@ -3,7 +3,9 @@ a.ico { position: relative; }
 a.view_layout {
   &.current, &:hover {
     background: $pagination-border-color;
+  }
 
+  &.current {
     .ico {
       &.s_layout { background-position: 0 -45px; }
       &.l_layout { background-position: 0 -30px; }
@@ -24,8 +26,8 @@ a.view_layout {
   }
 
   .ico {
-    top: 10px;
-    left: 12px;
+    top: 17px;
+    left: 17px;
   }
 
   span.ico {
@@ -36,8 +38,7 @@ a.view_layout {
   }
 }
 
-.pagination-bar {
-
+#sub-header, .pagination-bar {
   .layouts {
     float: right;
 
@@ -57,4 +58,21 @@ a.view_layout {
     }
   }
 
+}
+
+#sub-header {
+  .layouts {
+    li a {
+      height: 49px;
+      width: 49px;
+
+      &.s_layout {
+        border-right: 1px solid #112E4D;
+      }
+
+      &:hover, &.current {
+        background: #172951;
+      }
+    }
+  }
 }

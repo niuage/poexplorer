@@ -1,3 +1,7 @@
+# Only for similar searches
+# and items/show
+# shows the difference between the items stats and the items in the results
+
 class SimilarMods
   constructor: ->
     if $("body").is(".c-items.a-show")

@@ -7,6 +7,9 @@
 <%#= render "searches/results_and_facets" %>
 
 <div id="results" class="<%= @layout.to_class %>" data-size="<%= @layout.size %>">
+  <div class="no-results">
+    <p class="text-center"><i class="fa fa-refresh fire fa-spin fa-3x"></i></p>
+  </div>
 </div>
 
 <script id="result-template" type="text/x-handlebars-template">
@@ -29,8 +32,8 @@
   <%= render "searches/handlebars/account" %>
 </script>
 
-<script id="show-more-template" type="text/x-handlebars-template">
-  <%= render "searches/handlebars/show_more" %>
+<script id="pagination-template" type="text/x-handlebars-template">
+  <%= render "searches/handlebars/pagination" %>
 </script>
 
 <% content_for :dom_ready do %>

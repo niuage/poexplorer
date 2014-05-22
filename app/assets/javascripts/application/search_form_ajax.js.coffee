@@ -81,22 +81,25 @@ class AjaxForm
 
   setupFacets: ->
     @$sidebar.on "click", ".facet li a", (e) =>
+      e.preventDefault()
+      return if @working
       App.FacetHandler.click(e, @$form)
 
     @$sidebar.on "click", ".facet h3 a", (e) =>
+      e.preventDefault()
+      return if @working
       App.FacetHandler.reset(e, @$form)
 
   setupPagination: ->
-    @$results.on "click", "#show-more", (e) =>
+    @$results.on "click", ".nav-link", (e) =>
       e.preventDefault()
+      return if @working
       $a = $(e.currentTarget)
       page = $a.data("page")
       @$form.find("#search-page").val(page)
-      console.log "trigger submit with ", page
       @$form.trigger({ type: "submit", page: page })
-      $a.remove()
-      $('html, body').animate(
-        scrollTop: @$results.offset().top - 93,
+      $('html, body').stop(true).animate(
+        scrollTop: @$results.offset().top - 60,
         500
       )
 
@@ -108,15 +111,26 @@ class AjaxForm
 
   renderItems: (results, page) ->
     if results && results.length > 0
+      @renderPagination(page)
+
       $.each results, (i, result) =>
         @$results.append @resultTemplate(App.Item.create(result).toJson())
+
       @renderPagination(page)
     else
       @$results.append App.Item.templates["no-results"]()
 
   renderPagination: (page) ->
+    nextPage = Math.min(page.current + 1, page.total)
+    previousPage = Math.max(page.current - 1, 1)
+    currentPage = page.current
+
     @$results.append(
-      App.Item.templates["show-more"]({ currentPage: page.current + 1 })
+      App.Item.templates["pagination"](
+        nextPage: if currentPage < page.total then nextPage else null,
+        previousPage: if currentPage > 1 then previousPage else null,
+        currentPage: currentPage
+      )
     )
 
   beforeSubmit: ->
@@ -138,24 +152,13 @@ class AjaxForm
     $removedStats.next("input").remove()
     $removedStats.remove()
 
-    # $.each $nestedFields, (i, e) ->
-    #   $field = $(e)
-    #   name = $field.find("input[name*=stats_attributes]").attr("name")
-    #   if name
-    #     name = name.replace(/(.*\[stats_attributes\]\[\d+\]).*/, "$1[id]")
-    #     $field.after $("<input>").attr
-    #       type: "hidden"
-    #       name: name,
-
   layoutSize: ->
     @$results.data("size")
 
   setPageNb: (nb) ->
     if nb = parseInt(nb)
-      console.log "set page nb ", nb
       @$form.find("#search-page").val(nb)
     else
-      console.log "erase pg nb"
       @$form.find("#search-page").val("")
 
   updateURL: (page) ->

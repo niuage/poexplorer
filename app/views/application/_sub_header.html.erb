@@ -7,9 +7,14 @@
         </span>
 
         <span class="span10">
-          <ul class="clearfix main-menu">
-            <%= yield :main_menu %>
-          </ul>
+          <div class="row-fluid">
+            <ul class="span8 clearfix main-menu">
+              <%= yield :main_menu %>
+            </ul>
+            <div class="span4 hidden-phone">
+              <%= @layout.buttons if @layout %>
+            </div>
+          </div>
         </span>
 
       </div>

@@ -1,0 +1,24 @@
+<div class="pagination-bar ajax row-fluid">
+  <div class="ajax-pagination">
+  <div class="span2">
+    {{#if previousPage}}
+      <a href="" id="previous-page" class="span12 nav-link text-center" data-page="{{previousPage}}">
+        <span class="page"><i class="fa fa-caret-left"></i> Prev</span>
+      </a>
+    {{/if}}
+  </div>
+
+  <div class="span8 text-center">
+    Page {{currentPage}}
+  </div>
+
+
+  <div class="span2">
+    {{#if nextPage}}
+      <a href="" id="next-page" class="span12 nav-link text-center" data-page="{{nextPage}}">
+        <span class="page">Next <i class="fa fa-caret-right"></i></span>
+      </a>
+    {{/if}}
+  </div>
+  </div>
+</div>

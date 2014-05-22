@@ -64,14 +64,12 @@ class FacetHandler
       @$form.submit()
 
   @click: (event, @$form) ->
-    event.preventDefault()
     @$e = $(event.currentTarget)
     facetName = @$e.closest("[data-name]").data("name")
 
     @clicks[facetName]()
 
   @reset: (event, @$form) ->
-    event.preventDefault()
     @$e = $(event.currentTarget)
     facetName = @$e.closest("[data-name]").data("name")
 
