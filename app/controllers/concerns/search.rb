@@ -3,7 +3,6 @@ module Concerns::Search
 
   def search
     build_search
-    session[:current_league_id] = @search.league_id
 
     @searchable = Elastic::ItemSearch.new(@search, params)
     @tire_search = @searchable.tire_search
@@ -25,6 +24,8 @@ module Concerns::Search
 
     @search.stats.build unless @search.stats.any?
     @form = form_decorator_class.new(@search) unless request.xhr?
+
+    session[:current_league_id] = @search.league_id
   end
 
   def update_from_url_params(search)

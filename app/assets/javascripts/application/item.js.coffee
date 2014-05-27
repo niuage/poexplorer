@@ -112,7 +112,10 @@ class Item
     Handlebars.templates.account { account: @item.account }
 
   fullName: ->
-    @item.full_name
+    fullname = @item.name
+    if @item.base_name && @item.base_name != @item.name
+      fullname = fullname + " #{@item.base_name}"
+    fullname
 
   rarityName: ->
     @item.rarity_name.toLowerCase()

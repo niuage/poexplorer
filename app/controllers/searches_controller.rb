@@ -18,7 +18,7 @@ class SearchesController < ApplicationController
   end
 
   def new
-    search
+    build_search
   end
 
   def create
