@@ -54,10 +54,15 @@
 
 <% content_for :dom_ready do %>
   <% if !@form.similar? %>
+
     <% if Rails.env.development? %>
-      App.Item.cacheTemplates();
+      // App.Item.cacheTemplates();
     <% end %>
-    App.AjaxForm.setup();
+
+    Handlebars.templates.stat = Handlebars.compile($("#stat-template").html())
+
+    App.AjaxForm.setup('<%= @search.model_name %>');
+
     $("#search-form").trigger({
       type: "submit",
       page: '<%= params[:page].to_i %>'

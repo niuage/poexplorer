@@ -1,3 +1,10 @@
+<%# ################################# %>
+<%# When precompiling this template # %>
+<%# replace all the occurences ###### %>
+<%# of weapon/armour/misc_search #### %>
+<%# with {{object_name}} ############ %>
+<%# ################################# %>
+
 <%# generating the nested field %>
 <%
 new_search = @search.class.new
@@ -15,5 +22,5 @@ assoc = :stats
 <%# outputing the nested field %>
 <%= nested_fields %>
 {{#if id}}
-<input id="<%= object_name %>_<%= assoc %>_attributes_{{order}}_id" name="<%= object_name %>[<%= assoc %>_attributes][{{order}}][id]" type="hidden" value="{{id}}">
+<input id="{{object_name}}_stats_attributes_{{order}}_id" name="{{object_name}}[stats_attributes][{{order}}][id]" type="hidden" value="{{id}}">
 {{/if}}

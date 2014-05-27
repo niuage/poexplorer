@@ -60,7 +60,10 @@ class SearchesController < ApplicationController
       stats: @search.stats.each_with_index.map { |stat, i|
         stat.attributes.slice(
           "id", "mod_id", "value", "max_value", "excluded", "required"
-        ).merge(order: i)
+        ).merge({
+          order: i,
+          object_name: @search.model_name
+        })
       },
       page: {
         path: @search.persisted? ? search_path : new_polymorphic_search_path,

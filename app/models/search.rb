@@ -82,4 +82,8 @@ class Search < ActiveRecord::Base
   def full_name
     "#{self.name || ""} #{self.base_name}"
   end
+
+  def model_name
+    @model_name ||= self.class.name.underscore
+  end
 end

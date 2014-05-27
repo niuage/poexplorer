@@ -139,7 +139,11 @@ class Item
     Handlebars.templates.item = Handlebars.compile($("#result-template").html())
     Handlebars.templates.no_results = Handlebars.compile($("#no-results-template").html())
     Handlebars.templates.pagination = Handlebars.compile($("#pagination-template").html())
-    Handlebars.templates.stat = Handlebars.compile($("#stat-template").html())
+
+    # This template NEEDS to be precompiled because of the
+    # different search types, and the impossibility
+    # to easily override the field names
+    # Handlebars.templates.stat = Handlebars.compile($("#stat-template").html())
 
   @create: (item, layoutSize = "large") ->
     new Item(item, layoutSize)

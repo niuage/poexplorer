@@ -12,10 +12,11 @@
   </div>
 </div>
 
-<% if Rails.env.development? %>
 <script id="stat-template" type="text/x-handlebars-template">
   <%= render "searches/handlebars/stat" %>
 </script>
+
+<% if Rails.env.development? %>
 
 <script id="result-template" type="text/x-handlebars-template">
   <%= render "searches/handlebars/result" %>
@@ -27,10 +28,6 @@
 
 <script id="no-results-template" type="text/x-handlebars-template">
   <%= render "searches/handlebars/no_results" %>
-</script>
-
-<script id="requirements-template" type="text/x-handlebars-template">
-  <%= render "searches/handlebars/requirements" %>
 </script>
 
 <script id="account-template" type="text/x-handlebars-template">

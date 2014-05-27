@@ -236,7 +236,7 @@ class SearchFormDecorator < ApplicationDecorator
         data: { mod_sort: "remove" }) do
         "<i class='fa fa-times right'></i>Sorting by mod value".html_safe
       end + \
-      h.content_tag(:p, class: "span4 inputy") do
+      h.content_tag(:p, class: "span4 inputy text-center") do
         "then by"
       end
     end

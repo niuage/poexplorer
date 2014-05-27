@@ -1,5 +1,5 @@
 class AjaxForm
-  constructor: ->
+  constructor: (@modelName) ->
     @$results = $("#results")
     @$sidebar = $("#left-sidebar")
     @$form = $("#search-form")
@@ -190,9 +190,11 @@ class AjaxForm
       return if @working
       e.preventDefault()
       order = new Date().getTime()
-      @$stats.append @statTemplate({
-        order: order
-      })
+
+      new_stat = { order: order }
+      new_stat[@modelName] = true
+
+      @$stats.append @statTemplate(new_stat)
       @$form.trigger('cocoon:after-insert', [@$stats.find("#mod_#{order}")])
 
   layoutSize: ->
@@ -218,7 +220,7 @@ class AjaxForm
     App.PM.setup("#results")
     @$results.find("time").timeago()
 
-  @setup: ->
-    new AjaxForm()
+  @setup: (modelName = "") ->
+    new AjaxForm(modelName)
 
 @App.AjaxForm = AjaxForm
