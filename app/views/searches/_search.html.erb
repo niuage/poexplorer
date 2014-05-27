@@ -40,9 +40,9 @@
 <% end %>
 
 <% content_for :dom_ready do %>
-  App.OnlineStatus.setup("#results")
+  App.OnlineStatus.setup("#results");
 
-  App.NumberFormatter.setup();
+  App.NumberFormatter.onCountChange();
   App.Tabs.setup(".search-tabs");
   App.Layout.setup();
 <% end %>

@@ -14,6 +14,7 @@
 <%= render "searches/results_and_facets", no_facet_link: true %>
 
 <% content_for :dom_ready do %>
+  App.NumberFormatter.setup();
   App.SimilarMods.setup()
 <% end %>
 

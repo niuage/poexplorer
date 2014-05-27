@@ -20,7 +20,8 @@ class League < ActiveRecord::Base
     "anarchy",
     "onslaught",
     "domination",
-    "nemesis"
+    "nemesis",
+    "2 Week Charity Event"
   ]
 
   # after_save :update_all_items

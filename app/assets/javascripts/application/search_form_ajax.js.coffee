@@ -75,9 +75,8 @@ class AjaxForm
 
   updateTotalCount: (page) ->
     @$innerHeader ||= $("#sub-header")
-    @$innerHeader.find("span.tag span").text(
-      App.NumberFormatter.format(page.results.totalCount)
-    )
+    @$innerHeader.find("span.tag span").text(page.results.totalCount)
+    $("body").trigger('countChanged')
 
   updateFormAction: (page) ->
     @$form.attr
