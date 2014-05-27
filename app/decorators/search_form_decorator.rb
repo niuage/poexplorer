@@ -158,36 +158,39 @@ class SearchFormDecorator < ApplicationDecorator
       form.select :mod_id,
         h.grouped_options_for_select(mod_select, form.object.mod_id),
         { include_blank: "Mods" },
-        class: "span12 no-select2"
+        class: "span12 no-select2",
+        data: { pos: "{{order}}" }
     end
   end
 
   def stat_value(options = {})
     options.reverse_merge!({ width: 2 })
-    input :value, input_options({}, options)
+    input :value, input_options({
+      placeholder: "min"
+    }, options)
   end
 
-  def stat_max_value
-    input :max_value, input_options({}, { width: 2 })
+  def stat_max_value(options = {})
+    input :max_value, input_options({
+      placeholder: "max"
+    }, options.reverse_merge({ width: 2 }))
   end
 
   # Stat requirements
 
   def stat_requirement(stat, options = {})
-    input(stat, input_options({
-    }, options)) + \
-
-    input(:"max_#{stat}", input_options({
-    }, options))
+    input(stat, input_options({}, options)) + \
+    input(:"max_#{stat}", input_options({}, options))
   end
 
   # end stats requirements
 
-  def excluded
-    button_checkbox(:excluded,
-      message_checked: "Mod excluded. Click to require.",
-      message_unchecked: "Mod required. Click to exclude.",
-      data: { checked_class: "btn-danger" }
+  def excluded(options = {})
+    button_checkbox(:excluded, {
+        message_checked: "Mod excluded. Click to require.",
+        message_unchecked: "Mod required. Click to exclude.",
+        data: { checked_class: "btn-danger" }
+      }.merge(options)
     ) do
       '<i class="fa fa-check" data-fa-on="fa-minus-circle" data-fa-off="fa-check"></i>'
     end
@@ -264,7 +267,7 @@ class SearchFormDecorator < ApplicationDecorator
     {
       label: false,
       wrapper_html: { class: width(html_options) },
-      input_html: { class: "span12" }
+      input_html: { class: "span12" }.merge(html_options).except(:width)
     }.merge(options)
   end
 
@@ -301,6 +304,10 @@ class SearchFormDecorator < ApplicationDecorator
     classes = options.fetch(:class, [])
     width = options.fetch(:width, 1)
     checkbox_id = "cb-#{attribute}"
+    excluded = options.delete(:excluded)
+
+    cb_options = { class: "hidden", data: { cbid: checkbox_id }}
+    cb_options.merge!(checked: "checked") if excluded
 
     h.link_to("#",
       class: ["span#{width}", "btn", "btn-toggle"].concat(classes),
@@ -312,6 +319,6 @@ class SearchFormDecorator < ApplicationDecorator
     ) do
       yield.html_safe
     end + \
-    form.check_box(attribute, class: "hidden", data: { cbid: checkbox_id })
+    form.check_box(attribute, cb_options)
   end
 end

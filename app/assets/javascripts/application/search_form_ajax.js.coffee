@@ -4,14 +4,14 @@ class AjaxForm
     @$sidebar = $("#left-sidebar")
     @$form = $("#search-form")
     @$submitButton = @$form.find("input[type=submit]")
+    @$stats = @$form.find("#stats")
 
     @currentPage = 1
 
-    resultTemplateHtml = $("#result-template").html()
-    @resultTemplate = Handlebars.compile(resultTemplateHtml)
-
-    facetTemplateHtml = $("#facet-template").html()
-    @facetTemplate = Handlebars.compile(facetTemplateHtml)
+    # templates
+    @resultTemplate = Handlebars.templates.item
+    @facetTemplate = Handlebars.templates.facet
+    @statTemplate = Handlebars.templates.stat
 
     @setupEvents()
 
@@ -21,6 +21,8 @@ class AjaxForm
 
   setupEvents: ->
     self = @
+
+    @modHandling()
 
     @$form.on "itemLoaded", (e) =>
       @updateFormAction(e.page)
@@ -50,6 +52,7 @@ class AjaxForm
 
           self.renderItems(data.results, data.page)
           self.renderFacets(data.facets)
+          self.renderForm(data.stats)
 
           self.$form.trigger(
             type: "itemLoaded",
@@ -58,7 +61,10 @@ class AjaxForm
           )
 
         error: ->
-          alert("An error occured. If the problem persists, contact niuage[at]gmail.com.")
+          self.$results.find(".no-results").remove()
+          self.$results.prepend(
+            $('<div class="no-results">').html("<p>An error occured. If the problem persists, contact niuage[at]gmail.com.</p>")
+          )
 
         complete: ->
           self.complete()
@@ -66,6 +72,8 @@ class AjaxForm
   resetPageHtml: ->
     @$results.html("")
     @$sidebar.html("")
+    @$stats.find(".nested-fields").remove()
+    @$stats.find("input").remove()
 
   updateTotalCount: (page) ->
     @$innerHeader ||= $("#sub-header")
@@ -120,7 +128,15 @@ class AjaxForm
 
       @renderPagination(page)
     else
-      @$results.append App.Item.templates["no-results"]()
+      @$results.append Handlebars.templates.no_results()
+
+  renderForm: (stats) ->
+    @$stats.html("")
+    $.each stats, (i, stat) =>
+      @$stats
+        .append(@statTemplate(stat))
+        .find("select[data-pos='#{stat.order}']")
+        .val(stat.mod_id)
 
   renderPagination: (page) ->
     nextPage = Math.min(page.current + 1, page.total)
@@ -128,7 +144,7 @@ class AjaxForm
     currentPage = page.current
 
     @$results.append(
-      App.Item.templates["pagination"](
+      Handlebars.templates.pagination(
         nextPage: if currentPage < page.total then nextPage else null,
         previousPage: if currentPage > 1 then previousPage else null,
         currentPage: currentPage,
@@ -154,6 +170,30 @@ class AjaxForm
       .closest(".nested-fields")
     $removedStats.next("input").remove()
     $removedStats.remove()
+
+  modHandling: ->
+    @$form.on "click", "[data-remove]", (e) =>
+      e.preventDefault()
+      return if @working
+
+      $remove = $(e.currentTarget)
+      $fields = $remove.closest(".nested-fields")
+      if $remove.data("remove") # hides and set _destroy to 1
+        $remove.prev("input[type=hidden]").val("1")
+        $fields.slideUp()
+      else # the stat can just be removed now
+        $fields.next("input[type=hidden]").remove()
+        $fields.remove()
+      @$form.trigger('cocoon:after-remove', [$fields])
+
+    @$form.on "click", "#add-mod", (e) =>
+      return if @working
+      e.preventDefault()
+      order = new Date().getTime()
+      @$stats.append @statTemplate({
+        order: order
+      })
+      @$form.trigger('cocoon:after-insert', [@$stats.find("#mod_#{order}")])
 
   layoutSize: ->
     @$results.data("size")

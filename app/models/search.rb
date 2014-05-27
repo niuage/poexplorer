@@ -61,7 +61,7 @@ class Search < ActiveRecord::Base
   end
 
   def to_s
-    return "misc item" if type == "MiscSearch"
+    return "misc item" if misc?
     type.downcase.gsub("search", "")
   end
 

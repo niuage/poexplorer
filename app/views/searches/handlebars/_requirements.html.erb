@@ -1,25 +1,27 @@
-{{league_name}}
+{{#with requirements}}
+  {{league_name}}
 
-&mdash;
-
-<span data-sort="level">
-  {{requires_level}} {{level}}
-</span>
-
-{{#if required_stats}}
   &mdash;
 
-  {{#each required_stats}}
-    <span class="{{stat}}">
-      {{value}} {{stat}}
-    </span>
-  {{/each}}
-{{/if}}
-
-{{#if quality}}
-  &mdash;
-
-  <span data-sort="quality">
-    <b>+{{quality}}%</b> Quality
+  <span data-sort="level">
+    {{requires_level}} {{level}}
   </span>
-{{/if}}
+
+  {{#if required_stats}}
+    &mdash;
+
+    {{#each required_stats}}
+      <span class="{{stat}}">
+        {{value}} {{stat}}
+      </span>
+    {{/each}}
+  {{/if}}
+
+  {{#if quality}}
+    &mdash;
+
+    <span data-sort="quality">
+      <b>+{{quality}}%</b> Quality
+    </span>
+  {{/if}}
+{{/with}}

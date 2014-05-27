@@ -1,6 +1,7 @@
 class SearchForm
   constructor: ->
     @$form = $("#search-form")
+    @$stats = @$form.find("#stats")
     @$type = @$form.find("#item-type-select")
     @$name = @$form.find("#base-name-select")
 
@@ -55,6 +56,10 @@ class SearchForm
     @$type.on "change", =>
       $selectedOption = @$type.find(":selected")
       @selectedType = $selectedOption.data("type")
+
+    @$form.on "itemLoaded", (e) =>
+      @$stats.find("select").select2
+        matcher: $.proxy(@typeMatcher, @)
 
     @$type.trigger "change"
 

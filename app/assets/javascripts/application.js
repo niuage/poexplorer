@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require application_vendor
 //= require app
+//= require_tree ./templates
 //= require_tree ./application

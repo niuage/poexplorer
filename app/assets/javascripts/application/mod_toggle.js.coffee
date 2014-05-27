@@ -42,16 +42,20 @@ class ModToggle
   # set the toggle buttons states
   # and setup their click event
   setupToggleButtons: ->
-    self = @
+    @mirrorCheckboxState()
 
-    @$form.find(".btn-toggle").each (i, e) ->
-      $btn = $(e)
-      $cb = self.getCheckbox($btn)
-      self.setButton($btn, $cb.prop("checked"))
-
-    @$form.on "click", ".btn-toggle", (e) ->
-      self.toggleMod($(@))
+    @$form.on "click", ".btn-toggle", (e) =>
+      @toggleMod($(e.currentTarget))
       false
+
+    @$form.on "itemLoaded", (e) =>
+      @mirrorCheckboxState()
+
+  mirrorCheckboxState: ->
+    @$form.find(".btn-toggle").each (i, e) =>
+      $btn = $(e)
+      $cb = @getCheckbox($btn)
+      @setButton($btn, $cb.prop("checked"))
 
   getCheckbox: ($btn) ->
     $btn.siblings("[data-cbid=#{$btn.data("cbid")}]")

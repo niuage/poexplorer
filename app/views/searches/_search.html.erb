@@ -12,6 +12,11 @@
   </div>
 </div>
 
+<% if Rails.env.development? %>
+<script id="stat-template" type="text/x-handlebars-template">
+  <%= render "searches/handlebars/stat" %>
+</script>
+
 <script id="result-template" type="text/x-handlebars-template">
   <%= render "searches/handlebars/result" %>
 </script>
@@ -35,6 +40,7 @@
 <script id="pagination-template" type="text/x-handlebars-template">
   <%= render "searches/handlebars/pagination" %>
 </script>
+<% end %>
 
 <% content_for :dom_ready do %>
   App.OnlineStatus.setup("#results")

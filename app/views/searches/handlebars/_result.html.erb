@@ -44,7 +44,9 @@
       </div>
     </div>
 
-    <p class="requirements">{{{requirements}}}</p>
+    <p class="requirements">
+      <%= render "searches/handlebars/requirements" %>
+    </p>
 
     <div class="row-fluid section small-section">
 
@@ -56,11 +58,10 @@
                 {{name}}
               </li>
             {{/each}}
+            {{#if corrupted}}
+              <li class="corrupted">Corrupted</li>
+            {{/if}}
           </ul>
-
-          {{#if corrupted}}
-            <li class="corrupted">Corrupted</li>
-          {{/if}}
         {{/unless}}
 
       </div>

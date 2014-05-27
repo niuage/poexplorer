@@ -2,9 +2,13 @@ class InputHighlighter
   constructor: ->
     @$form = $("#search-form")
 
+    @$form.on "itemLoaded", (e) =>
+      $.each @getFormElements(@$form.find("#stats")), (i, e) =>
+        @highlight($(e))
+
   highlightSelected: ->
     self = @
-    $inputs = @$form.find("input[type=text], input[type=number], input[type=checkbox], select").filter(":not(.nh)")
+    $inputs = @getFormElements(@$form)
 
     $inputs.each (i, e) ->
       self.highlight($(e))
@@ -51,6 +55,9 @@ class InputHighlighter
 
     # update counter
     $counter.html(section.find(".highlight").length)
+
+  getFormElements: ($root) ->
+    $root.find("input[type=text], input[type=number], input[type=checkbox], select").filter(":not(.nh)")
 
   setup: ->
     @highlightSelected()

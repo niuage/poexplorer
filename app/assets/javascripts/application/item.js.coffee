@@ -20,6 +20,7 @@ class Item
     price_button: @priceButton()
     verify_button: @verifyButton()
     pm_button: @pmButton()
+    corrupted: @item.corrupted
 
   # Helpers
 
@@ -95,13 +96,11 @@ class Item
         meta_data: stat.mod_id
 
   requirements: ->
-    Item.templates["requirements"](
-      league_name: @capitalize(@item.league_name)
-      requires_level: if @item.item_type ==  "Map" then "Level" else "Requires level"
-      level: @item.level
-      required_stats: @requiredStats()
-      quality: @item.quality
-    )
+    league_name: @capitalize(@item.league_name)
+    requires_level: if @item.item_type ==  "Map" then "Level" else "Requires level"
+    level: @item.level
+    required_stats: @requiredStats()
+    quality: @item.quality
 
   requiredStats: ->
     ["dex", "str", "int"].map (stat, i) =>
@@ -110,7 +109,7 @@ class Item
         value: stat_value
 
   account: ->
-    Item.templates["account"] { account: @item.account }
+    Handlebars.templates.account { account: @item.account }
 
   fullName: ->
     @item.full_name
@@ -134,14 +133,13 @@ class Item
     string.charAt(0).toUpperCase() + string.slice(1)
 
   @cacheTemplates: ->
-    return if @templatesCached
-
-    @templatesCached = true
-    Item.templates = {}
-    Item.templates["requirements"] = Handlebars.compile($("#requirements-template").html())
-    Item.templates["account"] = Handlebars.compile($("#account-template").html())
-    Item.templates["no-results"] = Handlebars.compile($("#no-results-template").html())
-    Item.templates["pagination"] = Handlebars.compile($("#pagination-template").html())
+    Handlebars.templates ||= {}
+    Handlebars.templates.account = Handlebars.compile($("#account-template").html())
+    Handlebars.templates.facet = Handlebars.compile($("#facet-template").html())
+    Handlebars.templates.item = Handlebars.compile($("#result-template").html())
+    Handlebars.templates.no_results = Handlebars.compile($("#no-results-template").html())
+    Handlebars.templates.pagination = Handlebars.compile($("#pagination-template").html())
+    Handlebars.templates.stat = Handlebars.compile($("#stat-template").html())
 
   @create: (item, layoutSize = "large") ->
     new Item(item, layoutSize)

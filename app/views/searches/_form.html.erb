@@ -4,8 +4,12 @@
   <%= render @form %>
 
   <div id="stats" class="row-fluid">
-    <%= f.fields_for :stats do |s| %>
-      <%= render @form.stats_partial_path, f: s %>
+    <% if @form.similar? %>
+      <%= f.fields_for :stats do |s| %>
+        <%= render @form.stats_partial_path, f: s %>
+      <% end %>
+    <% else %>
+      <p class="box box-content"><i class="fa fa-refresh fa-spin"></i> Loading mods...</p>
     <% end %>
   </div>
 
@@ -18,14 +22,20 @@
       </div>
 
       <span class="span2">
-        <%= link_to_add_association "<i class='fa fa-plus fa fa-white'></i> Add mod".html_safe, f, :stats,
-          data: {
-            association_insertion_node: "#stats",
-            association_insertion_method: "append"
-          },
-          partial: @form.stats_partial_path,
-          class: "btn right btn-info span12"
-        %>
+        <% if @form.similar? %>
+          <%= link_to_add_association "<i class='fa fa-plus fa fa-white'></i> Add mod".html_safe, f, :stats,
+            data: {
+              association_insertion_node: "#stats",
+              association_insertion_method: "append"
+            },
+            partial: @form.stats_partial_path,
+            class: "btn right btn-info span12"
+          %>
+        <% else %>
+          <%= link_to "#", class: "btn btn-info span12", id: "add-mod" do %>
+            <i class='fa fa-plus fa fa-white'></i> Add mod
+          <% end %>
+        <% end %>
       </span>
     </div>
   </div>
@@ -44,7 +54,9 @@
 
 <% content_for :dom_ready do %>
   <% if !@form.similar? %>
-    App.Item.cacheTemplates();
+    <% if Rails.env.development? %>
+      App.Item.cacheTemplates();
+    <% end %>
     App.AjaxForm.setup();
     $("#search-form").trigger({
       type: "submit",

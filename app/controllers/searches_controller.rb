@@ -5,10 +5,9 @@ class SearchesController < ApplicationController
 
   before_filter :view_layout
   before_filter :find_search, only: [:show, :update, :destroy]
-  before_filter :clean_up_stats, only: :update, if: ->(c) { request.xhr? }
 
   def index
-    @searches = typed_search.includes(:item).page(params[:page]).per(10)
+    redirect_to new_polymorphic_search_path
   end
 
   def favorites
@@ -58,6 +57,11 @@ class SearchesController < ApplicationController
     render json: {
       results: @tire_search.results,
       facets: @results.facets,
+      stats: @search.stats.each_with_index.map { |stat, i|
+        stat.attributes.slice(
+          "id", "mod_id", "value", "max_value", "excluded", "required"
+        ).merge(order: i)
+      },
       page: {
         path: @search.persisted? ? search_path : new_polymorphic_search_path,
         formPath: polymorphic_path(@search),
@@ -75,40 +79,4 @@ class SearchesController < ApplicationController
   def location
     (@search && @search.valid?) ? @search : nil
   end
-
-  # if ajax request
-  # used handle
-  def clean_up_stats
-    stats_array = search_params[:stats_attributes].to_a
-    search_stats = @search.stats.pluck("id, mod_id")
-
-    stats_array.select { |s| s[1][:_destroy] == "false" }.each do |stat|
-
-      existing_stat_not_being_destroyed = begin
-        new_stat?(stat) &&
-        (search_stat = find_existing_stat_with_same_mod_id(search_stats, stat)) &&
-        !(stat_being_destroyed?(stats_array, stat))
-      end
-
-      if existing_stat_not_being_destroyed
-        stat[1][:id] = search_stat[0]
-        search_params[:stats_attributes][stat[0]] = stat[1]
-      end
-    end
-  end
-
-  def new_stat?(stat)
-    stat[1][:id].blank?
-  end
-
-  def find_existing_stat_with_same_mod_id(search_stats, stat)
-    stat_mod_id = stat[1][:mod_id].to_i
-    search_stats.find { |search_stat| search_stat[1] == stat_mod_id }
-  end
-
-  def stat_being_destroyed?(stats_array, stat)
-    stat_mod_id = stat[1][:mod_id]
-    stats_array.find { |s| s[1][:_destroy] == "1" && s[1][:mod_id] == stat_mod_id }
-  end
-
 end

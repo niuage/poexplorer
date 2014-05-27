@@ -1,0 +1,19 @@
+<%# generating the nested field %>
+<%
+new_search = @search.class.new
+nested_fields = nil
+object_name = nil
+assoc = :stats
+%>
+
+<% simple_form_for new_search do |f| %>
+  <% nested_fields = render_association(assoc, f, new_search.stats.build, 'f', { child_index: "{{order}}" }, @form.stats_partial_path) %>
+
+  <% object_name = f.object_name %>
+<% end %>
+
+<%# outputing the nested field %>
+<%= nested_fields %>
+{{#if id}}
+<input id="<%= object_name %>_<%= assoc %>_attributes_{{order}}_id" name="<%= object_name %>[<%= assoc %>_attributes][{{order}}][id]" type="hidden" value="{{id}}">
+{{/if}}

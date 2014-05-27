@@ -1,12 +1,20 @@
-<div class="nested-fields">
+<div class="nested-fields" id="mod_{{order}}">
   <div class="controls-row">
     <% @form.with_form(f) do |form| %>
       <%= form.mods %>
-      <%= form.stat_value %>
-      <%= form.stat_max_value %>
-      <%= form.excluded %>
+      <%= form.stat_value(value: "{{value}}") %>
+      <%= form.stat_max_value(value: "{{max_value}}") %>
+      {{#if excluded}}
+      <%= form.excluded(excluded: true) %>
+      {{else}}
+      <%= form.excluded() %>
+      {{/if}}
 
-      <%= form.link_to_remove_stat %>
-    <% end %>
+      <%= form.input :_destroy, wrapper: false, as: :hidden, val: "false" %>
+      <% end %>
+
+      <%= link_to "#", class: "btn span1", data: { remove: "{{id}}" }, title: "Remove mod" do %>
+        <i class="fa fa-trash-o"></i>
+      <% end %>
   </div>
 </div>
