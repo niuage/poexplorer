@@ -5,6 +5,7 @@ class AjaxForm
     @$form = $("#search-form")
     @$submitButton = @$form.find("input[type=submit]")
     @$stats = @$form.find("#stats")
+    @$body = $("body")
 
     # templates
     @resultTemplate = Handlebars.templates.item
@@ -154,12 +155,14 @@ class AjaxForm
     @working = true
     @$results.addClass("loading")
     @$sidebar.addClass("loading")
+    @$body.addClass("loading")
     @$submitButton.attr("disabled", "disabled")
 
   complete: ->
     @working = false
     @$results.removeClass("loading")
     @$sidebar.removeClass("loading")
+    @$body.removeClass("loading")
     @$form.find("input[type=submit]").removeAttr("disabled")
 
     $nestedFields = @$form.find(".nested-fields")

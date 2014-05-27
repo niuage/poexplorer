@@ -12,7 +12,9 @@
 
           <ul class="clearfix main-menu">
             <li class="tn-search">
-              <%= link_to "Find items", new_search_path %>
+              <%= link_to new_search_path do %>
+                Find items <i class="fa fa-spin fa-spinner hidden"></i>
+              <% end %>
             </li>
             <li class="tn-exiles">
               <%= link_to "Exiles", exiles_path %>

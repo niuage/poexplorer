@@ -151,7 +151,7 @@
   }
 
   .main-menu {
-     @include box-shadow(-2px 0 3px -2px rgba(0, 0, 0, 0.1));
+    @include box-shadow(-2px 0 3px -2px rgba(0, 0, 0, 0.1));
     background: $sub-header-color;
 
     li {
