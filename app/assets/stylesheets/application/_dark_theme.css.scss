@@ -11,11 +11,6 @@ body[data-time="night"] {
   }
 
   &.exiles {
-    .box-content {
-      background: #3b3b45;
-      border-color: #24242B;
-    }
-
     .exile {
       background: #3b3b45;
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
@@ -47,6 +42,11 @@ body[data-time="night"] {
 }
 
 [data-time="night"] {
+
+  .box-content {
+    background: #3b3b45;
+    border-color: #24242B;
+  }
 
   .unique, .fire, .str  { color: #E07726 }
   .life                 { color: $dark-life }
