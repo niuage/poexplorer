@@ -6,8 +6,6 @@ class AjaxForm
     @$submitButton = @$form.find("input[type=submit]")
     @$stats = @$form.find("#stats")
 
-    @currentPage = 1
-
     # templates
     @resultTemplate = Handlebars.templates.item
     @facetTemplate = Handlebars.templates.facet
@@ -148,6 +146,7 @@ class AjaxForm
         nextPage: if currentPage < page.total then nextPage else null,
         previousPage: if currentPage > 1 then previousPage else null,
         currentPage: currentPage,
+        totalPageCount: page.total,
         totalCount: page.results.totalCount
       )
     )
