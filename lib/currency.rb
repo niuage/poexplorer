@@ -44,6 +44,12 @@ class Currency
   end
 
   def self.query_string
-    "_exists_:price.gcp OR _exists_:price.exa OR _exists_:price.alch OR _exists_:price.chaos"
+    "_exists_:price"
+  end
+
+  def self.sorting_script
+    ORBS.map do |orb|
+      "(doc['price.#{orb}'].empty ? 0 : (doc['price.#{orb}'].value * #{orb}_price))"
+    end.join(" + ")
   end
 end

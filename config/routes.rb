@@ -51,14 +51,11 @@ Poesearch::Application.routes.draw do
 
   resources :accounts
 
-  resources :posts
-
   namespace :admin do
     root to: "admin#index"
     resources :searches
     resources :broadcasts
     resources :messages, only: [:index, :show]
-    resources :posts
     resources :scrawls
   end
 

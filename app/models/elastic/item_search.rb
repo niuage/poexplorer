@@ -21,13 +21,14 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
       item.with_context(self) do
         item.facets
         item.paginate
-        item.sort
+        # item.sort
       end
     end
 
     @_tire_search_query.to_hash.tap do |query|
       query[:query][:filtered].update(boolean_query)
       query[:query][:filtered].update(filter_query)
+      query.update(sort_query)
     end
   end
 

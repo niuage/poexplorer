@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140510011852) do
+ActiveRecord::Schema.define(version: 20140528030512) do
 
   create_table "accounts", force: true do |t|
     t.integer  "user_id"
@@ -297,15 +297,6 @@ ActiveRecord::Schema.define(version: 20140510011852) do
   add_index "players", ["account", "league_id"], name: "index_players_on_account_and_league_id", using: :btree
   add_index "players", ["account"], name: "index_players_on_account", using: :btree
   add_index "players", ["character", "league_id"], name: "index_players_on_character_and_league_id", using: :btree
-
-  create_table "posts", force: true do |t|
-    t.integer  "user_id"
-    t.string   "title"
-    t.text     "body"
-    t.datetime "published_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "rarities", force: true do |t|
     t.string   "name",       null: false
