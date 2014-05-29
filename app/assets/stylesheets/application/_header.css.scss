@@ -95,6 +95,10 @@
       margin: -1px 0 0;
       left: -1px;
 
+      p {
+        padding: 14px;
+      }
+
       li {
         float: none;
         margin: 0;
@@ -124,6 +128,10 @@
     &.menu-right .dropdown-menu {
       left: auto;
       right: -1px;
+    }
+
+    &.menu-large .dropdown-menu {
+      min-width: 400px;
     }
   }
 

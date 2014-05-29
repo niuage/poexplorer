@@ -35,7 +35,7 @@ class Exile < ActiveRecord::Base
   validates :tagline, presence: true, length: { maximum: 128 }
   validates :description, length: { maximum: 3000 }
 
-  delegate :login, to: :user, prefix: true
+  delegate :login, to: :user, prefix: true, allow_nil: true
   delegate :name, to: :klass, prefix: true
 
   make_voteable
