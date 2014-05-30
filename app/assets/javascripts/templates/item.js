@@ -12,28 +12,28 @@ templates['item'] = template({"1":function(depth0,helpers,partials,data) {
     + escapeExpression(((helper = helpers.sockets || (depth0 && depth0.sockets)),(typeof helper === functionType ? helper.call(depth0, {"name":"sockets","hash":{},"data":data}) : helper)))
     + "\"></div>\n      </div>\n    ";
 },"3":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", escapeExpression=this.escapeExpression;
+  return "\n  <a class=\"btn btn-warning "
+    + escapeExpression(((helper = helpers.btn_class || (depth0 && depth0.btn_class)),(typeof helper === functionType ? helper.call(depth0, {"name":"btn_class","hash":{},"data":data}) : helper)))
+    + " ttip verify\" data-container=\"body\" href=\"/items/"
+    + escapeExpression(((helper = helpers.id || (depth0 && depth0.id)),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "/verify\" title=\"Verify this item\"><i class=\"fa fa-check\"></i></a>\n";
+},"5":function(depth0,helpers,partials,data) {
   var stack1, buffer = "\n  ";
-  stack1 = helpers['with'].call(depth0, (depth0 && depth0.price_button), {"name":"with","hash":{},"fn":this.program(4, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['with'].call(depth0, (depth0 && depth0.price_button), {"name":"with","hash":{},"fn":this.program(6, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   return buffer + "\n";
-},"4":function(depth0,helpers,partials,data) {
+},"6":function(depth0,helpers,partials,data) {
   var helper, functionType="function", escapeExpression=this.escapeExpression;
   return "\n    <a class=\"btn "
     + escapeExpression(((helper = helpers.btn_class || (depth0 && depth0.btn_class)),(typeof helper === functionType ? helper.call(depth0, {"name":"btn_class","hash":{},"data":data}) : helper)))
-    + " ttip price\" href=\"#\">\n      "
+    + " ttip price\" data-container=\"body\" data-sort=\"price\" href=\"#\" title=\"Order by price\">\n      "
     + escapeExpression(((helper = helpers.price || (depth0 && depth0.price)),(typeof helper === functionType ? helper.call(depth0, {"name":"price","hash":{},"data":data}) : helper)))
     + " x <span class='orb "
     + escapeExpression(((helper = helpers.orb || (depth0 && depth0.orb)),(typeof helper === functionType ? helper.call(depth0, {"name":"orb","hash":{},"data":data}) : helper)))
     + "'>"
     + escapeExpression(((helper = helpers.orb || (depth0 && depth0.orb)),(typeof helper === functionType ? helper.call(depth0, {"name":"orb","hash":{},"data":data}) : helper)))
     + "</span>\n</a>  ";
-},"6":function(depth0,helpers,partials,data) {
-  var helper, functionType="function", escapeExpression=this.escapeExpression;
-  return "\n  <a class=\"btn btn-warning "
-    + escapeExpression(((helper = helpers.btn_class || (depth0 && depth0.btn_class)),(typeof helper === functionType ? helper.call(depth0, {"name":"btn_class","hash":{},"data":data}) : helper)))
-    + " ttip verify\" data-container=\"body\" data-placement=\"top\" href=\"/items/"
-    + escapeExpression(((helper = helpers.id || (depth0 && depth0.id)),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
-    + "/verify\" title=\"Verify this item\"><i class=\"fa fa-check\"></i></a>\n";
 },"8":function(depth0,helpers,partials,data) {
   var helper, functionType="function", escapeExpression=this.escapeExpression;
   return "\n  <a class=\"send-pm btn "
@@ -120,16 +120,16 @@ templates['item'] = template({"1":function(depth0,helpers,partials,data) {
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n\n    <span class=\"faded small\">\n      <i class='fa fa-clock-o'></i>\n      <time datetime=\""
     + escapeExpression(((helper = helpers.indexed_at || (depth0 && depth0.indexed_at)),(typeof helper === functionType ? helper.call(depth0, {"name":"indexed_at","hash":{},"data":data}) : helper)))
-    + "\"></time>\n    </span>\n  </div>\n\n  <div class=\"span10\">\n\n    <div class=\"row-fluid\">\n      <div class=\"span12\">\n        <div class=\"h2-title\">\n          <span class=\"small right\">\n            <div class=\"btn-toolbar\">\n              <div class=\"btn-group\">\n                ";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.price_button), {"name":"if","hash":{},"fn":this.program(3, data),"inverse":this.noop,"data":data});
+    + "\"></time>\n    </span>\n  </div>\n\n  <div class=\"span10\">\n\n    <div class=\"row-fluid\">\n      <div class=\"span12\">\n        <div class=\"h2-title\">\n          <span class=\"small right\">\n            <div class=\"btn-toolbar\">\n              ";
+  stack1 = helpers['with'].call(depth0, (depth0 && depth0.verify_button), {"name":"with","hash":{},"fn":this.program(3, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n\n                ";
-  stack1 = helpers['with'].call(depth0, (depth0 && depth0.verify_button), {"name":"with","hash":{},"fn":this.program(6, data),"inverse":this.noop,"data":data});
+  buffer += "\n\n              ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.price_button), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n\n              </div>\n\n              <div class=\"btn-group\">\n                ";
+  buffer += "\n\n              ";
   stack1 = helpers['with'].call(depth0, (depth0 && depth0.pm_button), {"name":"with","hash":{},"fn":this.program(8, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n\n              </div>\n            </div>\n          </span>\n          <h2>\n            <a href=\"http://www.pathofexile.com/forum/view-thread/"
+  buffer += "\n\n            </div>\n          </span>\n          <h2>\n            <a href=\"http://www.pathofexile.com/forum/view-thread/"
     + escapeExpression(((helper = helpers.thread_id || (depth0 && depth0.thread_id)),(typeof helper === functionType ? helper.call(depth0, {"name":"thread_id","hash":{},"data":data}) : helper)))
     + "\" target=\"_blank\">\n              <span class=\""
     + escapeExpression(((helper = helpers.rarity_name || (depth0 && depth0.rarity_name)),(typeof helper === functionType ? helper.call(depth0, {"name":"rarity_name","hash":{},"data":data}) : helper)))
