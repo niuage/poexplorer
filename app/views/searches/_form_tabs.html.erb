@@ -1,0 +1,27 @@
+<div class="btn-group">
+  <% if !search.armour? %>
+    <a class="btn" href="#offense">
+      <i class="fa fa-gavel"></i> Offense
+    </a>
+  <% end %>
+
+  <% if search.armour? %>
+    <a class="btn" href="#defense">
+      <i class="fa fa-shield"></i> Defense
+    </a>
+  <% end %>
+
+  <% if !search.misc? %>
+    <a class="btn" href="#sockets">
+      <i class="fa fa-circle-o"></i> Sockets
+    </a>
+  <% end %>
+
+  <a class="btn" href="#requirements">
+    <i class="fa fa-bar-chart-o"></i> Requirements
+  </a>
+
+  <a class="btn" href="#price">
+    <i class="fa fa-usd"></i> Price
+  </a>
+</div>

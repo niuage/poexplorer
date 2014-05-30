@@ -3,12 +3,7 @@
   <%= render "items/fields/common" %>
 
   <div class="search-tabs" id="weapon-tabs">
-    <div class="btn-group">
-      <a class="btn" href="#offense">Offense</a>
-      <a class="btn" href="#sockets">Sockets</a>
-      <a class="btn" href="#requirements">Requirements</a>
-      <a class="btn" href="#price">Price</a>
-    </div>
+    <%= render "searches/form_tabs", search: @form %>
 
     <div id="offense-fields" class="tabcontent">
       <div class="controls-row clearfix">

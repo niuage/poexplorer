@@ -1,7 +1,23 @@
 class Weapon < Item
   TYPES = G_WEAPON_TYPES.freeze
   BASE_NAMES = G_WEAPON_BASE_NAMES.freeze
-  INDEX_NAMES = G_WEAPON_INDEX_NAMES
+
+  ONE_HANDERS = [
+    "Claw",
+    "Dagger",
+    "OneHandAxe",
+    "OneHandMace",
+    "OneHandSword",
+    "ThrustingOneHandSword",
+    "Wand"
+  ]
+
+  TWO_HANDERS = TYPES - ONE_HANDERS
+
+  GENERIC_NAMES = {
+    "Any One-Handed Weapon" => ONE_HANDERS,
+    "Any Two-Handed Weapon" => TWO_HANDERS
+  }
 
   before_validation :compute_damage, on: :create
 

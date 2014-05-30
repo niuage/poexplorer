@@ -1,6 +1,7 @@
 {{#if price_button}}
   {{#with price_button}}
-    <%= link_to "#", class: "btn {{btn_class}} ttip price" do %>
+    <%= link_to "#", class: "btn {{btn_class}} ttip price", title: "Order by price",
+      data: { container: "body", sort: "price" } do %>
       {{price}} x <span class='orb {{orb}}'>{{orb}}</span>
     <% end %>
   {{/with}}

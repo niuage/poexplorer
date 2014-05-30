@@ -42,23 +42,29 @@ templates['item'] = template({"1":function(depth0,helpers,partials,data) {
 },"10":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", escapeExpression=this.escapeExpression, buffer = "\n  "
     + escapeExpression(((helper = helpers.league_name || (depth0 && depth0.league_name)),(typeof helper === functionType ? helper.call(depth0, {"name":"league_name","hash":{},"data":data}) : helper)))
-    + "\n\n  &mdash;\n\n  <span data-sort=\"level\">\n    "
-    + escapeExpression(((helper = helpers.requires_level || (depth0 && depth0.requires_level)),(typeof helper === functionType ? helper.call(depth0, {"name":"requires_level","hash":{},"data":data}) : helper)))
-    + " "
-    + escapeExpression(((helper = helpers.level || (depth0 && depth0.level)),(typeof helper === functionType ? helper.call(depth0, {"name":"level","hash":{},"data":data}) : helper)))
-    + "\n  </span>\n\n  ";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.required_stats), {"name":"if","hash":{},"fn":this.program(11, data),"inverse":this.noop,"data":data});
+    + "\n\n  ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.level), {"name":"if","hash":{},"fn":this.program(11, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n\n  ";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.quality), {"name":"if","hash":{},"fn":this.program(14, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.required_stats), {"name":"if","hash":{},"fn":this.program(13, data),"inverse":this.noop,"data":data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n  ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.quality), {"name":"if","hash":{},"fn":this.program(16, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   return buffer + "\n";
 },"11":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", escapeExpression=this.escapeExpression;
+  return "\n  &mdash;\n\n  <span data-sort=\"level\">\n    "
+    + escapeExpression(((helper = helpers.requires_level || (depth0 && depth0.requires_level)),(typeof helper === functionType ? helper.call(depth0, {"name":"requires_level","hash":{},"data":data}) : helper)))
+    + " "
+    + escapeExpression(((helper = helpers.level || (depth0 && depth0.level)),(typeof helper === functionType ? helper.call(depth0, {"name":"level","hash":{},"data":data}) : helper)))
+    + "\n  </span>\n  ";
+},"13":function(depth0,helpers,partials,data) {
   var stack1, buffer = "\n    &mdash;\n\n    ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.required_stats), {"name":"each","hash":{},"fn":this.program(12, data),"inverse":this.noop,"data":data});
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.required_stats), {"name":"each","hash":{},"fn":this.program(14, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   return buffer + "\n  ";
-},"12":function(depth0,helpers,partials,data) {
+},"14":function(depth0,helpers,partials,data) {
   var helper, functionType="function", escapeExpression=this.escapeExpression;
   return "\n      <span class=\""
     + escapeExpression(((helper = helpers.stat || (depth0 && depth0.stat)),(typeof helper === functionType ? helper.call(depth0, {"name":"stat","hash":{},"data":data}) : helper)))
@@ -67,20 +73,20 @@ templates['item'] = template({"1":function(depth0,helpers,partials,data) {
     + " "
     + escapeExpression(((helper = helpers.stat || (depth0 && depth0.stat)),(typeof helper === functionType ? helper.call(depth0, {"name":"stat","hash":{},"data":data}) : helper)))
     + "\n      </span>\n    ";
-},"14":function(depth0,helpers,partials,data) {
+},"16":function(depth0,helpers,partials,data) {
   var helper, functionType="function", escapeExpression=this.escapeExpression;
   return "\n    &mdash;\n\n    <span data-sort=\"quality\">\n      <b>+"
     + escapeExpression(((helper = helpers.quality || (depth0 && depth0.quality)),(typeof helper === functionType ? helper.call(depth0, {"name":"quality","hash":{},"data":data}) : helper)))
     + "%</b> Quality\n    </span>\n  ";
-},"16":function(depth0,helpers,partials,data) {
+},"18":function(depth0,helpers,partials,data) {
   var stack1, buffer = "\n          <ul class=\"stats\">\n            ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.visible_stats), {"name":"each","hash":{},"fn":this.program(17, data),"inverse":this.noop,"data":data});
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.visible_stats), {"name":"each","hash":{},"fn":this.program(19, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n            ";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.corrupted), {"name":"if","hash":{},"fn":this.program(19, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.corrupted), {"name":"if","hash":{},"fn":this.program(21, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   return buffer + "\n          </ul>\n        ";
-},"17":function(depth0,helpers,partials,data) {
+},"19":function(depth0,helpers,partials,data) {
   var helper, functionType="function", escapeExpression=this.escapeExpression;
   return "\n              <li data-mod=\""
     + escapeExpression(((helper = helpers.mod_id || (depth0 && depth0.mod_id)),(typeof helper === functionType ? helper.call(depth0, {"name":"mod_id","hash":{},"data":data}) : helper)))
@@ -91,9 +97,9 @@ templates['item'] = template({"1":function(depth0,helpers,partials,data) {
     + "\">\n                "
     + escapeExpression(((helper = helpers.name || (depth0 && depth0.name)),(typeof helper === functionType ? helper.call(depth0, {"name":"name","hash":{},"data":data}) : helper)))
     + "\n              </li>\n            ";
-},"19":function(depth0,helpers,partials,data) {
+},"21":function(depth0,helpers,partials,data) {
   return "\n              <li class=\"corrupted\">Corrupted</li>\n            ";
-  },"21":function(depth0,helpers,partials,data) {
+  },"23":function(depth0,helpers,partials,data) {
   var helper, functionType="function", escapeExpression=this.escapeExpression;
   return "\n            <li data-"
     + escapeExpression(((helper = helpers.data_attr || (depth0 && depth0.data_attr)),(typeof helper === functionType ? helper.call(depth0, {"name":"data_attr","hash":{},"data":data}) : helper)))
@@ -133,10 +139,10 @@ templates['item'] = template({"1":function(depth0,helpers,partials,data) {
   stack1 = helpers['with'].call(depth0, (depth0 && depth0.requirements), {"name":"with","hash":{},"fn":this.program(10, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n\n    </p>\n\n    <div class=\"row-fluid section small-section\">\n\n      <div class=\"span8\">\n        ";
-  stack1 = helpers.unless.call(depth0, (depth0 && depth0.isSkill), {"name":"unless","hash":{},"fn":this.program(16, data),"inverse":this.noop,"data":data});
+  stack1 = helpers.unless.call(depth0, (depth0 && depth0.isSkill), {"name":"unless","hash":{},"fn":this.program(18, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n\n      </div>\n\n      <div class=\"span4\">\n        <ul class=\"props\">\n          ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.properties), {"name":"each","hash":{},"fn":this.program(21, data),"inverse":this.noop,"data":data});
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.properties), {"name":"each","hash":{},"fn":this.program(23, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n        </ul>\n\n      </div>\n\n    </div>\n\n    <hr>\n    <div class=\"row-fluid\">\n      <div class=\"span8\">\n        <p class=\"footer faded small\">\n        ";
   stack1 = ((helper = helpers.account || (depth0 && depth0.account)),(typeof helper === functionType ? helper.call(depth0, {"name":"account","hash":{},"data":data}) : helper));

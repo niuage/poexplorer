@@ -3,12 +3,7 @@
   <%= render "items/fields/common" %>
 
   <div class="search-tabs" id="armour-tabs">
-    <div class="btn-group">
-      <a class="btn" href="#defense">Defense</a>
-      <a class="btn" href="#sockets">Sockets</a>
-      <a class="btn" href="#requirements">Requirements</a>
-      <a class="btn" href="#price">Price</a>
-    </div>
+    <%= render "searches/form_tabs", search: @form %>
 
     <div id="defense-fields" class="tabcontent">
       <div class="controls-row clearfix">
@@ -28,11 +23,6 @@
             <p class="small text"><i class="fa fa-info-sign"></i> Set max to 0 to exclude a stat</p>
           </div>
         </div>
-
-        <%#= @form.item_armour(width: 3) %>
-        <%#= @form.item_evasion(width: 3) %>
-        <%#= @form.item_shield(width: 3) %>
-        <%#= @form.item_block_chance(width: 3) %>
       </div>
     </div>
 

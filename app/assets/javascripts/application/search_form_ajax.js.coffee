@@ -220,6 +220,7 @@ class AjaxForm
     # App.OnlineStatus.accountStatuses("#results")
     App.PM.setup("#results")
     @$results.find("time").timeago()
+    @$results.find(".ttip").tooltip()
 
   @setup: (modelName = "") ->
     new AjaxForm(modelName)

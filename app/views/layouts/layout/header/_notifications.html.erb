@@ -1,0 +1,22 @@
+<li class="sep dropdown menu-right menu-large">
+  <%= link_to "#",
+        class: "dropdown-toggle",
+        data: { toggle: "dropdown" } do %>
+    <%= if @broadcasts.any?; @broadcasts.count end %> <i class="fa fa-bell"></i>
+  <% end %>
+  <ul class="dropdown-menu notifications">
+    <% if @broadcasts.any? %>
+        <li class="header">
+          <h5><i class="fa fa-bell"></i> News</h5>
+        </li>
+      <% @broadcasts.each do |broadcast| %>
+        <li class="notification_<%= broadcast.priority %>">
+          <h6><%= broadcast.title %></h6>
+          <p class="small"><%= broadcast.body %></p>
+        </li>
+      <% end %>
+    <% else %>
+      <li><i class="fa fa-bell-o"></i> No unread notifications.</li>
+    <% end %>
+  </ul>
+</li>

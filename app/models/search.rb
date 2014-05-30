@@ -59,6 +59,9 @@ class Search < ActiveRecord::Base
   def map?
     item_type.try :==, "Map"
   end
+  def generic_type?
+    false
+  end
 
   def to_s
     return "misc item" if misc?

@@ -22,7 +22,9 @@ class ModSorter
 
   highlight: ($elts) ->
     $elts
+      .filter(":not(.btn)")
       .addClass("sorting")
+      .end()
       .prepend("<i class='dex fa fa-chevron-down'></i> ")
 
   currentMod: ->
@@ -36,6 +38,7 @@ class ModSorter
 
     @$results.on "click", "[data-sort]", (e) =>
       $elt = $(e.currentTarget)
+      $elt.tooltip('destroy')
       @$orderSelect.select2("val", $elt.data("sort"))
       @$form.submit()
 

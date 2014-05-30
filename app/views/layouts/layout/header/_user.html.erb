@@ -5,7 +5,7 @@
     <li class="dropdown menu-right">
 
       <%= link_to "#", class: "dropdown-toggle", data: { toggle: "dropdown" } do %>
-        <%= current_user.login %>
+        <%= current_user.login %> <i class="fa fa-caret-down"></i>
       <% end %>
 
       <ul class="dropdown-menu">
@@ -25,18 +25,6 @@
         <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
       </ul>
     </li>
-
-    <li class="sep dropdown menu-right menu-large">
-      <%= link_to "#",
-            class: "dropdown-toggle",
-            data: { toggle: "dropdown" } do %>
-        <i class="fa fa-bell"></i>
-      <% end %>
-      <ul class="dropdown-menu">
-        <li><p>Some random thext that is long but not too long!</p></li>
-      </ul>
-    </li>
-
   <% else %>
     <li class="dropdown">
       <%= link_to "#",
@@ -62,6 +50,9 @@
     </li>
   <% end %>
 
+  <%= render "layouts/layout/header/notifications" %>
+
+  <% if false %>
   <li class="sep dropdown menu-right">
     <%= link_to "#",
           class: "dropdown-toggle",
@@ -75,5 +66,6 @@
       <li><%= link_to "RNG Hell", "http://www.rnghell.com" %></li>
     </ul>
   </li>
+  <% end %>
 
 </ul>

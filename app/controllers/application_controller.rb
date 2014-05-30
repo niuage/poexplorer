@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :find_broadcast
+  before_filter :find_broadcasts
   before_filter :store_location
 
   before_filter :configure_permitted_parameters, if: :configure_permitted_parameters?
@@ -10,8 +10,11 @@ class ApplicationController < ActionController::Base
     !(self.class.name == "AuthenticationsController") && devise_controller?
   end
 
-  def find_broadcast
-    @broadcast = Broadcast.where('priority > 0').first
+  def find_broadcasts
+    @broadcasts = Broadcast.
+      where('priority > 0').
+      where('updated_at > ?', 1.day.ago).
+      limit(5)
   end
 
   def view_layout

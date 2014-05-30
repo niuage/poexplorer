@@ -29,11 +29,13 @@ module Elastic::Concerns::Sort
       item.with_context(self) do
         item.sort(options)
       end
-    end.to_hash
+    end
 
-    sort_query[:sort].unshift(sort_by_price_query) if sorter.sort_by_price?
-
-    sort_query
+    sort_query.to_hash.tap do |query|
+      if sorter.sort_by_price?
+        query[:sort].unshift(sort_by_price_query)
+      end
+    end
   end
 
   def sort_by_price_query

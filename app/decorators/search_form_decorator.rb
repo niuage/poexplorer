@@ -35,7 +35,7 @@ class SearchFormDecorator < ApplicationDecorator
       as: :select
     }, options) do
       form.select :item_type,
-        h.options_for_select(item_types_select, form.object.item_type),
+        h.grouped_options_for_select(item_types_select, form.object.item_type),
         { include_blank: "Any type of #{search}" },
         class: "span12",
         id: "item-type-select"

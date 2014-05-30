@@ -1,11 +1,13 @@
 {{#with requirements}}
   {{league_name}}
 
+  {{#if level}}
   &mdash;
 
   <span data-sort="level">
     {{requires_level}} {{level}}
   </span>
+  {{/if}}
 
   {{#if required_stats}}
     &mdash;

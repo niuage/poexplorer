@@ -103,7 +103,7 @@ class Item
     quality: @item.quality
 
   requiredStats: ->
-    ["dex", "str", "int"].map (stat, i) =>
+    stats = $.map ["dex", "str", "int"], (stat, i) =>
       if (stat_value = @item[stat])
         stat: stat
         value: stat_value

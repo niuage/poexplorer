@@ -95,10 +95,6 @@
       margin: -1px 0 0;
       left: -1px;
 
-      p {
-        padding: 14px;
-      }
-
       li {
         float: none;
         margin: 0;
@@ -214,5 +210,34 @@
       background: #4A6FA0;
       text-shadow: 0 1px 0 $sub-header-color;
     }
+  }
+}
+
+.notifications {
+  li {
+    padding: 14px;
+    border-bottom: 1px solid #ccc;
+
+    &:hover {
+      background: #f2f2f2;
+    }
+
+    &.header {
+      padding: 5px 14px 10px;
+
+      &:hover { background: white; }
+    }
+
+    &.notification_1 {
+      background: #FF7B7B;
+      color: #FFF;
+      border: 1px solid #AA3939;
+      border-width: 1px 0;
+    }
+  }
+
+  h6 {
+    font-size: 14px;
+    margin-bottom: 6px;
   }
 }

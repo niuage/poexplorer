@@ -21,7 +21,6 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
       item.with_context(self) do
         item.facets
         item.paginate
-        # item.sort
       end
     end
 
@@ -39,7 +38,11 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
       item.with_context(self) do
         filter :term, verified: true
 
-        item.filter_match :item_type
+        if item.generic_type?
+          filter :terms, item_type: item.generic_type, execution: "or"
+        else
+          item.filter_match :item_type
+        end
         item.filter_match :base_name
         item.filter_match :account
         item.filter_match :thread_id

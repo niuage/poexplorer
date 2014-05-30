@@ -3,10 +3,6 @@ class ItemVerification
     @$root = $(options.root)
 
   setup: ->
-    @$root.on "click", ".item .price", (e) ->
-      e.preventDefault()
-      $(@).closest(".item").find(".verify").click()
-
     @$root.on "click", ".item .verify.disabled", (e) -> e.preventDefault()
 
     @$root.on "click", ".item .verify:not(.disabled)", (e) =>

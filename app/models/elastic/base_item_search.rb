@@ -1,8 +1,25 @@
 class Elastic::BaseItemSearch < Elastic::BaseSearch
-  delegate :weapon?, :armour?, :misc?, :skill?, :map?, :has_sockets?, :unique?,
-    :linked_socket_count, :elemental_damage, :evasion, :energy_shield, :armour,
-    :level, :quality, :online?, :corrupted?, :item_type, :account,
-    :order_by_mod_id, to: :search
+  delegate \
+    :weapon?, :armour?, :misc?,
+    :skill?,
+    :map?,
+    :has_sockets?,
+    :unique?,
+    :linked_socket_count,
+    :elemental_damage,
+    :evasion,
+    :energy_shield,
+    :armour,
+    :level,
+    :quality,
+    :online?,
+    :corrupted?,
+    :item_type,
+    :account,
+    :order_by_mod_id,
+    :generic_type?,
+    :generic_type,
+    to: :search
 
   def initialize(search, options = {})
     @order = search.order.try(:to_sym) unless search.is_a?(Item)

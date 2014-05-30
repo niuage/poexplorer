@@ -51,9 +51,27 @@ module FormHelper
     end
   end
 
+  def generic_item_types_select(item_type)
+    generic_names = item_type::GENERIC_NAMES.keys
+    return if generic_names.empty?
+
+    [
+      "Generic #{item_type.name.pluralize}",
+      generic_names.map do |type|
+        [type, type.classify, { :"data-type" => type.underscore }]
+      end
+    ]
+  end
+
   def item_types_select(item_type = Item)
-    item_type::TYPES.map do |type|
-      [ type.titleize, type.classify, { :"data-type" => type.underscore } ]
-    end
+    [].tap do |types|
+      types << generic_item_types_select(item_type)
+      types << ([
+        item_type.name.pluralize,
+        item_type::TYPES.map do |type|
+          [type.titleize, type.classify, { :"data-type" => type.underscore }]
+        end
+      ])
+    end.compact
   end
 end

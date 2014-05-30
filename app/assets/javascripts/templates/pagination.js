@@ -18,7 +18,7 @@ templates['pagination'] = template({"1":function(depth0,helpers,partials,data) {
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  </div>\n\n  <div class=\"span8 text-center faded\">\n    Page "
     + escapeExpression(((helper = helpers.currentPage || (depth0 && depth0.currentPage)),(typeof helper === functionType ? helper.call(depth0, {"name":"currentPage","hash":{},"data":data}) : helper)))
-    + " out of "
+    + "/"
     + escapeExpression(((helper = helpers.totalPageCount || (depth0 && depth0.totalPageCount)),(typeof helper === functionType ? helper.call(depth0, {"name":"totalPageCount","hash":{},"data":data}) : helper)))
     + " &mdash; "
     + escapeExpression(((helper = helpers.totalCount || (depth0 && depth0.totalCount)),(typeof helper === functionType ? helper.call(depth0, {"name":"totalCount","hash":{},"data":data}) : helper)))

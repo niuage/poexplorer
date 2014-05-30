@@ -11,7 +11,7 @@ class Item < ActiveRecord::Base
   ARCHETYPES = ["Weapon", "Armour", "Misc"]
   TYPES = [G_WEAPON_TYPES, G_ARMOUR_TYPES, G_MISC_TYPES].flatten.freeze
   BASE_NAMES = [G_WEAPON_BASE_NAMES, G_ARMOUR_BASE_NAMES, G_MISC_BASE_NAMES].flatten.freeze
-  INDEX_NAMES = G_ITEM_INDEX_NAMES
+  GENERIC_NAMES = {}
 
   attr_accessible :name, :account, :type, :quality, :level,
     :verified, :identified, :league, :rarity, :rarity_id, :league_id,
