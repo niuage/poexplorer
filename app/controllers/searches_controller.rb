@@ -73,13 +73,13 @@ class SearchesController < ApplicationController
   end
 
   def stats
-    @search.stats.
-      select("id", "mod_id", "value", "max_value", "excluded", "required").
-      each_with_index.map { |stat, i|
-      stat.attributes.merge({
-        order: i,
-        object_name: @search.model_name
-      })
+    @search.stats.each_with_index.map { |stat, i|
+      stat.attributes
+        .slice("id", "mod_id", "value", "max_value", "excluded", "required")
+        .merge({
+          order: i,
+          object_name: @search.model_name
+        })
     }
   end
 
