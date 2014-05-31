@@ -32,8 +32,7 @@ class ItemSorting
   # for display
   DEFAULT_ORDER = {
     quality: "Quality",
-    level: "Required Level",
-    price: "Price"
+    level: "Required Level"
   }
 
   SHARED_ORDER = DEFAULT_ORDER.merge({
@@ -71,7 +70,7 @@ class ItemSorting
   end
 
   def sort_by_attributes
-    return unless order.present?
+    return unless order.present? || sort_by_price?
 
     sort_weapon if weapon?
     sort_armour if armour?
@@ -85,7 +84,7 @@ class ItemSorting
   # def sort_shared
   [:weapon, :armour, :misc, :shared].each do |type|
     define_method "sort_#{type}" do
-      context.by(order, 'desc') if !sort_by_price? && send(:"valid_#{type}_order?")
+      context.by(order, 'desc') if send(:"valid_#{type}_order?")
     end
   end
 
@@ -101,7 +100,7 @@ class ItemSorting
   end
 
   def sort_by_price?
-    order == "price" || order == :price
+    item.sort_by_price?
   end
 
   private

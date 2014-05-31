@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528030512) do
+ActiveRecord::Schema.define(version: 20140531204331) do
 
   create_table "accounts", force: true do |t|
     t.integer  "user_id"
@@ -389,6 +389,7 @@ ActiveRecord::Schema.define(version: 20140528030512) do
     t.datetime "updated_at"
     t.integer  "minimum_mod_match",       default: 0
     t.integer  "order_by_mod_id"
+    t.boolean  "sort_by_price",           default: false
   end
 
   add_index "searches", ["uid"], name: "index_searches_on_uid", using: :btree

@@ -229,20 +229,37 @@ class SearchFormDecorator < ApplicationDecorator
     search.order_by_mod_id.to_i > 0
   end
 
-  def order_by_mod_id
-    h.content_tag :div, class: "span4 #{"hide" unless order_by_mod?}" do
-      h.link_to("#", class: "span8 inputy ttip",
+  def order_by(options)
+    h.content_tag :div, class: "span3 #{"hide" unless options[:show]}" do
+      h.link_to("#", class: "span10 inputy ttip",
         title: "Remove filter",
-        data: { mod_sort: "remove" }) do
-        "<i class='fa fa-times right'></i>Sorting by mod value".html_safe
+        data: { reset_sort: options[:reset_sort] }) do
+        "<i class='fa fa-times right'></i>Sorting by #{options[:order_by]}".html_safe
       end + \
-      h.content_tag(:p, class: "span4 inputy text-center") do
-        "then by"
+      h.content_tag(:p, class: "span2 inputy text-center") do
+        "<i class='fa fa-chevron-circle-right'></i>".html_safe
       end
     end
   end
 
+  def order_by_mod_id
+    order_by(
+      show: order_by_mod?,
+      reset_sort: "order-by-mod-id",
+      order_by: "mod value"
+    )
+  end
+
+  def sort_by_price
+    order_by(
+      show: search.sort_by_price?,
+      reset_sort: "sort-by-price",
+      order_by: "price"
+    )
+  end
+
   def order(options = {})
+    sort_by_price.html_safe + \
     order_by_mod_id.html_safe + \
     input(:order, input_options({
       collection: order_collection,

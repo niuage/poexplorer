@@ -1,6 +1,4 @@
 class Elastic::ItemSearch < Elastic::BaseItemSearch
-  include Elastic::Concerns::Sort
-  include Elastic::Concerns::Facets
   include Elastic::Concerns::Item
 
   attr_accessor :any_type
@@ -10,24 +8,53 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
   end
 
   def tire_search_query
-    return @_tire_search_query if @_tire_search_query
-
     item = self
     search = self.search
 
-    @_tire_search_query = Tire::Search::Search.new do
-      query { filtered {} }
+    if sort_by_price?
+      # filtered_query wrapped in a function_score to sort by price
+      function_score_query
+    else
+      # regular query
+      filtered_query.merge(meta_query)
+    end
+  end
 
+  def function_score_query
+    {
+      query: {
+        function_score: {
+          script_score: {
+            script: Currency.sorting_script,
+            params: {
+              exa_price: 30,
+              chaos_price: 1,
+              alch_price: 0.4,
+              gcp_price: 1.5
+            }
+          }
+        }.merge(filtered_query)
+      }
+    }.merge(meta_query)
+  end
+
+  def filtered_query
+    @_filtered_query ||= {
+      query: {
+        filtered: {}.update(boolean_query).update(filter_query)
+      }
+    }
+  end
+
+  def meta_query
+    item = self
+
+    Tire::Search::Search.new do
       item.with_context(self) do
         item.facets
         item.paginate
+        item.sort
       end
-    end
-
-    @_tire_search_query.to_hash.tap do |query|
-      query[:query][:filtered].update(boolean_query)
-      query[:query][:filtered].update(filter_query)
-      query.update(sort_query)
     end
   end
 

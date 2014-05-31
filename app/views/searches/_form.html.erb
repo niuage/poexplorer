@@ -47,7 +47,8 @@
     </div>
   </div>
 
-  <%= f.input :order_by_mod_id, as: :hidden, input_html: { id: "order-by-mod-id" } %>
+  <%= f.input :order_by_mod_id, as: :hidden, wrapper: false, input_html: { id: "order-by-mod-id" } %>
+  <%= f.input :sort_by_price, as: :hidden, wrapper: false, input_html: { id: "sort-by-price" } %>
 
   <%= hidden_field_tag :page, nil, id: "search-page" %>
 <% end %>

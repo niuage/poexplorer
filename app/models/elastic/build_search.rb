@@ -1,4 +1,4 @@
-class Elastic::BuildSearch < Elastic::BaseItemSearch
+class Elastic::BuildSearch < Elastic::BaseSearch
   def tire_search
     searchable = self
     search = self.search

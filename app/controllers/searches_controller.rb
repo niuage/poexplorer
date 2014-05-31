@@ -57,14 +57,7 @@ class SearchesController < ApplicationController
     render json: {
       results: @tire_search.results,
       facets: @results.facets,
-      stats: @search.stats.each_with_index.map { |stat, i|
-        stat.attributes.slice(
-          "id", "mod_id", "value", "max_value", "excluded", "required"
-        ).merge({
-          order: i,
-          object_name: @search.model_name
-        })
-      },
+      stats: stats,
       page: {
         path: @search.persisted? ? search_path : new_polymorphic_search_path,
         formPath: polymorphic_path(@search),
@@ -76,6 +69,17 @@ class SearchesController < ApplicationController
           totalCount: @results.total_count
         }
       }
+    }
+  end
+
+  def stats
+    @search.stats.
+      select("id", "mod_id", "value", "max_value", "excluded", "required").
+      each_with_index.map { |stat, i|
+      stat.attributes.merge({
+        order: i,
+        object_name: @search.model_name
+      })
     }
   end
 

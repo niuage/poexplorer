@@ -15,7 +15,7 @@ class Search < ActiveRecord::Base
     :elemental_damage, :raw_physical_damage,
     :price_value, :max_price_value, :currency, :socket_combination,
     :minimum_mod_match, :same_item_type, :has_price, :corrupted, :online,
-    :order_by_mod_id
+    :order_by_mod_id, :sort_by_price
 
   belongs_to :league
 

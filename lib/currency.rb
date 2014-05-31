@@ -48,8 +48,9 @@ class Currency
   end
 
   def self.sorting_script
-    ORBS.map do |orb|
+    score = ORBS.map do |orb|
       "(doc['price.#{orb}'].empty ? 0 : (doc['price.#{orb}'].value * #{orb}_price))"
-    end.join(" + ")
+    end.join(" - ")
+    "(#{score})"
   end
 end

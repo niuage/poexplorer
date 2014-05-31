@@ -1,4 +1,7 @@
 class Elastic::BaseItemSearch < Elastic::BaseSearch
+  include Elastic::Concerns::Sort
+  include Elastic::Concerns::Facets
+
   delegate \
     :weapon?, :armour?, :misc?,
     :skill?,

@@ -1,7 +1,4 @@
 class Elastic::SimilarItemSearch < Elastic::BaseItemSearch
-  include Elastic::Concerns::Facets
-  include Elastic::Concerns::Sort
-
   delegate :count, to: :stats, prefix: true
 
   attr_accessor :explanation, :search, :options
