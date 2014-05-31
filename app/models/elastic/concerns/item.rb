@@ -57,7 +57,7 @@ module Elastic::Concerns::Item
           end
         end
       end
-    elsif search.has_price? || search.order == "price"
+    elsif search.has_price? || sorter.sort_by_price?
       context.must { string Currency.query_string }
     end
   end
