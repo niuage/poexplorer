@@ -100,7 +100,7 @@ class ItemSorting
   end
 
   def sort_by_price?
-    item.sort_by_price?
+    item.respond_to?(:sort_by_price?) && item.sort_by_price?
   end
 
   private

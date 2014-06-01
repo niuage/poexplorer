@@ -16,6 +16,20 @@ namespace :crawler do
     RuntimeError.new(message)
   end
 
+  def parse_old_forum_threads(league_id)
+    puts "/////////////////////////"
+    puts "PARSING OLD THREADS: #{league_id}"
+    puts "/////////////////////////"
+
+    ForumThread
+      .where(league_id: league_id)
+      .order('updated_at ASC')
+      .limit(15)
+      .each do |thread|
+      ThreadIndexer.new(thread.uid).index
+    end
+  end
+
   desc "Scrawl infintely"
   task :permanent => :environment do
     File.open(ENV['PIDFILE'], 'w') { |f| f << Process.pid } if ENV['PIDFILE'].present?
@@ -39,7 +53,9 @@ namespace :crawler do
         crawl_league_by_id(league_id)
 
         finished_at = Time.zone.now
-        sleep(60)
+
+        parse_old_forum_threads(league_id)
+        sleep(30)
       end
     end
   end
@@ -68,6 +84,8 @@ namespace :crawler do
         crawl_league_by_id(league.id)
 
         finished_at = Time.zone.now
+
+        parse_old_forum_threads(league.id)
       end
     end
   end

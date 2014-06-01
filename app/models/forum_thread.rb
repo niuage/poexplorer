@@ -32,8 +32,8 @@ class ForumThread < ActiveRecord::Base
 
   # when there are no more items in the thread
   def clean_up!
-    verified_items_uid = verified_items.try(:map) { |i| i[0] }
-    Item.where(uid: verified_items_uid).destroy_all if verified_items_uid
+    puts Item.where(thread_id: self.uid).count
+    Item.where(thread_id: self.uid).destroy_all
     @forum_items = []
     self.items = []
     self.items_md5 = nil
@@ -91,11 +91,18 @@ class ForumThread < ActiveRecord::Base
   end
 
   def refresh_items
+    remove_deleted_items
+
     self.items = temp_items
   end
 
-  def verified_items
-    items.try(:select) { |i| i[1] }
+  def remove_deleted_items
+    real_md5s = temp_items.try(:map) { |i| i [0] }
+    return if real_md5s.blank?
+
+    Item.where(thread_id: self.uid)
+        .where('items.uid NOT IN (?)', real_md5s)
+        .destroy_all
   end
 
   def md5(elt)

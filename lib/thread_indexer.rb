@@ -62,32 +62,27 @@ class ThreadIndexer
   def update_forum_thread_items
     # for every actual items
     forum_thread.forum_items.reverse_each do |index_and_item|
-      item = index_and_item[1]
-      forum_item = forum_thread.find_item(item)
+      forum_item = index_and_item[1]
+      cached_item = forum_thread.find_item(forum_item)
 
-      if ItemBuilder.item_verified?(item)
+      if ItemBuilder.item_verified?(forum_item)
         # add the item md5 to the item
         # old md5 if already indexed, or new md5
-        md5_to_update << ((forum_item && forum_item[0]).presence || ItemBuilder.md5(item))
+        cached_md5 = cached_item.try :[], 0
+        md5_to_update << (cached_md5.presence || ItemBuilder.md5(forum_item))
 
         # if item is not already indexed or has a price
-        if (!forum_item || !forum_item[1]) ||
-          (forum_thread.edited? && prices[index_and_item[0]])
+        if (!cached_item || prices[index_and_item[0]])
           items_to_index << index_and_item
         end
-      else
-        # destroy the item if it's not verified anymore
-        Item.find_by(
-          uid: ItemBuilder.md5(item),
-          thread_id: forum_thread.uid
-        ).try(:destroy)
-      end
 
-      # add the item to the temporary-items list
-      # which will replace the current one on save
-      # TODO: why add unverified items again?
-      forum_thread << item
+        # add the item to the temporary-items list
+        # which will replace the current one on save
+        forum_thread << forum_item
+      end
     end
+
+    forum_thread.temp_items_changed = forum_thread.forum_items.any?
   end
 
   def update_verified_items

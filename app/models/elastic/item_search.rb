@@ -11,7 +11,7 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
     item = self
     search = self.search
 
-    if sort_by_price?
+    if sorter.sort_by_price?
       # filtered_query wrapped in a function_score to sort by price
       function_score_query
     else
