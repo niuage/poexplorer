@@ -1,10 +1,6 @@
 module Elastic::Concerns::Sort
   extend ActiveSupport::Concern
 
-  included do
-    delegate :sort_by_price?, to: :search
-  end
-
   def sorter
     @_sorter ||= ItemSorting.new(self)
   end
