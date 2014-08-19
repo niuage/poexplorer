@@ -1,2 +1,2 @@
-poesearch
+PoExplorer is now Open Source!
 =========
