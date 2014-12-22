@@ -16,4 +16,8 @@ class Rarity < ActiveRecord::Base
   def update_all_items
     items.update_all(rarity_name: self.name)
   end
+
+  def self.name_to_frame_type(name)
+    FRAME_TYPES.find { |t| t[:name] == name }[:frame_type]
+  end
 end

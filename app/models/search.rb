@@ -1,21 +1,25 @@
 class Search < ActiveRecord::Base
   include Extensions::Uid
 
-  attr_accessible :account, :item_type, :session, :order, :physical_dps,
+  attr_accessible :account, :item_type, :session, :order,
     :name, :quality, :verified, :identified,
     :league, :rarity, :rarity_id, :league_id,
     :sockets, :linked_socket_count, :socket_count, :max_linked_socket_count,
     :max_socket_count, :remote_icon_url, :base_name,
-    :physical_damage, :critical_strike_chance, :aps,
+    :physical_dps, :physical_damage,
+    :edps, :elemental_damage,
+    :csc, :aps,
     :max_level, :level, :str, :dex, :int, :max_int, :max_dex, :max_str,
     :dps, :thread_id, :stats_attributes,
     :raw_icon, :w, :h,
     :armour, :evasion, :energy_shield, :block_chance,
     :max_armour, :max_evasion, :max_energy_shield, :max_block_chance,
-    :elemental_damage, :raw_physical_damage,
+    :raw_physical_damage,
     :price_value, :max_price_value, :currency, :socket_combination,
     :minimum_mod_match, :same_item_type, :has_price, :corrupted, :online,
     :order_by_mod_id, :sort_by_price
+
+  attr_accessor :ngram_full_name
 
   belongs_to :league
 

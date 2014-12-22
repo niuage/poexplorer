@@ -1,4 +1,4 @@
 .btn {
-  @include box-shadow(none);
+  box-shadow: none;
   border-radius: $border-radius;
 }

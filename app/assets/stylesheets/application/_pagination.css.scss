@@ -2,7 +2,6 @@ $pagination-color: #f7f7f7;
 $bottom-pagination-color: darken($pagination-color, 2%);
 
 .pagination-bar {
-  @extend .clearfix;
   border: 1px solid $pagination-border-color;
   background: $bottom-pagination-color;
   border-radius: 2px;

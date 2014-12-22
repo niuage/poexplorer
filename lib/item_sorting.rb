@@ -9,7 +9,7 @@ class ItemSorting
     physical_damage: "Physical Damage",
     elemental_damage: "Elemental Damage",
     linked_socket_count: "Linked Sockets",
-    critical_strike_chance: "CS Chance"
+    csc: "CS Chance"
   }
 
   ARMOUR_ORDER = {
@@ -22,7 +22,7 @@ class ItemSorting
 
   MISC_ORDER = {
     elemental_damage: "Elemental Damage",
-    critical_strike_chance: "CS Chance"
+    csc: "CS Chance"
   }
 
   SIMILAR_SEARCH_ORDER = {

@@ -1,10 +1,15 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :build_fast_search
   before_filter :find_broadcasts
   before_filter :store_location
 
   before_filter :configure_permitted_parameters, if: :configure_permitted_parameters?
+
+  def build_fast_search
+    @fast_search = FastSearch.new
+  end
 
   def configure_permitted_parameters?
     !(self.class.name == "AuthenticationsController") && devise_controller?

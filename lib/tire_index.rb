@@ -32,7 +32,7 @@ class TireIndex
     raise ArgumentError.new("Prefix can't be blank") if prefix.blank?
 
     index = Tire.index(self.index_name(prefix, league_id))
-    index.create(mappings: mappings, settings: {})
+    index.create(mappings: mappings, settings: settings)
 
     a = Tire::Alias.new
     a.name self.name(league_id)
@@ -44,6 +44,10 @@ class TireIndex
     ::Helmet.tire.mapping_to_hash.merge(
       Player.tire.mapping_to_hash
     )
+  end
+
+  def self.settings
+    ::Helmet.tire.settings
   end
 
   def self.delete_index(prefix, league_id)

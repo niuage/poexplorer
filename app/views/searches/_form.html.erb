@@ -1,4 +1,4 @@
-<%= simple_form_for @search, url: polymorphic_path(@search, first: true), html: { id: "search-form" } do |f| %>
+<%= simple_form_for @search, url: weapon_search_path(@search, first: true), html: { id: "search-form" } do |f| %>
   <% @form.form = f %>
 
   <%= render @form %>

@@ -13,6 +13,25 @@ module ItemExtensions::Mapping
     # see if using the option store: false could be more efficient
     # only data that I use in the view should be stored?
     tire do
+      settings({
+        analysis: {
+          filter: {
+            autocomplete_filter: {
+              "type"     => "edge_ngram",
+              "max_gram" => 10,
+              "min_gram" => 1
+            }
+          },
+          analyzer: {
+            edge_ngram_analyzer: {
+              "tokenizer"    => "standard", #standard?
+              "filter"       => ["lowercase", "autocomplete_filter"], #standard, lowercase, #stop, #snowball?
+              "type"         => "custom"
+            }
+          }
+        }
+      })
+
       mapping(
         _parent: { type: 'player' },
         _routing: { required: true, path: :account }
@@ -20,19 +39,21 @@ module ItemExtensions::Mapping
         indexes :id,                            key: "value", index: :not_analyzed
 
         indexes :account,                       type: "string", index: :not_analyzed
-        indexes :full_name,                     analyzer: 'snowball', boost: 50
-        indexes :name,                          analyzer: 'snowball', boost: 50
+        indexes :full_name,                     type: "string", analyzer: 'snowball', boost: 50
+        indexes :name,                          type: "string", analyzer: "snowball", boost: 50
+        indexes :ngram_full_name,               type: "string", index_analyzer: "edge_ngram_analyzer", search_analyzer: "standard", boost: 50
         indexes :base_name,                     type: "string", index: :not_analyzed
 
         indexes :archetype,                     type: "integer"
         indexes :item_type,                     type: "string", index: :not_analyzed
 
         indexes :aps,                           type: "float"
-        indexes :dps,                           type: "integer"
-        indexes :physical_dps,                  type: "integer"
+        indexes :dps,                           type: "float"
+        indexes :physical_dps,                  type: "float"
         indexes :physical_damage,               type: "integer"
         indexes :elemental_damage,              type: "integer"
-        indexes :critical_strike_chance,        type: "float"
+        indexes :edps,                          type: "float"
+        indexes :csc,        type: "float"
         indexes :raw_physical_damage,           type: "string", index: :not_analyzed
 
         indexes :block_chance,                  type: "integer"
@@ -114,10 +135,12 @@ module ItemExtensions::Mapping
         :updated_at
       ],
       methods: [
+        :ngram_full_name,
         :indexed_at,
         :item_type,
         :archetype,
         :physical_dps,
+        :edps,
         :full_name,
         :sockets, :socket_count, :linked_socket_count,
         :raw_physical_damage,

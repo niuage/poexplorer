@@ -7,11 +7,15 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
     Tire.search(Indices.item_indices(search), tire_search_query)
   end
 
+  def fast_search
+    Tire.search(Indices.item_indices(search), fast_search_query)
+  end
+
   def tire_search_query
     item = self
     search = self.search
 
-    if sorter.sort_by_price?
+    if false # sorter.sort_by_price?
       # filtered_query wrapped in a function_score to sort by price
       function_score_query
     else
@@ -58,6 +62,14 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
     end
   end
 
+  def fast_search_query
+    return find_all if search.query.blank?
+
+    self.search = TireSearch.new(search.query).to_search
+
+    tire_search_query
+  end
+
   def filter_query
     item = self
 
@@ -95,15 +107,19 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
       query do
         boolean do
           item.with_context(self) do
+            if item.ngram_full_name.present?
+              must { match :ngram_full_name, item.ngram_full_name, operator: "AND" }
+            end
+
             item.must_match_string :name, :name, "AND"
 
-            item.must_be_gte :physical_damage
-            item.must_be_gte :elemental_damage
-            item.must_be_gte :aps
-            item.must_be_gte :dps
-            item.must_be_gte :physical_dps
-            item.must_be_gte :critical_strike_chance
-            item.must_be_gte :quality
+            item.must_be_between :physical_damage
+            item.must_be_between :elemental_damage
+            item.must_be_between :aps
+            item.must_be_between :dps
+            item.must_be_between :physical_dps
+            item.must_be_between :csc
+            item.must_be_between :quality
 
             item.must_be_between :level
 

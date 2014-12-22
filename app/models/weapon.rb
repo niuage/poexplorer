@@ -33,4 +33,7 @@ class Weapon < Item
     (physical_damage.to_i * aps.to_f).to_i
   end
 
+  def edps
+    elemental_damage * aps
+  end
 end

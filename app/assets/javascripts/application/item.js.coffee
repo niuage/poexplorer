@@ -78,7 +78,7 @@ class Item
     [
       { name: "Physical Dmg", value: @displayedPhysDmg(), meta_data: "physical_damage", data_attr: "sort" }
       { name: "Elemental Dmg", value: @item.elemental_damage, meta_data: "elemental_damage", data_attr: "sort" }
-      { name: "CS Chance", value: @item.critical_strike_chance, meta_data: "critical_strike_chance", data_attr: "sort" }
+      { name: "CS Chance", value: @item.csc, meta_data: "csc", data_attr: "sort" }
     ]
 
   displayedPhysDmg: ->

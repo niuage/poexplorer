@@ -1,7 +1,7 @@
 Poesearch::Application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
 
-  root to: "searches#new"
+  root to: "fast_searches#new"
 
   resources :users, except: [:index] do
     member do
@@ -14,6 +14,8 @@ Poesearch::Application.routes.draw do
     end
     resource :account
   end
+
+  resources :fast_searches
 
   resources :searches, except: [:edit] do
     collection do

@@ -28,7 +28,7 @@ class ItemBuilder
       raw_icon: poe_item["icon"],
 
       quality: property("Quality").to_i,
-      critical_strike_chance: property("Critical Strike Chance"),
+      csc: property("Critical Strike Chance"),
 
       block_chance: property("Chance to Block"),
 

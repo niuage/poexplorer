@@ -17,10 +17,11 @@ class Item < ActiveRecord::Base
     :verified, :identified, :league, :rarity, :rarity_id, :league_id,
     :sockets, :linked_socket_count, :socket_count, :socket_combination,
     :remote_icon_url, :base_name, :corrupted, :stats_attributes,
-    :physical_damage, :critical_strike_chance, :aps, :str,
+    :physical_damage, :csc, :aps, :str,
     :dex, :int, :dps, :thread_id,
     :raw_icon, :w, :h, :armour, :evasion, :energy_shield, :block_chance,
-    :elemental_damage, :raw_physical_damage
+    :elemental_damage, :raw_physical_damage,
+    :edps
 
   before_validation   :compute_elemental_damage, on: :create, if: :misc_with_elemental_damage?
   before_save         :cache_association_names
@@ -55,6 +56,7 @@ class Item < ActiveRecord::Base
     self.elemental_damage = stats.inject(0) do |dmg, stat|
       dmg + ((stat.elemental_dps? && !stat.hidden) ? stat.value.to_i : 0)
     end
+
   end
 
   # INDEX
@@ -75,6 +77,8 @@ class Item < ActiveRecord::Base
   def full_name
     "#{self.name || ""} #{self.base_name}"
   end
+
+  alias_method :ngram_full_name, :full_name
 
   def archetype
     [:weapon, :armour, :misc].each_with_index do |archetype, i|

@@ -29,7 +29,7 @@ class CreateSearches < ActiveRecord::Migration
       t.integer :max_physical_dps
 
       t.float :aps
-      t.float :critical_strike_chance
+      t.float :csc
 
       t.float :price_value
       t.float :max_price_value

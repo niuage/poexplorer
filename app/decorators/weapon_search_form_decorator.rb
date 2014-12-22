@@ -21,7 +21,7 @@ class WeaponSearchFormDecorator < SearchFormDecorator
   end
 
   def item_csc(options = {})
-    input :critical_strike_chance, input_options({}, options)
+    input :csc, input_options({}, options)
   end
 
   def item_types_select

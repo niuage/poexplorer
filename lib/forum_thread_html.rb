@@ -31,7 +31,13 @@ class ForumThreadHtml
     matches = content.match(/new R\((.*)\)\)\.run\(\)/)
     return unless matches && matches.length > 1
     items = JSON.parse(matches[1])
-    (items.respond_to?(:each) && !items.empty?) ? items : nil
+    unique_items(items)
+  end
+
+  def unique_items(items)
+    return nil unless (items.respond_to?(:each) && !items.empty?)
+    unique_frame_type = Rarity.name_to_frame_type("Unique")
+    items.select { |item| item[1]["frameType"] == unique_frame_type }
   end
 
   def thread_date

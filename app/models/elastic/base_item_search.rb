@@ -22,6 +22,7 @@ class Elastic::BaseItemSearch < Elastic::BaseSearch
     :order_by_mod_id,
     :generic_type?,
     :generic_type,
+    :ngram_full_name,
     to: :search
 
   def initialize(search, options = {})

@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require application_vendor
 //= require app
-//= require_tree ./templates
 //= require_tree ./application
+
+$(function(){ $(document).foundation(); });

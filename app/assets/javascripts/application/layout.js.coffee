@@ -27,8 +27,6 @@ class Layout
       @$layouts.find(".current[data-type=#{type}]").removeClass("current")
       $layout.addClass("current")
 
-      console.log("what's happening?")
-
       $.ajax
         url: "/users/update_layout"
         dataType: "json"

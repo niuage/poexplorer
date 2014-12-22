@@ -5,7 +5,7 @@ module ItemParsers
     misc_attributes   :level
 
     weapon_attributes :physical_damage,
-                      :critical_strike_chance,
+                      :csc,
                       :elemental_damage,
                       :aps,
                       :armour,

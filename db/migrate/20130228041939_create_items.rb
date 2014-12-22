@@ -19,7 +19,7 @@ class CreateItems < ActiveRecord::Migration
 
       t.integer     :physical_damage
       t.integer     :dps
-      t.float       :critical_strike_chance
+      t.float       :csc
       t.float       :aps
 
       t.integer     :level

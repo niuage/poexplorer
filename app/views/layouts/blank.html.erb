@@ -2,43 +2,35 @@
 <html>
 <head>
   <%= render "layouts/head" %>
-  <style type="text/css">
-    html { background: none; }
-    body {
-      color: #D4CCBD;
-      overflow-x: hidden;
-      background: none;
-      padding-bottom: 40px;
-    }
-
-    h2 a { color: #D4CCBD; }
-
-    a { color: #D96500; }
-    a:hover { color: white; }
-
-    .item .props li[data-sort],
-    .item .props li[data-mod],
-    .item .stats li,
-    .item .requirements [data-sort] {
-      cursor: default;
-    }
-
-    #overlay {
-      background: -webkit-linear-gradient(rgba(0, 0, 0, 0), #12110F);
-      background: -o-linear-gradient(rgba(0, 0, 0, 0), #12110F);
-      background: -moz-linear-gradient(rgba(0, 0, 0, 0), #12110F);
-      background: linear-gradient(rgba(0, 0, 0, 0), #12110F);
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      height: 40px;
-      z-index: 200;
-    }
-  </style>
 </head>
-<body>
-  <%= yield %>
-  <div id="overlay"></div>
-  <%= render 'layouts/javascripts' %>
+<body <%= body_layout %>>
+  <%= render "layouts/flash", flash: flash %>
+
+  <%= render "layouts/material/header" %>
+
+  <div id="content" class="wrapper-l">
+
+    <div class="row-fluid">
+
+      <div id="left-sidebar" class="span2">
+        <%= yield :left_sidebar %>
+      </div>
+
+      <div class="span10">
+        <div id="main-content">
+          <div class="row-fluid">
+            <div class="span12">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <%= render "layouts/layout/footer" %>
+  <%= render "layouts/common/bottom" %>
 </body>
 </html>

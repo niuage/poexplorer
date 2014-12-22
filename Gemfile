@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.0.rc1'
+gem 'rails', '4.2.0'
 
 gem 'mysql2'
 gem 'activerecord-import'
@@ -56,3 +56,7 @@ gem 'unicorn'
 # Deploy with Capistrano
 gem 'capistrano'
 gem 'rvm-capistrano'
+
+gem 'parslet'
+
+gem 'foundation-rails'

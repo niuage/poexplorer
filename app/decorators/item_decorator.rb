@@ -139,7 +139,7 @@ class ItemDecorator < ApplicationDecorator
     [
       ["Physical dmg", displayed_physical_damage, :physical_damage],
       ["Elemental dmg", source.elemental_damage.to_i, :elemental_damage],
-      ["CS chance", source.critical_strike_chance.to_f, :critical_strike_chance]
+      ["CS chance", source.csc.to_f, :csc]
     ]
   end
 

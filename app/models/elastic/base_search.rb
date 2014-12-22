@@ -3,7 +3,8 @@ module Elastic
     include Elastic::DSL::Base
 
     attr_accessor :context
-    attr_reader :search, :order, :page, :per_page
+    attr_reader :order, :page, :per_page
+    attr_accessor :search
 
     def initialize(search, options)
       @search = search
