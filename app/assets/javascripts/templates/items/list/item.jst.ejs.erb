@@ -1,0 +1,100 @@
+<% thread_url = ForumThreadHtml::THREAD_ROOT %>
+
+<div class="result item" data-item-type="<%%= item_type %>" data-id="<%%= id %>">
+  <div class="row">
+    <div class="small-2 columns">
+
+    <%% if (raw_icon) { %>
+      <div class="item-icon w-<%%= w %> h-<%%= h %>">
+        <img src="<%%= raw_icon %>" alt="item icon">
+        <div class="sockets" data-sockets='<%%= sockets %>'></div>
+      </div>
+    <%% } %>
+
+    <span class="faded small">
+      <i class='fa fa-clock-o'></i>
+      <time datetime="<%%= indexed_at %>"></time>
+    </span>
+  </div>
+
+  <div class="small-10 columns">
+    <div class="h2-title">
+      <span class="small right">
+        <!-- toolbar -->
+      </span>
+      <h2>
+        <a href="<%= thread_url %>/<%%= thread_id %>" target="_blank">
+          <span class="<%%= rarity_name %>">
+            <%%= name %>
+          </span>
+          <%%= base_name %>
+        </a>
+      </h2>
+    </div>
+
+    <p class="requirements">
+      <%% if (reqs) { %>
+        <%%= reqs.league_name %>
+
+        <%% if (reqs.level) { %>
+          &mdash;
+
+          <span data-sort="level">
+            <%%= reqs.requires_level %> <%%= reqs.level %>
+          </span>
+        <%% } %>
+
+        <%% if (reqs.required_stats) { %>
+          &mdash;
+
+          <%% _.each(reqs.required_stats, function(required_stat) { %>
+            <span class=" <%%= required_stat.stat %>">
+              <%%= required_stat.value %> <%%= required_stat.stat %>
+            </span>
+          <%% }) %>
+        <%% } %>
+
+        <%% if (reqs.quality) { %>
+          &mdash;
+
+          <span data-sort="quality">
+            <b>+<%%= reqs.quality %>%</b> Quality
+          </span>
+        <%% } %>
+
+      <%% } %>
+    </p>
+
+    <div class="row">
+      <div class="section small-section">
+        <div class="small-8 columns">
+          <%% if (!is_skill) { %>
+            <ul class="stats no-bullet">
+              <%% _.each(visible_stats, function(stat) { %>
+                <li data-mod="<%%= stat.mod_id %>" data-value="<%%= stat.value %>" class="<%%= stat.klass %>">
+                  <%%= stat.name %>
+                </li>
+              <%% }) %>
+              <%% if (corrupted) { %>
+                <li class="corrupted">Corrupted</li>
+              <%% } %>
+            </ul>
+          <%% } %>
+        </div>
+
+        <div class="small-4 columns">
+          <ul class="props no-bullet">
+            <%% _.each(properties, function(prop) { %>
+              <li data-<%%= prop.data_attr %>="<%%= prop.meta_data %>">
+                <span><%%= prop.value %></span> <%%= prop.name %>
+              </li>
+            <%% }) %>
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

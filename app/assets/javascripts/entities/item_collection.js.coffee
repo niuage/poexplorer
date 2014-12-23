@@ -5,25 +5,31 @@
   (Entities, ContactManager, Backbone, Marionette, $, _) ->
 
     @ItemCollection = Backbone.Collection.extend
-      # url: "http://api.platform.dev/item"
+      initialize: (models, options = {}) ->
+        @query = options.query
+        @totalCount = 0
+
+      url: -> "http://localhost:8080/i/search/#{@query}"
 
       model: HT.Entities.Item
 
       parse: (response) ->
-        response
+        @totalCount = response.total_count
+        response.items
 
+    # query = null
     itemCollection = null
 
-    @getItemCollection = (query) ->
-      itemCollection = new Entities.ItemCollection()
+    @getItemCollection = (q) ->
+      query = if q then encodeURIComponent(q) else ""
+      itemCollection = new Entities.ItemCollection(null, query: query)
+
+
       defer = $.Deferred()
 
-      query = if query then encodeURIComponent(query) else ""
-
       itemCollection.fetch
-        url: "http://localhost:8080/i/search/#{query}"
         reset: true
-        success: (data) -> defer.resolve(data)
+        success: (data) -> defer.resolve(itemCollection)
         error:          -> defer.resolve(undefined)
 
       defer.promise()

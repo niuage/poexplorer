@@ -28,7 +28,6 @@ class SocketRenderer
         .add(@createSocketLink sockets, socket, i)
 
   @createSocket: (socket, i) ->
-    group = socket["group"]
     attr = socket["attr"]
 
     row = Math.floor(i / 2)

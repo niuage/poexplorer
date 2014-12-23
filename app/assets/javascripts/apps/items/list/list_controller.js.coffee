@@ -7,11 +7,14 @@
 
         itemsRequest = HT.request("item:entities", query) # should pass query here?
 
-        $.when(itemsRequest).done (items) ->
-          console.log items
+        $.when(itemsRequest).done (itemCollection) ->
+
           itemListView = new List.Items(
-            collection: items
+            collection: itemCollection
           )
+
+          # create a view for that
+          # itemCollection.totalCount
 
           itemListView.on "childview:item:show", (childView, model) ->
             HT.trigger("item:show", model.get("id"))

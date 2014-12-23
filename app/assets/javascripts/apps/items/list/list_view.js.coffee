@@ -7,8 +7,15 @@
     @Item = Marionette.ItemView.extend
       template: JST["templates/items/list/item"]
 
+      className: "large-12 columns"
+
       events:
         click: "onClick"
+
+      initialize: ->
+        @listenTo @, "render", @decorate
+
+      decorate: -> App.ItemRenderer.setup(@$el)
 
       onClick: (e) ->
         e.preventDefault()
@@ -26,18 +33,18 @@
 
       className: "items-gallery row"
 
-      # initialize: ->
-        # @listenTo @collection, "reset", @render
-        # @update()
+      initialize: ->
+        @listenTo @, "render:collection", @decorateItems
 
-      update: (query, page) ->
-        @collection.fetch
-          reset: true
-          data:
-            query: @query(query)
-            page: page || 1
+      decorateItems: ->
+        # App.ItemVerification.setup({ root: $(".result").closest("div") })
+        # App.OnlineStatus.accountStatuses("#results")
+        # App.PM.setup("#results")
 
-      query: (query) ->
-        query ||= ""
-        "has:video #{query}"
+      # update: (query, page) ->
+      #   @collection.fetch
+      #     reset: true
+      #     data:
+      #       query: @query(query)
+      #       page: page || 1
 
