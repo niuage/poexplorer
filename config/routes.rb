@@ -23,6 +23,8 @@ Poesearch::Application.routes.draw do
     end
   end
 
+  get "i/search(/:query)", to: "fast_searches#new"
+
   resources :searches, except: [:edit]
   [:weapons, :armours, :misc].each do |type|
       resources :"#{type.to_s.singularize}_searches", except: [:edit]

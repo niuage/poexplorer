@@ -1,6 +1,8 @@
 @import "foundation_and_overrides";
 @import "variables";
-@import "application/reset";
+
+@import "application/top_nav/base";
+
 @import "application_vendor";
 @import "application/base";
 @import "application/typography";

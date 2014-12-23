@@ -12,9 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require foundation
 //= require application_vendor
 //= require app
 //= require_tree ./application
+//= require app
+//= require_tree ./templates
+//= require_tree ./common
+//= require_tree ./apps
+//= require_tree ./entities
 
-$(function(){ $(document).foundation(); });
+// require foundation
+// $(function(){ $(document).foundation(); });
+
+$(function() {
+  HT.start();
+})

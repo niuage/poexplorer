@@ -60,3 +60,9 @@ gem 'rvm-capistrano'
 gem 'parslet'
 
 gem 'foundation-rails'
+
+gem 'active_model_serializers'
+
+gem 'ejs'
+
+gem 'rabl'
