@@ -72,7 +72,8 @@ class Item < ActiveRecord::Base
 
   # END INDEX
 
-  def physical_dps; nil end # ??
+  def physical_dps; nil end
+  def edps; nil end
 
   def full_name
     "#{self.name || ""} #{self.base_name}"

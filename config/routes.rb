@@ -23,7 +23,7 @@ Poesearch::Application.routes.draw do
     end
   end
 
-  get "i/search(/:query)", to: "fast_searches#new", as: :item_search
+  get "i/search(/:query)", to: "fast_searches#new", query: /[^\/]*/, as: :item_search
 
   resources :searches, except: [:edit]
   [:weapons, :armours, :misc].each do |type|

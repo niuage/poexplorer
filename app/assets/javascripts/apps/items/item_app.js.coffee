@@ -5,7 +5,7 @@
       appRoutes:
         "": "listItems"
         "i/search/:query": "listItems"
-        "i/search": "listItems"
+        "i/search(/)": "listItems"
         "i/:id": "showItem"
 
     API =

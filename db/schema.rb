@@ -200,43 +200,43 @@ ActiveRecord::Schema.define(version: 20141222140529) do
   add_index "item_types", ["name"], name: "index_item_types_on_name", using: :btree
 
   create_table "items", force: :cascade do |t|
-    t.integer  "league_id",              limit: 4
-    t.integer  "rarity_id",              limit: 4
-    t.string   "name",                   limit: 255,                   null: false
-    t.string   "base_name",              limit: 255
-    t.string   "account",                limit: 255
-    t.text     "socket_store",           limit: 65535
-    t.integer  "quality",                limit: 4
-    t.integer  "block_chance",           limit: 4
-    t.integer  "armour",                 limit: 4
-    t.integer  "evasion",                limit: 4
-    t.integer  "energy_shield",          limit: 4
-    t.integer  "physical_damage",        limit: 4
-    t.integer  "dps",                    limit: 4
-    t.float    "critical_strike_chance", limit: 24
-    t.float    "aps",                    limit: 24
-    t.integer  "level",                  limit: 4
-    t.string   "requirements",           limit: 255
-    t.string   "type",                   limit: 255
-    t.string   "price",                  limit: 255
-    t.string   "thread_id",              limit: 255
-    t.boolean  "verified",               limit: 1
-    t.boolean  "identified",             limit: 1
+    t.integer  "league_id",          limit: 4
+    t.integer  "rarity_id",          limit: 4
+    t.string   "name",               limit: 255,                   null: false
+    t.string   "base_name",          limit: 255
+    t.string   "account",            limit: 255
+    t.text     "socket_store",       limit: 65535
+    t.integer  "quality",            limit: 4
+    t.integer  "block_chance",       limit: 4
+    t.integer  "armour",             limit: 4
+    t.integer  "evasion",            limit: 4
+    t.integer  "energy_shield",      limit: 4
+    t.integer  "physical_damage",    limit: 4
+    t.integer  "dps",                limit: 4
+    t.float    "csc",                limit: 24
+    t.float    "aps",                limit: 24
+    t.integer  "level",              limit: 4
+    t.string   "requirements",       limit: 255
+    t.string   "type",               limit: 255
+    t.string   "price",              limit: 255
+    t.string   "thread_id",          limit: 255
+    t.boolean  "verified",           limit: 1
+    t.boolean  "identified",         limit: 1
     t.datetime "indexed_at"
-    t.string   "icon",                   limit: 255
-    t.text     "raw_icon",               limit: 65535
-    t.string   "uid",                    limit: 255
+    t.string   "icon",               limit: 255
+    t.text     "raw_icon",           limit: 65535
+    t.string   "uid",                limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "size",                   limit: 255
+    t.string   "size",               limit: 255
     t.date     "thread_updated_at"
-    t.string   "league_name",            limit: 255
-    t.string   "rarity_name",            limit: 255
-    t.integer  "elemental_damage",       limit: 4
-    t.integer  "sold",                   limit: 4,     default: 0
-    t.string   "display_stats",          limit: 255
-    t.string   "socket_combination",     limit: 255
-    t.boolean  "corrupted",              limit: 1,     default: false
+    t.string   "league_name",        limit: 255
+    t.string   "rarity_name",        limit: 255
+    t.integer  "elemental_damage",   limit: 4
+    t.integer  "sold",               limit: 4,     default: 0
+    t.string   "display_stats",      limit: 255
+    t.string   "socket_combination", limit: 255
+    t.boolean  "corrupted",          limit: 1,     default: false
   end
 
   add_index "items", ["uid", "thread_id"], name: "index_items_on_uid_and_thread_id", using: :btree

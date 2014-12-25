@@ -65,6 +65,7 @@
         [
           { name: "DPS", value: @get("dps"), meta_data: "dps", data_attr: "sort" }
           { name: "pDPS", value: @get("physical_dps"), meta_data: "physical_dps", data_attr: "sort" }
+          { name: "eDPS", value: @get("edps"), meta_data: "edps", data_attr: "sort" }
           { name: "APS", value: @get("aps"), meta_data: "aps", data_attr: "sort" }
         ].concat @weapon_and_misc_props()
 

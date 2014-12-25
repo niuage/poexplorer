@@ -38,4 +38,9 @@ class SearchBuilder < Parslet::Transform
   rule(color_operator: { color: simple(:color) }) do
     search.socket_combination = color.to_s
   end
+
+  rule(number: { sign: simple(:sign), natural: simple(:natural) }) do
+    n = natural.to_s.to_i
+    sign == "-" ? -n : n
+  end
 end

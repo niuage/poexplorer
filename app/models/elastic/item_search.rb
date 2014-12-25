@@ -118,6 +118,7 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
             item.must_be_between :aps
             item.must_be_between :dps
             item.must_be_between :physical_dps
+            item.must_be_between :edps
             item.must_be_between :csc
             item.must_be_between :quality
 
