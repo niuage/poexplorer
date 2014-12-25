@@ -34,4 +34,8 @@ class SearchBuilder < Parslet::Transform
     search.currency = Currency.normalize_name(currency)
     search.range(:price_value, range)
   end
+
+  rule(color_operator: { color: simple(:color) }) do
+    search.socket_combination = color.to_s
+  end
 end

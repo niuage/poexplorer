@@ -11,6 +11,14 @@ class QueryParser < Parslet::Parser
   rule(:word_or_string) { word | string }
   rule(:anything) { match['^\s\t'].repeat(1) }
 
+  rule(:socket_color) { match['rgbw'] }
+  rule(:item_color) { socket_color.repeat(1) }
+  rule(:string_color) do
+    str('"') >>
+    (socket_color >> space?).repeat(1).as(:color) >>
+    str('"')
+  end
+
   rule(:digit) { match('\\d') }
   rule(:natural_number) { digit.repeat(1) }
   rule(:float) { (natural_number >> str(".").maybe >> natural_number.maybe).as(:float) }
@@ -51,6 +59,13 @@ class QueryParser < Parslet::Parser
   float_operator :edps
   float_operator :pdps
 
+  rule(:color_operator) do
+    (
+      ((str("color") >> str("s").maybe) | str("col")) >> str(":") >>
+      (item_color.as(:color) | string_color)
+    ).as(:color_operator)
+  end
+
   rule(:currency) do
     (
       str("chaos") | str("c") |
@@ -72,7 +87,8 @@ class QueryParser < Parslet::Parser
     dps_operator |
     edps_operator |
     pdps_operator |
-    price_operator
+    price_operator |
+    color_operator
   end
 
   rule(:query) do

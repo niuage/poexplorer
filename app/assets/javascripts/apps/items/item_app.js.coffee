@@ -5,6 +5,7 @@
       appRoutes:
         "": "listItems"
         "i/search/:query": "listItems"
+        "i/search": "listItems"
         "i/:id": "showItem"
 
     API =
@@ -26,7 +27,7 @@
       API.indexItem()
 
     HT.on "item:list", (query) ->
-      HT.navigate("i/search/#{query}")
+      HT.navigate("i/search/#{encodeURIComponent(query)}")
       API.listItems(query)
 
     HT.on "item:show", (id) ->

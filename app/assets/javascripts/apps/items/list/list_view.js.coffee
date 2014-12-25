@@ -31,7 +31,7 @@
     @Items = Marionette.CollectionView.extend
       childView: List.Item
 
-      className: "items-gallery row"
+      className: "items-gallery"
 
       initialize: ->
         @listenTo @, "render:collection", @decorateItems

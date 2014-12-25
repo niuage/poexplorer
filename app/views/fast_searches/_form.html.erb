@@ -1,10 +1,9 @@
-<%= simple_form_for @fast_search do |f| %>
-  <%= f.input :query,
-        as: :string,
-        label: false,
+<%= form_tag item_search_path, data: { role: "search-form" }, method: :get do %>
+  <%= text_field_tag :query,
+        params[:query],
         placeholder: "Search uniques",
         autocomplete: "off",
         spellcheck: false
   %>
-  <%= f.submit "Search" %>
+  <%= submit_tag "Search" %>
 <% end %>

@@ -21,7 +21,7 @@
     itemCollection = null
 
     @getItemCollection = (q) ->
-      query = if q then encodeURIComponent(q) else ""
+      query = if q then decodeURIComponent(q) else ""
       itemCollection = new Entities.ItemCollection(null, query: query)
 
 

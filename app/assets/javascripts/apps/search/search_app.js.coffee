@@ -2,4 +2,4 @@
   (SearchApp, HT, Backbone, Marionette, $, _) ->
 
     SearchApp.on "start", ->
-      new SearchApp.Show.SearchInput()
+      new SearchApp.Show.SearchForm()
