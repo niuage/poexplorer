@@ -16,7 +16,7 @@ module Parser::Math
     rule(:number_range) { number.as(:lb) >> str("..") >> number.as(:ub) }
 
     rule(:float) { (natural_number >> (str(".") >> natural_number).maybe).as(:float) }
-    rule(:float_range) { float.as(:lb) >> str("..") >> float.as(:ub) }
+    rule(:float_range) { (float.as(:lb) >> str("..") >> float.as(:ub)).as(:float_range) }
 
     rule(:comparison_operator) { (str("<") | str(">") | str("=")) }
   end

@@ -55,12 +55,13 @@ class CreateSearches < ActiveRecord::Migration
       t.integer :linked_socket_count
       t.integer :max_linked_socket_count
 
+      t.integer :corrupted, default: 0
+
       t.integer :level
       t.integer :max_level
 
       t.boolean :has_price, default: false
       t.boolean :same_item_type
-      t.boolean :corrupted
       t.boolean :online, default: false
 
       t.string :order, default: nil

@@ -18,7 +18,7 @@ module ItemExtensions::Mapping
           filter: {
             autocomplete_filter: {
               "type"     => "edge_ngram",
-              "max_gram" => 10,
+              "max_gram" => 12,
               "min_gram" => 1
             }
           },

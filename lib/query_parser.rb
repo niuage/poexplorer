@@ -5,6 +5,7 @@ class QueryParser < Parslet::Parser
   include ::Parser::Price
   include ::Parser::FullName
   include ::Parser::Dps
+  include ::Parser::FixedParams
 
   rule(:any_operator) do
     full_name_operator |
@@ -13,7 +14,8 @@ class QueryParser < Parslet::Parser
     pdps_operator |
     price_operator |
     color_operator |
-    socket_operator
+    socket_operator |
+    is_operator
   end
 
   rule(:query) do

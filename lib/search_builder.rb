@@ -9,6 +9,11 @@ class SearchBuilder < Parslet::Transform
     search.range(attribute, range)
   end
 
+  rule(number: { sign: simple(:sign), natural: simple(:natural) }) do
+    n = natural.to_s.to_i
+    sign == "-" ? -n : n
+  end
+
   rule(float: simple(:value)) { value.to_f }
 
   rule(comparison_range: {
@@ -18,15 +23,20 @@ class SearchBuilder < Parslet::Transform
     ::Transform::ComparisonRange.new(operator, float)
   end
 
-  rule(range: { lb: simple(:lb), ub: simple(:ub) }) { lb..ub }
+  rule(float_range: { lb: simple(:lb), ub: simple(:ub) }) { lb..ub }
 
   rule(anything: simple(:name)) { search << name.to_s }
 
-  rule(socket_count: simple(:socket_count)) { search.socket_count = socket_count.to_s }
-  rule(linked_socket_count: simple(:socket_count)) { search.linked_socket_count = socket_count.to_s }
-
+  # sockets
   rule(count: simple(:count)) { count }
+  rule(socket_count: simple(:socket_count)) do
+    search.socket_count = socket_count.to_s
+  end
+  rule(linked_socket_count: simple(:socket_count)) do
+    search.linked_socket_count = socket_count.to_s
+  end
 
+  # price
   rule(price_operator: {
     range: simple(:range),
     currency: simple(:currency)
@@ -35,12 +45,13 @@ class SearchBuilder < Parslet::Transform
     search.range(:price_value, range)
   end
 
+  # color
   rule(color_operator: { color: simple(:color) }) do
     search.socket_combination = color.to_s
   end
 
-  rule(number: { sign: simple(:sign), natural: simple(:natural) }) do
-    n = natural.to_s.to_i
-    sign == "-" ? -n : n
+  # is operator
+  rule(is_operator: { operand: simple(:operand), exclude: simple(:exclude) }) do
+    SearchOperator::Is.new(operand, search: search, exclude: exclude ).call
   end
 end

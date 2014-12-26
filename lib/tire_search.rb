@@ -28,7 +28,6 @@ class TireSearch
 
   # range can be a Range, or a ComparisonRange
   def range(attr, range)
-    raise range.inspect
     attr = get_attr(attr.to_sym)
     set(attr, range.first) if range.first
     set("max_#{attr}", range.last) if range.last

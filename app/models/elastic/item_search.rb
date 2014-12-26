@@ -87,7 +87,8 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
         item.filter_match :thread_id
         item.filter_match :rarity_id
         item.filter_match :archetype if item.typed?
-        item.filter_match :corrupted if item.corrupted?
+
+        filter :term, corrupted: item.corrupted == 1 if item.corrupted != 0
 
         item.filter_armour_requirements
 

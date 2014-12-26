@@ -10,17 +10,20 @@
       className: "large-12 columns"
 
       events:
-        click: "onClick"
+        "click .props li": "onPropClick"
+        "click .stats li": "onStatClick"
 
       initialize: ->
         @listenTo @, "render", @decorate
 
       decorate: -> App.ItemRenderer.setup(@$el)
 
-      onClick: (e) ->
+      onStatClick: (e) ->
         e.preventDefault()
         # e.stopPropagation()
-        @trigger("item:show", @model)
+        console.log $(e.currentTarget)
+
+      onPropClick: (e) -> @onStatClick(e)
 
       serializeData: ->
         @model.toViewAttributes()

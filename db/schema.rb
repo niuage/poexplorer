@@ -386,11 +386,11 @@ ActiveRecord::Schema.define(version: 20141222140529) do
     t.integer  "max_socket_count",        limit: 4
     t.integer  "linked_socket_count",     limit: 4
     t.integer  "max_linked_socket_count", limit: 4
+    t.integer  "corrupted",               limit: 4,   default: 0
     t.integer  "level",                   limit: 4
     t.integer  "max_level",               limit: 4
     t.boolean  "has_price",               limit: 1,   default: false
     t.boolean  "same_item_type",          limit: 1
-    t.boolean  "corrupted",               limit: 1
     t.boolean  "online",                  limit: 1,   default: false
     t.string   "order",                   limit: 255
     t.string   "type",                    limit: 255

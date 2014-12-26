@@ -16,7 +16,7 @@ class Elastic::BaseItemSearch < Elastic::BaseSearch
     :level,
     :quality,
     :online?,
-    :corrupted?,
+    :corrupted,
     :item_type,
     :account,
     :order_by_mod_id,
