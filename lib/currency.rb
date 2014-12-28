@@ -47,6 +47,11 @@ class Currency
     "_exists_:price"
   end
 
+  def self.normalize_name(name)
+    return :chaos if name.to_s == "c"
+    name.to_s
+  end
+
   def self.sorting_script
     score = ORBS.map do |orb|
       "(doc['price.#{orb}'].empty ? 0 : (doc['price.#{orb}'].value * #{orb}_price))"

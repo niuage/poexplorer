@@ -8,7 +8,7 @@ module Parser::Price
         str("alch") |
         str("gcp") |
         str("exa")
-      ) >> str("s").maybe
+      )
     end
 
     rule(:price_operator) do

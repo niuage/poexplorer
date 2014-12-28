@@ -32,8 +32,8 @@ module Elastic
 
         context.must do
           range_values = {}.tap do |range_values|
-            range_values.update(gte: min_value.to_i) if min_value.present?
-            range_values.update(lte: max_value.to_i) if max_value.present?
+            range_values.update(gte: min_value.to_f) if min_value.present?
+            range_values.update(lte: max_value.to_f) if max_value.present?
           end
 
           range attr, range_values

@@ -13,6 +13,8 @@ class Item < ActiveRecord::Base
   BASE_NAMES = [G_WEAPON_BASE_NAMES, G_ARMOUR_BASE_NAMES, G_MISC_BASE_NAMES].flatten.freeze
   GENERIC_NAMES = {}
 
+  attr_accessor :damage
+
   attr_accessible :name, :account, :type, :quality, :level,
     :verified, :identified, :league, :rarity, :rarity_id, :league_id,
     :sockets, :linked_socket_count, :socket_count, :socket_combination,
@@ -21,9 +23,9 @@ class Item < ActiveRecord::Base
     :dex, :int, :dps, :thread_id,
     :raw_icon, :w, :h, :armour, :evasion, :energy_shield, :block_chance,
     :elemental_damage, :raw_physical_damage,
-    :edps
+    :edps, :damage
 
-  before_validation   :compute_elemental_damage, on: :create, if: :misc_with_elemental_damage?
+  before_validation   :compute_damage, on: :create, if: :compute_damage?
   before_save         :cache_association_names
 
   validates :type, inclusion: { in: TYPES, message: "This item type does not exist." }
@@ -48,15 +50,18 @@ class Item < ActiveRecord::Base
     self.rarity_name = (self.rarity_id.nil? ? nil : self.rarity.name) if self.rarity_id_changed? #probably not necessary anymore
   end
 
-  def misc_with_elemental_damage?
-    self.class.to_s.in? ["Amulet", "Ring", "Quiver", "Glove", "Helmet", "BodyArmour", "Boot"]
+  def compute_damage?
+    weapon? || self.class.to_s.in?(["Amulet", "Ring", "Quiver", "Glove", "Helmet", "BodyArmour", "Boot"])
   end
 
-  def compute_elemental_damage
+  def compute_damage
     self.elemental_damage = stats.inject(0) do |dmg, stat|
-      dmg + ((stat.elemental_dps? && !stat.hidden) ? stat.value.to_i : 0)
+      dmg + ((stat.elemental_damage? && !stat.hidden) ? stat.value.to_i : 0)
     end
 
+    chaos_damage = stats.find { |s| s.chaos_damage? }.try(:value)
+
+    self.damage = physical_damage.to_i + self.elemental_damage.to_i + chaos_damage.to_i
   end
 
   # INDEX

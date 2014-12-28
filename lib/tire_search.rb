@@ -6,7 +6,10 @@ class TireSearch
   attr_accessor :query, :search
 
   ATTR_MAPPING = {
-    pdps: :physical_dps
+    pdps: :physical_dps,
+    dmg: :damage,
+    pdmg: :physical_damage,
+    edmg: :elemental_damage
   }
 
   def initialize(query)

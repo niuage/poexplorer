@@ -54,4 +54,14 @@ class SearchBuilder < Parslet::Transform
   rule(is_operator: { operand: simple(:operand), exclude: simple(:exclude) }) do
     SearchOperator::Is.new(operand, search: search, exclude: exclude ).call
   end
+
+  # thread
+  rule(thread_id: simple(:thread_id)) { search.thread_id = thread_id.to_s }
+
+  # float operators
+  rule(csc_operator: { range: simple(:range) }) { search.range(:csc, range) }
+  rule(level_operator: { range: simple(:range) }) { search.range(:level, range) }
+  rule(evasion_operator: { range: simple(:range) }) { search.range(:evasion, range) }
+  rule(energy_shield_operator: { range: simple(:range) }) { search.range(:energy_shield, range) }
+  rule(quality_operator: { range: simple(:range) }) { search.range(:quality, range) }
 end

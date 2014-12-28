@@ -114,6 +114,7 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
 
             item.must_match_string :name, :name, "AND"
 
+            item.must_be_between :damage
             item.must_be_between :physical_damage
             item.must_be_between :elemental_damage
             item.must_be_between :aps

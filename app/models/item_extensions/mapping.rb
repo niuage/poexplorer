@@ -18,8 +18,8 @@ module ItemExtensions::Mapping
           filter: {
             autocomplete_filter: {
               "type"     => "edge_ngram",
-              "max_gram" => 12,
-              "min_gram" => 1
+              "max_gram" => 13,
+              "min_gram" => 2
             }
           },
           analyzer: {
@@ -50,10 +50,11 @@ module ItemExtensions::Mapping
         indexes :aps,                           type: "float"
         indexes :dps,                           type: "float"
         indexes :physical_dps,                  type: "float"
+        indexes :damage,                        type: "integer"
         indexes :physical_damage,               type: "integer"
         indexes :elemental_damage,              type: "integer"
         indexes :edps,                          type: "float"
-        indexes :csc,        type: "float"
+        indexes :csc,                           type: "float"
         indexes :raw_physical_damage,           type: "string", index: :not_analyzed
 
         indexes :block_chance,                  type: "integer"
@@ -139,6 +140,7 @@ module ItemExtensions::Mapping
         :indexed_at,
         :item_type,
         :archetype,
+        :damage,
         :physical_dps,
         :edps,
         :full_name,

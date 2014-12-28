@@ -55,8 +55,10 @@ class StatBuilder
   end
 
   def update_custom_resistance_stats(stat)
-    if element = stat.resistance_element.try(:[], 1)
+    if element = stat.elemental_resistance.try(:[], 1)
       resistances[element.downcase] += stat.value
+    elsif chaos = stat.chaos_resistance.try(:[], 1)
+      resistances["chaos"] += stat.value
     elsif stat.all_resistance?
       resistances.each do |elt, res|
         resistances[elt] += stat.value if elt != "chaos"

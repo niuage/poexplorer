@@ -17,9 +17,9 @@ class Search < ActiveRecord::Base
     :raw_physical_damage,
     :price_value, :max_price_value, :currency, :socket_combination,
     :minimum_mod_match, :same_item_type, :has_price, :corrupted, :online,
-    :order_by_mod_id, :sort_by_price
+    :order_by_mod_id, :sort_by_price, :damage, :max_damage
 
-  attr_accessor :ngram_full_name
+  attr_accessor :ngram_full_name, :damage, :max_damage
 
   belongs_to :league
 

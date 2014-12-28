@@ -4,14 +4,20 @@ class QueryParser < Parslet::Parser
   include ::Parser::Math
   include ::Parser::Price
   include ::Parser::FullName
-  include ::Parser::Dps
+  include ::Parser::Damage
+  include ::Parser::Defense
   include ::Parser::FixedParams
+  include ::Parser::Requirements
+  include ::Parser::Misc
 
   rule(:any_operator) do
     full_name_operator |
-    dps_operator |
-    edps_operator |
-    pdps_operator |
+    dmg_operator | pdmg_operator | edmg_operator |
+    dps_operator | edps_operator | pdps_operator |
+    csc_operator |
+    armour_operator | evasion_operator | energy_shield_operator | block_chance_operator |
+    str_operator | dex_operator | int_operator | level_operator |
+    quality_operator | thread_operator |
     price_operator |
     color_operator |
     socket_operator |

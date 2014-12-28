@@ -19,5 +19,7 @@ module Parser::Math
     rule(:float_range) { (float.as(:lb) >> str("..") >> float.as(:ub)).as(:float_range) }
 
     rule(:comparison_operator) { (str("<") | str(">") | str("=")) }
+
+    rule(:range_or_comp) { (float_range | comparison_range).as(:range) }
   end
 end

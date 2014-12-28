@@ -24,12 +24,30 @@ module Parser::Basics
 
     # 12..15 dps
     # > 12 dps
-    def self.float_operator(attr)
+    def self.float_operator(attr, &block)
       rule("#{attr}_operator".to_sym) do
         (
+          attr_str = block_given? ? instance_eval(&block) : str(attr.to_s)
           (float_range | comparison_range).as(:range) >>
           space? >>
-          str(attr.to_s).as(:attribute)
+          attr_str.as(:attribute)
+        ).as(:float_operator)
+      end
+    end
+
+    def self.custom_float_operator(attr, &block)
+      rule("#{attr}_operator".to_sym) do
+        range_or_comp.as(:"#{attr}_operator") >> space? >> instance_eval(&block)
+      end
+    end
+
+    def self.reverse_float_operator(attr, &block)
+      rule("#{attr}_operator".to_sym) do
+        (
+          attr_str = block_given? ? instance_eval(&block) : str(attr.to_s)
+          attr_str.as(:attribute) >>
+          space? >>
+          float_or_range
         ).as(:float_operator)
       end
     end
