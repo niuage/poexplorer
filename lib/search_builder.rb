@@ -32,10 +32,10 @@ class SearchBuilder < Parslet::Transform
   # sockets
   rule(count: simple(:count)) { count } # might not be used
 
-  rule(socket_count_operator: simple(:range)) do
-    search.range(:count, range)
+  rule(socket_count_operator: { range: simple(:range) }) do
+    search.range(:socket_count, range)
   end
-  rule(linked_socket_count_operator: simple(:range)) do
+  rule(linked_socket_count_operator: { range: simple(:range) }) do
     search.range(:linked_socket_count, range)
   end
 
