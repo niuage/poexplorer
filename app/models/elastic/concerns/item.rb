@@ -47,21 +47,6 @@ module Elastic::Concerns::Item
     end
   end
 
-  def must_have_price
-    if search.currency.present? && (search.price_value.present? || search.max_price_value.present?)
-      currency = Currency.new(search.price_value, search.max_price_value, search.currency, search.league_id.to_i)
-      context.must do
-        boolean minimum_number_should_match: 1 do
-          Currency::ORBS.each do |currency_name|
-            should { range "price.#{currency_name}", currency.range(currency_name) }
-          end
-        end
-      end
-    elsif search.has_price? || sorter.sort_by_price?
-      context.must { string Currency.query_string }
-    end
-  end
-
   private
 
   def stats_match(stat, excluded)

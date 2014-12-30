@@ -20,10 +20,12 @@ class SearchBuilder < Parslet::Transform
     comparison_operator: simple(:operator),
     float: simple(:float)
   }) do
-    ::Transform::ComparisonRange.new(operator, float)
+    a = ::Transform::ComparisonRange.new(operator, float)
   end
 
-  rule(float_range: { lb: simple(:lb), ub: simple(:ub) }) { lb..ub }
+  rule(float_range: { lb: simple(:lb), ub: simple(:ub) }) do
+    lb..ub
+  end
 
   rule(anything: simple(:name)) { search << name.to_s }
 
@@ -41,8 +43,11 @@ class SearchBuilder < Parslet::Transform
     range: simple(:range),
     currency: simple(:currency)
   }) do
-    search.currency = Currency.normalize_name(currency)
-    search.range(:price_value, range)
+    range2 = ::Transform::Range.new(
+      Currency.new(range.first, currency, search.league).to_chaos,
+      Currency.new(range.last, currency, search.league).to_chaos
+    )
+    search.range(:chaos_value, range2)
   end
 
   # color
@@ -64,4 +69,7 @@ class SearchBuilder < Parslet::Transform
   rule(evasion_operator: { range: simple(:range) }) { search.range(:evasion, range) }
   rule(energy_shield_operator: { range: simple(:range) }) { search.range(:energy_shield, range) }
   rule(quality_operator: { range: simple(:range) }) { search.range(:quality, range) }
+
+  # seller operator
+  rule(seller_operator: simple(:seller)) { search.account = seller }
 end

@@ -367,8 +367,8 @@ ActiveRecord::Schema.define(version: 20141222140529) do
     t.float    "max_physical_dps",        limit: 24
     t.float    "aps",                     limit: 24
     t.float    "csc",                     limit: 24
-    t.float    "price_value",             limit: 24
-    t.float    "max_price_value",         limit: 24
+    t.float    "chaos_value",             limit: 24
+    t.float    "max_chaos_value",         limit: 24
     t.integer  "physical_damage",         limit: 4
     t.integer  "max_physical_damage",     limit: 4
     t.integer  "elemental_damage",        limit: 4

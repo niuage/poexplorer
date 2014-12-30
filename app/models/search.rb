@@ -15,7 +15,7 @@ class Search < ActiveRecord::Base
     :armour, :evasion, :energy_shield, :block_chance,
     :max_armour, :max_evasion, :max_energy_shield, :max_block_chance,
     :raw_physical_damage,
-    :price_value, :max_price_value, :currency, :socket_combination,
+    :chaos_value, :max_chaos_value, :currency, :socket_combination,
     :minimum_mod_match, :same_item_type, :has_price, :corrupted, :online,
     :order_by_mod_id, :sort_by_price, :damage, :max_damage
 

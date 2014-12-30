@@ -31,8 +31,8 @@ class CreateSearches < ActiveRecord::Migration
       t.float :aps
       t.float :csc
 
-      t.float :price_value
-      t.float :max_price_value
+      t.float :chaos_value
+      t.float :max_chaos_value
 
       t.integer :physical_damage
       t.integer :max_physical_damage

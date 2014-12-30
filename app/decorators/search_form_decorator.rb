@@ -67,7 +67,7 @@ class SearchFormDecorator < ApplicationDecorator
 
   def item_currency(options = {})
     input :currency, input_options({
-      collection: Currency::ORBS,
+      collection: Currency.orbs,
       selected: form.object.currency || Currency::DEFAULT,
       input_html: { class: "span12 nh" }
     }, options)

@@ -1,61 +1,66 @@
 class Currency
-  ORBS = [:alch, :chaos, :gcp, :exa]
   DEFAULT = :alch
 
-  def initialize(min, max, item_currency, league_id)
-    @league_id = get_league_id(league_id)
-    @min = min
-    @max = max
-    @item_currency = item_currency
-    @prices = [
-    {
-      alch: {   alch: 1,  chaos: 1.0/2, gcp: 1.0/5, exa: 1.0/32 },
-      chaos: {  alch: 2,  chaos: 1,     gcp: 1.0/2, exa: 1.0/20 },
-      gcp: {    alch: 5,  chaos: 2,     gcp: 1,     exa: 1.0/7 },
-      exa: {    alch: 32, chaos: 20,    gcp: 7,     exa: 1 }
-    },
-    {
-      alch: {   alch: 1,  chaos: 1.0/2, gcp: 1.0/7, exa: 1.0/39 },
-      chaos: {  alch: 2,  chaos: 1,     gcp: 1.0/4, exa: 1.0/34 },
-      gcp: {    alch: 7,  chaos: 4,     gcp: 1,     exa: 1.0/10 },
-      exa: {    alch: 39, chaos: 34,    gcp: 10,    exa: 1 }
-    }
-    ]
+  class_attribute :rates
+
+  self.rates = {
+    alt: 1.to_f / 15,
+    chrome: 1.to_f / 13,
+    jew: 1.to_f / 8,
+    chance: 1.to_f / 7.5,
+    fus: 1.to_f / 2,
+    alch: 1.to_f / 2.5,
+    scour: 1.to_f / 2,
+    chisel: 1.to_f / 3,
+    vaal: 1.to_f / 1.5,
+    chaos: 1,
+    blessed: 1,
+    regal: 2,
+    gcp: 2,
+    divine: 7.5,
+    exa: 42.5,
+    eternal: 80
+  }
+
+  attr_accessor :league_id, :value, :currency
+
+  def initialize(value, currency, league_id)
+    self.league_id = league_id
+    self.value = value.to_f
+    self.currency = currency
   end
 
-  def range(in_currency)
-    {}.tap do |range|
-      range[:gte] = value(@min.to_f, in_currency) if @min.present?
-      range[:lte] = value(@max.to_f, in_currency) if @max.present?
-    end
+  def self.orbs
+    @_orbs ||= rates.keys
   end
 
-  def value(amount, in_currency)
-    # 1 exa => ? gcp
-    @prices[@league_id][@item_currency.to_sym][in_currency] * amount
+  def orbs
+    self.class.orbs
+  end
+
+  def rates
+    self.class.rates
+  end
+
+  def to_chaos
+    return nil unless valid?
+    rates[currency] * value
   end
 
   def self.valid_currency?(currency)
-    ORBS.include?(currency.to_sym)
+    orbs.include?(currency.to_sym)
   end
 
-  def get_league_id(id)
-    id.to_i % 2
+  def valid?
+    orbs.include?(currency) && value > 0
   end
 
-  def self.query_string
-    "_exists_:price"
+  def currency=(currency)
+    @currency = normalize_name(currency)
   end
 
-  def self.normalize_name(name)
+  def normalize_name(name)
     return :chaos if name.to_s == "c"
-    name.to_s
-  end
-
-  def self.sorting_script
-    score = ORBS.map do |orb|
-      "(doc['price.#{orb}'].empty ? 0 : (doc['price.#{orb}'].value * #{orb}_price))"
-    end.join(" + ")
-    "0 - (#{score})"
+    name.to_s.to_sym
   end
 end

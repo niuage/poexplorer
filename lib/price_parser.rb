@@ -82,6 +82,7 @@ class PriceParser
     /~(?:(?:gb)|b)\/o ([-+]?[0-9]*\.?[0-9]+) (?:#{orbs_regexp})/.match(price).to_a.compact[1..-1]
   end
 
+  # is this used?
   def self.parse_price(price)
     /([-+]?[0-9]*\.?[0-9]+) (?:#{orbs_regexp})/.match(price).to_a.compact[1..-1]
   end
@@ -123,10 +124,11 @@ class PriceParser
   end
 
   def orbs_regexp
-    @orbs_regexp ||= ORBS.map { |orb| "(?:(#{orb}).*)" }.join("|")
+    self.class.orbs_regexp
   end
+
   def self.orbs_regexp
-    ORBS.map { |orb| "(?:(#{orb}).*)" }.join("|")
+    @orbs_regexp ||= ORBS.map { |orb| "(?:(#{orb}).*)" }.join("|")
   end
 
   def find_spoilers(node)

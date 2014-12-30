@@ -15,31 +15,7 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
     item = self
     search = self.search
 
-    if false # sorter.sort_by_price?
-      # filtered_query wrapped in a function_score to sort by price
-      function_score_query
-    else
-      # regular query
-      filtered_query.merge(meta_query)
-    end
-  end
-
-  def function_score_query
-    {
-      query: {
-        function_score: {
-          script_score: {
-            script: Currency.sorting_script,
-            params: {
-              exa_price: 30,
-              chaos_price: 1,
-              alch_price: 0.4,
-              gcp_price: 1.5
-            }
-          }
-        }.merge(filtered_query)
-      }
-    }.merge(meta_query)
+    filtered_query.merge(meta_query)
   end
 
   def filtered_query
@@ -55,7 +31,7 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
 
     Tire::Search::Search.new do
       item.with_context(self) do
-        item.facets
+        # item.facets
         item.paginate
         item.sort
       end
@@ -87,6 +63,8 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
         item.filter_match :thread_id
         item.filter_match :rarity_id
         item.filter_match :archetype if item.typed?
+
+        item.filter_between(:chaos_value)
 
         filter :term, corrupted: item.corrupted == 1 if item.corrupted != 0
 
@@ -126,11 +104,9 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
 
             item.must_be_between :level
 
-            item.must_have_price
-
             item.must_have_sockets
 
-            item.must_have_stats
+            # item.must_have_stats
           end
         end
       end

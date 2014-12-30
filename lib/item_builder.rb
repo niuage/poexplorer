@@ -143,7 +143,7 @@ class ItemBuilder
 
   def requirement(requirement_name)
     req = fetch_value(requirements, requirement_name)
-    req ? req.to_i : nil
+    req ? req.to_i : 0
   end
 
   def parse_value(value)

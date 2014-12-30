@@ -21,7 +21,8 @@ class QueryParser < Parslet::Parser
     price_operator |
     color_operator |
     socket_operator |
-    is_operator
+    is_operator |
+    seller_operator
   end
 
   rule(:query) do

@@ -75,12 +75,7 @@ module ItemExtensions::Mapping
         indexes :quality,                       type: "integer"
         indexes :level,                         type: "integer"
 
-        indexes :price,                         type: "object" do
-          indexes :gcp, type: "float"
-          indexes :alch, type: "float"
-          indexes :chaos, type: "float"
-          indexes :exa, type: "float"
-        end
+        indexes :chaos_value,                   type: "float"
 
         indexes :h,                             type: "integer"
         indexes :w,                             type: "integer"
@@ -144,6 +139,7 @@ module ItemExtensions::Mapping
         :physical_dps,
         :edps,
         :full_name,
+        :chaos_value,
         :sockets, :socket_count, :linked_socket_count,
         :raw_physical_damage,
         :level, :str, :dex, :int,

@@ -12,6 +12,20 @@ module Elastic
         end
       end
 
+      def filter_between(attr)
+        attr_max = :"max_#{attr}"
+        min_value, max_value = search.send(attr), search.send(attr_max)
+
+        return unless min_value.present? || max_value.present?
+
+        range_values = {}.tap do |range_values|
+          range_values.update(gte: min_value.to_f) if min_value.present?
+          range_values.update(lte: max_value.to_f) if max_value.present?
+        end
+
+        context.filter :range, {}.tap { |range| range[attr] = range_values }
+      end
+
       def must_be_gte(attr)
         return unless (attr_value = search.send(attr)).present?
         attr_value = yield attr_value if block_given?
@@ -26,8 +40,8 @@ module Elastic
       def must_be_between(attr, max_prefix = :max)
         attr_max = :"#{max_prefix}_#{attr}"
 
-        min_value = search.send(attr)
-        max_value = search.send(attr_max)
+        min_value, max_value = search.send(attr), search.send(attr_max)
+
         return unless min_value.present? || max_value.present?
 
         context.must do
@@ -37,26 +51,6 @@ module Elastic
           end
 
           range attr, range_values
-        end
-      end
-
-      def filter_between(attr, max_prefix = :max)
-        max_attr = :"#{max_prefix}_#{attr}"
-
-        min_value = search.send(attr)
-        max_value = search.send(max_attr)
-
-        return unless (max_present = max_value.present?) || min_value.present?
-
-        range_values = {}.tap do |range_values|
-          range_values.update(gte: min_value.to_i) if min_value.present?
-          range_values.update(lte: max_value.to_i) if max_present
-        end
-
-        if max_present && max_value.to_i == 0
-          context.filter :not, { exists: { field: attr.to_s } }
-        else
-          context.filter :range, attr => range_values
         end
       end
 

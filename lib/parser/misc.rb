@@ -7,5 +7,9 @@ module Parser::Misc
     rule(:thread_operator) do
       str("thread:") >> natural_number.as(:thread_id)
     end
+
+    rule(:seller_operator) do
+      str("seller:") >> word.as(:seller_operator)
+    end
   end
 end
