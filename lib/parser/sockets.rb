@@ -6,7 +6,7 @@ module Parser::Sockets
     rule(:item_color) { socket_color.repeat(1) }
     rule(:string_color) do
       str('"') >>
-      (socket_color >> space?).repeat(1).as(:color) >>
+      (item_color >> space?).repeat(1).as(:color) >>
       str('"')
     end
 
@@ -15,9 +15,12 @@ module Parser::Sockets
     rule(:socket_count) { socket_digit.as(:count) >> str("s") }
     rule(:linked_socket_count) { (socket_digit.as(:count) >> str("l")) }
 
+    custom_float_operator(:socket_count) { str("s") }
+    custom_float_operator(:linked_socket_count) { str("l") }
+
     rule(:socket_operator) do
-      socket_count.as(:socket_count) |
-      linked_socket_count.as(:linked_socket_count)
+      socket_count_operator |
+      linked_socket_count_operator
     end
 
     rule(:color_operator) do

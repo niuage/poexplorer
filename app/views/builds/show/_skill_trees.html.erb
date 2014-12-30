@@ -1,9 +1,0 @@
-<% trees = @build.skill_trees.first(15) %>
-
-<% if trees.any? %>
-  <div class="bordered-section">
-    <h2 id="skill-tree">Passive Skill Trees</h2>
-
-    <%= render trees %>
-  </div>
-<% end %>

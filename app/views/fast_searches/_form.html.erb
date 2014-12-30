@@ -1,9 +1,14 @@
 <%= form_tag item_search_path, data: { role: "search-form" }, method: :get do %>
+
   <%= text_field_tag :query,
         params[:query],
         placeholder: "Search uniques",
         autocomplete: "off",
         spellcheck: false
   %>
+
+  <%= hidden_field_tag :league_id, params[:league_id] %>
+  <%= hidden_field_tag :order_by, params[:order_by] %>
+
   <%= submit_tag "Search" %>
 <% end %>

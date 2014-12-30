@@ -70,23 +70,3 @@
 .a-faq .tab-help a { @extend .tab-selected; }
 
 .c-feedback { .tab-feedback a { @extend .tab-selected; } }
-
-.c-builds, .c-build_searches {
-  .tn-builds a { @extend .tn-selected; }
-}
-
-.c-builds.a-new, .c-builds.a-create {
-  .tab-add-build a { @extend .tab-selected; }
-}
-
-.c-builds.a-index {
-  .tab-search a { @extend .tab-selected; }
-}
-
-.c-builds.a-edit {
-  .tab-my-builds a { @extend .tab-selected; }
-}
-
-.c-build_searches {
-  .tab-search a { @extend .tab-selected; }
-}

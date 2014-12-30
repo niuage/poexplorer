@@ -11,18 +11,25 @@ class League < ActiveRecord::Base
     "nemesis",
     "ambush",
     "invasion",
-    "2 Week Charity Event"
+    "rampage",
+    "beyond",
+    "torment",
+    "bloodlines"
   ]
-
-  MERGED_LEAGUES = ["2 Week Charity Event"]
 
   OLD_SEASON_LEAGUES = [
     "anarchy",
     "onslaught",
     "domination",
     "nemesis",
-    "2 Week Charity Event"
+    "ambush",
+    "invasion",
+    "2 Week Charity Event",
+    "rampage",
+    "beyond"
   ]
+
+  RUNNING_LEAGUES = LEAGUES + (SEASON_LEAGUES - OLD_SEASON_LEAGUES)
 
   # after_save :update_all_items
   # after_save :update_all_users
@@ -53,7 +60,7 @@ class League < ActiveRecord::Base
   end
 
   def self.running
-    self.where(name: LEAGUES + SEASON_LEAGUES - OLD_SEASON_LEAGUES).all
+    self.where(name: RUNNING_LEAGUES).all
   end
 
   def self.searchable_indices

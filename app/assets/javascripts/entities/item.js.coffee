@@ -17,6 +17,7 @@
           visible_stats: @visibleStats()
           properties: @properties()
           sockets: @sockets()
+          hidden_stats: @hiddenStats()
         )
 
       parse: (response) ->
@@ -37,10 +38,13 @@
         quality: @get("quality")
 
       requiredStats: ->
-        $.map ["dex", "str", "int"], (stat, i) =>
+        stats = []
+        $.each ["dex", "str", "int"], (i, stat) =>
           if (stat_value = @get(stat))
-            stat: stat
-            value: stat_value
+            stats.push
+              stat: stat
+              value: stat_value
+        stats
 
       visibleStats: ->
         $.map @get("stats"), (stat, i) ->
@@ -55,8 +59,6 @@
           when 0 then @weapon_props()
           when 1 then @armour_props()
           when 2 then @misc_props()
-
-        props = props.concat @hiddenStats()
 
         $.map props, (prop, i) ->
           prop if prop && prop.value > 0
@@ -74,7 +76,7 @@
           { name: "Evasion", value: @get("evasion"), meta_data: "evasion", data_attr: "sort" }
           { name: "Armour", value: @get("armour"), meta_data: "armour", data_attr: "sort" }
           { name: "ES", value: @get("energy_shield"), meta_data: "energy_shield", data_attr: "sort" }
-          { name: "% Chance to Block", value: @get("block_chance"), meta_data: "block_chance", data_attr: "sort" }
+          { name: "% Block", value: @get("block_chance"), meta_data: "block_chance", data_attr: "sort" }
         ]
 
       misc_props: ->
@@ -82,8 +84,8 @@
 
       weapon_and_misc_props: ->
         [
-          { name: "Physical Dmg", value: @displayedPhysDmg(), meta_data: "physical_damage", data_attr: "sort" }
-          { name: "Elemental Dmg", value: @get("elemental_damage"), meta_data: "elemental_damage", data_attr: "sort" }
+          { name: "Phys Dmg", value: @displayedPhysDmg(), meta_data: "physical_damage", data_attr: "sort" }
+          { name: "Ele Dmg", value: @get("elemental_damage"), meta_data: "elemental_damage", data_attr: "sort" }
           { name: "CS Chance", value: @get("csc"), meta_data: "csc", data_attr: "sort" }
         ]
 

@@ -26,12 +26,6 @@ private
 
     # can :create, UserFavorite
 
-    # can :create, Build
-
-    # can :update, Build do |build|
-    #   build.user_id == user.id
-    # end
-
     can :edit, Player do |player|
       user.account_name == player.account
     end

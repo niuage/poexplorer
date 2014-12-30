@@ -1,3 +1,5 @@
+$border-color: #28241d;
+
 #results.loading {
   opacity: 0.8;
 }
@@ -19,7 +21,8 @@
 }
 
 .item {
-  border-bottom: 1px solid #ececec;
+  border-bottom: 1px solid $border-color;
+  color: $font-color;
 
   &:first-child {
     border-radius: 3px 3px 0 0;
@@ -31,16 +34,20 @@
 
   h2 {
     margin-bottom: -3px;
+
+    a {
+      color: #F3E6D0;
+    }
   }
 
   .implicit {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid $border-color;
     padding-bottom: 2px;
     margin-bottom: 2px;
   }
 
   .corrupted {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid $border-color;
     padding-top: 2px;
     margin-top: 3px;
     color: red;
@@ -59,12 +66,27 @@
     li.sorting { padding-right: 20px; }
   }
 
-  .props li {
-    font-size: 0.825em;
+  .props {
+    li {
+      font-size: 0.825em;
 
-    &[data-mod] span {
-      display: none;
-      &.tag { display: block }
+      &[data-mod] span {
+        display: none;
+
+        &.tag { display: block }
+      }
+    }
+
+    span {
+      font-size: 1.7em;
+    }
+  }
+
+  .item-props {
+    li {
+      width: 48%;
+      margin: 0 2% 10px 0;
+      float: left;
     }
   }
 
@@ -133,8 +155,9 @@
     }
   }
 
-  .props {
-    span { font-weight: bold; }
+  .quality {
+    font-size: 1rem;
+    color: $font-color;
   }
 
   .item-icon img {

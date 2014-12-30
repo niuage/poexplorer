@@ -28,40 +28,29 @@
             <%%= name %>
           </span>
           <%%= base_name %>
+
+          <%% if (reqs.quality) { %>
+            <span data-sort="quality" class="quality">
+              (+<%%= reqs.quality %>%)
+            </span>
+          <%% } %>
         </a>
       </h2>
     </div>
-
     <p class="requirements">
       <%% if (reqs) { %>
-        <%%= reqs.league_name %>
-
         <%% if (reqs.level) { %>
-          &mdash;
-
           <span data-sort="level">
-            <%%= reqs.requires_level %> <%%= reqs.level %>
-          </span>
+            <%%= reqs.requires_level %> <%%= reqs.level %></span><%% if (reqs.required_stats) { %>,<%% } %>
         <%% } %>
 
         <%% if (reqs.required_stats) { %>
-          &mdash;
-
           <%% _.each(reqs.required_stats, function(required_stat) { %>
             <span class=" <%%= required_stat.stat %>">
               <%%= required_stat.value %> <%%= required_stat.stat %>
             </span>
           <%% }) %>
         <%% } %>
-
-        <%% if (reqs.quality) { %>
-          &mdash;
-
-          <span data-sort="quality">
-            <b>+<%%= reqs.quality %>%</b> Quality
-          </span>
-        <%% } %>
-
       <%% } %>
     </p>
 
@@ -83,7 +72,7 @@
         </div>
 
         <div class="small-4 columns">
-          <ul class="props no-bullet">
+          <ul class="props item-props clearfix no-bullet">
             <%% _.each(properties, function(prop) { %>
               <li data-<%%= prop.data_attr %>="<%%= prop.meta_data %>">
                 <span><%%= prop.value %></span> <%%= prop.name %>
@@ -91,6 +80,13 @@
             <%% }) %>
           </ul>
 
+          <ul class="props no-bullet">
+            <%% _.each(hidden_stats, function(stat) { %>
+              <li data-<%%= stat.data_attr %>="<%%= stat.meta_data %>">
+                <%%= stat.name %>
+              </li>
+            <%% }) %>
+          </ul>
         </div>
 
       </div>

@@ -13,8 +13,7 @@ module Parser::Price
 
     rule(:price_operator) do
       (
-        (float_range | comparison_range).as(:range) >> space? >>
-        currency.as(:currency)
+        range_or_comp >> space? >> currency.as(:currency)
       ).as(:price_operator)
     end
   end

@@ -28,90 +28,12 @@ ActiveRecord::Schema.define(version: 20141222140529) do
     t.datetime "updated_at"
   end
 
-  create_table "bandit_choices", force: :cascade do |t|
-    t.integer "build_id",         limit: 4
-    t.integer "normal_choice",    limit: 4
-    t.integer "cruel_choice",     limit: 4
-    t.integer "merciless_choice", limit: 4
-    t.text    "alternatives",     limit: 65535
-  end
-
   create_table "broadcasts", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.string   "body",       limit: 255
     t.integer  "priority",   limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "build_classes", force: :cascade do |t|
-    t.integer  "build_id",   limit: 4
-    t.integer  "klass_id",   limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "build_keystones", force: :cascade do |t|
-    t.integer "build_id",    limit: 4
-    t.integer "keystone_id", limit: 4
-  end
-
-  create_table "build_leagues", force: :cascade do |t|
-    t.integer  "build_id",   limit: 4
-    t.integer  "league_id",  limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "build_searches", force: :cascade do |t|
-    t.string   "uid",           limit: 255
-    t.integer  "user_id",       limit: 4
-    t.integer  "build_id",      limit: 4
-    t.string   "order",         limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "keywords",      limit: 255
-    t.integer  "life_type",     limit: 4
-    t.boolean  "softcore",      limit: 1,   default: true
-    t.boolean  "hardcore",      limit: 1,   default: true
-    t.string   "skill_gem_ids", limit: 255
-    t.string   "unique_ids",    limit: 255
-    t.string   "klass_ids",     limit: 255
-    t.string   "keystone_ids",  limit: 255
-    t.boolean  "pvp",           limit: 1,   default: false
-    t.integer  "user_uid",      limit: 4
-  end
-
-  add_index "build_searches", ["uid"], name: "index_build_searches_on_uid", using: :btree
-
-  create_table "build_uniques", force: :cascade do |t|
-    t.integer "build_id",  limit: 4
-    t.integer "unique_id", limit: 4
-  end
-
-  create_table "builds", force: :cascade do |t|
-    t.integer  "user_id",        limit: 4
-    t.string   "title",          limit: 255
-    t.text     "summary",        limit: 65535
-    t.text     "description",    limit: 65535
-    t.string   "video_url",      limit: 255
-    t.integer  "life_type",      limit: 4
-    t.integer  "playstyle",      limit: 4
-    t.integer  "role",           limit: 4
-    t.boolean  "pvp",            limit: 1
-    t.string   "version",        limit: 255
-    t.boolean  "indexed",        limit: 1
-    t.boolean  "certified",      limit: 1
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "published_at"
-    t.boolean  "softcore",       limit: 1,     default: true
-    t.boolean  "hardcore",       limit: 1,     default: true
-    t.text     "gearing_advice", limit: 65535
-    t.text     "conclusion",     limit: 65535
-    t.integer  "up_votes",       limit: 4,     default: 0,    null: false
-    t.integer  "down_votes",     limit: 4,     default: 0,    null: false
-    t.integer  "views",          limit: 4,     default: 0
   end
 
   create_table "exile_searches", force: :cascade do |t|
@@ -178,21 +100,6 @@ ActiveRecord::Schema.define(version: 20141222140529) do
     t.datetime "updated_at"
   end
 
-  create_table "gear_gems", force: :cascade do |t|
-    t.integer "gear_id",      limit: 4
-    t.integer "skill_gem_id", limit: 4
-  end
-
-  create_table "gears", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.string   "description",     limit: 255
-    t.integer  "gear_gems_count", limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "build_id",        limit: 4
-    t.boolean  "main",            limit: 1,   default: false
-  end
-
   create_table "item_types", force: :cascade do |t|
     t.string "name", limit: 255
   end
@@ -240,20 +147,6 @@ ActiveRecord::Schema.define(version: 20141222140529) do
   end
 
   add_index "items", ["uid", "thread_id"], name: "index_items_on_uid_and_thread_id", using: :btree
-
-  create_table "keystones", force: :cascade do |t|
-    t.string  "name",        limit: 255
-    t.text    "description", limit: 65535
-    t.string  "icon",        limit: 255
-    t.integer "uid",         limit: 4
-  end
-
-  create_table "klasses", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "description", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "leagues", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -408,24 +301,6 @@ ActiveRecord::Schema.define(version: 20141222140529) do
 
   add_index "searches", ["uid"], name: "index_searches_on_uid", using: :btree
 
-  create_table "skill_gems", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "description", limit: 255
-    t.string   "attr",        limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "support",     limit: 1,   default: false
-  end
-
-  create_table "skill_trees", force: :cascade do |t|
-    t.integer  "build_id",    limit: 4
-    t.text     "url",         limit: 65535
-    t.text     "description", limit: 65535
-    t.integer  "level",       limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "stats", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.integer  "item_id",    limit: 4
@@ -438,14 +313,6 @@ ActiveRecord::Schema.define(version: 20141222140529) do
   end
 
   add_index "stats", ["item_id"], name: "index_stats_on_item_id", using: :btree
-
-  create_table "uniques", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "base_item",  limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "image_url",  limit: 255
-  end
 
   create_table "user_favorites", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -475,25 +342,9 @@ ActiveRecord::Schema.define(version: 20141222140529) do
     t.text     "cached_favorite_item_ids", limit: 65535
     t.integer  "league_id",                limit: 4
     t.string   "league_name",              limit: 255
-    t.integer  "up_votes",                 limit: 4,     default: 0,          null: false
-    t.integer  "down_votes",               limit: 4,     default: 0,          null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "votings", force: :cascade do |t|
-    t.string   "voteable_type", limit: 255
-    t.integer  "voteable_id",   limit: 4
-    t.string   "voter_type",    limit: 255
-    t.integer  "voter_id",      limit: 4
-    t.boolean  "up_vote",       limit: 1,   null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "votings", ["voteable_type", "voteable_id", "voter_type", "voter_id"], name: "unique_voters", unique: true, using: :btree
-  add_index "votings", ["voteable_type", "voteable_id"], name: "index_votings_on_voteable_type_and_voteable_id", using: :btree
-  add_index "votings", ["voter_type", "voter_id"], name: "index_votings_on_voter_type_and_voter_id", using: :btree
 
 end

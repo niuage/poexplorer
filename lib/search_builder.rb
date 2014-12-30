@@ -30,12 +30,13 @@ class SearchBuilder < Parslet::Transform
   rule(anything: simple(:name)) { search << name.to_s }
 
   # sockets
-  rule(count: simple(:count)) { count }
-  rule(socket_count: simple(:socket_count)) do
-    search.socket_count = socket_count.to_s
+  rule(count: simple(:count)) { count } # might not be used
+
+  rule(socket_count_operator: simple(:range)) do
+    search.range(:count, range)
   end
-  rule(linked_socket_count: simple(:socket_count)) do
-    search.linked_socket_count = socket_count.to_s
+  rule(linked_socket_count_operator: simple(:range)) do
+    search.range(:linked_socket_count, range)
   end
 
   # price

@@ -28,7 +28,7 @@ module Parser::Basics
       rule("#{attr}_operator".to_sym) do
         (
           attr_str = block_given? ? instance_eval(&block) : str(attr.to_s)
-          (float_range | comparison_range).as(:range) >>
+          range_or_comp >>
           space? >>
           attr_str.as(:attribute)
         ).as(:float_operator)

@@ -19,3 +19,19 @@
 .socket-D     { color: green }
 .socket-S     { color: red }
 .socket-I     { color: blue }
+
+$dark-bg-color: #31313a;
+$dark-life: #F75B54;
+$dex-color: #51A531;
+
+.unique  { color: #E07726 }
+.fire { color: #C77334 }
+.life                 { color: $dark-life }
+.cold                 { color: #77A8FF }
+.chaos                { color: #EF6CBF }
+.magic                { color: #6BB2FF }
+.rare, .lightning     { color: #DDBF22 }
+.normal               { color: #fff }
+.physical             { color: #C48C59 }
+.spell                { color: #B39CE4 }
+.speed                { color: #63AC63 }

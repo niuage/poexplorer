@@ -1,10 +1,11 @@
 body
   padding-top: 76px
-  background: white
+  background: $bg-color image-url("bg.jpg") center 56px repeat-x
+  background-attachment: fixed
 
 #top-nav
   background: #795548
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.14),0 4px 8px rgba(0, 0, 0, 0.28)
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28)
   position: fixed
   width: 100%
   z-index: 1000
@@ -21,15 +22,27 @@ body
     top: -2px
 
   form
-    padding-top: 10px
+    margin-top: 10px
 
     input[type="text"]
       border: 0
-      background: #D7CCC8
       box-shadow: none
-      border-radius: 3px
       margin: 0
+      background: #D7CCC8
+      border-radius: 3px
       height: 36px
+      line-height: 36px
+
+      @include placeholder
+        color: #795548
 
     input[type="submit"]
       display: none
+
+    select
+      background: none
+      border: 0
+      margin-bottom: 0
+      float: left
+      line-height: 36px
+      width: auto
