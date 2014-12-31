@@ -21,10 +21,12 @@
         @listenTo @, "render", @createButtons
 
       createButtons: ->
+        @ui.actions.append(new List.VerifyButton(model: @model).render().$el)
+
         if @model.get("price").currency
           @ui.actions.append(new List.PriceButton(model: @model).render().$el)
 
-        @ui.actions.append(new List.VerifyButton(model: @model).render().$el)
+        @ui.actions.append(new List.PmButton(model: @model).render().$el)
 
       decorate: -> App.ItemRenderer.setup(@$el)
 
