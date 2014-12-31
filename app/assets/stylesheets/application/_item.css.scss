@@ -79,6 +79,7 @@ $border-color: #28241d;
 
     span {
       font-size: 1.7em;
+      color: #FFCB8D;
     }
   }
 
@@ -176,7 +177,7 @@ $border-color: #28241d;
       border-radius: 2px;
       padding: 0 10px;
       line-height: 26px;
-      margin-right: 0.5em
+      margin: 6px 0.5em 0 0
     }
   }
 
@@ -213,6 +214,7 @@ $border-color: #28241d;
   &.gcp { background-position: -1px -145px; }
   &.chaos { background-position: -38px -145px; }
   &.alch { background-position: -73px -109px; }
+  &.fus { background-position: -145px -145px }
 }
 
 .big {

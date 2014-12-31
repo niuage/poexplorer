@@ -2,7 +2,7 @@
 
 <div class="result item" data-item-type="<%%= item_type %>" data-id="<%%= id %>">
   <div class="row">
-    <div class="small-2 columns">
+    <div class="medium-2 columns">
 
     <%% if (raw_icon) { %>
       <div class="item-icon w-<%%= w %> h-<%%= h %>">
@@ -13,15 +13,13 @@
 
     <span class="faded small">
       <i class='fa fa-clock-o'></i>
-      <time datetime="<%%= indexed_at %>"></time>
     </span>
   </div>
 
-  <div class="small-10 columns">
+  <div class="medium-10 columns">
+    <div class="row">
+    <div class="medium-8 columns">
     <div class="h2-title">
-      <span class="small right actions">
-        <!-- toolbar -->
-      </span>
       <h2>
         <a href="<%= thread_url %>/<%%= thread_id %>" target="_blank">
           <span class="<%%= rarity_name %>">
@@ -54,10 +52,17 @@
         <%% } %>
       <%% } %>
     </p>
+    </div>
+    <div class="medium-4 columns">
+      <span class="small actions">
+        <!-- toolbar -->
+      </span>
+    </div>
+    </div>
 
     <div class="row">
       <div class="section small-section">
-        <div class="small-8 columns">
+        <div class="medium-8 columns">
           <%% if (!is_skill) { %>
             <ul class="stats no-bullet">
               <%% _.each(visible_stats, function(stat) { %>
@@ -72,7 +77,7 @@
           <%% } %>
         </div>
 
-        <div class="small-4 columns">
+        <div class="medium-4 columns">
           <ul class="props item-props clearfix no-bullet">
             <%% _.each(properties, function(prop) { %>
               <li data-<%%= prop.data_attr %>="<%%= prop.meta_data %>">
