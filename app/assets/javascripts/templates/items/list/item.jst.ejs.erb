@@ -19,7 +19,7 @@
 
   <div class="small-10 columns">
     <div class="h2-title">
-      <span class="small right">
+      <span class="small right actions">
         <!-- toolbar -->
       </span>
       <h2>
@@ -28,12 +28,6 @@
             <%%= name %>
           </span>
           <%%= base_name %>
-
-          <%% if (reqs.quality) { %>
-            <span data-sort="quality" class="quality">
-              (+<%%= reqs.quality %>%)
-            </span>
-          <%% } %>
         </a>
       </h2>
     </div>
@@ -50,6 +44,13 @@
               <%%= required_stat.value %> <%%= required_stat.stat %>
             </span>
           <%% }) %>
+        <%% } %>
+
+        <%% if (reqs.quality) { %>
+          &mdash;
+          <span data-sort="quality">
+            quality: +<%%= reqs.quality %>%
+          </span>
         <%% } %>
       <%% } %>
     </p>

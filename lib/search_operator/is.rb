@@ -2,11 +2,16 @@ module SearchOperator
   class Is < SearchOperator::Base
     self.supported_operands = {
       online: :online,
-      corrupted: :corrupted
+      corrupted: :corrupted,
+      priced: :priced
     }
 
     def call
       send(action) if action
+    end
+
+    def priced
+      search.has_price = on
     end
 
     def online

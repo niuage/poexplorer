@@ -3,6 +3,7 @@ class StatBuilder
   attr_accessor :implicit_mod
 
   @@unknown_mods = {}
+  @@missing_types_mods = {}
 
   def initialize(item, implicit_mods = nil, explicit_mods = nil, search_stat = false)
     @item = item
@@ -141,19 +142,26 @@ class StatBuilder
     regexp = Regexp.new("^" << raw_mod.gsub("+", "\\\\+").gsub(/[0-9]*\.?[0-9]+/, "([0-9]*\\.?[0-9]+)") << "$", "i")
     values = regexp.match raw_mod
 
-    if values
-      values = values.to_a
-      values.shift
+    item_type = item.type.underscore.to_sym
+
+    if missing_type
+      @@missing_types_mods[generic_mod] ||= []
+      if !@@missing_types_mods[generic_mod].include?(item_type)
+        @@missing_types_mods[generic_mod] << item_type
+      end
+    else
+      @@unknown_mods[generic_mod] ||= []
+      if !@@unknown_mods[generic_mod].try(:include?, item_type)
+        @@unknown_mods[generic_mod] << item_type
+      end
     end
 
-    item_type = item.type.underscore.to_sym
-    @@unknown_mods[generic_mod] ||= [[], [], []]
-    @@unknown_mods[generic_mod][0] << item_type unless @@unknown_mods[generic_mod][0].try(:include?, item_type)
-    @@unknown_mods[generic_mod][1] << values unless !values || @@unknown_mods[generic_mod][1].try(:include?, values)
-    @@unknown_mods[generic_mod][2] << item_type if missing_type && missing_type.to_s != "similar_search" && !@@unknown_mods[generic_mod][2].include?(item_type)
+    File.open("/tmp/unknown_mods.txt", "w") do |f|
+      f << @@unknown_mods.select { |k, v| v.present? }
+    end
 
-    File.open("/tmp/unknown_mods_#{item.unique?}.txt", "w") do |f|
-      f << @@unknown_mods
+    File.open("/tmp/missing_types.txt", "w") do |f|
+      f << @@missing_types_mods.select { |k, v| v.present? }
     end
   end
 

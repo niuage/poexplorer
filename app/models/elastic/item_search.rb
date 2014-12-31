@@ -66,6 +66,8 @@ class Elastic::ItemSearch < Elastic::BaseItemSearch
 
         item.filter_between(:chaos_value)
 
+        # filter :not, { term: { chaos_value: 0 } } if item.search.has_price?
+
         filter :term, corrupted: item.corrupted == 1 if item.corrupted != 0
 
         item.filter_armour_requirements

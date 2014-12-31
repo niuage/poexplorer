@@ -109,8 +109,12 @@ $border-color: #28241d;
       }
     }
 
-    &:hover, &.sorting {
-      background: #F1F1F1;
+    &:hover {
+      background: #3C2F2B
+    }
+
+    &.sorting {
+      background: #795548
     }
   }
 
@@ -164,6 +168,19 @@ $border-color: #28241d;
     max-height: 225px;
   }
 
+  .actions {
+    .button {
+      background: none;
+      border: 1px solid #A99877;
+      color: #F3E6D0;
+      border-radius: 2px;
+      padding: 0 10px;
+      line-height: 26px;
+      margin-right: 0.5em
+    }
+  }
+
+
   hr {
     margin: -14px 0 5px;
   }
@@ -189,6 +206,8 @@ $border-color: #28241d;
   width: 20px;
   background-image: image-url("orbs.png");
   background-repeat: no-repeat;
+  position: relative;
+  top: 3px;
 
   &.exa { background-position: -36px -109px; }
   &.gcp { background-position: -1px -145px; }

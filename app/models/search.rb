@@ -30,14 +30,15 @@ class Search < ActiveRecord::Base
 
   belongs_to :rarity
 
-  before_save :format_socket_combination, if: :format_socket_combination?
+  # before_save :format_socket_combination, if: :format_socket_combination?
 
   def format_socket_combination?
     has_sockets? && socket_combination_changed?
   end
 
-  def format_socket_combination
-    self.socket_combination = SocketCollection.format_combination(socket_combination)
+  def socket_combination=(socket_combination)
+    return unless socket_combination.present?
+    self[:socket_combination] = SocketCollection.format_combination(socket_combination)
   end
 
   def searchable_indices

@@ -73,7 +73,7 @@ class SocketCollection
     # rajouter \* quand jai gere la regexp
     cleanup_combination(combination)
       .split(" ")
-      .map{ |str| str.chars.sort.join }
+      .map { |str| str.chars.sort.join }
       .join(" ")
       # .sort_by(&:length)
       # .reverse!

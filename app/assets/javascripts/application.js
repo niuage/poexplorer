@@ -15,7 +15,6 @@
 //= require application_vendor
 //= require app
 //= require_tree ./application
-//= require app
 //= require_tree ./templates
 //= require_tree ./common
 //= require_tree ./apps

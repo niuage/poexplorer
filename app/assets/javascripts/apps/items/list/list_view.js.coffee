@@ -7,6 +7,9 @@
     @Item = Marionette.ItemView.extend
       template: JST["templates/items/list/item"]
 
+      ui:
+        actions: ".actions"
+
       className: "large-12 columns"
 
       events:
@@ -15,6 +18,13 @@
 
       initialize: ->
         @listenTo @, "render", @decorate
+        @listenTo @, "render", @createButtons
+
+      createButtons: ->
+        if @model.get("price").currency
+          @ui.actions.append(new List.PriceButton(model: @model).render().$el)
+
+        @ui.actions.append(new List.VerifyButton(model: @model).render().$el)
 
       decorate: -> App.ItemRenderer.setup(@$el)
 
@@ -35,14 +45,6 @@
       childView: List.Item
 
       className: "items-gallery"
-
-      initialize: ->
-        @listenTo @, "render:collection", @decorateItems
-
-      decorateItems: ->
-        # App.ItemVerification.setup({ root: $(".result").closest("div") })
-        # App.OnlineStatus.accountStatuses("#results")
-        # App.PM.setup("#results")
 
       # update: (query, page) ->
       #   @collection.fetch
