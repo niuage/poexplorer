@@ -4,7 +4,6 @@
 
 @HT.addRegions
   mainRegion: "[data-region=main]"
-  # searchRegion: '[data-region="top-nav"]'
 
 @HT.on "start", (options) ->
   Backbone.history.start(pushState: true)

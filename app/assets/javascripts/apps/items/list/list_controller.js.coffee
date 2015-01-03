@@ -3,11 +3,12 @@
 
     @Controller =
       listItems: (query) ->
-        # HT.mainRegion.show(new HT.Common.Views.Loading())
+        HT.vent.trigger("loading", true)
 
         itemsRequest = HT.request("item:entities", query) # should pass query here?
 
         $.when(itemsRequest).done (itemCollection) ->
+          HT.vent.trigger("loading", false)
 
           itemListView = new List.Items(
             collection: itemCollection

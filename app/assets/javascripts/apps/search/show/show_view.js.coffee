@@ -28,9 +28,27 @@
 
       initialize: ->
         @inputView = new Show.SearchInput()
+        @icon = new Show.SearchIcon()
+        @icon.render()
 
       onSubmit: (e) ->
         e.preventDefault()
         @inputView.trigger("change")
 
         return false
+
+    @SearchIcon = Marionette.ItemView.extend
+      el: '[data-role="search-icon"]'
+
+      template: JST["templates/search/show/icon"]
+
+      loading: false
+
+      initialize: ->
+        HT.vent.on "loading", (loading) =>
+          @loading = loading
+          @render()
+
+      serializeData: ->
+        loading: @loading
+

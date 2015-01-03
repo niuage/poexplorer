@@ -1440,4 +1440,10 @@ $include-html-global-classes: $include-html-classes;
 // $include-legacy-visibility-classes: true;
 // $include-accessibility-classes: true;
 
+// 37. Custom var
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+$main-bg-color: #795548;
+$main-bg-dark-color: darken($main-bg-color, 10%);
+
 @import 'foundation';

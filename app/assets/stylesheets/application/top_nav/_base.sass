@@ -23,6 +23,13 @@ body
 
   form
     margin-top: 10px
+    position: relative
+
+    #search-icon
+      position: absolute
+      left: 10px
+      top: 5px
+      color: $main-bg-dark-color
 
     input[type="text"]
       border: 0
@@ -32,9 +39,10 @@ body
       border-radius: 3px
       height: 36px
       line-height: 36px
+      padding-left: 33px
 
       @include placeholder
-        color: #795548
+        color: $main-bg-color
 
     input[type="submit"]
       display: none

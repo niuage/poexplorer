@@ -6,5 +6,7 @@
  *= require ./application_vendor/jquery.timeago
  *= require ./application_vendor/select2
  *= require ./application_vendor/backbone.picky
+ *= require ./application_vendor/spin
+ *= require ./application_vendor/spin.jquery
  *= require cocoon
  */

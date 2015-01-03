@@ -16,9 +16,9 @@
         "click .props li": "onPropClick"
         "click .stats li": "onStatClick"
 
-      initialize: ->
-        @listenTo @, "render", @decorate
-        @listenTo @, "render", @createButtons
+      onRender: ->
+        @decorate()
+        @createButtons()
 
       createButtons: ->
         @ui.actions.append(new List.VerifyButton(model: @model).render().$el)
